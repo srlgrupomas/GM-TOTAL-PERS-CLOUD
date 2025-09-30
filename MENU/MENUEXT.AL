@@ -1,0 +1,4825 @@
+pageextension 80890 persMenu9006 extends "Order Processor Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80891 persMenu9022 extends "Business Manager Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80892 persMenu9027 extends "Accountant Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80893 persMenu9018 extends "Administrator Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80894 persMenu9005 extends "Sales Manager Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+pageextension 80895 persMenu8901 extends "Finance Manager Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80896 persMenu8908 extends "Service Manager Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80897 persMenu9007 extends "Purchasing Agent Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80898 persMenu8909 extends "Warehouse Manager Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80899 persMenu8905 extends "Purchasing Manager Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}
+
+pageextension 80900 persMenu8910 extends "Service Dispatcher Role Center"
+{
+    actions
+    {
+        modify(GMLocRep23)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep23)
+        {
+            action("PERSRep23")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SUSS';
+                Image = "Report";
+                RunObject = Report "PERS SUSS";
+
+            }
+        }
+        modify(GMLocRep31)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep31)
+        {
+            action("PERSRep31")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRE IVA';
+                Image = "Report";
+                RunObject = Report "PERS SIRE IVA";
+
+            }
+        }
+        addlast(Sections)
+        {
+            group("TotalPersData")
+            {
+                Caption = 'Total Data Editor';
+                action("TotalPerBanckDimensionValuePage")
+                {
+                    RunObject = page "EntitySetUpExtend";
+                    ApplicationArea = ALL;
+                    Image = PaymentJournal;
+                    Caption = 'Dimension Value Bank';
+                }
+            }
+        }
+
+        addafter(GMLocMovAxiPresupDetallado)
+        {
+            action(PERReporteTotal)
+            {
+                ApplicationArea = ALL;
+                Caption = 'Reporte Total';
+                Image = TransmitElectronicDoc;
+                RunObject = page "Report Total";
+            }
+        }
+        addafter("GMLocTax Groups")
+        {
+            action(TaxAreaPerCompany)
+            {
+                ApplicationArea = all;
+                Caption = 'Tax Area by Entity';
+                RunObject = Page PerceptionabyEntity;
+            }
+
+
+        }
+        modify("GMLocGEneracionAXI")
+        {
+            visible = false;
+        }
+        modify("GMLocGEneracionAXIV2")
+        {
+            visible = false;
+        }
+        addafter("GMLocGEneracionAXI")
+        {
+            action("GeneracionAXI")
+            {
+                RunObject = page "AXI Parámetros";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'AXI Generation';
+            }
+            action("EntitySetUpExtendPage")
+            {
+                RunObject = page "EntitySetUpExtend";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Entity SetUp Extend';
+            }
+        }
+        addafter("GMLocTaxation")
+        {
+            action("Withholding Taxes by Entity")
+            {
+                RunObject = page "BssiMEMWithholdingTaxByEntity";
+                ApplicationArea = ALL;
+                Image = TransmitElectronicDoc;
+                Caption = 'Withholding Taxes by Entity';
+            }
+        }
+        modify("GMLocRep7")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep7")
+        {
+            action("persVAT Sales Book F(V)NC(C)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Book F(V)NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(C)";
+
+            }
+        }
+        modify("GMLocRep88")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep88")
+        {
+            action("persRep88")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Ledger Purchases Invoices(C) and NC(C)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(C)";
+            }
+        }
+        modify("GMLocRep55")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep55")
+        {
+            action("perscRep55")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Sales Ledger Invoices(V) and NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Sales Book F(V)NC(V)";
+
+            }
+        }
+        modify("GMLocRep8")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep8")
+        {
+            action("persVAT Purch Book F(C)NC(V)")
+            {
+                ApplicationArea = ALL;
+                Caption = 'VAT Purch Book F(C)NC(V)';
+                Image = "Report";
+                RunObject = Report "PersVAT Purch Book F(C)NC(V)";
+
+            }
+        }
+
+        modify("GMLocRep11")
+        {
+            visible = false;
+        }
+        addafter("GMLocRep11")
+        {
+            action("PERRep11")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Libro Diario';
+                Image = "Report";
+                RunObject = Report "PersLibro Diario";
+
+            }
+        }
+        modify(GMLocRep12)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep12)
+        {
+            action("PERRep12")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Withholdings Book';
+                Image = "Report";
+                RunObject = Report "PersWithholdings Book";
+
+            }
+
+        }
+        modify(GMLocRep13)
+        {
+            visible = false;
+        }
+        addafter(GMLocRep13)
+        {
+            action("persRep13")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Perceptions Book';
+                Image = "Report";
+                RunObject = Report "PersPerceptions Book";
+
+            }
+
+            action("PERMEMTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalance";
+
+            }
+            action("PERMEMTrialBalanceLocal")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Trial Balance Local';
+                Image = "Report";
+                RunObject = Report "PERMEMTrialBalanceLocal";
+
+            }
+            action("PERDetailTrialBalance")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Balance';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalance";
+
+            }
+            action("PERDetailTrialBalByEntity")
+            {
+                ApplicationArea = ALL;
+                Caption = 'Detail Trial Bal By Entity';
+                Image = "Report";
+                RunObject = Report "PERDetailTrialBalByEntity";
+
+            }
+            action("PerTrialBalanceCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Cli/Pro";
+            }
+            action("PerTrialBalanceDetailCliPro")
+            {
+                ApplicationArea = all;
+                caption = 'Detail Trial Balance Vendor / Customer';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Det Cli/Pro";
+            }
+            action("PerTrialBalanceBankAcc")
+            {
+                ApplicationArea = all;
+                Caption = 'Trial Balance Bank Account';
+                Image = "Report";
+                RunObject = report "PersTrial Balance Bank Acc";
+            }
+        }
+
+        modify("GMLocRep16")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep16")
+        {
+            action("PERRep16")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA Perception';
+                Image = "Report";
+                RunObject = Report "PERARBA Perception";
+
+            }
+        }
+        modify("GMLocRep17")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep17")
+        {
+            action("PERRep17")
+            {
+                ApplicationArea = ALL;
+                Caption = 'ARBA RET IIBB BSAS';
+                Image = "Report";
+                RunObject = Report "PERARBA IIBB BSAS";
+
+            }
+        }
+        modify(GMLocRep20)
+        {
+            Visible = false;
+        }
+
+        addafter(GMLocRep20)
+        {
+            action("PERRep20")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Per. IIBB Sufferings';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT Perc. Suff.";
+
+            }
+
+        }
+        modify(GMLocRep19)
+        {
+            Visible = false;
+        }
+        addafter(GMLocRep19)
+        {
+            action("PERRep19")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIFERE - Ret. IIBB Suffered';
+                Image = "Report";
+                RunObject = Report "PERSIFERE - GIT With. Suff.";
+
+            }
+        }
+        modify("GMLocRep22")
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep22")
+        {
+            action("PERRep22")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SICORE';
+                Image = "Report";
+                RunObject = Report "PER SICORE";
+
+            }
+        }
+        modify(GMLocRep25)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep25")
+        {
+            action("PERRep25")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Purchases';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Compras";
+
+            }
+        }
+        modify(GMLocRep26)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep26")
+        {
+            action("PERRep26")
+            {
+                ApplicationArea = ALL;
+                Caption = 'CITI Sales';
+                Image = "Report";
+                RunObject = Report "PER R.G. 3685 CITI Ventas";
+
+            }
+        }
+        modify(GMLocRep27)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep27")
+        {
+            action("PERRep27")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA RET PERC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA RET PERC";
+
+            }
+        }
+        modify(GMLocRep28)
+        {
+            Visible = false;
+        }
+        addafter("GMLocRep28")
+        {
+            action("PERRep28")
+            {
+                ApplicationArea = ALL;
+                Caption = 'E-ARCIBA NC';
+                Image = "Report";
+                RunObject = Report "PER EARCIBA NC";
+
+            }
+            action("PERSircar")
+            {
+                ApplicationArea = ALL;
+                Caption = 'SIRCAR Perceptions and Withholdings Reg 1 y 2';
+                Image = "Report";
+                RunObject = Report "PERSIRCAR_REG_1y2";
+
+            }
+        }
+        modify("GMLocSircar")
+        {
+            Visible = false;
+        }
+        addafter(GMLocAXI)
+        {
+            group(GMLocAXDC)
+            {
+                Caption = 'Differences Exchange Rates';
+
+                action("Differences Exchange Rates")
+                {
+                    RunObject = page "Differences Exchange Rates";
+                    ApplicationArea = ALL;
+                    Caption = 'Differences Exchange Rates';
+                }
+            }
+            action(extrate)
+            {
+                ApplicationArea = ALL;
+                RunObject = report "PERExch. Rate Adjustment";
+                Caption = 'Exch. Rate Adjustment';
+            }
+        }
+
+    }
+}

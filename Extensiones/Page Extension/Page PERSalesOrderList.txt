@@ -1,0 +1,87 @@
+pageextension 80903 "PERSalesOrderList" extends "Sales Order List"
+{
+    layout
+    {
+
+
+    }
+
+    actions
+    {
+        addlast(processing)
+        {
+            action("Previsualizar Asientos")
+            {
+                Caption = 'Previsualizar Asientos';
+                Image = Preview;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    SalesOrder: Record "Sales Header";
+                    TempGenJnlLine: Record "Gen. Journal Line" temporary;
+                    TempVATEntry: Record "VAT Entry" temporary;
+
+                begin
+                    CurrPage.SetSelectionFilter(SalesOrder);
+                    if SalesOrder.IsEmpty() then
+                        Error('Debe seleccionar al menos un pedido.');
+                    GeneratePreview(SalesOrder, TempGenJnlLine, TempVATEntry);
+
+                    // Mostrar la vista previa en páginas modales
+                    Page.RunModal(Page::"Previsualización Asientos", TempGenJnlLine);
+                    Page.RunModal(Page::"Previsualización IVA", TempVATEntry);
+                end;
+            }
+        }
+
+
+    }
+    var
+        GMLocSalesOrderHeader: record "sales header";
+
+    procedure GeneratePreview(SalesOrder: Record "Sales Header"; var TempGenJnlLine: Record "Gen. Journal Line" temporary; var TempVATEntry: Record "VAT Entry" temporary)
+    var
+        SalesLine: Record "Sales Line";
+        aux: Integer;
+    begin
+        // Limpiar las tablas temporales
+        TempGenJnlLine.Reset();
+        TempGenJnlLine.DeleteAll();
+        TempVATEntry.Reset();
+        TempVATEntry.DeleteAll();
+
+        SalesOrder.SetFilter(Status, 'Released'); // Solo pedidos listos para facturar
+
+        if SalesOrder.FindSet() then
+            repeat
+                // Obtener líneas del pedido
+                SalesLine.SetRange("Document Type", SalesOrder."Document Type");
+                SalesLine.SetRange("Document No.", SalesOrder."No.");
+                if SalesLine.FindSet() then
+                    repeat
+                        // Simular asiento contable
+                        aux += 1;
+                        TempGenJnlLine.Init();
+                        TempGenJnlLine."Line No." := aux;
+                        TempGenJnlLine."Account No." := SalesOrder."Sell-to Customer No.";
+                        TempGenJnlLine.Amount := SalesLine.Amount;
+                        TempGenJnlLine."Posting Date" := SalesOrder."Posting Date";
+                        TempGenJnlLine.Insert();
+
+                        // Simular IVA
+                        TempVATEntry.Init();
+                        TempVATEntry."Entry No." := aux;
+                        TempVATEntry."Document No." := SalesOrder."No.";
+                        TempVATEntry.Amount := SalesLine."VAT Base Amount";
+                        //  TempVATEntry.Validate("VAT Amount", SalesLine."VAT Amount");
+                        //  TempVATEntry.Validate("VAT %", SalesLine."VAT %");
+                        TempVATEntry.Insert();
+                    until SalesLine.Next() = 0;
+
+            until SalesOrder.Next() = 0;
+    end;
+
+}

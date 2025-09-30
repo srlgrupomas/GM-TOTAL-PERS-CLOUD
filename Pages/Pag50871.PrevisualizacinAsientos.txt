@@ -1,0 +1,24 @@
+page 80871 "Previsualización Asientos"
+{
+    PageType = List;
+    SourceTable = "Gen. Journal Line";
+    Editable = false;
+    SourceTableTemporary = true;
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Group)
+            {
+                field("Account No."; Rec."Account No.")
+                {
+                    ApplicationArea = all;
+                }
+                field(Description; Rec.Description) { ApplicationArea = all; }
+                field(Amount; Rec.Amount) { ApplicationArea = all; }
+                field("Posting Date"; Rec."Posting Date") { ApplicationArea = all; }
+            }
+        }
+    }
+}

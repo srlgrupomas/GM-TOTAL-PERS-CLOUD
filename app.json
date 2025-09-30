@@ -1,0 +1,58 @@
+{
+  "id": "548fa4b2-5173-40e8-acde-e18dd39be325",
+   "name": "Total Customizations",
+  "publisher": "Grupo MAS SRL",
+  "brief": "Total Customizations",
+  "description": "Total Customizations",
+  "version": "2025.09.25.02",
+  "privacyStatement": "http://grupomas.software/BC/privacystatement",
+  "EULA": "http://grupomas.software/BC/EULA",
+  "help": "http://grupomas.software/BC/help",
+  "url": "http://www.grupomas.software",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "634f03a6-88be-4db8-aec0-86f7b5a8d6f9",
+      "name": "Multi-Entity Management for Argentina GM",
+      "version": "1.1.0.3",
+      "publisher": "Binary Stream Software Inc."
+    },
+    {
+      "id": "1b3d67a7-7ddb-45d6-9173-2b4bf499fd0e",
+      "name": "Multi-Entity Management (EU)",
+      "version": "1.1.132.0",
+      "publisher": "Binary Stream Software Inc."
+    },
+    {
+      "id": "12fa8f44-457b-4d5f-a96c-2b4b9827a6e2",
+      "name": "Localization for Argentina W1",
+      "version": "2025.07.30.1",
+      "publisher": "Grupo MAS SRL"
+    },
+    {
+      "id": "84098ca0-a105-4fba-a8af-03a8d2dc2ba6",
+      "name": "GRP Core Model",
+      "version": "1.0.0.79",
+      "publisher": "TotalEnergies"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "25.0.0.0",
+  "features": ["TranslationFile"],
+  "preprocessorSymbols": ["CLEAN15", "CLEAN16", "CLEAN17", "CLEAN18","CLEAN19", "CLEAN20","CLEAN22","CLEAN23","CLEAN24","CLEAN25"],
+  "idRanges": [
+    {
+      "from": 80870,
+      "to": 80999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+    
+  },
+  "runtime":"14.0",
+  "target":"Cloud"
+}

@@ -1,0 +1,1899 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>8ebd0b41-3d37-4c2a-91bd-356dff582a83</rd:ReportID>
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>PBIRB</am:Name>
+      <am:Version>15.7.1813.16</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>PBIRB</am:Name>
+      <am:Version>15.7.1813.16</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-04-11T19:52:18.9424049Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:DataSourceID>cfeeaef9-ea13-4f6f-a438-ed7ef76897b0</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Table1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>3.1746cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>6.34921cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.475cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.025cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.325cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.63492cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Movimiento_Retenciones_Regimen">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Movimiento_Retenciones_Regimen.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>5</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Descripcion">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Descripcion.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>4</ZIndex>
+                          <Style>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="FORMAT_vbase_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Withholding_Ledger_Entry_GMLocCalculation_Base.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>3</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.15cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="FORMAT_alicuota______">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!FORMAT_alicuota______.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>2</ZIndex>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.15cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="FORMAT__Movimiento_Retenciones___Importe_retencion__">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!FORMAT__Movimiento_Retenciones___Importe_retencion__.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Table1_Details_Group">
+                    <DataElementName>Detail</DataElementName>
+                  </Group>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                  <DataElementName>Detail_Collection</DataElementName>
+                  <DataElementOutput>Output</DataElementOutput>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>12.7965cm</Top>
+            <Left>0.31746cm</Left>
+            <Height>0.63492cm</Height>
+            <Width>16.34881cm</Width>
+            <Style />
+          </Tablix>
+          <Textbox Name="REGIMEN_N_Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!REGIMEN_N_Caption.Value)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.74615cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.62735cm</Height>
+            <Width>2.59206cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="RETENIDOCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!RETENIDOCaption.Value)</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.9505cm</Top>
+            <Left>14.41908cm</Left>
+            <Height>0.423cm</Height>
+            <Width>1.8cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="ALICUOTACaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!ALICUOTACaption.Value)</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.9505cm</Top>
+            <Left>12.34445cm</Left>
+            <Height>0.423cm</Height>
+            <Width>1.8cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="B__IMPONIBLECaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!B__IMPONIBLECaption.Value)</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.9505cm</Top>
+            <Left>9.84736cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.25cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="RETENCIONCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!RETENCIONCaption.Value)</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.9505cm</Top>
+            <Left>3.5209cm</Left>
+            <Height>0.423cm</Height>
+            <Width>4.52143cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="FechaCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!FechaCaption.Value)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.961cm</Top>
+            <Left>9.41508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.85cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Movimiento_Retenciones__Fecha_comprobante_">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Movimiento_Retenciones__Fecha_comprobante_.Value)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>d/M/yyyy</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.961cm</Top>
+            <Left>12.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.3cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Certificado_N_Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Certificado_N_Caption.Value)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.538cm</Top>
+            <Left>9.41508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.85cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Movimiento_Retenciones__Withholding_Certification_No__">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Movimiento_Retenciones__Withholding_Certification_No__.Value)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.538cm</Top>
+            <Left>12.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>5.25cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="SUJETO_DE_RETENCIONCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!SUJETO_DE_RETENCIONCaption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>8.9895cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Proveedor_Name">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Proveedor_Name.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>8.9895cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.95cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="DirecciónCaption_Control1000000021">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!DirecciónCaption_Control1000000021.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.4125cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Proveedor_Address_______Proveedor_City_______Proveedor__Cód__Provincia_">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Proveedor_Address_______Proveedor_City_______Proveedor__Cód__Provincia_.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.4125cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>15cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Nro__de_CUITCaption_Control1000000018">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Nro__de_CUITCaption_Control1000000018.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.8355cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Proveedor__VAT_Registration_No__">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Proveedor__VAT_Registration_No__.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.8355cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.95cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Nro__de_IIBBCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Nro__de_IIBBCaption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>10.2585cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Proveedor__No_ingresos_brutos_">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Proveedor__No_ingresos_brutos_.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>10.2585cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.95cm</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="JurisdicciónCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!JurisdicciónCaption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.7625cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="InfoEmpresa_Provincia">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!InfoEmpresa_Provincia.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.7625cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.95cm</Width>
+            <ZIndex>19</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Agente_RetenciónCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Agente_RetenciónCaption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.3395cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>20</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="InfoEmpresa__Withholding_Agent_No__">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!InfoEmpresa__Withholding_Agent_No__.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.3395cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.95cm</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Nro__de_CUITCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Nro__de_CUITCaption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.9165cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>22</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="InfoEmpresa__VAT_Registration_No__">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!InfoEmpresa__VAT_Registration_No__.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.9165cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.95cm</Width>
+            <ZIndex>23</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="DirecciónCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!DirecciónCaption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.4515cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="InfoEmpresa_Address">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!InfoEmpresa_Address.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.4515cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.95cm</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="AGENTE_DE_RETENCIONCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!AGENTE_DE_RETENCIONCaption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.0285cm</Top>
+            <Left>0.26508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="InfoEmpresa_Name">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!InfoEmpresa_Name.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.0285cm</Top>
+            <Left>4.01508cm</Left>
+            <Height>0.423cm</Height>
+            <Width>7.95cm</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="CERTIFICADO_DE_RETENCION_IVACaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CERTIFICADO_DE_RETENCION_IVACaption.Value)</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.269cm</Top>
+            <Left>8.88996cm</Left>
+            <Height>0.423cm</Height>
+            <Width>10.79258cm</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Tablix Name="table2">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>4.44444cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.44444cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.80952cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.49206cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.63492cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Nro__FacturaCaption">
+                          <rd:DefaultName>Nro__FacturaCaption</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!Nro__FacturaCaption.Value)</Value>
+                                  <Style>
+                                    <FontStyle>Italic</FontStyle>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>7</ZIndex>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ReferenciaCaption">
+                          <rd:DefaultName>ReferenciaCaption</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!ReferenciaCaption.Value)</Value>
+                                  <Style>
+                                    <FontStyle>Italic</FontStyle>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>6</ZIndex>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!Cod__RetenciónCaption.Value)</Value>
+                                  <Style>
+                                    <FontStyle>Italic</FontStyle>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>5</ZIndex>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="B__IMPONIBLECaption_1">
+                          <rd:DefaultName>B__IMPONIBLECaption_1</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Total Factura</Value>
+                                  <Style>
+                                    <FontStyle>Italic</FontStyle>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>4</ZIndex>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.63492cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="movfac__External_Document_No__">
+                          <rd:DefaultName>movfac__External_Document_No__</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!movfac__External_Document_No__.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>3</ZIndex>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Hist_Lin_Comp_OPago__Nro_Comprobante_">
+                          <rd:DefaultName>Hist_Lin_Comp_OPago__Nro_Comprobante_</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Hist_Lin_Comp_OPago__Nro_Comprobante_.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>2</ZIndex>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Movimiento_Retenciones__Valor.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <ZIndex>1</ZIndex>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="FORMAT_Acumulado_">
+                          <rd:DefaultName>FORMAT_Acumulado_</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!FORMAT_Acumulado_.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="table2_Details_Group">
+                    <DataElementName>Detail</DataElementName>
+                  </Group>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=IIF(Fields!movfac__External_Document_No__.Value = "",TRUE,FALSE)</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                  <DataElementName>Detail_Collection</DataElementName>
+                  <DataElementOutput>Output</DataElementOutput>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>14.28583cm</Top>
+            <Left>0.37037cm</Left>
+            <Height>1.26984cm</Height>
+            <Width>16.19046cm</Width>
+            <ZIndex>29</ZIndex>
+            <Style />
+          </Tablix>
+          <Line Name="line5">
+            <Top>13.75673cm</Top>
+            <Left>0.31746cm</Left>
+            <Height>0cm</Height>
+            <Width>19.36508cm</Width>
+            <ZIndex>30</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="line6">
+            <Top>15.9525cm</Top>
+            <Left>0.37037cm</Left>
+            <Height>0cm</Height>
+            <Width>19.36508cm</Width>
+            <ZIndex>31</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="line1">
+            <Top>12.61917cm</Top>
+            <Left>0.31746cm</Left>
+            <Height>0cm</Height>
+            <Width>19.36508cm</Width>
+            <ZIndex>32</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="textbox2">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Firma_del_Agente_de_RetenciónCaption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>17.85726cm</Top>
+            <Left>0.37037cm</Left>
+            <Height>0.423cm</Height>
+            <Width>11.99881cm</Width>
+            <ZIndex>33</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>0.075cm</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="textbox3">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Aclaración_Caption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>18.49218cm</Top>
+            <Left>0.37037cm</Left>
+            <Height>0.42272cm</Height>
+            <Width>11.99881cm</Width>
+            <ZIndex>34</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>0.075cm</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="textbox4">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Cargo_Caption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>19.1271cm</Top>
+            <Left>0.37037cm</Left>
+            <Height>0.42244cm</Height>
+            <Width>11.99881cm</Width>
+            <ZIndex>35</ZIndex>
+            <Style>
+              <VerticalAlign>Bottom</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>0.075cm</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Declaración_en_la_que_se_informará_la_retencion__Caption">
+            <rd:DefaultName>Declaración_en_la_que_se_informará_la_retencion__Caption</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Declaración_en_la_que_se_informará_la_retencion__Caption.Value)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>16.26996cm</Top>
+            <Left>0.37037cm</Left>
+            <Height>0.63492cm</Height>
+            <Width>12.06349cm</Width>
+            <ZIndex>36</ZIndex>
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="line2">
+            <Top>11.11123cm</Top>
+            <Left>0.31746cm</Left>
+            <Height>0cm</Height>
+            <Width>19.36508cm</Width>
+            <ZIndex>37</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="line3">
+            <Top>8.80964cm</Top>
+            <Left>0.31746cm</Left>
+            <Height>0cm</Height>
+            <Width>19.36508cm</Width>
+            <ZIndex>38</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="line4">
+            <Top>5.39694cm</Top>
+            <Left>0.31746cm</Left>
+            <Height>0cm</Height>
+            <Width>19.36508cm</Width>
+            <ZIndex>39</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Image Name="Image1">
+            <Source>Database</Source>
+            <Value>=First(Fields!InfoEmpresa_Picture.Value, "DataSet_Result")</Value>
+            <MIMEType>image/jpeg</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.39067cm</Top>
+            <Left>0.37037cm</Left>
+            <Height>2.07998cm</Height>
+            <Width>6.31456cm</Width>
+            <ZIndex>40</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox911">
+            <rd:DefaultName>Textbox911</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!InfoEmpresa_Name.Value</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.59413cm</Top>
+            <Left>0.41353cm</Left>
+            <Height>0.175in</Height>
+            <Width>227.49945pt</Width>
+            <ZIndex>41</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox1811">
+            <rd:DefaultName>Textbox1811</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!InfoEmpresa_LocARAddress.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.17974cm</Top>
+            <Left>0.41353cm</Left>
+            <Height>0.1475in</Height>
+            <Width>227.49945pt</Width>
+            <ZIndex>42</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3012">
+            <rd:DefaultName>Textbox3011</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Tel:</Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!InfoEmpresa__Phone_No__.Value</Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">  </Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.08955cm</Top>
+            <Left>0.41353cm</Left>
+            <Height>0.12736in</Height>
+            <Width>227.49945pt</Width>
+            <ZIndex>43</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3011">
+            <rd:DefaultName>Textbox3011</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>MAIL:</Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!InfoEmpresa__E_Mail_.Value</Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">  </Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.66022cm</Top>
+            <Left>0.41353cm</Left>
+            <Height>0.12736in</Height>
+            <Width>227.49945pt</Width>
+            <ZIndex>44</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Image Name="Image3">
+            <Source>Database</Source>
+            <Value>=First(Fields!GMLocPictureSign.Value, "DataSet_Result")</Value>
+            <MIMEType>image/jpeg</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>17.99593cm</Top>
+            <Left>8.04688cm</Left>
+            <Height>1.33067cm</Height>
+            <Width>3.6417cm</Width>
+            <ZIndex>45</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+        </ReportItems>
+        <Height>20.24692cm</Height>
+        <Style />
+      </Body>
+      <Width>19.73545cm</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <InteractiveWidth>38.95cm</InteractiveWidth>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="InfoEmpresa_Name">
+          <DataField>InfoEmpresa_Name</DataField>
+        </Field>
+        <Field Name="InfoEmpresa_Picture">
+          <DataField>InfoEmpresa_Picture</DataField>
+        </Field>
+        <Field Name="InfoEmpresa_LocARAddress">
+          <DataField>InfoEmpresa_LocARAddress</DataField>
+        </Field>
+        <Field Name="InfoEmpresa__Phone_No__">
+          <DataField>InfoEmpresa__Phone_No__</DataField>
+        </Field>
+        <Field Name="InfoEmpresa__E_Mail_">
+          <DataField>InfoEmpresa__E_Mail_</DataField>
+        </Field>
+        <Field Name="InfoEmpresa__Home_Page_">
+          <DataField>InfoEmpresa__Home_Page_</DataField>
+        </Field>
+        <Field Name="InfoEmpresa_Address">
+          <DataField>InfoEmpresa_Address</DataField>
+        </Field>
+        <Field Name="InfoEmpresa_City_______InfoEmpresa_Provincia_______InfoEmpresa__Cod__Pais_Argentina_">
+          <DataField>InfoEmpresa_City_______InfoEmpresa_Provincia_______InfoEmpresa__Cod__Pais_Argentina_</DataField>
+        </Field>
+        <Field Name="InfoEmpresa__VAT_Registration_No__">
+          <DataField>InfoEmpresa__VAT_Registration_No__</DataField>
+        </Field>
+        <Field Name="InfoEmpresa__Withholding_Agent_No__">
+          <DataField>InfoEmpresa__Withholding_Agent_No__</DataField>
+        </Field>
+        <Field Name="InfoEmpresa_Provincia">
+          <DataField>InfoEmpresa_Provincia</DataField>
+        </Field>
+        <Field Name="Proveedor__No_ingresos_brutos_">
+          <DataField>Proveedor__No_ingresos_brutos_</DataField>
+        </Field>
+        <Field Name="Proveedor__VAT_Registration_No__">
+          <DataField>Proveedor__VAT_Registration_No__</DataField>
+        </Field>
+        <Field Name="Proveedor_Address_______Proveedor_City_______Proveedor__Cód__Provincia_">
+          <DataField>Proveedor_Address_______Proveedor_City_______Proveedor__Cód__Provincia_</DataField>
+        </Field>
+        <Field Name="Proveedor_Name">
+          <DataField>Proveedor_Name</DataField>
+        </Field>
+        <Field Name="Movimiento_Retenciones__Withholding_Certification_No__">
+          <DataField>Movimiento_Retenciones__Withholding_Certification_No__</DataField>
+        </Field>
+        <Field Name="Movimiento_Retenciones__Fecha_comprobante_">
+          <DataField>Movimiento_Retenciones__Fecha_comprobante_</DataField>
+        </Field>
+        <Field Name="Provincia_Descripción">
+          <DataField>Provincia_Descripción</DataField>
+        </Field>
+        <Field Name="Descripcion">
+          <DataField>Descripcion</DataField>
+        </Field>
+        <Field Name="FORMAT_vbase_">
+          <DataField>FORMAT_vbase_</DataField>
+        </Field>
+        <Field Name="FORMAT__Movimiento_Retenciones___Importe_retencion__">
+          <DataField>FORMAT__Movimiento_Retenciones___Importe_retencion__</DataField>
+        </Field>
+        <Field Name="FORMAT_alicuota______">
+          <DataField>FORMAT_alicuota______</DataField>
+        </Field>
+        <Field Name="minimo">
+          <DataField>minimo</DataField>
+        </Field>
+        <Field Name="minimoFormat">
+          <DataField>minimoFormat</DataField>
+        </Field>
+        <Field Name="Movimiento_Retenciones_Regimen">
+          <DataField>Movimiento_Retenciones_Regimen</DataField>
+        </Field>
+        <Field Name="CERTIFICADO_DE_RETENCION_IVACaption">
+          <DataField>CERTIFICADO_DE_RETENCION_IVACaption</DataField>
+        </Field>
+        <Field Name="AGENTE_DE_RETENCIONCaption">
+          <DataField>AGENTE_DE_RETENCIONCaption</DataField>
+        </Field>
+        <Field Name="DirecciónCaption">
+          <DataField>DirecciónCaption</DataField>
+        </Field>
+        <Field Name="Nro__de_CUITCaption">
+          <DataField>Nro__de_CUITCaption</DataField>
+        </Field>
+        <Field Name="Agente_RetenciónCaption">
+          <DataField>Agente_RetenciónCaption</DataField>
+        </Field>
+        <Field Name="JurisdicciónCaption">
+          <DataField>JurisdicciónCaption</DataField>
+        </Field>
+        <Field Name="Nro__de_IIBBCaption">
+          <DataField>Nro__de_IIBBCaption</DataField>
+        </Field>
+        <Field Name="Nro__de_CUITCaption_Control1000000018">
+          <DataField>Nro__de_CUITCaption_Control1000000018</DataField>
+        </Field>
+        <Field Name="DirecciónCaption_Control1000000021">
+          <DataField>DirecciónCaption_Control1000000021</DataField>
+        </Field>
+        <Field Name="SUJETO_DE_RETENCIONCaption">
+          <DataField>SUJETO_DE_RETENCIONCaption</DataField>
+        </Field>
+        <Field Name="Certificado_N_Caption">
+          <DataField>Certificado_N_Caption</DataField>
+        </Field>
+        <Field Name="FechaCaption">
+          <DataField>FechaCaption</DataField>
+        </Field>
+        <Field Name="JurisdicciónCaption_Control1000000016">
+          <DataField>JurisdicciónCaption_Control1000000016</DataField>
+        </Field>
+        <Field Name="RETENCIONCaption">
+          <DataField>RETENCIONCaption</DataField>
+        </Field>
+        <Field Name="B__IMPONIBLECaption">
+          <DataField>B__IMPONIBLECaption</DataField>
+        </Field>
+        <Field Name="ALICUOTACaption">
+          <DataField>ALICUOTACaption</DataField>
+        </Field>
+        <Field Name="MINIMOCaption">
+          <DataField>MINIMOCaption</DataField>
+        </Field>
+        <Field Name="RETENIDOCaption">
+          <DataField>RETENIDOCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1000000041">
+          <DataField>EmptyStringCaption_Control1000000041</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1000000042">
+          <DataField>EmptyStringCaption_Control1000000042</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1000000046">
+          <DataField>EmptyStringCaption_Control1000000046</DataField>
+        </Field>
+        <Field Name="REGIMEN_N_Caption">
+          <DataField>REGIMEN_N_Caption</DataField>
+        </Field>
+        <Field Name="Firma_del_Agente_de_RetenciónCaption">
+          <DataField>Firma_del_Agente_de_RetenciónCaption</DataField>
+        </Field>
+        <Field Name="Aclaración_Caption">
+          <DataField>Aclaración_Caption</DataField>
+        </Field>
+        <Field Name="Cargo_Caption">
+          <DataField>Cargo_Caption</DataField>
+        </Field>
+        <Field Name="Withholding_Ledger_Entry_No_">
+          <DataField>Withholding_Ledger_Entry_No_</DataField>
+        </Field>
+        <Field Name="Withholding_Ledger_Entry_Voucher_Number">
+          <DataField>Withholding_Ledger_Entry_Voucher_Number</DataField>
+        </Field>
+        <Field Name="Withholding_Ledger_Entry_GMLocCalculation_Base">
+          <DataField>Withholding_Ledger_Entry_GMLocCalculation_Base</DataField>
+        </Field>
+        <Field Name="Withholding_Ledger_Entry_GMLocCalculation_BaseFormat">
+          <DataField>Withholding_Ledger_Entry_GMLocCalculation_BaseFormat</DataField>
+        </Field>
+        <Field Name="GMLocPictureSign">
+          <DataField>GMLocPictureSign</DataField>
+        </Field>
+        <Field Name="Movimiento_Retenciones__Valor">
+          <DataField>Movimiento_Retenciones__Valor</DataField>
+        </Field>
+        <Field Name="FORMAT_Acumulado_">
+          <DataField>FORMAT_Acumulado_</DataField>
+        </Field>
+        <Field Name="Hist_Lin_Comp_OPago__Nro_Comprobante_">
+          <DataField>Hist_Lin_Comp_OPago__Nro_Comprobante_</DataField>
+        </Field>
+        <Field Name="movfac__External_Document_No__">
+          <DataField>movfac__External_Document_No__</DataField>
+        </Field>
+        <Field Name="ReferenciaCaption">
+          <DataField>ReferenciaCaption</DataField>
+        </Field>
+        <Field Name="Cod__RetenciónCaption">
+          <DataField>Cod__RetenciónCaption</DataField>
+        </Field>
+        <Field Name="ImponibleCaption">
+          <DataField>ImponibleCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1000000047">
+          <DataField>EmptyStringCaption_Control1000000047</DataField>
+        </Field>
+        <Field Name="Nro__FacturaCaption">
+          <DataField>Nro__FacturaCaption</DataField>
+        </Field>
+        <Field Name="Declaración_en_la_que_se_informará_la_retencion__Caption">
+          <DataField>Declaración_en_la_que_se_informará_la_retencion__Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1000000049">
+          <DataField>EmptyStringCaption_Control1000000049</DataField>
+        </Field>
+        <Field Name="Posted_Payment_Order_Vouchers_Payment_Order_No_">
+          <DataField>Posted_Payment_Order_Vouchers_Payment_Order_No_</DataField>
+        </Field>
+        <Field Name="Posted_Payment_Order_Vouchers_Entry_No_">
+          <DataField>Posted_Payment_Order_Vouchers_Entry_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

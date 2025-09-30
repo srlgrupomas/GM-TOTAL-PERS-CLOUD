@@ -1,0 +1,21 @@
+page 80872 "Previsualización IVA"
+{
+    PageType = List;
+    SourceTable = "VAT Entry";
+    Editable = false;
+    SourceTableTemporary = true;
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Group)
+            {
+                field("Document No."; Rec."Document No.") { ApplicationArea = all; }
+                field("VAT Amount"; Rec.Amount) { ApplicationArea = all; }
+                // field("VAT %"; Rec."VAT %") { }
+                //  field("VAT Identifier"; Rec."VAT Identifier") { }
+            }
+        }
+    }
+}

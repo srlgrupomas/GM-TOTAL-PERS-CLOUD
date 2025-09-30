@@ -1,0 +1,30 @@
+pageextension 80901 "PersExtendPurchaseOrderSubForm" extends "Purchase Order SubForm"
+{
+    layout
+    {
+        modify("Tax Group Code")
+        {
+            ShowMandatory = true;
+        }
+        modify("Shortcut Dimension 2 Code")
+        {
+            ShowMandatory = true;
+        }
+        modify("Shortcut Dimension 1 Code")
+        {
+            ShowMandatory = true;
+        }
+        modify("Tax Area Code")
+        {
+            ShowMandatory = true;
+        }
+        modify("GMLocProvince")
+        {
+            ShowMandatory = true;
+        }
+        modify("GMLocWithholding Code")
+        {
+            ShowMandatory = true;
+        }
+    }
+}
