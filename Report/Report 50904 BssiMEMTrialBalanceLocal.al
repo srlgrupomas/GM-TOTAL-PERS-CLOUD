@@ -1,5 +1,5 @@
 
-report 80904 PERMEMTrialBalanceLocal
+report 34006904 PERMEMTrialBalanceLocal
 {
     // *********************************************************************************
     // Description: Duplicate D365BC - Trial Balance (Object ID: 6)
@@ -24,7 +24,7 @@ report 80904 PERMEMTrialBalanceLocal
     {
         dataitem("G/L Account"; "G/L Account")
         {
-            DataItemTableView = SORTING("GMLocCorporate Account Code") ORDER(Ascending);
+            DataItemTableView = SORTING("GMACorporate Account Code") ORDER(Ascending);
             RequestFilterFields = "No.", "Account Type", "Date Filter", "Global Dimension 1 Filter", "Global Dimension 2 Filter";
             column(STRSUBSTNO_Text000_PeriodText_; StrSubstNo(Text000, PeriodText))
             {
@@ -41,7 +41,7 @@ report 80904 PERMEMTrialBalanceLocal
             column(GLFilter; GLFilter)
             {
             }
-            column(G_L_Account_No_; "GMLocCorporate Account Code")
+            column(G_L_Account_No_; "GMACorporate Account Code")
             {
             }
             column(Trial_BalanceCaption; Trial_BalanceCaptionLbl)
@@ -63,7 +63,7 @@ report 80904 PERMEMTrialBalanceLocal
             column(AdditionalBalanceCaption; AdditionalBalanceCaptionLbl)
             {
             }
-            column(G_L_Account___No__Caption; FieldCaption("GMLocCorporate Account Code"))
+            column(G_L_Account___No__Caption; FieldCaption("GMACorporate Account Code"))
             {
             }
             column(PADSTR_____G_L_Account__Indentation___2___G_L_Account__NameCaption; PADSTR_____G_L_Account__Indentation___2___G_L_Account__NameCaptionLbl)
@@ -94,7 +94,7 @@ report 80904 PERMEMTrialBalanceLocal
             {
                 DataItemTableView = SORTING(Number)
                                     WHERE(Number = CONST(1));
-                column(G_L_Account___No__; "G/L Account"."GMLocCorporate Account Code")
+                column(G_L_Account___No__; "G/L Account"."GMACorporate Account Code")
                 {
                 }
                 column(PADSTR_____G_L_Account__Indentation___2___G_L_Account__Name; PadStr('', "G/L Account".Indentation * 2) + AccountName)
@@ -149,7 +149,7 @@ report 80904 PERMEMTrialBalanceLocal
                         BlankLineNo -= 1;
 
                         if UsarNombreCorporativo then
-                            AccountName := "G/L Account"."GMLocCorporate Account Name"
+                            AccountName := "G/L Account"."GMACorporate Account Name"
                         else
                             AccountName := "G/L Account".Name;
                     end;
@@ -162,7 +162,7 @@ report 80904 PERMEMTrialBalanceLocal
                         CurrReport.Skip();
 
                     if UsarNombreCorporativo then
-                        AccountName := "G/L Account"."GMLocCorporate Account Name"
+                        AccountName := "G/L Account"."GMACorporate Account Name"
                     else
                         AccountName := "G/L Account".Name;
                 end;
@@ -188,7 +188,7 @@ report 80904 PERMEMTrialBalanceLocal
                 ChangeGroupNo := "New Page";
 
                 if UsarNombreCorporativo then
-                    AccountName := "G/L Account"."GMLocCorporate Account Name"
+                    AccountName := "G/L Account"."GMACorporate Account Name"
                 else
                     AccountName := "G/L Account".Name;
             end;

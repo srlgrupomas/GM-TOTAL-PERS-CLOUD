@@ -1,8 +1,8 @@
-pageextension 80907 "PersPayment Order Vouchers" extends "GMLocPayment Order Vouchers"
+pageextension 34006907 "PersPayment Order Vouchers" extends "GMAPayment Order Vouchers"
 {
     layout
     {
-        modify("GMLocDocument Posting Group")
+        modify("GMADocument Posting Group")
         {
             Editable = false;
         }

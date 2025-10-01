@@ -1,4 +1,4 @@
-codeunit 80999 "SaveTempMov"
+codeunit 34006999 "SaveTempMov"
 {
     SingleInstance = true;
     Permissions = tabledata PreviewMasivoBool = rimd;
@@ -55,8 +55,8 @@ codeunit 80999 "SaveTempMov"
         end;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"GMLocExtention Codeunit", 'OnBeforeIsPurchaseApprovalsGMLOC', '', false, false)]
-    local procedure OnBeforeIsPurchaseApprovalsGMLOC(var IsHandled: Boolean)
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"GMAExtention Codeunit", 'OnBeforeIsPurchaseApprovalsGMA', '', false, false)]
+    local procedure OnBeforeIsPurchaseApprovalsGMA(var IsHandled: Boolean)
     var
         PreviewMasivoBool: Record "PreviewMasivoBool";
     begin
@@ -84,22 +84,22 @@ codeunit 80999 "SaveTempMov"
             GLobalParVatEntry."Entry No." := entryNo;
 
             //Compras
-            IF (GenJnlLine.GMLocSalesPurchase = GenJnlLine.GMLocSalesPurchase::Compra) THEN begin
+            IF (GenJnlLine.GMASalesPurchase = GenJnlLine.GMASalesPurchase::Compra) THEN begin
                 PurchaseHeader.Reset();
-                PurchaseHeader.SetRange("Document Type", GenJnlLine.GMLocDocTypepurchase);
-                PurchaseHeader.setrange("No.", GenJnlLine.GMLocDocNo);
+                PurchaseHeader.SetRange("Document Type", GenJnlLine.GMADocTypepurchase);
+                PurchaseHeader.setrange("No.", GenJnlLine.GMADocNo);
                 if PurchaseHeader.FindFirst() then begin
-                    GLobalParVatEntry."GMLocAFIP Voucher Type" := PurchaseHeader."GMLocAFIP Invoice Voucher Type";
+                    GLobalParVatEntry."GMAAFIP Voucher Type" := PurchaseHeader."GMAAFIP Invoice Voucher Type";
                 end;
             end;
 
             //Ventas
-            IF (GenJnlLine.GMLocSalesPurchase = GenJnlLine.GMLocSalesPurchase::Venta) THEN begin
+            IF (GenJnlLine.GMASalesPurchase = GenJnlLine.GMASalesPurchase::Venta) THEN begin
                 salesHeader.Reset();
-                salesHeader.SetRange("Document Type", GenJnlLine.GMLocDocTypeSales);
-                salesHeader.setrange("No.", GenJnlLine.GMLocDocNo);
+                salesHeader.SetRange("Document Type", GenJnlLine.GMADocTypeSales);
+                salesHeader.setrange("No.", GenJnlLine.GMADocNo);
                 if salesHeader.FindFirst() then begin
-                    GLobalParVatEntry."GMLocAFIP Voucher Type" := salesHeader."GMLocAFIP Invoice Voucher Type";
+                    GLobalParVatEntry."GMAAFIP Voucher Type" := salesHeader."GMAAFIP Invoice Voucher Type";
                 end;
             end;
 
@@ -133,23 +133,23 @@ codeunit 80999 "SaveTempMov"
             GLobalParGLEntry."GMLocPreview CUIT" := GenJournalLine."VAT Registration No.";
 
             //Compras
-            IF (GenJournalLine.GMLocSalesPurchase = GenJournalLine.GMLocSalesPurchase::Compra) THEN begin
+            IF (GenJournalLine.GMASalesPurchase = GenJournalLine.GMASalesPurchase::Compra) THEN begin
                 PurchaseHeader.Reset();
-                PurchaseHeader.SetRange("Document Type", GenJournalLine.GMLocDocTypepurchase);
-                PurchaseHeader.setrange("No.", GenJournalLine.GMLocDocNo);
+                PurchaseHeader.SetRange("Document Type", GenJournalLine.GMADocTypepurchase);
+                PurchaseHeader.setrange("No.", GenJournalLine.GMADocNo);
                 if PurchaseHeader.FindFirst() then begin
-                    GLobalParGLEntry."GMLocPreviewAFIP Inv. Vo. Type" := PurchaseHeader."GMLocAFIP Invoice Voucher Type";
+                    GLobalParGLEntry."GMLocPreviewAFIP Inv. Vo. Type" := PurchaseHeader."GMAAFIP Invoice Voucher Type";
                     GLobalParGLEntry."PerNombre Proveedor" := PurchaseHeader."Buy-from Vendor Name";
                 end;
             end;
 
             //Ventas
-            IF (GenJournalLine.GMLocSalesPurchase = GenJournalLine.GMLocSalesPurchase::Venta) THEN begin
+            IF (GenJournalLine.GMASalesPurchase = GenJournalLine.GMASalesPurchase::Venta) THEN begin
                 salesHeader.Reset();
-                salesHeader.SetRange("Document Type", GenJournalLine.GMLocDocTypepurchase);
-                salesHeader.setrange("No.", GenJournalLine.GMLocDocNo);
+                salesHeader.SetRange("Document Type", GenJournalLine.GMADocTypepurchase);
+                salesHeader.setrange("No.", GenJournalLine.GMADocNo);
                 if salesHeader.FindFirst() then begin
-                    GLobalParGLEntry."GMLocPreviewAFIP Inv. Vo. Type" := salesHeader."GMLocAFIP Invoice Voucher Type";
+                    GLobalParGLEntry."GMLocPreviewAFIP Inv. Vo. Type" := salesHeader."GMAAFIP Invoice Voucher Type";
                     GLobalParGLEntry."PerNombre Cliente" := salesHeader."Sell-to Customer Name";
                 end;
             end;
@@ -269,9 +269,9 @@ codeunit 80999 "SaveTempMov"
 
     begin
         // identificar si es preview
-        GenJnlLine.GMLocDocNo := PurchHeader."No.";
-        GenJnlLine.GMLocDocTypepurchase := PurchHeader."Document Type";
-        GenJnlLine.GMLocSalesPurchase := GenJnlLine.GMLocSalesPurchase::Compra;
+        GenJnlLine.GMADocNo := PurchHeader."No.";
+        GenJnlLine.GMADocTypepurchase := PurchHeader."Document Type";
+        GenJnlLine.GMASalesPurchase := GenJnlLine.GMASalesPurchase::Compra;
     end;
 #else
     [EventSubscriber(ObjectType::Codeunit, 826, 'OnPostLinesOnBeforeGenJnlLinePost', '', false, false)]
@@ -279,9 +279,9 @@ codeunit 80999 "SaveTempMov"
 
     begin
         // identificar si es preview
-        GenJnlLine.GMLocDocNo := PurchHeader."No.";
-        GenJnlLine.GMLocDocTypepurchase := PurchHeader."Document Type";
-        GenJnlLine.GMLocSalesPurchase := GenJnlLine.GMLocSalesPurchase::Compra;
+        GenJnlLine.GMADocNo := PurchHeader."No.";
+        GenJnlLine.GMADocTypepurchase := PurchHeader."Document Type";
+        GenJnlLine.GMASalesPurchase := GenJnlLine.GMASalesPurchase::Compra;
     end;
 #endif
 
@@ -293,9 +293,9 @@ codeunit 80999 "SaveTempMov"
     var
     begin
         // identificar si es preview
-        GenJnlLine.GMLocDocNo := SalesHeader."No.";
-        GenJnlLine.GMLocDocTypepurchase := SalesHeader."Document Type";
-        GenJnlLine.GMLocSalesPurchase := GenJnlLine.GMLocSalesPurchase::Venta;
+        GenJnlLine.GMADocNo := SalesHeader."No.";
+        GenJnlLine.GMADocTypepurchase := SalesHeader."Document Type";
+        GenJnlLine.GMASalesPurchase := GenJnlLine.GMASalesPurchase::Venta;
     end;
 #else
     [EventSubscriber(ObjectType::Codeunit, 825, 'OnPostLinesOnBeforeGenJnlLinePost', '', false, false)]
@@ -303,9 +303,9 @@ codeunit 80999 "SaveTempMov"
 
     begin
         // identificar si es preview
-        GenJnlLine.GMLocDocNo := SalesHeader."No.";
-        genJnlLine.GMLocDocTypeSales := salesheader."Document Type";
-        GenJnlLine.GMLocSalesPurchase := GenJnlLine.GMLocSalesPurchase::Venta;
+        GenJnlLine.GMADocNo := SalesHeader."No.";
+        genJnlLine.GMADocTypeSales := salesheader."Document Type";
+        GenJnlLine.GMASalesPurchase := GenJnlLine.GMASalesPurchase::Venta;
     end;
 #endif
 

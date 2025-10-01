@@ -1,4 +1,4 @@
-page 80903 "EntitySetUpExtend"
+page 34006903 "EntitySetUpExtend"
 {
     PageType = List;
     SourceTable = "EntitySetUpExtend";

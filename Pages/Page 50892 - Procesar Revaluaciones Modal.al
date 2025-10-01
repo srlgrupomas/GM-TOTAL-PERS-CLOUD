@@ -1,4 +1,4 @@
-// page 80892 "Procesar Revaluaciones Modal"
+// page 34006892 "Procesar Revaluaciones Modal"
 // {
 //     PageType = Card;
 //     ApplicationArea = All;

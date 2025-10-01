@@ -1,4 +1,4 @@
-pageextension 80998 "GMLocPurchase Order List" extends "Purchase Order List"
+pageextension 34006998 "GMLocPurchase Order List" extends "Purchase Order List"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------

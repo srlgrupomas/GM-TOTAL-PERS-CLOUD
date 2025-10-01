@@ -1,4 +1,4 @@
-pageextension 80903 "PERSalesOrderList" extends "Sales Order List"
+pageextension 34006903 "PERSalesOrderList" extends "Sales Order List"
 {
     layout
     {

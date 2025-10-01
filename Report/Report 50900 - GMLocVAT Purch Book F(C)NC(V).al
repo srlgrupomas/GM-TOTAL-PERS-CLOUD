@@ -1,12 +1,12 @@
 ﻿/// <summary>
-///  File Description : MEM Copy of Localization Argentina report: VAT Purchase Book (report 34006496 "GMLocVAT Purch Book F(C)NC(V)") 
+///  File Description : MEM Copy of Localization Argentina report: VAT Purchase Book (report 34006496 "GMAVAT Purch Book F(C)NC(V)") 
 /// </summary>
 /// <remarks>
 /// | Rev No. | Date | By | Ticket | Description |
 /// |:-------:|:----:|:--:|:------:|:------------|
 /// | 000 | 20241224 | Arvind | NAVMEM-#### | Initial Release |
 /// </remarks>
-report 80900 "PersVAT Purch Book F(C)NC(V)"
+report 34006900 "PersVAT Purch Book F(C)NC(V)"
 {
     DefaultRenderingLayout = "BssiMEMVATPurchaseBook.rdlc";
     Caption = 'MEM VAT Purchase Book';
@@ -170,7 +170,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                 dataitem(Facturas; "Purch. Inv. Header")
                 {
                     DataItemTableView = sorting("Posting Date", "No.") order(ascending);
-                    RequestFilterFields = "GMLocFiscal Type";
+                    RequestFilterFields = "GMAFiscal Type";
 
                     dataitem(AFacturas; "Integer")
                     {
@@ -187,7 +187,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                             if Lineas.FindSet then
                                 repeat
                                     CLEAR(VATBUSPOSTINGGROUP);
-                                    IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                    IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                         if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Normal VAT") then
                                             BaseNoGravado += Lineas."VAT Base Amount" * Tipocambio;
 
@@ -195,9 +195,9 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                             GRUPOREGIVAPROD.reset;
                                             GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, lineas."VAT Prod. Posting Group");
                                             if GRUPOREGIVAPROD.FindFirst then begin
-                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') or (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') or (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then begin
-                                                    BaseGravado += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) * Tipocambio);
-                                                    TotalFactura += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) * Tipocambio);
+                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') or (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') or (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then begin
+                                                    BaseGravado += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) * Tipocambio);
+                                                    TotalFactura += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) * Tipocambio);
 
                                                 end;
                                             end;
@@ -207,7 +207,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                             taxGroup.reset;
                                             taxGroup.setRange(code, Lineas."Tax Group Code");
                                             IF (taxGroup.findfirst) THEN begin
-                                                if (TaxGroup."GMLocRes 3685" = TaxGroup."GMLocRes 3685"::"No gravado") or (TaxGroup."GMLocRes 3685" = TaxGroup."GMLocRes 3685"::Exento) then begin
+                                                if (TaxGroup."GMARes 3685" = TaxGroup."GMARes 3685"::"No gravado") or (TaxGroup."GMARes 3685" = TaxGroup."GMARes 3685"::Exento) then begin
                                                     BaseNoGravado += Lineas."VAT Base Amount" * Tipocambio;
                                                 end else begin
                                                     BaseGravado += Lineas.Amount * Tipocambio
@@ -236,30 +236,30 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                             //Inserto datos en TEMP
                             keyTempDatos += 1;
                             recTempDatos.Reset;
-                            recTempDatos.SetRange(GMLocPostingdate, Facturas."Posting Date");
-                            recTempDatos.SetRange(GMLocInvoiceNumber, Facturas."No.");
+                            recTempDatos.SetRange(GMAPostingdate, Facturas."Posting Date");
+                            recTempDatos.SetRange(GMAInvoiceNumber, Facturas."No.");
                             if not recTempDatos.FindFirst then begin
-                                recTempDatos.GMLocKey := keyTempDatos;
-                                recTempDatos.GMLocPostingdate := Facturas."Posting Date";
-                                recTempDatos.GMLocInvoiceNumber := Facturas."Vendor Invoice No.";
-                                if Facturas."GMLocDocument Type Loc." = Facturas."GMLocDocument Type Loc."::Invoice then begin
-                                    RecTempDatos.GMLoctipodocumento := 'Factura';
+                                recTempDatos.GMAKey := keyTempDatos;
+                                recTempDatos.GMAPostingdate := Facturas."Posting Date";
+                                recTempDatos.GMAInvoiceNumber := Facturas."Vendor Invoice No.";
+                                if Facturas."GMADocument Type Loc." = Facturas."GMADocument Type Loc."::Invoice then begin
+                                    RecTempDatos.GMAtipodocumento := 'Factura';
 
                                 end else begin
-                                    RecTempDatos.GMLoctipodocumento := 'Nota Débito';
+                                    RecTempDatos.GMAtipodocumento := 'Nota Débito';
                                 end;
 
-                                case Facturas."GMLocAFIP Invoice Voucher Type" of
+                                case Facturas."GMAAFIP Invoice Voucher Type" of
                                     '66':
-                                        RecTempDatos.GMLoctipodocumento := 'Despacho Importación';
+                                        RecTempDatos.GMAtipodocumento := 'Despacho Importación';
                                     '81':
-                                        RecTempDatos.GMLoctipodocumento := 'Tique-Factura "A"';
+                                        RecTempDatos.GMAtipodocumento := 'Tique-Factura "A"';
                                     '51':
-                                        RecTempDatos.GMLoctipodocumento := 'Factura "M"';
+                                        RecTempDatos.GMAtipodocumento := 'Factura "M"';
                                     '17':
-                                        RecTempDatos.GMLoctipodocumento := 'Liquidación de servicios públicos clase "A"';
+                                        RecTempDatos.GMAtipodocumento := 'Liquidación de servicios públicos clase "A"';
                                     '17C':
-                                        RecTempDatos.GMLoctipodocumento := 'Abono Liq. Serv. Publicos';
+                                        RecTempDatos.GMAtipodocumento := 'Abono Liq. Serv. Publicos';
                                 end;
 
                                 cleaR(EsProveedorGenerico);
@@ -267,33 +267,33 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                 IF (EsProveedorGenerico) and (Facturas."Buy-from Vendor Name 2" <> '') THEN
                                     Facturas."Buy-from Vendor Name" := Facturas."Buy-from Vendor Name 2";
 
-                                recTempDatos.GMLocCustomerName := Facturas."Buy-from Vendor Name";
-                                recTempDatos.GMLocVATRegistrationNo := Facturas."VAT Registration No.";
-                                recTempDatos.GMLocFiscalType := Facturas."GMLocFiscal Type";
-                                recTempDatos.GMLocExternalDocumentNo := Facturas."Vendor Invoice No.";
-                                recTempDatos.GMLocDocumentDate := Facturas."Document Date";
-                                recTempDatos.GMLocBaseAmount := BaseGravado;
-                                recTempDatos.GMLocVAT25 := ABS(decIVA25);
-                                recTempDatos.GMLocVAT105 := ABS(decIVA105);
-                                recTempDatos.GMLocVAT21 := ABS(decIVA21);
-                                recTempDatos.GMLocVAT27 := ABS(decIVA27);
-                                recTempDatos.GMLocVATPercep := ABS(IPer);
-                                recTempDatos.GMLocIIBB := ABS(IIB);
-                                recTempDatos.GMLocGAN := ABS(IGA);
-                                recTempDatos.GMLocSpecial := ABS(IOP);
-                                recTempDatos.GMLocNoBaseAmount := BaseNoGravado + BaseExcento;
-                                recTempDatos.GMLocInvoiceAmount := TotalFactura;
-                                recTempDatos.GMLocProvince := Facturas.GMLocProvince;
+                                recTempDatos.GMACustomerName := Facturas."Buy-from Vendor Name";
+                                recTempDatos.GMAVATRegistrationNo := Facturas."VAT Registration No.";
+                                recTempDatos.GMAFiscalType := Facturas."GMAFiscal Type";
+                                recTempDatos.GMAExternalDocumentNo := Facturas."Vendor Invoice No.";
+                                recTempDatos.GMADocumentDate := Facturas."Document Date";
+                                recTempDatos.GMABaseAmount := BaseGravado;
+                                recTempDatos.GMAVAT25 := ABS(decIVA25);
+                                recTempDatos.GMAVAT105 := ABS(decIVA105);
+                                recTempDatos.GMAVAT21 := ABS(decIVA21);
+                                recTempDatos.GMAVAT27 := ABS(decIVA27);
+                                recTempDatos.GMAVATPercep := ABS(IPer);
+                                recTempDatos.GMAIIBB := ABS(IIB);
+                                recTempDatos.GMAGAN := ABS(IGA);
+                                recTempDatos.GMASpecial := ABS(IOP);
+                                recTempDatos.GMANoBaseAmount := BaseNoGravado + BaseExcento;
+                                recTempDatos.GMAInvoiceAmount := TotalFactura;
+                                recTempDatos.GMAProvince := Facturas.GMAProvince;
                                 recTempDatos.Insert(false);
                             end else begin
-                                recTempDatos.GMLocVAT25 += ABS(decIVA25);
-                                recTempDatos.GMLocVAT105 += ABS(decIVA105);
-                                recTempDatos.GMLocVAT21 += ABS(decIVA21);
-                                recTempDatos.GMLocVAT27 += ABS(decIVA27);
-                                recTempDatos.GMLocVATPercep += IPer;
-                                recTempDatos.GMLocIIBB += IIB;
-                                recTempDatos.GMLocGAN += IGA;
-                                recTempDatos.GMLocSpecial += IOP;
+                                recTempDatos.GMAVAT25 += ABS(decIVA25);
+                                recTempDatos.GMAVAT105 += ABS(decIVA105);
+                                recTempDatos.GMAVAT21 += ABS(decIVA21);
+                                recTempDatos.GMAVAT27 += ABS(decIVA27);
+                                recTempDatos.GMAVATPercep += IPer;
+                                recTempDatos.GMAIIBB += IIB;
+                                recTempDatos.GMAGAN += IGA;
+                                recTempDatos.GMASpecial += IOP;
                                 recTempDatos.Modify(false);
                             end;
 
@@ -384,12 +384,12 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                         TipoIVAcero := 'NoGravado';
 
                         recTipoFiscal.Reset;
-                        recTipoFiscal.SetRange(GMlocCode, Facturas."GMLocFiscal Type");
+                        recTipoFiscal.SetRange(GMACode, Facturas."GMAFiscal Type");
                         if recTipoFiscal.FindFirst then begin
-                            if recTipoFiscal.GMLocTipo = recTipoFiscal.GMLocTipo::Exento then
+                            if recTipoFiscal.GMATipo = recTipoFiscal.GMATipo::Exento then
                                 TipoIVAcero := 'EXENTO'
                             else
-                                if (recTipoFiscal."GMLocSummary in VAT Book" = false) then
+                                if (recTipoFiscal."GMASummary in VAT Book" = false) then
                                     CurrReport.Skip;          //No debe aparecer en el Libro de Compras
                         end;
 
@@ -416,7 +416,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                         Impuestos.SetRange(Impuestos."Document No.", Facturas."No.");
                                         Impuestos.SetFilter(Impuestos."Document Type", '%1', Impuestos."document type"::Invoice);
                                         Impuestos.SetRange(Impuestos."Tax Group Code", Lineas."Tax Group Code");
-                                        Impuestos.SetRange(Impuestos."GMLocTax Type Loc", Impuestos."GMLocTax Type Loc"::IVA);
+                                        Impuestos.SetRange(Impuestos."GMATax Type Loc", Impuestos."GMATax Type Loc"::IVA);
                                         if BssiMEMSystemSetup.BssiUseGlobalDimOne() then
                                             Impuestos.SetRange("Bssi Shortcut Dimension 1 Code", DimensionValue.Code)
                                         else
@@ -467,7 +467,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                             if LineasCredito.FindSet then
                                 repeat
                                     CLEAR(VATBUSPOSTINGGROUP);
-                                    IF (VATBUSPOSTINGGROUP.GET(LineasCredito."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                    IF (VATBUSPOSTINGGROUP.GET(LineasCredito."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                         if (LineasCredito."VAT Calculation Type" = LineasCredito."VAT Calculation Type"::"Normal VAT") then
                                             BaseNoGravado += LineasCredito."VAT Base Amount" * Tipocambio;
 
@@ -475,9 +475,9 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                             GRUPOREGIVAPROD.reset;
                                             GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, lineas."VAT Prod. Posting Group");
                                             if GRUPOREGIVAPROD.FindFirst then begin
-                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') or (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') or (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then begin
-                                                    BaseGravado += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) * Tipocambio);
-                                                    TotalFactura += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) * Tipocambio);
+                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') or (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') or (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then begin
+                                                    BaseGravado += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) * Tipocambio);
+                                                    TotalFactura += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) * Tipocambio);
 
                                                 end;
                                             end;
@@ -487,7 +487,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                             taxGroup.reset;
                                             taxGroup.setRange(code, LineasCredito."Tax Group Code");
                                             IF (taxGroup.findfirst) THEN begin
-                                                if (TaxGroup."GMLocRes 3685" = TaxGroup."GMLocRes 3685"::"No gravado") or (TaxGroup."GMLocRes 3685" = TaxGroup."GMLocRes 3685"::Exento) then begin
+                                                if (TaxGroup."GMARes 3685" = TaxGroup."GMARes 3685"::"No gravado") or (TaxGroup."GMARes 3685" = TaxGroup."GMARes 3685"::Exento) then begin
                                                     BaseNoGravado += LineasCredito."VAT Base Amount" * Tipocambio;
                                                 end else begin
                                                     BaseGravado += LineasCredito.Amount * Tipocambio
@@ -519,37 +519,37 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                             //Inserto datos en TEMP
                             keyTempDatos += 1;
                             recTempDatos.Reset;
-                            recTempDatos.SetRange(GMLocPostingdate, NotasDeCredito."Posting Date");
-                            recTempDatos.SetRange(GMLocInvoiceNumber, NotasDeCredito."No.");
+                            recTempDatos.SetRange(GMAPostingdate, NotasDeCredito."Posting Date");
+                            recTempDatos.SetRange(GMAInvoiceNumber, NotasDeCredito."No.");
                             if not recTempDatos.FindFirst then begin
-                                recTempDatos.GMLocKey := keyTempDatos;
-                                recTempDatos.GMLocPostingdate := NotasDeCredito."Posting Date";
-                                recTempDatos.GMLocInvoiceNumber := NotasDeCredito."No.";
-                                recTempDatos.GMLoctipodocumento := 'Notas de Credito'; //FORMAT(NotasDeCredito."GMLocDocument Type Loc.");
+                                recTempDatos.GMAKey := keyTempDatos;
+                                recTempDatos.GMAPostingdate := NotasDeCredito."Posting Date";
+                                recTempDatos.GMAInvoiceNumber := NotasDeCredito."No.";
+                                recTempDatos.GMAtipodocumento := 'Notas de Credito'; //FORMAT(NotasDeCredito."GMADocument Type Loc.");
 
-                                recTempDatos.GMLocCustomerName := NotasDeCredito."Bill-to Name";
-                                recTempDatos.GMLocVATRegistrationNo := NotasDeCredito."VAT Registration No.";
-                                recTempDatos.GMLocFiscalType := NotasDeCredito."GMLocFiscal Type";
-                                //recTempDatos.GMLocExternalDocumentNo := NotasDeCredito."Ex";
-                                recTempDatos.GMLocDocumentDate := NotasDeCredito."Document Date";
-                                recTempDatos.GMLocBaseAmount := BaseGravado;
-                                recTempDatos.GMLocVAT25 := ABS(decIVA25);
-                                recTempDatos.GMLocVAT105 := ABS(decIVA105);
-                                recTempDatos.GMLocVAT21 := ABS(decIVA21);
-                                recTempDatos.GMLocVAT27 := ABS(decIVA27);
-                                recTempDatos.GMLocVATPercep := ABS(IPer);
-                                recTempDatos.GMLocIIBB := ABS(IIB);
-                                recTempDatos.GMLocGAN := ABS(IGA);
-                                recTempDatos.GMLocSpecial := ABS(IOP);
-                                recTempDatos.GMLocNoBaseAmount := (BaseNoGravado + BaseExcento);
-                                recTempDatos.GMLocInvoiceAmount := TotalFactura;
-                                recTempDatos.GMLocProvince := NotasDeCredito.GMLocProvince;
+                                recTempDatos.GMACustomerName := NotasDeCredito."Bill-to Name";
+                                recTempDatos.GMAVATRegistrationNo := NotasDeCredito."VAT Registration No.";
+                                recTempDatos.GMAFiscalType := NotasDeCredito."GMAFiscal Type";
+                                //recTempDatos.GMAExternalDocumentNo := NotasDeCredito."Ex";
+                                recTempDatos.GMADocumentDate := NotasDeCredito."Document Date";
+                                recTempDatos.GMABaseAmount := BaseGravado;
+                                recTempDatos.GMAVAT25 := ABS(decIVA25);
+                                recTempDatos.GMAVAT105 := ABS(decIVA105);
+                                recTempDatos.GMAVAT21 := ABS(decIVA21);
+                                recTempDatos.GMAVAT27 := ABS(decIVA27);
+                                recTempDatos.GMAVATPercep := ABS(IPer);
+                                recTempDatos.GMAIIBB := ABS(IIB);
+                                recTempDatos.GMAGAN := ABS(IGA);
+                                recTempDatos.GMASpecial := ABS(IOP);
+                                recTempDatos.GMANoBaseAmount := (BaseNoGravado + BaseExcento);
+                                recTempDatos.GMAInvoiceAmount := TotalFactura;
+                                recTempDatos.GMAProvince := NotasDeCredito.GMAProvince;
                                 recTempDatos.Insert(false);
                             end else begin
-                                recTempDatos.GMLocVAT25 += ABS(decIVA25);
-                                recTempDatos.GMLocVAT105 += ABS(decIVA105);
-                                recTempDatos.GMLocVAT21 += ABS(decIVA21);
-                                recTempDatos.GMLocVAT27 += ABS(decIVA27);
+                                recTempDatos.GMAVAT25 += ABS(decIVA25);
+                                recTempDatos.GMAVAT105 += ABS(decIVA105);
+                                recTempDatos.GMAVAT21 += ABS(decIVA21);
+                                recTempDatos.GMAVAT27 += ABS(decIVA27);
                                 recTempDatos.Modify(false);
                             end;
 
@@ -636,12 +636,12 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                         NotasDeCredito."No." := NotasDeCredito."No.";
 
                         recTipoFiscal.Reset;
-                        recTipoFiscal.SetRange(GMlocCode, NotasDeCredito."GMLocFiscal Type");
+                        recTipoFiscal.SetRange(GMACode, NotasDeCredito."GMAFiscal Type");
                         if recTipoFiscal.FindFirst then begin
-                            if recTipoFiscal.GMLocTipo = recTipoFiscal.GMLocTipo::Exento then
+                            if recTipoFiscal.GMATipo = recTipoFiscal.GMATipo::Exento then
                                 TipoIVAcero := 'EXENTO'
                             else
-                                if (recTipoFiscal."GMLocSummary in VAT Book" = false) then
+                                if (recTipoFiscal."GMASummary in VAT Book" = false) then
                                     CurrReport.Skip;
                         end;
 
@@ -668,7 +668,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                         Impuestos.SetRange(Impuestos."Document Type", Impuestos."document type"::"Credit Memo");
                                         Impuestos.SetRange(Impuestos."Document No.", NotasDeCredito."No.");
                                         Impuestos.SetRange(Impuestos."Tax Group Code", LineasCredito."Tax Group Code");
-                                        Impuestos.SetRange(Impuestos."GMLocTax Type Loc", Impuestos."GMLocTax Type Loc"::IVA);
+                                        Impuestos.SetRange(Impuestos."GMATax Type Loc", Impuestos."GMATax Type Loc"::IVA);
                                         if BssiMEMSystemSetup.BssiUseGlobalDimOne() then
                                             Impuestos.SetRange("Bssi Shortcut Dimension 1 Code", DimensionValue.Code)
                                         else
@@ -720,7 +720,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                             if LineasCredito2.FindSet then
                                 repeat
                                     CLEAR(VATBUSPOSTINGGROUP);
-                                    IF (VATBUSPOSTINGGROUP.GET(LineasCredito2."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                    IF (VATBUSPOSTINGGROUP.GET(LineasCredito2."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                         if (LineasCredito2."VAT Calculation Type" = LineasCredito2."VAT Calculation Type"::"Normal VAT") then
                                             BaseNoGravado += LineasCredito2."VAT Base Amount" * Tipocambio;
 
@@ -728,9 +728,9 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                             GRUPOREGIVAPROD.reset;
                                             GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, lineas."VAT Prod. Posting Group");
                                             if GRUPOREGIVAPROD.FindFirst then begin
-                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') or (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') or (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then begin
-                                                    BaseGravado += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) * Tipocambio);
-                                                    TotalFactura += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) * Tipocambio);
+                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') or (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') or (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then begin
+                                                    BaseGravado += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) * Tipocambio);
+                                                    TotalFactura += (ROUND((Lineas.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) * Tipocambio);
 
                                                 end;
                                             end;
@@ -740,7 +740,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                             taxGroup.reset;
                                             taxGroup.setRange(code, LineasCredito2."Tax Group Code");
                                             IF (taxGroup.findfirst) THEN begin
-                                                if (TaxGroup."GMLocRes 3685" = TaxGroup."GMLocRes 3685"::"No gravado") or (TaxGroup."GMLocRes 3685" = TaxGroup."GMLocRes 3685"::Exento) then begin
+                                                if (TaxGroup."GMARes 3685" = TaxGroup."GMARes 3685"::"No gravado") or (TaxGroup."GMARes 3685" = TaxGroup."GMARes 3685"::Exento) then begin
                                                     BaseNoGravado += LineasCredito2."VAT Base Amount" * Tipocambio;
                                                 end else begin
                                                     BaseGravado += LineasCredito2.Amount * Tipocambio
@@ -770,37 +770,37 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                             //Inserto datos en TEMP
                             keyTempDatos += 1;
                             recTempDatos.Reset;
-                            recTempDatos.SetRange(GMLocPostingdate, NotasDeCredito2."Posting Date");
-                            recTempDatos.SetRange(GMLocInvoiceNumber, NotasDeCredito2."No.");
+                            recTempDatos.SetRange(GMAPostingdate, NotasDeCredito2."Posting Date");
+                            recTempDatos.SetRange(GMAInvoiceNumber, NotasDeCredito2."No.");
                             if not recTempDatos.FindFirst then begin
-                                recTempDatos.GMLocKey := keyTempDatos;
-                                recTempDatos.GMLocPostingdate := NotasDeCredito2."Posting Date";
-                                recTempDatos.GMLocInvoiceNumber := NotasDeCredito2."No.";
-                                recTempDatos.GMLoctipodocumento := 'Notas de Credito'; //FORMAT(NotasDeCredito2."GMLocDocument Type Loc.");
+                                recTempDatos.GMAKey := keyTempDatos;
+                                recTempDatos.GMAPostingdate := NotasDeCredito2."Posting Date";
+                                recTempDatos.GMAInvoiceNumber := NotasDeCredito2."No.";
+                                recTempDatos.GMAtipodocumento := 'Notas de Credito'; //FORMAT(NotasDeCredito2."GMADocument Type Loc.");
 
-                                recTempDatos.GMLocCustomerName := NotasDeCredito2."Bill-to Name";
-                                recTempDatos.GMLocVATRegistrationNo := NotasDeCredito2."VAT Registration No.";
-                                recTempDatos.GMLocFiscalType := NotasDeCredito2."GMLocFiscal Type";
-                                //recTempDatos.GMLocExternalDocumentNo := NotasDeCredito2."Ex";
-                                recTempDatos.GMLocDocumentDate := NotasDeCredito2."Document Date";
-                                recTempDatos.GMLocBaseAmount := BaseGravado;
-                                recTempDatos.GMLocVAT25 := ABS(decIVA25);
-                                recTempDatos.GMLocVAT105 := ABS(decIVA105);
-                                recTempDatos.GMLocVAT21 := ABS(decIVA21);
-                                recTempDatos.GMLocVAT27 := ABS(decIVA27);
-                                recTempDatos.GMLocVATPercep := ABS(IPer);
-                                recTempDatos.GMLocIIBB := ABS(IIB);
-                                recTempDatos.GMLocGAN := ABS(IGA);
-                                recTempDatos.GMLocSpecial := ABS(IOP);
-                                recTempDatos.GMLocNoBaseAmount := (BaseNoGravado + BaseExcento);
-                                recTempDatos.GMLocInvoiceAmount := TotalFactura;
-                                recTempDatos.GMLocProvince := NotasDeCredito2.GMLocProvince;
+                                recTempDatos.GMACustomerName := NotasDeCredito2."Bill-to Name";
+                                recTempDatos.GMAVATRegistrationNo := NotasDeCredito2."VAT Registration No.";
+                                recTempDatos.GMAFiscalType := NotasDeCredito2."GMAFiscal Type";
+                                //recTempDatos.GMAExternalDocumentNo := NotasDeCredito2."Ex";
+                                recTempDatos.GMADocumentDate := NotasDeCredito2."Document Date";
+                                recTempDatos.GMABaseAmount := BaseGravado;
+                                recTempDatos.GMAVAT25 := ABS(decIVA25);
+                                recTempDatos.GMAVAT105 := ABS(decIVA105);
+                                recTempDatos.GMAVAT21 := ABS(decIVA21);
+                                recTempDatos.GMAVAT27 := ABS(decIVA27);
+                                recTempDatos.GMAVATPercep := ABS(IPer);
+                                recTempDatos.GMAIIBB := ABS(IIB);
+                                recTempDatos.GMAGAN := ABS(IGA);
+                                recTempDatos.GMASpecial := ABS(IOP);
+                                recTempDatos.GMANoBaseAmount := (BaseNoGravado + BaseExcento);
+                                recTempDatos.GMAInvoiceAmount := TotalFactura;
+                                recTempDatos.GMAProvince := NotasDeCredito2.GMAProvince;
                                 recTempDatos.Insert(false);
                             end else begin
-                                recTempDatos.GMLocVAT25 += ABS(decIVA25);
-                                recTempDatos.GMLocVAT105 += ABS(decIVA105);
-                                recTempDatos.GMLocVAT21 += ABS(decIVA21);
-                                recTempDatos.GMLocVAT27 += ABS(decIVA27);
+                                recTempDatos.GMAVAT25 += ABS(decIVA25);
+                                recTempDatos.GMAVAT105 += ABS(decIVA105);
+                                recTempDatos.GMAVAT21 += ABS(decIVA21);
+                                recTempDatos.GMAVAT27 += ABS(decIVA27);
                                 recTempDatos.Modify(false);
                             end;
 
@@ -887,12 +887,12 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                         NotasDeCredito2."No." := NotasDeCredito2."No.";
 
                         recTipoFiscal.Reset;
-                        recTipoFiscal.SetRange(GMlocCode, NotasDeCredito2."GMLocFiscal Type");
+                        recTipoFiscal.SetRange(GMACode, NotasDeCredito2."GMAFiscal Type");
                         if recTipoFiscal.FindFirst then begin
-                            if recTipoFiscal.GMLocTipo = recTipoFiscal.GMLocTipo::Exento then
+                            if recTipoFiscal.GMATipo = recTipoFiscal.GMATipo::Exento then
                                 TipoIVAcero := 'EXENTO'
                             else
-                                if (recTipoFiscal."GMLocSummary in VAT Book" = false) then
+                                if (recTipoFiscal."GMASummary in VAT Book" = false) then
                                     CurrReport.Skip;
                         end;
 
@@ -919,7 +919,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                                         Impuestos.SetRange(Impuestos."Document Type", Impuestos."document type"::"Credit Memo");
                                         Impuestos.SetRange(Impuestos."Document No.", NotasDeCredito2."No.");
                                         Impuestos.SetRange(Impuestos."Tax Group Code", LineasCredito2."Tax Group Code");
-                                        Impuestos.SetRange(Impuestos."GMLocTax Type Loc", Impuestos."GMLocTax Type Loc"::IVA);
+                                        Impuestos.SetRange(Impuestos."GMATax Type Loc", Impuestos."GMATax Type Loc"::IVA);
                                         if BssiMEMSystemSetup.BssiUseGlobalDimOne() then
                                             Impuestos.SetRange("Bssi Shortcut Dimension 1 Code", DimensionValue.Code)
                                         else
@@ -959,61 +959,61 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                     column(ReportForNavId_5680; 5680)
                     {
                     }
-                    column(recTempDatos__Fecha_Registros_; recTempDatos.GMLocPostingdate)
+                    column(recTempDatos__Fecha_Registros_; recTempDatos.GMAPostingdate)
                     {
                     }
-                    column(recTempDatos__Num_Documento_Externo_; recTempDatos.GMLocExternalDocumentNo)
+                    column(recTempDatos__Num_Documento_Externo_; recTempDatos.GMAExternalDocumentNo)
                     {
                     }
-                    column(recTempDatos__Razon_Social_; recTempDatos.GMLocCustomerName)
+                    column(recTempDatos__Razon_Social_; recTempDatos.GMACustomerName)
                     {
                     }
-                    column(recTempDatos_CUIT; recTempDatos.GMLocVATRegistrationNo)
+                    column(recTempDatos_CUIT; recTempDatos.GMAVATRegistrationNo)
                     {
                     }
-                    column(recTempDatos__Total_Factura_; recTempDatos.GMLocInvoiceAmount)
+                    column(recTempDatos__Total_Factura_; recTempDatos.GMAInvoiceAmount)
                     {
                     }
-                    column(recTempDatos__IVA_10_5_; recTempDatos.GMLocVAT105)
+                    column(recTempDatos__IVA_10_5_; recTempDatos.GMAVAT105)
                     {
                     }
-                    column(recTempDatos__IVA_2_5_; recTempDatos.GMLocVAT25)
+                    column(recTempDatos__IVA_2_5_; recTempDatos.GMAVAT25)
                     {
                     }
-                    column(recTempDatos_IIBB; recTempDatos.GMLocIIBB)
+                    column(recTempDatos_IIBB; recTempDatos.GMAIIBB)
                     {
                     }
-                    column(recTempDatos__Impuestos_Internos_; recTempDatos.GMLocSpecial)
+                    column(recTempDatos__Impuestos_Internos_; recTempDatos.GMASpecial)
                     {
                     }
-                    column(recTempDatos_Gravado; recTempDatos.GMLocBaseAmount)
+                    column(recTempDatos_Gravado; recTempDatos.GMABaseAmount)
                     {
                     }
-                    column(recTempDatos__No_Gravado___Exento_; recTempDatos.GMLocNoBaseAmount)
+                    column(recTempDatos__No_Gravado___Exento_; recTempDatos.GMANoBaseAmount)
                     {
                     }
-                    column(recTempDatos__Fecha_Documento_; recTempDatos.GMLocDocumentDate)
+                    column(recTempDatos__Fecha_Documento_; recTempDatos.GMADocumentDate)
                     {
                     }
-                    column(recTempDatos__Numero_Interno_; recTempDatos.GMLocInvoiceNumber)
+                    column(recTempDatos__Numero_Interno_; recTempDatos.GMAInvoiceNumber)
                     {
                     }
-                    column(recTempDatos_GAN; recTempDatos.GMLocGAN)
+                    column(recTempDatos_GAN; recTempDatos.GMAGAN)
                     {
                     }
-                    column(recTempDatos__Tipo_Fiscal_; recTempDatos.GMLocFiscalType)
+                    column(recTempDatos__Tipo_Fiscal_; recTempDatos.GMAFiscalType)
                     {
                     }
-                    column(recTempDatos__IVA_27_; recTempDatos.GMLocVAT27)
+                    column(recTempDatos__IVA_27_; recTempDatos.GMAVAT27)
                     {
                     }
-                    column(recTempDatos__Tipo_Documento_; recTempDatos."GMLoctipodocumento")
+                    column(recTempDatos__Tipo_Documento_; recTempDatos."GMAtipodocumento")
                     {
                     }
-                    column(recTempDatos__IVA_Percep_; recTempDatos.GMLocVATPercep)
+                    column(recTempDatos__IVA_Percep_; recTempDatos.GMAVATPercep)
                     {
                     }
-                    column(recTempDatos__IVA_21_; recTempDatos.GMLocVAT21)
+                    column(recTempDatos__IVA_21_; recTempDatos.GMAVAT21)
                     {
                     }
                     column(Fecha_Reg_Caption; Fecha_Reg_CaptionLbl)
@@ -1092,12 +1092,12 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                     trigger OnPreDataItem()
                     begin
                         recTempDatos.Reset;
-                        recTempDatos.setfilter("GMLocInvoiceType", '=%1|=%2', recTempDatos.GMLocInvoiceType::"Nota Débito", recTempDatos.GMLocInvoiceType::Invoice);
+                        recTempDatos.setfilter("GMAInvoiceType", '=%1|=%2', recTempDatos.GMAInvoiceType::"GMANota Debito", recTempDatos.GMAInvoiceType::Invoice);
                         if not recTempDatos.FindFirst then begin
                             keyTempDatos += 1;
                             recTempDatos.Init;
-                            recTempDatos.GMLocKey := keyTempDatos;
-                            recTempDatos.GMLoctipodocumento := FORMAT(recTempDatos.GMLocInvoiceType);
+                            recTempDatos.GMAKey := keyTempDatos;
+                            recTempDatos.GMAtipodocumento := FORMAT(recTempDatos.GMAInvoiceType);
                             recTempDatos.Insert;
                         end;
 
@@ -1320,7 +1320,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                     // Calcula la Cantidad de Alicuotas de IVA y las almacena en Alic[x] la Alic[1,1] siempre es cero
                     Jurisdiccion.Reset;
                     Jurisdiccion.SetCurrentkey(Code);
-                    Jurisdiccion.SetRange(Jurisdiccion."GMLocType of Tax", 0);
+                    Jurisdiccion.SetRange(Jurisdiccion."GMAType of Tax", 0);
                     Alicant := 1;   // La primera siempre es CERO
                     if Jurisdiccion.FindFirst then
                         repeat
@@ -1500,7 +1500,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
 
         Impuestos: Record "VAT Entry";
         Taxarea: Record "Tax Area";
-        Tipofiscal: Record "GMLocFiscal Type";
+        Tipofiscal: Record "GMAFiscal Type";
 
         TaxGroup: Record "Tax Group";
         Detalleimpuesto: Record "Tax Detail";
@@ -1580,9 +1580,9 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
         GTotalIGAC: Decimal;
         GTotalBaseTotalC: Decimal;
         t: Decimal;
-        recTipoFiscal: Record "GMLocFiscal Type";
+        recTipoFiscal: Record "GMAFiscal Type";
         recTaxJurisdiction: Record "Tax Jurisdiction";
-        recTempDatos: Record GMLocVatBookTmp temporary;
+        recTempDatos: Record GMAVatBookTmp temporary;
         keyTempDatos: Integer;
         Folio_CaptionLbl: label 'Folio:';
         LIBRO_IVA_COMPRASCaptionLbl: label 'LIBRO IVA COMPRAS';
@@ -1637,7 +1637,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
         Total_Compras_con_ImpuestosCaptionCLbl: label 'Total Compras con Impuestos';
         Impuesto_IVACaption_Control1102201064_1Lbl: label 'IVA Adic';  // Cesar
 
-        Argentina: codeunit GMLocArgentina2;
+        Argentina: codeunit GMAArgentina2;
         EsProveedorGenerico: Boolean;
 
         //Bssi Variables
@@ -1659,7 +1659,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
         if Detalleimpuesto.FindSet then
             repeat
                 if Jurisdiccion.Get(Detalleimpuesto."Tax Jurisdiction Code") then
-                    if (Jurisdiccion."GMLocType of Tax" = Jurisdiccion."GMLocType of Tax"::IVA) and (valor = 0) then
+                    if (Jurisdiccion."GMAType of Tax" = Jurisdiccion."GMAType of Tax"::IVA) and (valor = 0) then
                         valor := Detalleimpuesto."Tax Below Maximum";
             until Detalleimpuesto.Next = 0;
     end;
@@ -1680,7 +1680,7 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
         Impuestos.SetCurrentkey("Entry No.");
         Impuestos.SetRange(Impuestos."Document No.", numdoc);
         Impuestos.SetRange(Impuestos."Tax Group Code", grupo);
-        Impuestos.SetRange(Impuestos."GMLocTax Type Loc", 0);
+        Impuestos.SetRange(Impuestos."GMATax Type Loc", 0);
         if BssiMEMSystemSetup.BssiUseGlobalDimOne() then
             Impuestos.SetRange("Bssi Shortcut Dimension 1 Code", DimensionValue.Code)
         else
@@ -1713,51 +1713,51 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
         if Impuestos.FindSet then
             repeat
                 IF (Impuestos."Tax Jurisdiction Code" <> '') THEN begin
-                    case Impuestos."GMLocTax Type Loc" of
+                    case Impuestos."GMATax Type Loc" of
                         0:
                             begin
                                 Clear(recTaxJurisdiction);
                                 recTaxJurisdiction.Reset;
                                 recTaxJurisdiction.SetRange(Code, Impuestos."Tax Jurisdiction Code");
                                 if recTaxJurisdiction.FindFirst then
-                                    case recTaxJurisdiction.GMLocTipo of
-                                        recTaxJurisdiction.GMLocTipo::IVA21:
+                                    case recTaxJurisdiction.GMATipo of
+                                        recTaxJurisdiction.GMATipo::IVA21:
                                             decIVA21 += Impuestos.Amount;
 
-                                        recTaxJurisdiction.GMLocTipo::"IVA2.5":
+                                        recTaxJurisdiction.GMATipo::"IVA2.5":
                                             decIVA25 += Impuestos.Amount;
 
-                                        recTaxJurisdiction.GMLocTipo::IVA5:
+                                        recTaxJurisdiction.GMATipo::IVA5:
                                             decIVA25 += Impuestos.Amount;
 
-                                        recTaxJurisdiction.GMLocTipo::"IVA10.5":
+                                        recTaxJurisdiction.GMATipo::"IVA10.5":
                                             decIVA105 += Impuestos.Amount;
 
-                                        recTaxJurisdiction.GMLocTipo::IVA27:
+                                        recTaxJurisdiction.GMATipo::IVA27:
                                             decIVA27 += Impuestos.Amount;
 
 
-                                        recTaxJurisdiction.GMLocTipo::" ":
+                                        recTaxJurisdiction.GMATipo::" ":
                                             begin
                                                 GRUPOREGIVAPROD.Reset;
                                                 GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, Impuestos."VAT Prod. Posting Group");
                                                 if GRUPOREGIVAPROD.FindFirst then begin
-                                                    case GRUPOREGIVAPROD."GMLocTax Type" of
+                                                    case GRUPOREGIVAPROD."GMATax Type" of
                                                         0:
                                                             begin
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') then
                                                                     decIVA21 += Impuestos.Amount;
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '9') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '9') then
                                                                     decIVA25 += Impuestos.Amount;
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') then
                                                                     decIVA105 += Impuestos.Amount;
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then
                                                                     decIVA27 += Impuestos.Amount;
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '8') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '8') then
                                                                     decIVA25 += Impuestos.Amount;
                                                             end;
 
@@ -1787,21 +1787,21 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                     GRUPOREGIVAPROD.Reset;
                     GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, Impuestos."VAT Prod. Posting Group");
                     if GRUPOREGIVAPROD.FindFirst then begin
-                        case GRUPOREGIVAPROD."GMLocTax Type" of
+                        case GRUPOREGIVAPROD."GMATax Type" of
                             0:
                                 begin
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') then
                                         decIVA21 += Impuestos.Amount;
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '9') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '9') then
                                         decIVA25 += Impuestos.Amount;
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') then
                                         decIVA105 += Impuestos.Amount;
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then
                                         decIVA27 += Impuestos.Amount;
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '8') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '8') then
                                         decIVA25 += Impuestos.Amount;
                                 end;
                             1:
@@ -1835,51 +1835,51 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
         if Impuestos.FindSet then
             repeat
                 IF (Impuestos."Tax Jurisdiction Code" <> '') THEN begin
-                    case Impuestos."GMLocTax Type Loc" of
+                    case Impuestos."GMATax Type Loc" of
                         0:
                             begin
                                 Clear(recTaxJurisdiction);
                                 recTaxJurisdiction.Reset;
                                 recTaxJurisdiction.SetRange(Code, Impuestos."Tax Jurisdiction Code");
                                 if recTaxJurisdiction.FindFirst then
-                                    case recTaxJurisdiction.GMLocTipo of
-                                        recTaxJurisdiction.GMLocTipo::IVA21:
+                                    case recTaxJurisdiction.GMATipo of
+                                        recTaxJurisdiction.GMATipo::IVA21:
                                             decIVA21 += Impuestos.Amount;
 
-                                        recTaxJurisdiction.GMLocTipo::"IVA2.5":
+                                        recTaxJurisdiction.GMATipo::"IVA2.5":
                                             decIVA25 += Impuestos.Amount;
 
-                                        recTaxJurisdiction.GMLocTipo::IVA5:
+                                        recTaxJurisdiction.GMATipo::IVA5:
                                             decIVA25 += Impuestos.Amount;
 
-                                        recTaxJurisdiction.GMLocTipo::"IVA10.5":
+                                        recTaxJurisdiction.GMATipo::"IVA10.5":
                                             decIVA105 += Impuestos.Amount;
 
-                                        recTaxJurisdiction.GMLocTipo::IVA27:
+                                        recTaxJurisdiction.GMATipo::IVA27:
                                             decIVA27 += Impuestos.Amount;
 
 
-                                        recTaxJurisdiction.GMLocTipo::" ":
+                                        recTaxJurisdiction.GMATipo::" ":
                                             begin
                                                 GRUPOREGIVAPROD.Reset;
                                                 GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, Impuestos."VAT Prod. Posting Group");
                                                 if GRUPOREGIVAPROD.FindFirst then begin
-                                                    case GRUPOREGIVAPROD."GMLocTax Type" of
+                                                    case GRUPOREGIVAPROD."GMATax Type" of
                                                         0:
                                                             begin
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') then
                                                                     decIVA21 += Impuestos.Amount;
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '9') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '9') then
                                                                     decIVA25 += Impuestos.Amount;
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') then
                                                                     decIVA105 += Impuestos.Amount;
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then
                                                                     decIVA27 += Impuestos.Amount;
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '8') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '8') then
                                                                     decIVA25 += Impuestos.Amount;
                                                             end;
 
@@ -1909,22 +1909,22 @@ report 80900 "PersVAT Purch Book F(C)NC(V)"
                     GRUPOREGIVAPROD.Reset;
                     GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, Impuestos."VAT Prod. Posting Group");
                     if GRUPOREGIVAPROD.FindFirst then begin
-                        case GRUPOREGIVAPROD."GMLocTax Type" of
+                        case GRUPOREGIVAPROD."GMATax Type" of
                             0:
                                 begin
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') then
                                         decIVA21 += Impuestos.Amount;
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '9') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '9') then
                                         decIVA25 += Impuestos.Amount;
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') then
                                         decIVA105 += Impuestos.Amount;
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then
                                         decIVA27 += Impuestos.Amount;
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '8') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '8') then
                                         decIVA25 += Impuestos.Amount;
                                 end;
                             1:

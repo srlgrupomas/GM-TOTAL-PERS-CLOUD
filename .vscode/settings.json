@@ -1,0 +1,8 @@
+{
+    "al.enableCodeAnalysis": true,
+    "al.codeAnalyzers": [
+        "${AppSourceCop}",
+        "${CodeCop}"
+    ],
+    "xliffSync.baseFile": "Total Customizations.g.xlf"
+}

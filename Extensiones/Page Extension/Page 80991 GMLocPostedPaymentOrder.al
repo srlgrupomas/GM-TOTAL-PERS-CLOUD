@@ -6,7 +6,7 @@
 
 // using Microsoft.Sales.Customer;
 
-// pageextension 80991 GMLocPostedPaymentOrder extends "GMLocPosted Payment Order"
+// pageextension 34006991 GMLocPostedPaymentOrder extends "GMLocPosted Payment Order"
 // {
 //     actions
 //     {
@@ -30,7 +30,7 @@
 //                     postedpaymentorder.SETRANGE(postedpaymentorder."GMLocPayment O. No.", Rec."GMLocPayment O. No.");
 //                     if postedpaymentorder.FindSet() then
 //                         postedpaymentorder.SETRECFILTER;
-//                     REPORT.RUNMODAL(80890, true, false, postedpaymentorder);
+//                     REPORT.RUNMODAL(34006890, true, false, postedpaymentorder);
 //                 end;
 //             }
 //         }

@@ -1,4 +1,4 @@
-pageextension 80999 "GMLocPurchase Invoices Preview" extends "Purchase Invoices"
+pageextension 34006999 "GMLocPurchase Invoices Preview" extends "Purchase Invoices"
 {
     layout
     {

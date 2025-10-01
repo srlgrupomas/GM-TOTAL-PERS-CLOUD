@@ -1841,14 +1841,14 @@ End Function
         <Field Name="Withholding_Ledger_Entry_Voucher_Number">
           <DataField>Withholding_Ledger_Entry_Voucher_Number</DataField>
         </Field>
-        <Field Name="Withholding_Ledger_Entry_GMLocCalculation_Base">
-          <DataField>Withholding_Ledger_Entry_GMLocCalculation_Base</DataField>
+        <Field Name="Withholding_Ledger_Entry_GMACalculation_Base">
+          <DataField>Withholding_Ledger_Entry_GMACalculation_Base</DataField>
         </Field>
-        <Field Name="Withholding_Ledger_Entry_GMLocCalculation_BaseFormat">
-          <DataField>Withholding_Ledger_Entry_GMLocCalculation_BaseFormat</DataField>
+        <Field Name="Withholding_Ledger_Entry_GMACalculation_BaseFormat">
+          <DataField>Withholding_Ledger_Entry_GMACalculation_BaseFormat</DataField>
         </Field>
-        <Field Name="GMLocPictureSign">
-          <DataField>GMLocPictureSign</DataField>
+        <Field Name="GMAPictureSign">
+          <DataField>GMAPictureSign</DataField>
         </Field>
         <Field Name="Movimiento_Retenciones__Valor">
           <DataField>Movimiento_Retenciones__Valor</DataField>

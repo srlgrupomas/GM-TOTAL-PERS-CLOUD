@@ -1,4 +1,4 @@
-page 80900 PerceptionabyEntity
+page 34006900 PerceptionabyEntity
 {
     ApplicationArea = All;
     Caption = 'Perception by Entity';
@@ -23,7 +23,7 @@ page 80900 PerceptionabyEntity
                         PageProvince.LookupMode(true);
                         IF PageProvince.RunModal() = Action::LookupOK then begin
                             PageProvince.GetRecord(TableProvince);
-                            CodProvince := TableProvince."GMLocProvince Code";
+                            CodProvince := TableProvince."GMAProvince Code";
                             Rec.Reset();
                             Rec.SetRange(ProvinceCode, CodProvince);
                             IF (rec.FindFirst()) THEN;
@@ -61,9 +61,9 @@ page 80900 PerceptionabyEntity
         }
     }
     var
-        TableProvince: Record GMLocProvince;
+        TableProvince: Record GMAProvince;
         CodProvince: Code[20];
-        PageProvince: Page GMLocProvinces;
+        PageProvince: Page GMAProvinces;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var

@@ -1,4 +1,4 @@
-pageextension 80995 "GMLocSales Invoices Preview" extends "Sales Invoice List"
+pageextension 34006995 "GMLocSales Invoices Preview" extends "Sales Invoice List"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------

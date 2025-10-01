@@ -1,20 +1,22 @@
 {
-  "id": "548fa4b2-5173-40e8-acde-e18dd39be325",
+   "id": "c141ff39-9279-4332-935f-1714dc352edb",
    "name": "Total Customizations",
   "publisher": "Grupo MAS SRL",
   "brief": "Total Customizations",
   "description": "Total Customizations",
   "version": "2025.09.25.02",
   "privacyStatement": "http://grupomas.software/BC/privacystatement",
-  "EULA": "http://grupomas.software/BC/EULA",
+   "contextSensitiveHelpUrl": "http://grupomas.software/BC/help",
+  "applicationInsightsConnectionString": "InstrumentationKey=60efd96f-43fc-41ee-a7c4-21e2945c4e54;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=1ad47396-89ca-4159-bd4a-84b63044d06e",
+   "EULA": "http://grupomas.software/BC/EULA",
   "help": "http://grupomas.software/BC/help",
   "url": "http://www.grupomas.software",
-  "logo": "",
+  "logo": "GrupoMAS.png",
   "dependencies": [
     {
       "id": "634f03a6-88be-4db8-aec0-86f7b5a8d6f9",
       "name": "Multi-Entity Management for Argentina GM",
-      "version": "1.1.0.3",
+      "version": "1.1.0.6",
       "publisher": "Binary Stream Software Inc."
     },
     {
@@ -24,9 +26,9 @@
       "publisher": "Binary Stream Software Inc."
     },
     {
-      "id": "12fa8f44-457b-4d5f-a96c-2b4b9827a6e2",
-      "name": "Localization for Argentina W1",
-      "version": "2025.07.30.1",
+      "id": "42cb1e6c-fe33-4fa8-b348-3aa6fa17da70",
+      "name": "Grupo MAS Localizacion Argentina",
+      "version": "2025.09.03.1",
       "publisher": "Grupo MAS SRL"
     },
     {
@@ -38,13 +40,14 @@
   ],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "25.0.0.0",
+  "application": "26.2.0.0",
   "features": ["TranslationFile"],
-  "preprocessorSymbols": ["CLEAN15", "CLEAN16", "CLEAN17", "CLEAN18","CLEAN19", "CLEAN20","CLEAN22","CLEAN23","CLEAN24","CLEAN25"],
+  "supportedLocales": ["es-ES","es-MX","es-AR"],
+  "preprocessorSymbols": ["CLEAN15", "CLEAN16", "CLEAN17", "CLEAN18","CLEAN19", "CLEAN20","CLEAN22","CLEAN23","CLEAN24","CLEAN25","CLEAN26"],
   "idRanges": [
     {
-      "from": 80870,
-      "to": 80999
+      "from": 34006832,
+      "to": 34006999
     }
   ],
   "resourceExposurePolicy": {
@@ -53,6 +56,6 @@
     "includeSourceInSymbolFile": false
     
   },
-  "runtime":"14.0",
+  "runtime":"15.0",
   "target":"Cloud"
 }

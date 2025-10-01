@@ -1,4 +1,4 @@
-report 80908 "PERS SIRE IVA"
+report 34006908 "PERS SIRE IVA"
 {
     caption = 'SIRE - IVA';
     ProcessingOnly = true;
@@ -9,26 +9,26 @@ report 80908 "PERS SIRE IVA"
         dataitem("Integer"; "Integer")
         {
             DataItemTableView = SORTING(Number) ORDER(Ascending) WHERE(Number = CONST(1));
-            dataitem("GMLocWithholding Ledger Entry"; "GMLocWithholding Ledger Entry")
+            dataitem("GMAWithholding Ledger Entry"; "GMAWithholding Ledger Entry")
             {
-                DataItemTableView = SORTING("GMLocNo.") ORDER(Ascending) WHERE("GMLocWithholding Type" = FILTER(Realizada));
+                DataItemTableView = SORTING("GMANo.") ORDER(Ascending) WHERE("GMAWithholding Type" = FILTER(Realizada));
                 trigger OnPreDataItem()
                 begin
                     IF (fechaposting) Then
-                        "GMLocWithholding Ledger Entry".SetRange("GMLocWithholding Ledger Entry"."GMLocWithholding Date", FechaDesde, FechaHasta)
+                        "GMAWithholding Ledger Entry".SetRange("GMAWithholding Ledger Entry"."GMAWithholding Date", FechaDesde, FechaHasta)
                     else
-                        "GMLocWithholding Ledger Entry".SetRange("GMLocWithholding Ledger Entry".GMLocDocumentDate, FechaDesde, FechaHasta);
-                    "GMLocWithholding Ledger Entry".SetFilter("GMLocWithholding Ledger Entry"."GMLocShortcut Dimension 1", BssiDimension);
-                    "GMLocWithholding Ledger Entry".SetFilter("GMLocWithholding Ledger Entry"."GMLocTax System", '%1|%2', '212', '214');
-                    "GMLocWithholding Ledger Entry".SetFilter("GMLocWithholding Ledger Entry"."GMLocWithholding Type", '%1', "GMLocWithholding Ledger Entry"."GMLocWithholding Type"::Realizada);
+                        "GMAWithholding Ledger Entry".SetRange("GMAWithholding Ledger Entry".GMADocumentDate, FechaDesde, FechaHasta);
+                    "GMAWithholding Ledger Entry".SetFilter("GMAWithholding Ledger Entry"."GMAShortcut Dimension 1", BssiDimension);
+                    "GMAWithholding Ledger Entry".SetFilter("GMAWithholding Ledger Entry"."GMATax System", '%1|%2', '212', '214');
+                    "GMAWithholding Ledger Entry".SetFilter("GMAWithholding Ledger Entry"."GMAWithholding Type", '%1', "GMAWithholding Ledger Entry"."GMAWithholding Type"::Realizada);
 
                     // JCG Segun la fecha elegida cambia el campo
-                    "GMLocWithholding Ledger Entry".CalcFields(GMLocDocumentDate);
+                    "GMAWithholding Ledger Entry".CalcFields(GMADocumentDate);
                 end;
 
                 trigger OnAfterGetRecord()
                 var
-                    CompPago: Record "GMLocPosted Payment Ord Vouch";
+                    CompPago: Record "GMAPosted Payment Ord Vouch";
                     PIH: Record "Purch. Inv. Header";
                     PICM: Record "Purch. Cr. Memo Hdr.";
                     vatentry: record "VAT Entry";
@@ -80,14 +80,14 @@ report 80908 "PERS SIRE IVA"
                     //Regimen
                     Campo4 := '831';
 
-                    "GMLocWithholding Ledger Entry".CalcFields(GMLocDocumentDate);
+                    "GMAWithholding Ledger Entry".CalcFields(GMADocumentDate);
 
                     //Fecha de retencion
                     // JCG Se solicita mostrar solo la Document date
                     // if fechaposting = true then
-                    //     Campo5 := FORMAT("GMLocWithholding Ledger Entry"."GMLocWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>')
+                    //     Campo5 := FORMAT("GMAWithholding Ledger Entry"."GMAWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>')
                     // else
-                    Campo5 := FORMAT("GMLocWithholding Ledger Entry".GMLocDocumentDate, 10, '<Day,2>/<Month,2>/<Year4>');
+                    Campo5 := FORMAT("GMAWithholding Ledger Entry".GMADocumentDate, 10, '<Day,2>/<Month,2>/<Year4>');
 
                     //Condicion
                     Campo6 := '01';
@@ -99,45 +99,45 @@ report 80908 "PERS SIRE IVA"
                     Campo8 := '                              ';
 
                     //Importe de retencion
-                    Campo9 := CompletarCerosAIzquierda(format("GMLocWithholding Ledger Entry"."GMLocWithholding Amount"), 14);
+                    Campo9 := CompletarCerosAIzquierda(format("GMAWithholding Ledger Entry"."GMAWithholding Amount"), 14);
 
                     //Importe base
-                    Campo10 := CompletarCerosAIzquierda(FORMAT("GMLocWithholding Ledger Entry"."GMLocCalculation Base"), 14);
+                    Campo10 := CompletarCerosAIzquierda(FORMAT("GMAWithholding Ledger Entry"."GMACalculation Base"), 14);
 
                     //Regimen de exclusion
-                    if "GMLocWithholding Ledger Entry"."GMLocExemption %" > 0 then
+                    if "GMAWithholding Ledger Entry"."GMAExemption %" > 0 then
                         campo11 := '1'
                     else
                         campo11 := '0';
 
                     //Porcentaje de exclusion
-                    campo12 := CompletarCerosAIzquierda(DelChr(format("GMLocWithholding Ledger Entry"."GMLocExemption %"), '=', '-'), 6);
+                    campo12 := CompletarCerosAIzquierda(DelChr(format("GMAWithholding Ledger Entry"."GMAExemption %"), '=', '-'), 6);
 
                     //Fecha de publicacion
                     // JCG Se solicita mostrar solo la Document date
-                    campo13 := FORMAT("GMLocWithholding Ledger Entry"."GMLocDocumentDate", 0, '<Day,2>/<Month,2>/<Year4>');
+                    campo13 := FORMAT("GMAWithholding Ledger Entry"."GMADocumentDate", 0, '<Day,2>/<Month,2>/<Year4>');
                     if (campo13 = '') or (campo13 = '00/00/0000') then
                         campo13 := '          ';
 
                     //Tipo de comprobante
                     CompPago.reset();
-                    CompPago.SetRange(CompPago."GMLocPayment Order No.", "GMLocWithholding Ledger Entry"."GMLocVoucher Number");
+                    CompPago.SetRange(CompPago."GMAPayment Order No.", "GMAWithholding Ledger Entry"."GMAVoucher Number");
                     if CompPago.findfirst() then
-                        case CompPago."GMLocDocument Type" of
-                            CompPago."GMLocDocument Type"::Invoice:
+                        case CompPago."GMADocument Type" of
+                            CompPago."GMADocument Type"::Invoice:
                                 campo14 := '01';
-                            CompPago."GMLocDocument Type"::"Credit Memo":
+                            CompPago."GMADocument Type"::"Credit Memo":
                                 campo14 := '03';
-                            CompPago."GMLocDocument Type"::"Nota Débito":
+                            CompPago."GMADocument Type"::"GMANota Debito":
                                 campo14 := '04';
                         end;
 
                     //Fecha de comprobante
-                    Campo15 := format("GMLocWithholding Ledger Entry"."GMLocDocumentDate", 0, '<Day,2>/<Month,2>/<Year4>');
+                    Campo15 := format("GMAWithholding Ledger Entry"."GMADocumentDate", 0, '<Day,2>/<Month,2>/<Year4>');
 
                     //Numero de comprobante
                     PIH.Reset();
-                    PIH.SetRange(PIH."No.", CompPago."GMLocVoucher No.");
+                    PIH.SetRange(PIH."No.", CompPago."GMAVoucher No.");
                     if PIH.FINDFIRST() then begin
                         Campo16 := CompletarEspaciosADerecha(FormatVoucherNumber(PIH."Vendor Invoice No."), 16);
                     end else
@@ -153,14 +153,14 @@ report 80908 "PERS SIRE IVA"
                     Campo19 := '              ';
 
                     //Importe del comprobante
-                    Campo20 := CompletarCerosAIzquierda(format("GMLocWithholding Ledger Entry"."GMLocVoucher Amount"), 14);
+                    Campo20 := CompletarCerosAIzquierda(format("GMAWithholding Ledger Entry"."GMAVoucher Amount"), 14);
 
                     //Motivo emision
                     Campo21 := '                              ';
 
                     //Retenido clave
                     Proveedor.RESET;
-                    Proveedor.SETRANGE(Proveedor."No.", "GMLocWithholding Ledger Entry"."GMLocVendor Code");
+                    Proveedor.SETRANGE(Proveedor."No.", "GMAWithholding Ledger Entry"."GMAVendor Code");
                     IF Proveedor.FINDFIRST THEN
                         Campo22 := DelChr(Proveedor."VAT Registration No.", '=', '-+');
 
@@ -217,7 +217,7 @@ report 80908 "PERS SIRE IVA"
         {
             area(Content)
             {
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     Caption = 'Options';
 
@@ -297,13 +297,13 @@ report 80908 "PERS SIRE IVA"
             "#RellenaExcelBuff"(Texto);
 
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuff);
-            Xmlport.Run(80396, false, false, TempExcelBuff);
+            Xmlport.Run(34006396, false, false, TempExcelBuff);
         end;
 
     end;
 
     var
-        XMLImporExport: XmlPort "GMLocXML ImportExport";
+        XMLImporExport: XmlPort "GMAXML ImportExport";
         Campo1: Text[4];
         Campo2: Text[36];
         Campo3: Text[3];

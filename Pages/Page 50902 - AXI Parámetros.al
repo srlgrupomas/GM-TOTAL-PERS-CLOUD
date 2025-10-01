@@ -1,4 +1,4 @@
-page 80902 "AXI Parámetros"
+page 34006902 "AXI Parámetros"
 {
     PageType = Card;
     ApplicationArea = All;
@@ -210,7 +210,7 @@ page 80902 "AXI Parámetros"
         sumatotalporbatchrevert: Decimal;
         MovimientosProcesados: Dictionary of [Integer, Boolean];
         generalLedgerSetUp: record 98;
-        EntitySetUpExtend: Record 80903;
+        EntitySetUpExtend: Record 34006903;
         dimensionvalue: record "Dimension Value";
     begin
         MovimientoID := 1;
@@ -222,9 +222,9 @@ page 80902 "AXI Parámetros"
         AnioFin := Date2DMY(FechaFin, 3);
 
         IndicesIniciales.Reset();
-        IndicesIniciales.SetFilter(GMLocFecha, '%1..%2', DMY2Date(1, MesFin, AnioFin), GetLastDayOfMonth(AnioFin, MesFin));
+        IndicesIniciales.SetFilter(GMAFecha, '%1..%2', DMY2Date(1, MesFin, AnioFin), GetLastDayOfMonth(AnioFin, MesFin));
         if IndicesIniciales.FindFirst() then
-            IndiceFinInicial := IndicesIniciales.GMLocIndice
+            IndiceFinInicial := IndicesIniciales.GMAIndice
         else
             Error('No index found for the date: %1', FechaFin);
 
@@ -232,9 +232,9 @@ page 80902 "AXI Parámetros"
         AnioActual := Date2DMY(FechaInicio, 3);
 
         IndicesIniciales.Reset();
-        IndicesIniciales.SetFilter(GMLocFecha, '%1..%2', DMY2Date(1, MesActual, AnioActual), GetLastDayOfMonth(AnioActual, MesActual));
+        IndicesIniciales.SetFilter(GMAFecha, '%1..%2', DMY2Date(1, MesActual, AnioActual), GetLastDayOfMonth(AnioActual, MesActual));
         if IndicesIniciales.FindFirst() then
-            Indice2InicioInicial := IndicesIniciales.GMLocIndice
+            Indice2InicioInicial := IndicesIniciales.GMAIndice
         else
             Error('No index found for the date %1.', FechaActual);
 
@@ -248,7 +248,7 @@ page 80902 "AXI Parámetros"
         //     repeat
         //         PlanAccount.Reset();
         //         PlanAccount.SetRange("No.", Movimientos."G/L Account No.");
-        //         PlanAccount.SetFilter("GMLocTipo de cuenta AXI Local", 'Monetaria');
+        //         PlanAccount.SetFilter("GMATipo de cuenta AXI Local", 'Monetaria');
 
         //         if PlanAccount.FindFirst() then begin
         //             if CuentaActual <> Movimientos."G/L Account No." then begin
@@ -313,17 +313,17 @@ page 80902 "AXI Parámetros"
             AnioFin := Date2DMY(FechaFin, 3);
 
             Indices.Reset();
-            Indices.SetFilter(GMLocFecha, '%1..%2', DMY2Date(1, MesFin, AnioFin), GetLastDayOfMonth(AnioFin, MesFin));
+            Indices.SetFilter(GMAFecha, '%1..%2', DMY2Date(1, MesFin, AnioFin), GetLastDayOfMonth(AnioFin, MesFin));
             if Indices.FindFirst() then
-                IndiceFin := Indices.GMLocIndice;
+                IndiceFin := Indices.GMAIndice;
 
             MesActual := Date2DMY(FechaActual, 2);
             AnioActual := Date2DMY(FechaActual, 3);
 
             Indices.Reset();
-            Indices.SetFilter(GMLocFecha, '%1..%2', DMY2Date(1, MesActual, AnioActual), GetLastDayOfMonth(AnioActual, MesActual));
+            Indices.SetFilter(GMAFecha, '%1..%2', DMY2Date(1, MesActual, AnioActual), GetLastDayOfMonth(AnioActual, MesActual));
             if Indices.FindFirst() then
-                Indice2Inicio := Indices.GMLocIndice;
+                Indice2Inicio := Indices.GMAIndice;
 
             // Calcular el primer y último día del mes actual
             PrimerDiaMesActual := DMY2Date(1, MesActual, AnioActual);
@@ -340,7 +340,7 @@ page 80902 "AXI Parámetros"
                     if not MovimientosProcesados.ContainsKey(Movimientos."Entry No.") then begin
                         PlanAccount.Reset();
                         PlanAccount.SetRange("No.", Movimientos."G/L Account No.");
-                        PlanAccount.SetFilter("GMLocTipo de cuenta AXI Local", 'Monetaria');
+                        PlanAccount.SetFilter("GMATipo de cuenta AXI Local", 'Monetaria');
 
                         if PlanAccount.FindFirst() then begin
                             if CuentaActual <> Movimientos."G/L Account No." then begin
@@ -407,13 +407,13 @@ page 80902 "AXI Parámetros"
 
             PlanAccount.Reset();
             PlanAccount.SetFilter("No.", CuentaKey);
-            PlanAccount.SetFilter("GMLocTipo de cuenta AXI Local", 'Monetaria');
+            PlanAccount.SetFilter("GMATipo de cuenta AXI Local", 'Monetaria');
             if PlanAccount.FindFirst() then begin
                 GLAccountName := PlanAccount.Name;
                 CuentaAXI := PlanAccount."No.";
-                if PlanAccount."GMLocCuenta AXI Local" <> '' then
+                if PlanAccount."GMACuenta AXI Local" <> '' then
                     if JournalBatchRevert <> '' then begin
-                        CuentaAXI := PlanAccount."GMLocCuenta AXI Local";
+                        CuentaAXI := PlanAccount."GMACuenta AXI Local";
                     end;
 
 
@@ -540,7 +540,7 @@ page 80902 "AXI Parámetros"
         generalLedgerSetUp.Reset();
         if generalLedgerSetUp.FindFirst() then begin
             if JournalBatchRevert <> '' then begin
-                CuentaAXI := generalLedgerSetUp."GMLocCta AXI Local Gan";
+                CuentaAXI := generalLedgerSetUp."GMACta AXI Local Gan";
             end;
             if JournalBatchRevert = '' then begin
                 CuentaAXI := PlanAccount."No.";
@@ -651,8 +651,8 @@ page 80902 "AXI Parámetros"
     var
         FechaInicio: Date;
         FechaFin: Date;
-        Indices: Record 80416;
-        IndicesIniciales: Record 80416;
+        Indices: Record "GMAInd Ajuste por Inflacion";
+        IndicesIniciales: Record "GMAInd Ajuste por Inflacion";
         IndiceFin: Decimal;
         Indice2Inicio: Decimal;
         AjusteInflacion: Record "AXI Ajuste Inflacion";

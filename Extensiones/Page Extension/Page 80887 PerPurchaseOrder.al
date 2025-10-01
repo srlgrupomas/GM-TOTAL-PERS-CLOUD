@@ -1,4 +1,4 @@
-pageextension 80887 "PersExtend_Purchase Order" extends "Purchase Order"
+pageextension 34006887 "PersExtend_Purchase Order" extends "Purchase Order"
 {
     layout
     {

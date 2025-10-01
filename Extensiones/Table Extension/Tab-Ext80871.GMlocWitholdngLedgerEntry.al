@@ -1,15 +1,15 @@
 namespace GMTOTALPERS.GMTOTALPERS;
 
-tableextension 80871 GMlocWitholdngLedgerEntry extends "GMLocWithholding Ledger Entry"
+tableextension 34006871 GMAWitholdngLedgerEntry extends "GMAWithholding Ledger Entry"
 {
     fields
     {
-        field(80870; "GMLocDocumentDate"; Date)
+        field(34006870; "GMADocumentDate"; Date)
         {
             Caption = 'Document Date';
 
             FieldClass = FlowField;
-            CalcFormula = lookup("GMLocPosted Payment Order"."GMLocPayment O. Date" where("GMLocPayment O. No." = field("GMLocVoucher Number")));
+            CalcFormula = lookup("GMAPosted Payment Order"."GMAPayment O. Date" where("GMAPayment O. No." = field("GMAVoucher Number")));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿pageextension 80993 "PersExtend_Customer" extends "Customer Card"
+﻿pageextension 34006993 "PersExtend_Customer" extends "Customer Card"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -10,15 +10,15 @@
         {
             ShowMandatory = true;
         }
-        modify("GMLocFiscal Type")
+        modify("GMAFiscal Type")
         {
             ShowMandatory = true;
         }
-        modify("GMLocAFIP Document Type")
+        modify("GMAAFIP Document Type")
         {
             ShowMandatory = true;
         }
-        modify("GMLocProvince Code")
+        modify("GMAProvince Code")
         {
             ShowMandatory = true;
         }

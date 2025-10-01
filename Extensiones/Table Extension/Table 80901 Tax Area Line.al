@@ -1,4 +1,4 @@
-tableextension 80901 "PERTaxAreaLine" extends "Tax Area Line"
+tableextension 34006901 "PERTaxAreaLine" extends "Tax Area Line"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------

@@ -1,12 +1,12 @@
 namespace GMTOTALPERS.GMTOTALPERS;
 
-pageextension 80871 GMLocWitholdingLedEntry extends "GMLoc Withh Ledg Entries"
+pageextension 34006871 GMLocWitholdingLedEntry extends "GMA Withh Ledg Entries"
 {
     layout
     {
-        addafter("GMLocVoucher Date")
+        addafter("GMAVoucher Date")
         {
-            field("GMLocDocumentDate"; Rec."GMLocDocumentDate")
+            field("GMADocumentDate"; Rec."GMADocumentDate")
             {
                 ApplicationArea = All;
                 Caption = 'Document Date';

@@ -1,6 +1,6 @@
-﻿report 80898 "PersIncome/Expend."
+﻿report 34006898 "PersIncome/Expend."
 {
-    // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    GMLocDescription
+    // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    GMADescription
     // -----------------------------------------------------------------------------------------------------
     // 01  2018.01.01        DDS           GRUPOMAS                   NAVAR1.06  Localization ARG
 
@@ -10,22 +10,22 @@
 
     dataset
     {
-        dataitem("Posted Deposit/Withdrawal"; "GMLocPosted Deposit/Withdrawal")
+        dataitem("Posted Deposit/Withdrawal"; "GMAPosted Deposit/Withdrawal")
         {
-            RequestFilterFields = "GMLocNo.";
-            column(Hist__Cab_Ingresos_Egresos__Hist__Cab_Ingresos_Egresos___N__; "Posted Deposit/Withdrawal"."GMLocNo.")
+            RequestFilterFields = "GMANo.";
+            column(Hist__Cab_Ingresos_Egresos__Hist__Cab_Ingresos_Egresos___N__; "Posted Deposit/Withdrawal"."GMANo.")
             {
             }
-            column(Hist__Cab_Ingresos_Egresos__Hist__Cab_Ingresos_Egresos___Fecha_de_Registro_; "Posted Deposit/Withdrawal"."GMLocPosting Date")
+            column(Hist__Cab_Ingresos_Egresos__Hist__Cab_Ingresos_Egresos___Fecha_de_Registro_; "Posted Deposit/Withdrawal"."GMAPosting Date")
             {
             }
-            column(Hist__Cab_Ingresos_Egresos_Tipo; GMLocType)
+            column(Hist__Cab_Ingresos_Egresos_Tipo; GMAType)
             {
             }
             column(Hist__Cab_Ingresos_Egresos__Caja_Cuenta_Bancaria_; nombrecajaCab)
             {
             }
-            column(Hist__Cab_Ingresos_Egresos_Tipo_Control1000000009; GMLocType)
+            column(Hist__Cab_Ingresos_Egresos_Tipo_Control1000000009; GMAType)
             {
             }
             column(InfoEmpresa_Name; InfoEmpresa.BssiLegalNameFull)
@@ -40,7 +40,7 @@
             column(InfoEmpresa_City; InfoEmpresa.BssiBillingCity)
             {
             }
-            column(Hist__Cab_Ingresos_Egresos_Comentario; GMLocComment)
+            column(Hist__Cab_Ingresos_Egresos_Comentario; GMAComment)
             {
             }
             column(nombrecaja; nombrecaja)
@@ -49,7 +49,7 @@
             column(TipoReport; TipoReport)
             {
             }
-            column(UserId_PostedDepositWithdrawal; "GMLocUser Id")
+            column(UserId_PostedDepositWithdrawal; "GMAUser Id")
             {
             }
             column(Fecha_Caption; Fecha_CaptionLbl)
@@ -73,7 +73,7 @@
             column(Tel_Caption; Tel_CaptionLbl)
             {
             }
-            column(Hist__Cab_Ingresos_Egresos_ComentarioCaption; FIELDCAPTION(GMLocComment))
+            column(Hist__Cab_Ingresos_Egresos_ComentarioCaption; FIELDCAPTION(GMAComment))
             {
             }
             column(FIRMA_GERENTE_GENERALCaption; FIRMA_GERENTE_GENERALCaptionLbl)
@@ -88,98 +88,98 @@
             column(FIRMA_SOLICITANTECaption; FIRMA_SOLICITANTECaptionLbl)
             {
             }
-            dataitem("GMLocPosted Depos/Withdrawal L"; "GMLocPosted Depos/Withdrawal L")
+            dataitem("GMAPosted Depos/Withdrawal L"; "GMAPosted Depos/Withdrawal L")
             {
-                DataItemLink = "GMLocDeposit/Withdrawal No." = FIELD("GMLocNo.");
-                DataItemTableView = SORTING("GMLocDeposit/Withdrawal No.", "GMLocLine No.") ORDER(Ascending);
+                DataItemLink = "GMADeposit/Withdrawal No." = FIELD("GMANo.");
+                DataItemTableView = SORTING("GMADeposit/Withdrawal No.", "GMALine No.") ORDER(Ascending);
                 MaxIteration = 0;
-                column(Hist__Lin_Ingresos_Egresos_Valor; GMLocValue)
+                column(Hist__Lin_Ingresos_Egresos_Valor; GMAValue)
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_Cuenta; "GMLocGL Account")
+                column(Hist__Lin_Ingresos_Egresos_Cuenta; "GMAGL Account")
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_Descripcion; GMLocDescription)
+                column(Hist__Lin_Ingresos_Egresos_Descripcion; GMADescription)
                 {
                 }
                 column(Valordivisa; Valordivisa)
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_Importe; GMLocAmount)
+                column(Hist__Lin_Ingresos_Egresos_Importe; GMAAmount)
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos__Importe__DL__; "GMLocAmount (LCY)")
+                column(Hist__Lin_Ingresos_Egresos__Importe__DL__; "GMAAmount (LCY)")
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos__N__Valor_; "GMLocValue No.")
+                column(Hist__Lin_Ingresos_Egresos__N__Valor_; "GMAValue No.")
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_Entidad; GMLocEntity)
+                column(Hist__Lin_Ingresos_Egresos_Entidad; GMAEntity)
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos__Hist__Lin_Ingresos_Egresos___Job_No__; "GMLocPosted Depos/Withdrawal L"."GMLocJob No.")
+                column(Hist__Lin_Ingresos_Egresos__Hist__Lin_Ingresos_Egresos___Job_No__; "GMAPosted Depos/Withdrawal L"."GMAJob No.")
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos__Nombre_cuenta_; "GMLocAccount Name")
+                column(Hist__Lin_Ingresos_Egresos__Nombre_cuenta_; "GMAAccount Name")
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_Importe_Control1000000027; GMLocAmount)
+                column(Hist__Lin_Ingresos_Egresos_Importe_Control1000000027; GMAAmount)
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos__Importe__DL___Control1000000030; "GMLocAmount (LCY)")
+                column(Hist__Lin_Ingresos_Egresos__Importe__DL___Control1000000030; "GMAAmount (LCY)")
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_ValorCaption; FIELDCAPTION(GMLocValue))
+                column(Hist__Lin_Ingresos_Egresos_ValorCaption; FIELDCAPTION(GMAValue))
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_CuentaCaption; FIELDCAPTION("GMLocGL Account"))
+                column(Hist__Lin_Ingresos_Egresos_CuentaCaption; FIELDCAPTION("GMAGL Account"))
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_DescripcionCaption; FIELDCAPTION(GMLocDescription))
+                column(Hist__Lin_Ingresos_Egresos_DescripcionCaption; FIELDCAPTION(GMADescription))
                 {
                 }
                 column(DivisaCaption; DivisaCaptionLbl)
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_ImporteCaption; FIELDCAPTION(GMLocAmount))
+                column(Hist__Lin_Ingresos_Egresos_ImporteCaption; FIELDCAPTION(GMAAmount))
                 {
                 }
                 column(En_PesosCaption; En_PesosCaptionLbl)
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos__N__Valor_Caption; FIELDCAPTION("GMLocValue No."))
+                column(Hist__Lin_Ingresos_Egresos__N__Valor_Caption; FIELDCAPTION("GMAValue No."))
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos_EntidadCaption; FIELDCAPTION(GMLocEntity))
+                column(Hist__Lin_Ingresos_Egresos_EntidadCaption; FIELDCAPTION(GMAEntity))
                 {
                 }
                 column(Job_No_Caption; Job_No_CaptionLbl)
                 {
                 }
-                column(Hist__Lin_Ingresos_Egresos__Nombre_cuenta_Caption; FIELDCAPTION("GMLocAccount Name"))
+                column(Hist__Lin_Ingresos_Egresos__Nombre_cuenta_Caption; FIELDCAPTION("GMAAccount Name"))
                 {
                 }
                 column(T_O_T_A_L_E_S_Caption; T_O_T_A_L_E_S_CaptionLbl)
                 {
                 }
-                column(Posted_Deposit_Withdrawal_Line_Deposit_Withdrawal_No_; "GMLocDeposit/Withdrawal No.")
+                column(Posted_Deposit_Withdrawal_Line_Deposit_Withdrawal_No_; "GMADeposit/Withdrawal No.")
                 {
                 }
-                column(Posted_Deposit_Withdrawal_Line_Line_No_; "GMLocLine No.")
+                column(Posted_Deposit_Withdrawal_Line_Line_No_; "GMALine No.")
                 {
                 }
 
                 trigger OnAfterGetRecord();
                 begin
-                    if "GMLocPosted Depos/Withdrawal L"."GMLocCurrency Code" = '' then
+                    if "GMAPosted Depos/Withdrawal L"."GMACurrency Code" = '' then
                         Valordivisa := 'PESO ARG'
                     else
-                        Valordivisa := "GMLocPosted Depos/Withdrawal L"."GMLocCurrency Code";
+                        Valordivisa := "GMAPosted Depos/Withdrawal L"."GMACurrency Code";
 
                     //NAVAR1.06003-
                     recGLAcc.RESET;
                     recGLAcc.SETCURRENTKEY("No.");
-                    recGLAcc.SETRANGE("No.", "GMLocGL Account");
+                    recGLAcc.SETRANGE("No.", "GMAGL Account");
                     if recGLAcc.FINDFIRST then
                         nombrecaja := recGLAcc.Name
                     else
@@ -190,12 +190,12 @@
 
             trigger OnAfterGetRecord();
             var
-                _recCajaCBank: Record "GMLocCash/Bank Account";
+                _recCajaCBank: Record "GMACash/Bank Account";
             begin
-                case GMLocType of
-                    GMLocType::"Ingreso Caja/Cuenta B.":
+                case GMAType of
+                    GMAType::"Ingreso Caja/Cuenta B.":
                         TipoReport := 'INGRESO';
-                    GMLocType::"Egreso Caja/Cuenta B.":
+                    GMAType::"Egreso Caja/Cuenta B.":
                         TipoReport := 'EGRESO';
                     else
                         TipoReport := '';
@@ -203,10 +203,10 @@
 
                 //NAVAR1.06003-
                 _recCajaCBank.RESET;
-                _recCajaCBank.SETCURRENTKEY("GMLocNo.");
-                _recCajaCBank.SETRANGE("GMLocNo.", "GMLocCash/Bank Account");
+                _recCajaCBank.SETCURRENTKEY("GMANo.");
+                _recCajaCBank.SETRANGE("GMANo.", "GMACash/Bank Account");
                 if _recCajaCBank.FINDFIRST then
-                    nombrecajaCab := _recCajaCBank.GMLocDescription
+                    nombrecajaCab := _recCajaCBank.GMADescription
                 else
                     nombrecajaCab := '';
                 //NAVAR1.06003+
@@ -218,7 +218,7 @@
             begin
                 InfoEmpresa.Reset();
                 InfoEmpresa.SetFilter("Dimension Code", BssiMEMSystemSetup.Bssi_cGetEntityCode());
-                InfoEmpresa.SetFilter(Code, "Posted Deposit/Withdrawal"."GMLocShortcut Dimension 1 Co");
+                InfoEmpresa.SetFilter(Code, "Posted Deposit/Withdrawal"."GMAShortcut Dimension 1 Co");
                 IF (InfoEmpresa.FindFirst()) THEN;
             end;
         }
@@ -242,9 +242,9 @@
 
     var
         Valordivisa: Code[10];
-        Valores: Record GMLocValues;
+        Valores: Record GMAValues;
         InfoEmpresa: Record "Dimension Value";
-        cajas: Record "GMLocCash/Bank Account";
+        cajas: Record "GMACash/Bank Account";
         nombrecaja: Text[100];
         TipoReport: Code[20];
         recGLAcc: Record "G/L Account";

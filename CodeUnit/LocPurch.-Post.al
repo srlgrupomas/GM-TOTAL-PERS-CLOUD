@@ -1,4 +1,4 @@
-codeunit 80997 "LocPurch.-Post"
+codeunit 34006997 "LocPurch.-Post"
 {
     Permissions = TableData "Sales Header" = rm,
                   TableData "Sales Line" = rm,

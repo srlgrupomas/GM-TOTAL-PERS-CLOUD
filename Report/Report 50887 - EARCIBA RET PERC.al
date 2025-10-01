@@ -1,4 +1,4 @@
-report 80887 "PER EARCIBA RET PERC"
+report 34006887 "PER EARCIBA RET PERC"
 {
     caption = 'E-ARCIBA RET PERC';
     ProcessingOnly = true;
@@ -6,40 +6,40 @@ report 80887 "PER EARCIBA RET PERC"
 
     dataset
     {
-        dataitem("GMLocWithholding Ledger Entry"; "GMLocWithholding Ledger Entry")
+        dataitem("GMAWithholding Ledger Entry"; "GMAWithholding Ledger Entry")
         {
-            DataItemTableView = SORTING("GMLocVoucher Date") ORDER(Ascending) WHERE("GMLocWithholding Type" = FILTER(Realizada));
+            DataItemTableView = SORTING("GMAVoucher Date") ORDER(Ascending) WHERE("GMAWithholding Type" = FILTER(Realizada));
 
             trigger OnPreDataItem()
             begin
                 if UseDocumentDate then
-                    "GMLocWithholding Ledger Entry".SETRANGE("GMLocWithholding Date", FechaDesde, FechaHasta)
+                    "GMAWithholding Ledger Entry".SETRANGE("GMAWithholding Date", FechaDesde, FechaHasta)
                 else
-                    "GMLocWithholding Ledger Entry".SETRANGE("GMLocVoucher Date", FechaDesde, FechaHasta);
+                    "GMAWithholding Ledger Entry".SETRANGE("GMAVoucher Date", FechaDesde, FechaHasta);
 
-                "GMLocWithholding Ledger Entry".SETFILTER("GMLocTax Code", '%1', 'IB*');
-                "GMLocWithholding Ledger Entry".SETFILTER(GMLocValue, TipoRetencion);
+                "GMAWithholding Ledger Entry".SETFILTER("GMATax Code", '%1', 'IB*');
+                "GMAWithholding Ledger Entry".SETFILTER(GMAValue, TipoRetencion);
                 if (BssiDimension <> '') then
                     if "BssiMEMSystemSetup".Bssi_iGetGlobalDimensionNoToUse() = 1 then
-                        "GMLocWithholding Ledger Entry".SetFilter("GMLocShortcut Dimension 1", BssiDimension)
+                        "GMAWithholding Ledger Entry".SetFilter("GMAShortcut Dimension 1", BssiDimension)
                     else
-                        "GMLocWithholding Ledger Entry".SetFilter("GMLocShortcut Dimension 2", BssiDimension);
+                        "GMAWithholding Ledger Entry".SetFilter("GMAShortcut Dimension 2", BssiDimension);
             end;
 
             trigger OnAfterGetRecord()
             var
-                WithholdingLedgerEntryTemp: record "GMLocWithholding Ledger Entry";
+                WithholdingLedgerEntryTemp: record "GMAWithholding Ledger Entry";
             BEGIN
 
-                IF (Valores.GET("GMLocWithholding Ledger Entry".GMLocValue)) THEN
-                    IF (Valores.GMLocProvince = '901') AND (Valores."GMLocIs Withholding") AND (Valores."GMLocIs GGII") THEN BEGIN
+                IF (Valores.GET("GMAWithholding Ledger Entry".GMAValue)) THEN
+                    IF (Valores.GMAProvince = '901') AND (Valores."GMAIs Withholding") AND (Valores."GMAIs GGII") THEN BEGIN
 
-                        IF ("GMLocWithholding Ledger Entry"."GMLocWithholding Amount" >= 0) THEN BEGIN
+                        IF ("GMAWithholding Ledger Entry"."GMAWithholding Amount" >= 0) THEN BEGIN
                             WithholdingLedgerEntryTemp.RESET;
-                            WithholdingLedgerEntryTemp.SETFILTER("GMLocWithholding Serie Code", '%1', "GMLocWithholding Ledger Entry"."GMLocWithholding Serie Code");
-                            WithholdingLedgerEntryTemp.SETFILTER("GMLocWithholding Amount", '%1', "GMLocWithholding Ledger Entry"."GMLocWithholding Amount" * -1);
+                            WithholdingLedgerEntryTemp.SETFILTER("GMAWithholding Serie Code", '%1', "GMAWithholding Ledger Entry"."GMAWithholding Serie Code");
+                            WithholdingLedgerEntryTemp.SETFILTER("GMAWithholding Amount", '%1', "GMAWithholding Ledger Entry"."GMAWithholding Amount" * -1);
                             IF (NOT WithholdingLedgerEntryTemp.FindFirst()) THEN
-                                "#GMLocWithholdingLedgerEntry";
+                                "#GMAWithholdingLedgerEntry";
                         END;
                     END;
             END;
@@ -52,7 +52,7 @@ report 80887 "PER EARCIBA RET PERC"
                 SETRANGE("Posting Date", FechaDesde, FechaHasta);
                 SETRANGE(Type, "VAT Entry".Type::Sale);
                 SETFILTER("Document Type", '%1', "Document Type"::Invoice);
-                SETRANGE("GMLocTax Type Loc", "VAT Entry"."GMLocTax Type Loc"::"Ingresos Brutos");
+                SETRANGE("GMATax Type Loc", "VAT Entry"."GMATax Type Loc"::"Ingresos Brutos");
 
                 AuxTempVatEntry.CopyFilters("VAT Entry");
 
@@ -81,7 +81,7 @@ report 80887 "PER EARCIBA RET PERC"
                 TaxJurisdiction.reset;
                 TaxJurisdiction.SETRANGE(code, "Tax Jurisdiction Code");
                 IF (TaxJurisdiction.FindFirst()) THEN
-                    if (TaxJurisdiction."GMLocProvince Code" = '901') then begin
+                    if (TaxJurisdiction."GMAProvince Code" = '901') then begin
                         NumeroLineas += 1;
                         "#VatEntry";
                     end;
@@ -95,7 +95,7 @@ report 80887 "PER EARCIBA RET PERC"
         {
             area(Content)
             {
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     Caption = 'Options',;
 
@@ -161,8 +161,8 @@ report 80887 "PER EARCIBA RET PERC"
     begin
         CR := 13;
         FL := 10;
-        GMLocDocTypeLocalizatiInvoice := 2;
-        GMLocDocTypeLocalizatiDebMemo := 16;
+        GMADocTypeLocalizatiInvoice := 2;
+        GMADocTypeLocalizatiDebMemo := 16;
     end;
 
 
@@ -177,14 +177,14 @@ report 80887 "PER EARCIBA RET PERC"
         else begin
 
             /*se ordena por fecha de transaccion*/
-            TempExcelBuff.SetCurrentKey(GMLocDate);
+            TempExcelBuff.SetCurrentKey(GMADate);
             TempExcelBuff.FindFirst();
             repeat
                 TempExcelBuff_2.INIT;
                 TempExcelBuff_2."Row No." := i;
                 TempExcelBuff_2."Cell Value as Text" := TempExcelBuff."Cell Value as Text";
                 TempExcelBuff_2.Comment := '';
-                TempExcelBuff_2.GMLocDate := TempExcelBuff.GMLocDate;
+                TempExcelBuff_2.GMADate := TempExcelBuff.GMADate;
                 TempExcelBuff_2.Formula := TempExcelBuff.Formula;
                 TempExcelBuff_2.INSERT;
                 i := i + 1;
@@ -199,13 +199,13 @@ report 80887 "PER EARCIBA RET PERC"
             TempExcelBuff_2.INSERT;
 
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuff_2);
-            Xmlport.Run(XmlPort::"GMLocXML ImportExport", false, false, TempExcelBuff_2);
+            Xmlport.Run(XmlPort::"GMAXML ImportExport", false, false, TempExcelBuff_2);
         end;
     end;
 
 
     var
-        XMLImporExport: XmlPort "GMLocXML ImportExport";
+        XMLImporExport: XmlPort "GMAXML ImportExport";
         Campo1: Text[1];
         Campo2: Text[3];
         Campo3: Text[10];
@@ -234,15 +234,15 @@ report 80887 "PER EARCIBA RET PERC"
         EscribirFichero: Boolean;
         Text01: label 'File cannot be created',;
         TextoBis: BigText;
-        ExportaTxt: Codeunit "GMLocExporta TXT";
+        ExportaTxt: Codeunit "GMAExporta TXT";
         TempExcelBuff: Record 370 TEMPORARY;
         TempExcelBuff_2: Record 370 TEMPORARY;
         RBMgt: Codeunit 419;
         CR: Char;
         FL: Char;
-        GMLocDocTypeLocalizatiInvoice: Integer;
-        GMLocDocTypeLocalizatiDebMemo: Integer;
-        Valores: Record GMLocValues;
+        GMADocTypeLocalizatiInvoice: Integer;
+        GMADocTypeLocalizatiDebMemo: Integer;
+        Valores: Record GMAValues;
         TipoRetencion: Code[50];
         alicuota: Decimal;
         Campo7: Text[10];
@@ -274,17 +274,17 @@ report 80887 "PER EARCIBA RET PERC"
         importesumado: Decimal;
         montocomprobante: Decimal;
         RecCustomer: Record 18;
-        RecGMLocPostedPaymentOrder: Record "GMLocPosted Payment Order";
-        GMLocPostedPaymentOrdVouch: Record "GMLocPosted Payment Ord Vouch";
+        RecGMAPostedPaymentOrder: Record "GMAPosted Payment Order";
+        GMAPostedPaymentOrdVouch: Record "GMAPosted Payment Ord Vouch";
         PurchInvLine: Record "Purch. Inv. Line";
         SalesInvoiceLine: Record "Sales Invoice Line";
         Purch_Inv_Header: Record "Purch. Inv. Header";
-        recMovRete: Record "GMLocWithholding Ledger Entry";
-        GMLocFiscalType: Record "GMLocFiscal Type";
+        recMovRete: Record "GMAWithholding Ledger Entry";
+        GMAFiscalType: Record "GMAFiscal Type";
         TaxDetail: Record "Tax Detail";
         PurchInvAmount: Decimal;
-        GMLocVoucherNo_: Code[20];
-        GMLocTaxConditions: record "GMLocTax Conditions";
+        GMAVoucherNo_: Code[20];
+        GMATaxConditions: record "GMATax Conditions";
         TaxJurisdiction: record "Tax Jurisdiction";
         calculodeverificacion: Decimal;
         BssiMEMSystemSetup: Record "BssiMEMSystemSetup";
@@ -303,7 +303,7 @@ report 80887 "PER EARCIBA RET PERC"
         TempExcelBuff.INIT;
         TempExcelBuff."Row No." := NumeroLineas;
         TempExcelBuff."Cell Value as Text" := COPYSTR(pTexto, 1, 250);
-        TempExcelBuff.GMLocDate := FechaOrden;//se guarda en este campo la fecha para luego ordernar por dicho campo
+        TempExcelBuff.GMADate := FechaOrden;//se guarda en este campo la fecha para luego ordernar por dicho campo
         TempExcelBuff.Formula := COPYSTR(pTexto, 501, 250);
         TempExcelBuff.INSERT;
     END;
@@ -322,7 +322,7 @@ report 80887 "PER EARCIBA RET PERC"
 
     PROCEDURE "#VatEntry"();
     var
-        GMLocAFIPVoucherType: Code[3];
+        GMAAFIPVoucherType: Code[3];
         SalesInvoiceHeader: Record "Sales Invoice Header";
         SalesCrMemoHeader: Record "Sales Cr.Memo Header";
         CustLedgerEntry: Record "Cust. Ledger Entry";
@@ -354,16 +354,16 @@ report 80887 "PER EARCIBA RET PERC"
         CAMPO23 := '';
         importesumado := 0;
         montocomprobante := 0;
-        GMLocAFIPVoucherType := '';
+        GMAAFIPVoucherType := '';
 
-        if ("VAT Entry"."GMLocDocument Type Loc." = "VAT Entry"."GMLocDocument Type Loc."::Invoice)
-        or ("VAT Entry"."GMLocDocument Type Loc." = "VAT Entry"."GMLocDocument Type Loc."::"Nota Débito") then begin
+        if ("VAT Entry"."GMADocument Type Loc." = "VAT Entry"."GMADocument Type Loc."::Invoice)
+        or ("VAT Entry"."GMADocument Type Loc." = "VAT Entry"."GMADocument Type Loc."::"GMANota Debito") then begin
             if (SalesInvoiceHeader.GET("VAT Entry"."Document No.")) then
-                GMLocAFIPVoucherType := SalesInvoiceHeader."GMLocAFIP Voucher Type"
+                GMAAFIPVoucherType := SalesInvoiceHeader."GMAAFIP Voucher Type"
         end
         else begin
             if (SalesCrMemoHeader.GET("VAT Entry"."Document No.")) then
-                GMLocAFIPVoucherType := SalesCrMemoHeader."GMLocAFIP Voucher Type"
+                GMAAFIPVoucherType := SalesCrMemoHeader."GMAAFIP Voucher Type"
         end;
 
 
@@ -379,8 +379,8 @@ report 80887 "PER EARCIBA RET PERC"
         // 4 - Tipo de Comprobante
 
 
-        IF "VAT Entry"."GMLocDocument Type Loc." = "VAT Entry"."GMLocDocument Type Loc."::Invoice THEN begin
-            case GMLocAFIPVoucherType of
+        IF "VAT Entry"."GMADocument Type Loc." = "VAT Entry"."GMADocument Type Loc."::Invoice THEN begin
+            case GMAAFIPVoucherType of
                 '001', '006', '011', '019', '051':
                     Campo4 := '01';
                 '201', '206', '211':
@@ -389,8 +389,8 @@ report 80887 "PER EARCIBA RET PERC"
                     Campo4 := '09';
             end
         end;
-        IF "VAT Entry"."GMLocDocument Type Loc." = "VAT Entry"."GMLocDocument Type Loc."::"Nota Débito" THEN begin
-            case GMLocAFIPVoucherType of
+        IF "VAT Entry"."GMADocument Type Loc." = "VAT Entry"."GMADocument Type Loc."::"GMANota Debito" THEN begin
+            case GMAAFIPVoucherType of
                 '202', '207', '212':
                     Campo4 := '13';
                 else
@@ -404,12 +404,12 @@ report 80887 "PER EARCIBA RET PERC"
             RecCustomer.RESET;
             RecCustomer.SETRANGE("No.", "VAT Entry"."Bill-to/Pay-to No.");
             IF RecCustomer.FIND('-') THEN begin
-                GMLocFiscalType.RESET;
-                GMLocFiscalType.SETCURRENTKEY(GMLocCode);
-                GMLocFiscalType.SETRANGE(GMLocFiscalType.GMLocCode, RecCustomer."GMLocFiscal Type");
+                GMAFiscalType.RESET;
+                GMAFiscalType.SETCURRENTKEY(GMACode);
+                GMAFiscalType.SETRANGE(GMAFiscalType.GMACode, RecCustomer."GMAFiscal Type");
 
-                IF GMLocFiscalType.FIND('-') THEN BEGIN
-                    Campo5 := GMLocFiscalType."GMLocInvoice Letter";
+                IF GMAFiscalType.FIND('-') THEN BEGIN
+                    Campo5 := GMAFiscalType."GMAInvoice Letter";
                 END;
             end;
         end;
@@ -428,10 +428,10 @@ report 80887 "PER EARCIBA RET PERC"
 
         //8 -Monto del comprobante
         CustLedgerEntry.Reset();
-        CustLedgerEntry.SetCurrentKey("Document No.", "GMLocDocument Type Loc.", "Customer No.", "Transaction No.");
+        CustLedgerEntry.SetCurrentKey("Document No.", "GMADocument Type Loc.", "Customer No.", "Transaction No.");
 
         CustLedgerEntry.SetRange("Document No.", "VAT Entry"."Document No.");
-        CustLedgerEntry.SetRange("GMLocDocument Type Loc.", "VAT Entry"."GMLocDocument Type Loc.");
+        CustLedgerEntry.SetRange("GMADocument Type Loc.", "VAT Entry"."GMADocument Type Loc.");
         CustLedgerEntry.SetRange("Customer No.", "VAT Entry"."Bill-to/Pay-to No.");
         CustLedgerEntry.SetRange("Transaction No.", "VAT Entry"."Transaction No.");
 
@@ -453,11 +453,11 @@ report 80887 "PER EARCIBA RET PERC"
         RecCustomer.RESET;
         RecCustomer.SETRANGE("No.", "VAT Entry"."Bill-to/Pay-to No.");
         IF RecCustomer.FIND('-') THEN begin
-            IF (RecCustomer."GMLocAFIP Document Type" = '80') THEN
+            IF (RecCustomer."GMAAFIP Document Type" = '80') THEN
                 CAMPO10 := '3';
-            IF (RecCustomer."GMLocAFIP Document Type" = '86') THEN
+            IF (RecCustomer."GMAAFIP Document Type" = '86') THEN
                 CAMPO10 := '2';
-            IF (RecCustomer."GMLocAFIP Document Type" = '87') THEN
+            IF (RecCustomer."GMAAFIP Document Type" = '87') THEN
                 CAMPO10 := '1';
         end;
 
@@ -468,19 +468,19 @@ report 80887 "PER EARCIBA RET PERC"
             CAMPO11 := COPYSTR(DELCHR(RecCustomer."VAT Registration No.", '=', '-'), 1, 11);
 
         //12 - situacion iibb
-        IF (COPYSTR(RecCustomer."GMLocIIBB Code", 1, 3) = '901') OR
-        (COPYSTR(RecCustomer."GMLocIIBB Code", 1, 3) = '902') THEN BEGIN
+        IF (COPYSTR(RecCustomer."GMAIIBB Code", 1, 3) = '901') OR
+        (COPYSTR(RecCustomer."GMAIIBB Code", 1, 3) = '902') THEN BEGIN
             CAMPO12 := '2';
 
-            IF STRLEN(COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(RecCustomer."GMLocIIBB Code", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
+            IF STRLEN(COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(RecCustomer."GMAIIBB Code", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
             ) <> 10 THEN BEGIN
                 CAMPO12 := '4';
             END;
         END
         ELSE BEGIN
-            IF COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(RecCustomer."GMLocIIBB Code", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 1) = '0' THEN BEGIN
+            IF COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(RecCustomer."GMAIIBB Code", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 1) = '0' THEN BEGIN
                 CAMPO12 := '1';
-                IF STRLEN(COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(RecCustomer."GMLocIIBB Code", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
+                IF STRLEN(COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(RecCustomer."GMAIIBB Code", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
                 ) <> 10 THEN BEGIN
                     CAMPO12 := '4';
                 END;
@@ -495,7 +495,7 @@ report 80887 "PER EARCIBA RET PERC"
         RecCustomer.SETRANGE("No.", "VAT Entry"."Bill-to/Pay-to No.");
         IF RecCustomer.FIND('-') THEN begin
             IF CAMPO12 <> '4' THEN BEGIN
-                nroig := COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(RecCustomer."GMLocIIBB Code", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
+                nroig := COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(RecCustomer."GMAIIBB Code", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
             END
             ELSE BEGIN
                 nroig := '0';
@@ -507,13 +507,13 @@ report 80887 "PER EARCIBA RET PERC"
         end;
 
         //14 - SITUACION IVA
-        GMLocFiscalType.RESET;
-        GMLocFiscalType.SETCURRENTKEY(GMLocCode);
-        GMLocFiscalType.SETRANGE(GMLocFiscalType.GMLocCode, RecCustomer."GMLocFiscal Type");
+        GMAFiscalType.RESET;
+        GMAFiscalType.SETCURRENTKEY(GMACode);
+        GMAFiscalType.SETRANGE(GMAFiscalType.GMACode, RecCustomer."GMAFiscal Type");
 
-        IF GMLocFiscalType.FIND('-') THEN BEGIN
+        IF GMAFiscalType.FIND('-') THEN BEGIN
 
-            case GMLocFiscalType."GMLocCod 3685" of
+            case GMAFiscalType."GMACod 3685" of
                 '01':
                     CAMPO14 := '1';
                 '04':
@@ -533,7 +533,7 @@ report 80887 "PER EARCIBA RET PERC"
         CLEAR(importesumado);
         TempVatEntry.RESET;
         TempVatEntry.SETRANGE("Document No.", "VAT Entry"."Document No.");
-        TempVatEntry.SetFilter("GMLocTax Type Loc", '<>%1', "VAT Entry"."GMLocTax Type Loc"::IVA);
+        TempVatEntry.SetFilter("GMATax Type Loc", '<>%1', "VAT Entry"."GMATax Type Loc"::IVA);
         TempVatEntry.SETRANGE("Document Type", AuxVATEntry."Document Type"::Invoice);
 
         IF (TempVatEntry.FINDSET) THEN
@@ -566,7 +566,7 @@ report 80887 "PER EARCIBA RET PERC"
         AuxVATEntry.RESET;
         AuxVATEntry.SETRANGE(AuxVATEntry."Document No.", "VAT Entry"."Document No.");
         AuxVATEntry.SETRANGE(AuxVATEntry."Document Type", AuxVATEntry."Document Type"::Invoice);
-        AuxVATEntry.SETRANGE(AuxVATEntry."GMLocTax Type Loc", "VAT Entry"."GMLocTax Type Loc"::IVA);
+        AuxVATEntry.SETRANGE(AuxVATEntry."GMATax Type Loc", "VAT Entry"."GMATax Type Loc"::IVA);
 
         importesumado := 0;
         IF (AuxVATEntry.FINDSET) THEN
@@ -590,14 +590,14 @@ report 80887 "PER EARCIBA RET PERC"
         AuxVATEntry.RESET;
         AuxVATEntry.SETRANGE(AuxVATEntry."Document No.", "VAT Entry"."Document No.");
         AuxVATEntry.SETRANGE(AuxVATEntry."Document Type", AuxVATEntry."Document Type"::Invoice);
-        AuxVATEntry.SETRANGE(AuxVATEntry."GMLocTax Type Loc", "VAT Entry"."GMLocTax Type Loc"::"Ingresos Brutos");
+        AuxVATEntry.SETRANGE(AuxVATEntry."GMATax Type Loc", "VAT Entry"."GMATax Type Loc"::"Ingresos Brutos");
         importesumado := 0;
         IF (AuxVATEntry.FINDSET) THEN BEGIN
             REPEAT
                 TaxJurisdiction.reset;
                 TaxJurisdiction.SETRANGE(code, AuxVATEntry."Tax Jurisdiction Code");
                 IF (TaxJurisdiction.FindFirst()) THEN
-                    if (TaxJurisdiction."GMLocProvince Code" = '901') then
+                    if (TaxJurisdiction."GMAProvince Code" = '901') then
                         importesumado := importesumado + ABS(AuxVATEntry.Base);
             UNTIL AuxVATEntry.NEXT = 0;
         END;
@@ -619,14 +619,14 @@ report 80887 "PER EARCIBA RET PERC"
         AuxVATEntry.RESET;
         AuxVATEntry.SETRANGE(AuxVATEntry."Document No.", "VAT Entry"."Document No.");
         AuxVATEntry.SETRANGE(AuxVATEntry."Document Type", AuxVATEntry."Document Type"::Invoice);
-        AuxVATEntry.SETRANGE(AuxVATEntry."GMLocTax Type Loc", "VAT Entry"."GMLocTax Type Loc"::"Ingresos Brutos");
+        AuxVATEntry.SETRANGE(AuxVATEntry."GMATax Type Loc", "VAT Entry"."GMATax Type Loc"::"Ingresos Brutos");
         importesumado := 0;
         IF (AuxVATEntry.FINDSET) THEN BEGIN
             REPEAT
                 TaxJurisdiction.reset;
                 TaxJurisdiction.SETRANGE(code, AuxVATEntry."Tax Jurisdiction Code");
                 IF (TaxJurisdiction.FindFirst()) THEN
-                    if (TaxJurisdiction."GMLocProvince Code" = '901') then
+                    if (TaxJurisdiction."GMAProvince Code" = '901') then
                         importesumado := importesumado + (AuxVATEntry.Amount);// antes ABS(AuxVATEntry.Amount)
             UNTIL AuxVATEntry.NEXT = 0;
         END;
@@ -703,9 +703,9 @@ report 80887 "PER EARCIBA RET PERC"
 
     END;
 
-    PROCEDURE "#GMLocWithholdingLedgerEntry"();
+    PROCEDURE "#GMAWithholdingLedgerEntry"();
     VAR
-        GMLocPostingDate: date;
+        GMAPostingDate: date;
     BEGIN
         NumeroLineas += 1;
         Campo1 := '';
@@ -732,19 +732,19 @@ report 80887 "PER EARCIBA RET PERC"
         CAMPO21 := '';
         CAMPO22 := '';
         CAMPO23 := '';
-        GMLocPostingDate := 0D;
+        GMAPostingDate := 0D;
 
 
 
-        GMLocPostedPaymentOrdVouch.RESET;
-        GMLocPostedPaymentOrdVouch.SETCURRENTKEY("GMLocPayment Order No.");
-        GMLocPostedPaymentOrdVouch.SetRange("GMLocPayment Order No.", "GMLocWithholding Ledger Entry"."GMLocVoucher Number");
-        if (GMLocPostedPaymentOrdVouch.FindFirst()) then;
+        GMAPostedPaymentOrdVouch.RESET;
+        GMAPostedPaymentOrdVouch.SETCURRENTKEY("GMAPayment Order No.");
+        GMAPostedPaymentOrdVouch.SetRange("GMAPayment Order No.", "GMAWithholding Ledger Entry"."GMAVoucher Number");
+        if (GMAPostedPaymentOrdVouch.FindFirst()) then;
 
-        RecGMLocPostedPaymentOrder.Reset();
-        RecGMLocPostedPaymentOrder.SetRange("GMLocPayment O. No.", "GMLocWithholding Ledger Entry"."GMLocVoucher Number");
-        if (RecGMLocPostedPaymentOrder.FindFirst()) then
-            GMLocPostingDate := RecGMLocPostedPaymentOrder."GMLocPosting Date";
+        RecGMAPostedPaymentOrder.Reset();
+        RecGMAPostedPaymentOrder.SetRange("GMAPayment O. No.", "GMAWithholding Ledger Entry"."GMAVoucher Number");
+        if (RecGMAPostedPaymentOrder.FindFirst()) then
+            GMAPostingDate := RecGMAPostedPaymentOrder."GMAPosting Date";
 
 
 
@@ -757,7 +757,7 @@ report 80887 "PER EARCIBA RET PERC"
         Campo2 := '029';
 
         //3 - fecha retencion
-        Campo3 := FORMAT("GMLocWithholding Ledger Entry"."GMLocWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>');
+        Campo3 := FORMAT("GMAWithholding Ledger Entry"."GMAWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>');
 
         //4 - Tipo de Comprobante
         Campo4 := '03';
@@ -766,79 +766,79 @@ report 80887 "PER EARCIBA RET PERC"
         Campo5 := ' ';
 
         //6 - nro comprobante
-        Campo6 := "GMLocWithholding Ledger Entry"."GMLocVoucher Number";
+        Campo6 := "GMAWithholding Ledger Entry"."GMAVoucher Number";
         Campo6 := DELCHR(Campo6, '=', '-+QWERTYUIOPASDFGHJKLÑZXCVBNM');
         Campo6 := DELCHR(Campo6, '=', '-+qwertyuiopasdfghjklñzxcvbnm');
         Campo6 := Campo6.PadLeft(16, '0');
 
         //7 - fechacomprobante
         if (Campo4 = '03') then //si tipo de cbte es 03
-            Campo7 := FORMAT(GMLocPostingDate, 10, '<Day,2>/<Month,2>/<Year4>')
+            Campo7 := FORMAT(GMAPostingDate, 10, '<Day,2>/<Month,2>/<Year4>')
         else
-            Campo7 := FORMAT("GMLocWithholding Ledger Entry"."GMLocVoucher Date", 10, '<Day,2>/<Month,2>/<Year4>');
+            Campo7 := FORMAT("GMAWithholding Ledger Entry"."GMAVoucher Date", 10, '<Day,2>/<Month,2>/<Year4>');
 
         //8 - monto
         if (Campo4 = '03') then //si tipo de cbte es 03
         begin
-            WHILE STRLEN(CAMPO8) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocCalculation Base", 0.01), 0,
+            WHILE STRLEN(CAMPO8) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMACalculation Base", 0.01), 0,
                     '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',')) < 16 DO CAMPO8 += '0';
             BEGIN
-                CAMPO8 += CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocCalculation Base", 0.01), 0,
+                CAMPO8 += CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMACalculation Base", 0.01), 0,
                 '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',');
             END;
         end
         else begin
-            WHILE STRLEN(CAMPO8) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND(GMLocPostedPaymentOrdVouch.GMLocAmount, 0.01), 0,
+            WHILE STRLEN(CAMPO8) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND(GMAPostedPaymentOrdVouch.GMAAmount, 0.01), 0,
             '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',')) < 16 DO CAMPO8 += '0';
             BEGIN
-                CAMPO8 += CONVERTSTR(DELCHR(FORMAT(ROUND(GMLocPostedPaymentOrdVouch.GMLocAmount, 0.01), 0,
+                CAMPO8 += CONVERTSTR(DELCHR(FORMAT(ROUND(GMAPostedPaymentOrdVouch.GMAAmount, 0.01), 0,
                 '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',');
             END;
         end;
 
         //9 - NRO  CERTIFICADO
-        WHILE STRLEN(CAMPO9) + STRLEN("GMLocWithholding Ledger Entry"."GMLocWithh. Certificate No.") < 16 DO CAMPO9 += ' ';
+        WHILE STRLEN(CAMPO9) + STRLEN("GMAWithholding Ledger Entry"."GMAWithh. Certificate No.") < 16 DO CAMPO9 += ' ';
         BEGIN
-            CAMPO9 += "GMLocWithholding Ledger Entry"."GMLocWithh. Certificate No.";
+            CAMPO9 += "GMAWithholding Ledger Entry"."GMAWithh. Certificate No.";
         END;
 
         //10 - tipo documento
         Proveedor.RESET;
-        Proveedor.SETRANGE(Proveedor."No.", "GMLocWithholding Ledger Entry"."GMLocVendor Code");
+        Proveedor.SETRANGE(Proveedor."No.", "GMAWithholding Ledger Entry"."GMAVendor Code");
         IF Proveedor.FIND('-') THEN BEGIN
-            IF (Proveedor."GMLocAFIP Document Type" = '80') THEN
+            IF (Proveedor."GMAAFIP Document Type" = '80') THEN
                 CAMPO10 := '3';
-            IF (Proveedor."GMLocAFIP Document Type" = '86') THEN
+            IF (Proveedor."GMAAFIP Document Type" = '86') THEN
                 CAMPO10 := '2';
-            IF (Proveedor."GMLocAFIP Document Type" = '87') THEN
+            IF (Proveedor."GMAAFIP Document Type" = '87') THEN
                 CAMPO10 := '1';
         END;
 
 
         //11 - Número de documento
         Proveedor.RESET;
-        Proveedor.SETRANGE(Proveedor."No.", "GMLocWithholding Ledger Entry"."GMLocVendor Code");
+        Proveedor.SETRANGE(Proveedor."No.", "GMAWithholding Ledger Entry"."GMAVendor Code");
         IF Proveedor.FIND('-') THEN
             CAMPO11 := COPYSTR(DELCHR(Proveedor."VAT Registration No.", '=', '-'), 1, 11);
 
         //12 - situacion iibb
         Proveedor.RESET;
-        Proveedor.SETRANGE(Proveedor."No.", "GMLocWithholding Ledger Entry"."GMLocVendor Code");
+        Proveedor.SETRANGE(Proveedor."No.", "GMAWithholding Ledger Entry"."GMAVendor Code");
         IF Proveedor.FIND('-') THEN;
 
-        IF (COPYSTR(Proveedor."GMLocGross Income Tax No", 1, 3) = '901') OR
-        (COPYSTR(Proveedor."GMLocGross Income Tax No", 1, 3) = '902') THEN BEGIN
+        IF (COPYSTR(Proveedor."GMAGross Income Tax No", 1, 3) = '901') OR
+        (COPYSTR(Proveedor."GMAGross Income Tax No", 1, 3) = '902') THEN BEGIN
             CAMPO12 := '2';
 
-            IF STRLEN(COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(Proveedor."GMLocGross Income Tax No", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
+            IF STRLEN(COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(Proveedor."GMAGross Income Tax No", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
             ) <> 10 THEN BEGIN
                 CAMPO12 := '4';
             END;
         END
         ELSE BEGIN
-            IF COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(Proveedor."GMLocGross Income Tax No", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 1) = '0' THEN BEGIN
+            IF COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(Proveedor."GMAGross Income Tax No", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 1) = '0' THEN BEGIN
                 CAMPO12 := '1';
-                IF STRLEN(COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(Proveedor."GMLocGross Income Tax No", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
+                IF STRLEN(COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(Proveedor."GMAGross Income Tax No", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
                 ) <> 10 THEN BEGIN
                     CAMPO12 := '4';
                 END;
@@ -850,11 +850,11 @@ report 80887 "PER EARCIBA RET PERC"
 
         //13 - Nro Inscripción de IIBB
         Proveedor.RESET;
-        Proveedor.SETRANGE(Proveedor."No.", "GMLocWithholding Ledger Entry"."GMLocVendor Code");
+        Proveedor.SETRANGE(Proveedor."No.", "GMAWithholding Ledger Entry"."GMAVendor Code");
         IF Proveedor.FIND('-') THEN BEGIN
 
             IF CAMPO12 <> '4' THEN BEGIN
-                nroig := COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(Proveedor."GMLocGross Income Tax No", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
+                nroig := COPYSTR(DELCHR(DELCHR(DELCHR(DELCHR(Proveedor."GMAGross Income Tax No", '=', ','), '=', '-'), '=', '.'), '=', '/'), 1, 10)
             END
             ELSE BEGIN
                 nroig := '0'
@@ -867,13 +867,13 @@ report 80887 "PER EARCIBA RET PERC"
         END;
 
         //14 - SITUACION IVA
-        GMLocFiscalType.RESET;
-        GMLocFiscalType.SETCURRENTKEY(GMLocCode);
-        GMLocFiscalType.SETRANGE(GMLocFiscalType.GMLocCode, Proveedor."GMLocFiscal Type");
+        GMAFiscalType.RESET;
+        GMAFiscalType.SETCURRENTKEY(GMACode);
+        GMAFiscalType.SETRANGE(GMAFiscalType.GMACode, Proveedor."GMAFiscal Type");
 
-        IF GMLocFiscalType.FIND('-') THEN BEGIN
+        IF GMAFiscalType.FIND('-') THEN BEGIN
 
-            case GMLocFiscalType."GMLocCod 3685" of
+            case GMAFiscalType."GMACod 3685" of
                 '01':
                     CAMPO14 := '1';
                 '04':
@@ -886,7 +886,7 @@ report 80887 "PER EARCIBA RET PERC"
 
         //15 - Razón Social del retenido
         Proveedor.RESET;
-        Proveedor.SETRANGE(Proveedor."No.", "GMLocWithholding Ledger Entry"."GMLocVendor Code");
+        Proveedor.SETRANGE(Proveedor."No.", "GMAWithholding Ledger Entry"."GMAVendor Code");
         IF Proveedor.FIND('-') THEN
             CAMPO15 := COPYSTR(DELCHR(Proveedor.Name, '=', ','), 1, 30);
 
@@ -898,7 +898,7 @@ report 80887 "PER EARCIBA RET PERC"
             Campo16 := Campo16.PadLeft(16, '0');
         end
         else begin
-            otrosconceptos := GMLocPostedPaymentOrdVouch.GMLocAmount - "GMLocWithholding Ledger Entry"."GMLocCalculation Base";
+            otrosconceptos := GMAPostedPaymentOrdVouch.GMAAmount - "GMAWithholding Ledger Entry"."GMACalculation Base";
             WHILE STRLEN(CAMPO16) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND(otrosconceptos, 0.01), 0,
                 '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',')) < 16 DO CAMPO16 += '0';
             BEGIN
@@ -913,49 +913,49 @@ report 80887 "PER EARCIBA RET PERC"
 
 
         //18 - BASE DE CALCULO
-        WHILE STRLEN(CAMPO18) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocCalculation Base", 0.01), 0,
+        WHILE STRLEN(CAMPO18) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMACalculation Base", 0.01), 0,
         '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',')) < 16 DO CAMPO18 += '0';
         BEGIN
-            CAMPO18 += CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocCalculation Base", 0.01), 0,
+            CAMPO18 += CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMACalculation Base", 0.01), 0,
             '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',');
         END;
 
-        GMLocTaxConditions.RESET;
-        GMLocTaxConditions.SetRange("GMLocTax Code", "GMLocWithholding Ledger Entry"."GMLocTax Code");
-        GMLocTaxConditions.SetRange("GMLocCondition Code", "GMLocWithholding Ledger Entry"."GMLocCondition Code");
+        GMATaxConditions.RESET;
+        GMATaxConditions.SetRange("GMATax Code", "GMAWithholding Ledger Entry"."GMATax Code");
+        GMATaxConditions.SetRange("GMACondition Code", "GMAWithholding Ledger Entry"."GMACondition Code");
 
         //19 - ALICUOTA
         if (Campo4 = '03') then //si tipo de cbte es 03
         begin
-            CAMPO19 := CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocWithholding%", 0.01), 0,
+            CAMPO19 := CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMAWithholding%", 0.01), 0,
                         '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',');
             CAMPO19 := CAMPO19.PadLeft(5, '0');
         end
         else begin
-            IF GMLocTaxConditions.FindFirst() THEN BEGIN
-                /* WHILE STRLEN(CAMPO19) + STRLEN(GMLocTaxConditions."GMLocAGIP GGII Code") < 5 DO CAMPO19 += '0';
+            IF GMATaxConditions.FindFirst() THEN BEGIN
+                /* WHILE STRLEN(CAMPO19) + STRLEN(GMATaxConditions."GMAAGIP GGII Code") < 5 DO CAMPO19 += '0';
                  BEGIN
-                     CAMPO19 += GMLocTaxConditions."GMLocAGIP GGII Code", 0.01;
+                     CAMPO19 += GMATaxConditions."GMAAGIP GGII Code", 0.01;
                  END;*/
                 CAMPO19 := CONVERTSTR(CAMPO19, '.', ',');
-                CAMPO19 := GMLocTaxConditions."GMLocAGIP GGII Code";
+                CAMPO19 := GMATaxConditions."GMAAGIP GGII Code";
                 CAMPO19 := CAMPO19.PadLeft(5, '0');
             END;
         end;
 
         //20 - IMPORTE RETENCION
-        WHILE STRLEN(CAMPO20) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocWithholding Amount", 0.01), 0,
+        WHILE STRLEN(CAMPO20) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMAWithholding Amount", 0.01), 0,
         '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',')) < 16 DO CAMPO20 += '0';
         BEGIN
-            CAMPO20 += CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocWithholding Amount", 0.01), 0,
+            CAMPO20 += CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMAWithholding Amount", 0.01), 0,
             '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',');
         END;
 
         //21 - TOTAL MONTO RETENIDO
-        WHILE STRLEN(CAMPO21) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocWithholding Amount", 0.01), 0,
+        WHILE STRLEN(CAMPO21) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMAWithholding Amount", 0.01), 0,
         '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',')) < 16 DO CAMPO21 += '0';
         BEGIN
-            CAMPO21 += CONVERTSTR(DELCHR(FORMAT(ROUND("GMLocWithholding Ledger Entry"."GMLocWithholding Amount", 0.01), 0,
+            CAMPO21 += CONVERTSTR(DELCHR(FORMAT(ROUND("GMAWithholding Ledger Entry"."GMAWithholding Amount", 0.01), 0,
             '<Precision,2:2><integer><decimals>'), '.', ''), '.', ',');
         END;
 
@@ -988,7 +988,7 @@ report 80887 "PER EARCIBA RET PERC"
         FORMAT(CAMPO23, 10, '<Text>')
         );
 
-        "#RellenaExcelBuff"(Texto, "GMLocWithholding Ledger Entry"."GMLocWithholding Date")
+        "#RellenaExcelBuff"(Texto, "GMAWithholding Ledger Entry"."GMAWithholding Date")
 
     END;
 

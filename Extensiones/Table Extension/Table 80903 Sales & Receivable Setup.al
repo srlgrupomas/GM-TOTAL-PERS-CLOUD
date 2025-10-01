@@ -1,4 +1,4 @@
-tableextension 80903 "PERSales & Receivables Set" extends "Sales & Receivables Setup"
+tableextension 34006903 "PERSales & Receivables Set" extends "Sales & Receivables Setup"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------

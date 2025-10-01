@@ -1,8 +1,8 @@
-pageextension 80889 PERTaxArea extends "Tax Area"
+pageextension 34006889 PERTaxArea extends "Tax Area"
 {
     layout
     {
-        addafter("GMLocTax Area Ex. Gross income")
+        addafter("GMATax Area Ex. Gross income")
         {
             field(EntityID; rec.EntityID)
             {

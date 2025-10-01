@@ -1,14 +1,14 @@
-tableextension 80908 "PersFixed Asset" extends "Fixed Asset"
+tableextension 34006908 "PersFixed Asset" extends "Fixed Asset"
 {
     fields
     {
-        field(80901; "PersCurrency Factor"; Decimal)
+        field(34006901; "PersCurrency Factor"; Decimal)
         {
             Caption = 'Currency Factor';
             Editable = false;
             DecimalPlaces = 0 : 18;
         }
-        field(80902; "PersCurrency Code"; Code[10])
+        field(34006902; "PersCurrency Code"; Code[10])
         {
             Caption = 'Currency Code';
             TableRelation = Currency;
@@ -26,7 +26,7 @@ tableextension 80908 "PersFixed Asset" extends "Fixed Asset"
                 Validate("PersCurrency Factor");
             end;
         }
-        field(80903; "PersExchange Rate FA"; Decimal)
+        field(34006903; "PersExchange Rate FA"; Decimal)
         {
             Caption = 'Exchange Rate FA';
             DecimalPlaces = 1 : 6;

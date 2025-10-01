@@ -1,4 +1,4 @@
-pageextension 80997 "GMLocPurchase Credit Memos P" extends "Purchase Credit Memos"
+pageextension 34006997 "GMLocPurchase Credit Memos P" extends "Purchase Credit Memos"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------

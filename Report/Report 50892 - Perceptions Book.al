@@ -1,12 +1,12 @@
 ﻿/// <summary>
-///  File Description : MEM Copy of Localization Argentina report: Perception Book (report 34006465 "GMLocPerceptions Book") 
+///  File Description : MEM Copy of Localization Argentina report: Perception Book (report 34006465 "GMAPerceptions Book") 
 /// </summary>
 /// <remarks>
 /// | Rev No. | Date | By | Ticket | Description |
 /// |:-------:|:----:|:--:|:------:|:------------|
 /// | 000 | 20241224 | Arvind | NAVMEM-#### | Initial Release |
 /// </remarks>
-report 80892 "PersPerceptions Book"
+report 34006892 "PersPerceptions Book"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -283,43 +283,43 @@ report 80892 "PersPerceptions Book"
 
                         "VAT Entry Temp".DELETEALL;
                         /*
-                            IF (EnVentas.GetFilter(GMLocValue) = '') then begin
+                            IF (EnVentas.GetFilter(GMAValue) = '') then begin
                             Valores.RESET;
-                            Valores.SETCURRENTKEY(GMLocCode);
-                            Valores.SetRange("GMLocIs Withholding", true);
+                            Valores.SETCURRENTKEY(GMACode);
+                            Valores.SetRange("GMAIs Withholding", true);
                             if Provincia <> '' then
-                                Valores.SetRange(GMLocProvince, Provincia);
+                                Valores.SetRange(GMAProvince, Provincia);
 
                             if Valores.FindFirst() then
                                 repeat
-                                    txtValores += Valores.GMLocCode + '|';
+                                    txtValores += Valores.GMACode + '|';
                                 until Valores.Next() = 0;
                             if StrLen(txtValores) > 0 then
                                 txtValores := CopyStr(txtValores, 1, StrLen(txtValores) - 1);
-                            EnVentas.SETRANGE(EnVentas."GMLocPosting Date", Desde, Hasta);
-                            EnVentas.SetFilter(EnVentas."GMLocValue", txtValores);
+                            EnVentas.SETRANGE(EnVentas."GMAPosting Date", Desde, Hasta);
+                            EnVentas.SetFilter(EnVentas."GMAValue", txtValores);
                         end
                         else begin
-                            EnVentas.SETRANGE(EnVentas."GMLocPosting Date", Desde, Hasta);
-                            GlobaltxtValoresVentas := EnVentas.GetFilter(GMLocValue);
+                            EnVentas.SETRANGE(EnVentas."GMAPosting Date", Desde, Hasta);
+                            GlobaltxtValoresVentas := EnVentas.GetFilter(GMAValue);
                         end;
                         */
 
 
                         //sdt filtro ventas
 
-                        //NOTA: Si no se especifica ningún valor en el filtro, el reporte traerá los movimientos que sean en GMLocTax Type Loc del tipo IIBB e IVA Percep.
+                        //NOTA: Si no se especifica ningún valor en el filtro, el reporte traerá los movimientos que sean en GMATax Type Loc del tipo IIBB e IVA Percep.
                         //Si decidimos colocar un filtro en particular que no pertenezca a esos tipos (ej IVA 21%), lo traerá.
                         IF (EnVentas.GetFilter("Tax Jurisdiction Code") = '') then begin
                             EnVentas.Reset();
                             EnVentas.SETRANGE(EnVentas."Posting Date", Desde, Hasta);
-                            EnVentas.SetFilter("GMLocTax Type Loc", '%1|%2', "GMLocTax Type Loc"::"Ingresos Brutos", "GMLocTax Type Loc"::"IVA Percepcion");
+                            EnVentas.SetFilter("GMATax Type Loc", '%1|%2', "GMATax Type Loc"::"Ingresos Brutos", "GMATax Type Loc"::"IVA Percepcion");
                             EnVentas.SETRANGE(EnVentas.Type, EnVentas.Type::Sale);
 
                             if paramProvincia <> '' then begin
                                 varFiltro := '';
                                 recTaxJurisdictions.Reset();
-                                recTaxJurisdictions.SetRange("GMLocProvince Code", paramProvincia);
+                                recTaxJurisdictions.SetRange("GMAProvince Code", paramProvincia);
                                 if recTaxJurisdictions.FindFirst() then
                                     repeat
                                         varFiltro += recTaxJurisdictions.Code + '|';
@@ -399,12 +399,12 @@ report 80892 "PersPerceptions Book"
 
                         if (EnVentas."Tax Jurisdiction Code" = '') then begin
                             if ("VAT Product Posting Group".GET(EnVentas."VAT Prod. Posting Group")) then begin
-                                Jurid."GMLocType of Tax" := "VAT Product Posting Group"."GMLocTax Type";
+                                Jurid."GMAType of Tax" := "VAT Product Posting Group"."GMATax Type";
                                 taxoftype := "VAT Product Posting Group".Code;
                             end;
                         end;
 
-                        if Jurid."GMLocType of Tax" = Jurid."GMLocType of Tax"::IVA then begin
+                        if Jurid."GMAType of Tax" = Jurid."GMAType of Tax"::IVA then begin
                             //if not (Mostrar) then CurrReport.SKIP;
                             //CurrReport.Skip();
                         end
@@ -457,8 +457,8 @@ report 80892 "PersPerceptions Book"
                             end;
 
                             DocuInterno := NDocumento;
-                            case EnVentas."GMLocDocument Type Loc." of
-                                EnVentas."GMLocDocument Type Loc."::Invoice:
+                            case EnVentas."GMADocument Type Loc." of
+                                EnVentas."GMADocument Type Loc."::Invoice:
                                     begin
                                         if VTSHistFAc.GET(EnVentas."Document No.") then
                                             VTSHistFAc.CALCFIELDS(Amount);
@@ -473,7 +473,7 @@ report 80892 "PersPerceptions Book"
                                         varCUITCliente := CheckVATRegistrationNo(varCUITCliente, VTSHistFAc."Sell-to Customer No.");
                                         //7280  -  CAS-14859-M6Z2D4  -  20200826 END
                                     end;
-                                EnVentas."GMLocDocument Type Loc."::"Nota Débito":
+                                EnVentas."GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         if VTSHistFAc.GET(EnVentas."Document No.") then
                                             VTSHistFAc.CALCFIELDS(Amount);
@@ -489,7 +489,7 @@ report 80892 "PersPerceptions Book"
                                         varCUITCliente := CheckVATRegistrationNo(varCUITCliente, VTSHistFAc."Sell-to Customer No.");
                                         //7280  -  CAS-14859-M6Z2D4  -  20200826 END
                                     end;
-                                EnVentas."GMLocDocument Type Loc."::"Credit Memo":
+                                EnVentas."GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         if VTSHistAbono.GET(EnVentas."Document No.") then
                                             VTSHistAbono.CALCFIELDS(Amount);
@@ -524,13 +524,13 @@ report 80892 "PersPerceptions Book"
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Bus. Posting Group", EnVentas."VAT Bus. Posting Group");
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Prod. Posting Group", EnVentas."VAT Prod. Posting Group");
                             if recVBCodeVPostingSetup.FindFirst() then
-                                varVATBookCode := recVBCodeVPostingSetup."GMLocVAT Book Code";
+                                varVATBookCode := recVBCodeVPostingSetup."GMAVAT Book Code";
                         end;
                         if EnVentas."VAT Calculation Type" = EnVentas."VAT Calculation Type"::"Sales Tax" then begin
                             recvBTaxJurisdictions.Reset();
                             recvBTaxJurisdictions.SetRange(recvBTaxJurisdictions.Code, EnVentas."Tax Jurisdiction Code");
                             if recvBTaxJurisdictions.FindFirst() then
-                                varVATBookCode := recvBTaxJurisdictions."GMLoc VAT Book Code";
+                                varVATBookCode := recvBTaxJurisdictions."GMA VAT Book Code";
                         end;
                         //VATBookCode+
                     end;
@@ -640,24 +640,24 @@ report 80892 "PersPerceptions Book"
                         /*
                         EnCompras.RESET;
                         EnCompras.SETCURRENTKEY("Tax Jurisdiction Code", "Tax Group Used", "Tax Type", "Use Tax", "Posting Date");
-                        EnCompras.SetFilter("GMLocTax Type Loc", '%1|%2', "GMLocTax Type Loc"::"Ingresos Brutos", "GMLocTax Type Loc"::"IVA Percepcion");
+                        EnCompras.SetFilter("GMATax Type Loc", '%1|%2', "GMATax Type Loc"::"Ingresos Brutos", "GMATax Type Loc"::"IVA Percepcion");
                         EnCompras.SETRANGE(EnCompras."Posting Date", Desde, Hasta);
                         EnCompras.SETRANGE(EnCompras.Type, EnCompras.Type::Purchase);
 
                         Entradas := 0;
     */
-                        //NOTA: Si no se especifica ningún valor en el filtro, el reporte traerá los movimientos que sean en GMLocTax Type Loc del tipo IIBB e IVA Percep.
+                        //NOTA: Si no se especifica ningún valor en el filtro, el reporte traerá los movimientos que sean en GMATax Type Loc del tipo IIBB e IVA Percep.
                         //Si decidimos colocar un filtro en particular que no pertenezca a esos tipos (ej IVA 21%), lo traerá.
                         IF (EnCompras.GetFilter("Tax Jurisdiction Code") = '') then begin
                             EnCompras.Reset();
                             EnCompras.SETRANGE(EnCompras."Posting Date", Desde, Hasta);
-                            EnCompras.SetFilter("GMLocTax Type Loc", '%1|%2', "GMLocTax Type Loc"::"Ingresos Brutos", "GMLocTax Type Loc"::"IVA Percepcion");
+                            EnCompras.SetFilter("GMATax Type Loc", '%1|%2', "GMATax Type Loc"::"Ingresos Brutos", "GMATax Type Loc"::"IVA Percepcion");
                             EnCompras.SETRANGE(EnCompras.Type, EnCompras.Type::Purchase);
 
                             if paramProvincia <> '' then begin
                                 varFiltro := '';
                                 recTaxJurisdictions.Reset();
-                                recTaxJurisdictions.SetRange("GMLocProvince Code", paramProvincia);
+                                recTaxJurisdictions.SetRange("GMAProvince Code", paramProvincia);
                                 if recTaxJurisdictions.FindFirst() then
                                     repeat
                                         varFiltro += recTaxJurisdictions.Code + '|';
@@ -708,7 +708,7 @@ report 80892 "PersPerceptions Book"
                             recTaxJurisdictions.Reset();
                             recTaxJurisdictions.SetRange(recTaxJurisdictions.Code, EnCompras."Tax Jurisdiction Code");
                             if recTaxJurisdictions.FindFirst() then begin
-                                if (recTaxJurisdictions."GMLocProvince Code" <> paramProvincia) and (EnCompras."VAT Calculation Type" <> EnCompras."VAT Calculation Type"::"Full VAT") then
+                                if (recTaxJurisdictions."GMAProvince Code" <> paramProvincia) and (EnCompras."VAT Calculation Type" <> EnCompras."VAT Calculation Type"::"Full VAT") then
                                     CurrReport.Skip();
                             end;
                             if EnCompras."VAT Calculation Type" = EnCompras."VAT Calculation Type"::"Full VAT" then begin
@@ -718,7 +718,7 @@ report 80892 "PersPerceptions Book"
                                     if recPIL.FindFirst() then
                                         repeat
                                             if recPIL."VAT Calculation Type" = recPIL."VAT Calculation Type"::"Full VAT" then begin
-                                                if (EnCompras."VAT Bus. Posting Group" = recPIL."VAT Bus. Posting Group") and (EnCompras."VAT Prod. Posting Group" = recpil."VAT Prod. Posting Group") and (recpil.GMLocProvince = paramProvincia) then
+                                                if (EnCompras."VAT Bus. Posting Group" = recPIL."VAT Bus. Posting Group") and (EnCompras."VAT Prod. Posting Group" = recpil."VAT Prod. Posting Group") and (recpil.GMAProvince = paramProvincia) then
                                                     contemplar := true;
                                             end;
                                         until recPIL.Next = 0;
@@ -733,7 +733,7 @@ report 80892 "PersPerceptions Book"
                                     if recPCML.FindFirst() then
                                         repeat
                                             if recPCML."VAT Calculation Type" = recPIL."VAT Calculation Type"::"Full VAT" then begin
-                                                if (EnCompras."VAT Bus. Posting Group" = recPCML."VAT Bus. Posting Group") and (EnCompras."VAT Prod. Posting Group" = recPCML."VAT Prod. Posting Group") and (recPCML.GMLocProvince = paramProvincia) then
+                                                if (EnCompras."VAT Bus. Posting Group" = recPCML."VAT Bus. Posting Group") and (EnCompras."VAT Prod. Posting Group" = recPCML."VAT Prod. Posting Group") and (recPCML.GMAProvince = paramProvincia) then
                                                     contemplar := true;
                                             end;
                                         until recPCML.Next = 0;
@@ -772,14 +772,14 @@ report 80892 "PersPerceptions Book"
 
                         if (EnCompras."Tax Jurisdiction Code" = '') then begin
                             if ("VAT Product Posting Group".GET(EnCompras."VAT Prod. Posting Group")) then begin
-                                Jurid."GMLocType of Tax" := "VAT Product Posting Group"."GMLocTax Type";
+                                Jurid."GMAType of Tax" := "VAT Product Posting Group"."GMATax Type";
                                 taxoftype := "VAT Product Posting Group".Code;
                             end;
                         end;
 
 
-                        case EnCompras."GMLocDocument Type Loc." of
-                            EnCompras."GMLocDocument Type Loc."::Invoice:
+                        case EnCompras."GMADocument Type Loc." of
+                            EnCompras."GMADocument Type Loc."::Invoice:
                                 begin
                                     if CPRHistFac.GET(EnCompras."Document No.") then
                                         CPRHistFac.CALCFIELDS(Amount);
@@ -794,7 +794,7 @@ report 80892 "PersPerceptions Book"
                                     //7280  -  CAS-14859-M6Z2D4  -  20200826 END
 
                                 end;
-                            EnCompras."GMLocDocument Type Loc."::"Nota Débito":
+                            EnCompras."GMADocument Type Loc."::"GMANota Debito":
                                 begin
                                     if CPRHistFac.GET(EnCompras."Document No.") then
                                         CPRHistFac.CALCFIELDS(Amount);
@@ -808,7 +808,7 @@ report 80892 "PersPerceptions Book"
                                     varCUITProveedor := CheckVendorVATRegistrationNo(varCUITProveedor, EnCompras."Bill-to/Pay-to No.")
                                     //7280  -  CAS-14859-M6Z2D4  -  20200826 END
                                 end;
-                            EnCompras."GMLocDocument Type Loc."::"Credit Memo":
+                            EnCompras."GMADocument Type Loc."::"Credit Memo":
                                 begin
                                     if CPRHistAbono.GET(EnCompras."Document No.") then
                                         CPRHistAbono.CALCFIELDS(Amount);
@@ -837,20 +837,20 @@ report 80892 "PersPerceptions Book"
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Bus. Posting Group", EnCompras."VAT Bus. Posting Group");
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Prod. Posting Group", EnCompras."VAT Prod. Posting Group");
                             if recVBCodeVPostingSetup.FindFirst() then
-                                varVATBookCode := recVBCodeVPostingSetup."GMLocVAT Book Code";
+                                varVATBookCode := recVBCodeVPostingSetup."GMAVAT Book Code";
                         end;
                         if EnCompras."VAT Calculation Type" = EnCompras."VAT Calculation Type"::"Normal VAT" then begin
                             recVBCodeVPostingSetup.Reset();
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Bus. Posting Group", EnCompras."VAT Bus. Posting Group");
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Prod. Posting Group", EnCompras."VAT Prod. Posting Group");
                             if recVBCodeVPostingSetup.FindFirst() then
-                                varVATBookCode := recVBCodeVPostingSetup."GMLocVAT Book Code";
+                                varVATBookCode := recVBCodeVPostingSetup."GMAVAT Book Code";
                         end;
                         if EnCompras."VAT Calculation Type" = EnCompras."VAT Calculation Type"::"Sales Tax" then begin
                             recVBTaxJurisdictions.Reset();
                             recVBTaxJurisdictions.SetRange(recVBTaxJurisdictions."Code", EnCompras."Tax Jurisdiction Code");
                             if recVBTaxJurisdictions.FindFirst() then
-                                varVATBookCode := recVBTaxJurisdictions."GMLoc VAT Book Code";
+                                varVATBookCode := recVBTaxJurisdictions."GMA VAT Book Code";
                         end;
                         //VATBookCode+
 
@@ -905,33 +905,33 @@ report 80892 "PersPerceptions Book"
                         /*
                         if ((GlobaltxtValoresCompras = '') and (GlobaltxtVAloresVentas = '')) then begin
                             Totales.RESET;
-                            Totales.SETCURRENTKEY(Totales.GMLocValue);
-                            Totales.SETRANGE(Totales."GMLocPosting Date", Desde, Hasta);
+                            Totales.SETCURRENTKEY(Totales.GMAValue);
+                            Totales.SETRANGE(Totales."GMAPosting Date", Desde, Hasta);
 
                             Valores.RESET;
-                            Valores.SETCURRENTKEY(GMLocCode);
-                            Valores.SetRange("GMLocIs Withholding", true);
+                            Valores.SETCURRENTKEY(GMACode);
+                            Valores.SetRange("GMAIs Withholding", true);
                             if Provincia <> '' then
-                                Valores.SetRange(GMLocProvince, Provincia);
+                                Valores.SetRange(GMAProvince, Provincia);
 
                             if Valores.FindFirst() then
                                 repeat
-                                    txtValores += Valores.GMLocCode + '|';
+                                    txtValores += Valores.GMACode + '|';
                                 until Valores.Next() = 0;
                             if StrLen(txtValores) > 0 then
                                 txtValores := CopyStr(txtValores, 1, StrLen(txtValores) - 1);
-                            Totales.SetFilter(Totales."GMLocValue", txtValores);
+                            Totales.SetFilter(Totales."GMAValue", txtValores);
                         end
                         else begin
                             Totales.RESET;
-                            Totales.SETCURRENTKEY(Totales.GMLocValue);
-                            Totales.SETRANGE(Totales."GMLocPosting Date", Desde, Hasta);
+                            Totales.SETCURRENTKEY(Totales.GMAValue);
+                            Totales.SETRANGE(Totales."GMAPosting Date", Desde, Hasta);
                             if ((GlobaltxtValoresCompras <> '') and (GlobaltxtVAloresVentas <> '')) then
-                                Totales.SetFilter(Totales."GMLocValue", '%1|%2', GlobaltxtValoresVentas, GlobaltxtValoresCompras);
+                                Totales.SetFilter(Totales."GMAValue", '%1|%2', GlobaltxtValoresVentas, GlobaltxtValoresCompras);
                             if ((GlobaltxtValoresCompras <> '') and (GlobaltxtVAloresVentas = '')) then
-                                Totales.SetFilter(Totales."GMLocValue", '%1', GlobaltxtValoresCompras);
+                                Totales.SetFilter(Totales."GMAValue", '%1', GlobaltxtValoresCompras);
                             if ((GlobaltxtValoresCompras = '') and (GlobaltxtVAloresVentas <> '')) then
-                                Totales.SetFilter(Totales."GMLocValue", '%1', GlobaltxtValoresVentas);
+                                Totales.SetFilter(Totales."GMAValue", '%1', GlobaltxtValoresVentas);
                         end;
                     end;
                         */
@@ -941,14 +941,14 @@ report 80892 "PersPerceptions Book"
                                             if ((GlobaltxtVAloresVentas = '')) then begin
                                                 TotalesVentas.RESET;
                                                 TotalesVentas.SETCURRENTKEY("Tax Jurisdiction Code", "Tax Group Used", "Tax Type", "Use Tax", "Posting Date");
-                                                TotalesVentas.SetFilter("GMLocTax Type Loc", '%1|%2', "GMLocTax Type Loc"::"Ingresos Brutos", "GMLocTax Type Loc"::"IVA Percepcion");
+                                                TotalesVentas.SetFilter("GMATax Type Loc", '%1|%2', "GMATax Type Loc"::"Ingresos Brutos", "GMATax Type Loc"::"IVA Percepcion");
                                                 TotalesVentas.SETRANGE(TotalesVentas."Posting Date", Desde, Hasta);
                                                 totalesventas.SETRANGE(totalesventas.Type, totalesventas.Type::Sale);
 
                                                 if paramProvincia <> '' then begin
                                                     varFiltro := '';
                                                     recTaxJurisdictions.Reset();
-                                                    recTaxJurisdictions.SetRange("GMLocProvince Code", paramProvincia);
+                                                    recTaxJurisdictions.SetRange("GMAProvince Code", paramProvincia);
                                                     if recTaxJurisdictions.FindFirst() then begin
                                                         repeat
                                                             varFiltro += recTaxJurisdictions.Code + '|';
@@ -969,7 +969,7 @@ report 80892 "PersPerceptions Book"
 
                         // TotalesVentas.Reset();
                         // totalesventas.SETRANGE(totalesventas."Posting Date", Desde, Hasta);
-                        // TotalesVentas.SetFilter("GMLocTax Type Loc", '%1|%2', "GMLocTax Type Loc"::"Ingresos Brutos", "GMLocTax Type Loc"::"IVA Percepcion");
+                        // TotalesVentas.SetFilter("GMATax Type Loc", '%1|%2', "GMATax Type Loc"::"Ingresos Brutos", "GMATax Type Loc"::"IVA Percepcion");
                         // totalesventas.SETRANGE(totalesventas.Type, 2);
                     end;
 
@@ -994,7 +994,7 @@ report 80892 "PersPerceptions Book"
                             Jurid.SETCURRENTKEY(Code);
                             Jurid.SETRANGE(Jurid.Code, TotalesVentas."Tax Jurisdiction Code");
                             if (Jurid.FINDFIRST) then begin
-                                //if (Jurid."GMLocType of Tax" = Jurid."GMLocType of Tax"::IVA) then
+                                //if (Jurid."GMAType of Tax" = Jurid."GMAType of Tax"::IVA) then
                                 //    CurrReport.SKIP;
 
                                 Texto := Jurid.Description;
@@ -1003,8 +1003,8 @@ report 80892 "PersPerceptions Book"
                         end
                         else begin
                             if ("VAT Product Posting Group".GET(TotalesVentas."VAT Prod. Posting Group")) then
-                                Jurid."GMLocType of Tax" := "VAT Product Posting Group"."GMLocTax Type";
-                            //if (Jurid."GMLocType of Tax" = Jurid."GMLocType of Tax"::IVA) then
+                                Jurid."GMAType of Tax" := "VAT Product Posting Group"."GMATax Type";
+                            //if (Jurid."GMAType of Tax" = Jurid."GMAType of Tax"::IVA) then
                             //    CurrReport.SKIP
                             begin
                                 TaxJurisdictionCodeventa := FORMAT("VAT Product Posting Group".Code);
@@ -1019,13 +1019,13 @@ report 80892 "PersPerceptions Book"
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Bus. Posting Group", TotalesVentas."VAT Bus. Posting Group");
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Prod. Posting Group", TotalesVentas."VAT Prod. Posting Group");
                             if recVBCodeVPostingSetup.FindFirst() then
-                                varVATBookCode := recVBCodeVPostingSetup."GMLocVAT Book Code";
+                                varVATBookCode := recVBCodeVPostingSetup."GMAVAT Book Code";
                         end;
                         if TotalesVentas."VAT Calculation Type" = TotalesVentas."VAT Calculation Type"::"Sales Tax" then begin
                             recVBTaxJurisdictions.Reset();
                             recVBTaxJurisdictions.SetRange(recVBTaxJurisdictions."Code", TotalesVentas."Tax Jurisdiction Code");
                             if recVBTaxJurisdictions.FindFirst() then
-                                varVATBookCode := recVBTaxJurisdictions."GMLoc VAT Book Code";
+                                varVATBookCode := recVBTaxJurisdictions."GMA VAT Book Code";
                         end;
                         //VATBookCode+
                     end;
@@ -1072,7 +1072,7 @@ report 80892 "PersPerceptions Book"
 
                         // TotalesCompras.Reset();
                         // TotalesCompras.SETCURRENTKEY("Tax Jurisdiction Code", "Tax Group Used", "Tax Type", "Use Tax", "Posting Date");
-                        // TotalesCompras.SetFilter("GMLocTax Type Loc", '%1|%2', "GMLocTax Type Loc"::"Ingresos Brutos", "GMLocTax Type Loc"::"IVA Percepcion");
+                        // TotalesCompras.SetFilter("GMATax Type Loc", '%1|%2', "GMATax Type Loc"::"Ingresos Brutos", "GMATax Type Loc"::"IVA Percepcion");
                         // TotalesCompras.SETRANGE(TotalesCompras."Posting Date", Desde, Hasta);
                         // TotalesCompras.SETRANGE(TotalesCompras.Type, TotalesCompras.Type::Purchase);
                         TotalesCompras.RESET;
@@ -1080,14 +1080,14 @@ report 80892 "PersPerceptions Book"
                         /*if ((GlobaltxtVAloresVentas = '')) then begin
                             TotalesCompras.RESET;
                             TotalesCompras.SETCURRENTKEY("Tax Jurisdiction Code", "Tax Group Used", "Tax Type", "Use Tax", "Posting Date");
-                            TotalesCompras.SetFilter("GMLocTax Type Loc", '%1|%2', "GMLocTax Type Loc"::"Ingresos Brutos", "GMLocTax Type Loc"::"IVA Percepcion");
+                            TotalesCompras.SetFilter("GMATax Type Loc", '%1|%2', "GMATax Type Loc"::"Ingresos Brutos", "GMATax Type Loc"::"IVA Percepcion");
                             TotalesCompras.SETRANGE(TotalesCompras."Posting Date", Desde, Hasta);
                             TotalesCompras.SETRANGE(TotalesCompras.Type, TotalesCompras.Type::Purchase);
 
                             if paramProvincia <> '' then begin
                                 varFiltro := '';
                                 recTaxJurisdictions.Reset();
-                                recTaxJurisdictions.SetRange("GMLocProvince Code", paramProvincia);
+                                recTaxJurisdictions.SetRange("GMAProvince Code", paramProvincia);
                                 if recTaxJurisdictions.FindFirst() then begin
                                     repeat
                                         varFiltro += recTaxJurisdictions.Code + '|';
@@ -1133,7 +1133,7 @@ report 80892 "PersPerceptions Book"
                             recTaxJurisdictions.Reset();
                             recTaxJurisdictions.SetRange(recTaxJurisdictions.Code, TotalesCompras."Tax Jurisdiction Code");
                             if recTaxJurisdictions.FindFirst() then begin
-                                if (recTaxJurisdictions."GMLocProvince Code" <> paramProvincia) and (TotalesCompras."VAT Calculation Type" <> TotalesCompras."VAT Calculation Type"::"Full VAT") then
+                                if (recTaxJurisdictions."GMAProvince Code" <> paramProvincia) and (TotalesCompras."VAT Calculation Type" <> TotalesCompras."VAT Calculation Type"::"Full VAT") then
                                     CurrReport.Skip();
                             end;
                             if TotalesCompras."VAT Calculation Type" = TotalesCompras."VAT Calculation Type"::"Full VAT" then begin
@@ -1143,7 +1143,7 @@ report 80892 "PersPerceptions Book"
                                     if recPIL.FindFirst() then
                                         repeat
                                             if recPIL."VAT Calculation Type" = recPIL."VAT Calculation Type"::"Full VAT" then begin
-                                                if (TotalesCompras."VAT Bus. Posting Group" = recPIL."VAT Bus. Posting Group") and (TotalesCompras."VAT Prod. Posting Group" = recpil."VAT Prod. Posting Group") and (recpil.GMLocProvince = paramProvincia) then
+                                                if (TotalesCompras."VAT Bus. Posting Group" = recPIL."VAT Bus. Posting Group") and (TotalesCompras."VAT Prod. Posting Group" = recpil."VAT Prod. Posting Group") and (recpil.GMAProvince = paramProvincia) then
                                                     contemplar := true;
                                             end;
                                         until recPIL.Next = 0;
@@ -1158,7 +1158,7 @@ report 80892 "PersPerceptions Book"
                                     if recPCML.FindFirst() then
                                         repeat
                                             if recPCML."VAT Calculation Type" = recPIL."VAT Calculation Type"::"Full VAT" then begin
-                                                if (TotalesCompras."VAT Bus. Posting Group" = recPCML."VAT Bus. Posting Group") and (TotalesCompras."VAT Prod. Posting Group" = recPCML."VAT Prod. Posting Group") and (recPCML.GMLocProvince = paramProvincia) then
+                                                if (TotalesCompras."VAT Bus. Posting Group" = recPCML."VAT Bus. Posting Group") and (TotalesCompras."VAT Prod. Posting Group" = recPCML."VAT Prod. Posting Group") and (recPCML.GMAProvince = paramProvincia) then
                                                     contemplar := true;
                                             end;
                                         until recPCML.Next = 0;
@@ -1176,7 +1176,7 @@ report 80892 "PersPerceptions Book"
                             Jurid.SETCURRENTKEY(Code);
                             Jurid.SETRANGE(Jurid.Code, TotalesCompras."Tax Jurisdiction Code");
                             if (Jurid.FINDFIRST) then begin
-                                //if (Jurid."GMLocType of Tax" = Jurid."GMLocType of Tax"::IVA) then
+                                //if (Jurid."GMAType of Tax" = Jurid."GMAType of Tax"::IVA) then
                                 //CurrReport.SKIP;
 
                                 Texto := Jurid.Description;
@@ -1185,9 +1185,9 @@ report 80892 "PersPerceptions Book"
                         end
                         else begin
                             if ("VAT Product Posting Group".GET(TotalesCompras."VAT Prod. Posting Group")) then begin
-                                Jurid."GMLocType of Tax" := "VAT Product Posting Group"."GMLocTax Type";
+                                Jurid."GMAType of Tax" := "VAT Product Posting Group"."GMATax Type";
 
-                                //if (Jurid."GMLocType of Tax" = Jurid."GMLocType of Tax"::IVA) then
+                                //if (Jurid."GMAType of Tax" = Jurid."GMAType of Tax"::IVA) then
                                 //CurrReport.SKIP
                             end
                             else begin
@@ -1204,20 +1204,20 @@ report 80892 "PersPerceptions Book"
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Bus. Posting Group", TotalesCompras."VAT Bus. Posting Group");
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Prod. Posting Group", TotalesCompras."VAT Prod. Posting Group");
                             if recVBCodeVPostingSetup.FindFirst() then
-                                varVATBookCode := recVBCodeVPostingSetup."GMLocVAT Book Code";
+                                varVATBookCode := recVBCodeVPostingSetup."GMAVAT Book Code";
                         end;
                         if TotalesCompras."VAT Calculation Type" = TotalesCompras."VAT Calculation Type"::"Normal VAT" then begin
                             recVBCodeVPostingSetup.Reset();
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Bus. Posting Group", TotalesCompras."VAT Bus. Posting Group");
                             recVBCodeVPostingSetup.SetRange(recVBCodeVPostingSetup."VAT Prod. Posting Group", TotalesCompras."VAT Prod. Posting Group");
                             if recVBCodeVPostingSetup.FindFirst() then
-                                varVATBookCode := recVBCodeVPostingSetup."GMLocVAT Book Code";
+                                varVATBookCode := recVBCodeVPostingSetup."GMAVAT Book Code";
                         end;
                         if TotalesCompras."VAT Calculation Type" = TotalesCompras."VAT Calculation Type"::"Sales Tax" then begin
                             recVBCodeTaxJurisdictions.Reset();
                             recVBCodeTaxJurisdictions.SetRange(recVBCodeTaxJurisdictions."Code", TotalesCompras."Tax Jurisdiction Code");
                             if recVBCodeTaxJurisdictions.FindFirst() then
-                                varVATBookCode := recVBCodeTaxJurisdictions."GMLoc VAT Book Code";
+                                varVATBookCode := recVBCodeTaxJurisdictions."GMA VAT Book Code";
                         end;
                         //VATBookCode+
 
@@ -1247,7 +1247,7 @@ report 80892 "PersPerceptions Book"
         {
             area(content)
             {
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     Caption = 'Options';
                     field(Desde; Desde)
@@ -1266,7 +1266,7 @@ report 80892 "PersPerceptions Book"
                     {
                         Caption = 'Province Code';
                         ApplicationArea = all;
-                        TableRelation = GMLocProvince;
+                        TableRelation = GMAProvince;
                     }
                     field(GenerarSufridas; GenerarSufridas)
                     {
@@ -1386,8 +1386,8 @@ report 80892 "PersPerceptions Book"
         mRecVendor: Record Vendor;
         mRecCustomer: Record Customer;
         Importe2: Decimal;
-        "VAT Entry Temp": Record "GMLocVAT Entry Temp";
-        "VAT Entry Temp2": Record "GMLocVAT Entry Temp";
+        "VAT Entry Temp": Record "GMAVAT Entry Temp";
+        "VAT Entry Temp2": Record "GMAVAT Entry Temp";
         "VAT Product Posting Group": Record "VAT Product Posting Group";
         Per_odo_CaptionLbl: Label 'Período:';
         Folio_CaptionLbl: Label 'Folio:';
@@ -1460,10 +1460,10 @@ report 80892 "PersPerceptions Book"
         Cliente.GET(EnVentas."Bill-to/Pay-to No.");
 
         "VAT Entry Temp".RESET;
-        "VAT Entry Temp".SETRANGE("VAT Entry Temp"."GMLocDocument No.", ParVat."Document No.");
-        "VAT Entry Temp".SETRANGE("VAT Entry Temp"."GMLocTax Jurisdiction Code", ParVat."Tax Jurisdiction Code");
+        "VAT Entry Temp".SETRANGE("VAT Entry Temp"."GMADocument No.", ParVat."Document No.");
+        "VAT Entry Temp".SETRANGE("VAT Entry Temp"."GMATax Jurisdiction Code", ParVat."Tax Jurisdiction Code");
         if ("VAT Entry Temp".FINDFIRST) then begin
-            "VAT Entry Temp".GMLocAmount := "VAT Entry Temp".GMLocAmount + ParVat.Amount;
+            "VAT Entry Temp".GMAAmount := "VAT Entry Temp".GMAAmount + ParVat.Amount;
             "VAT Entry Temp".MODIFY;
         end
         else begin
@@ -1471,35 +1471,35 @@ report 80892 "PersPerceptions Book"
             Jurid.SETCURRENTKEY(Code);
             Jurid.SETRANGE(Jurid.Code, EnVentas."Tax Jurisdiction Code");
             if (Jurid.FINDFIRST) then begin
-                //if Jurid."GMLocType of Tax" = Jurid."GMLocType of Tax"::IVA then
+                //if Jurid."GMAType of Tax" = Jurid."GMAType of Tax"::IVA then
                 //    CurrReport.SKIP;
             end;
 
             "VAT Entry Temp".TRANSFERFIELDS(ParVat);
             "VAT Entry Temp".INSERT;
 
-            case EnVentas."GMLocDocument Type Loc." of
-                EnVentas."GMLocDocument Type Loc."::Invoice:
+            case EnVentas."GMADocument Type Loc." of
+                EnVentas."GMADocument Type Loc."::Invoice:
                     begin
-                        if VTSHistFAc.GET("VAT Entry Temp"."GMLocDocument No.") then
+                        if VTSHistFAc.GET("VAT Entry Temp"."GMADocument No.") then
                             VTSHistFAc.CALCFIELDS(Amount);
                         ValorNeto := CPRHistFac.Amount;
                     end;
-                EnVentas."GMLocDocument Type Loc."::"Nota Débito":
+                EnVentas."GMADocument Type Loc."::"GMANota Debito":
                     begin
-                        if VTSHistFAc.GET("VAT Entry Temp"."GMLocDocument No.") then
+                        if VTSHistFAc.GET("VAT Entry Temp"."GMADocument No.") then
                             VTSHistFAc.CALCFIELDS(Amount);
                         ValorNeto := CPRHistFac.Amount;
                     end;
-                EnVentas."GMLocDocument Type Loc."::"Credit Memo":
+                EnVentas."GMADocument Type Loc."::"Credit Memo":
                     begin
-                        if VTSHistAbono.GET("VAT Entry Temp"."GMLocDocument No.") then
+                        if VTSHistAbono.GET("VAT Entry Temp"."GMADocument No.") then
                             VTSHistAbono.CALCFIELDS(Amount);
                         ValorNeto := CPRHistAbono.Amount * (-1);
                     end;
             end;
 
-            "VAT Entry Temp".GMLocBase := ValorNeto;
+            "VAT Entry Temp".GMABase := ValorNeto;
             "VAT Entry Temp".MODIFY;
         end;
 
@@ -1531,7 +1531,7 @@ report 80892 "PersPerceptions Book"
         Jurid.SETCURRENTKEY(Code);
         Jurid.SETRANGE(Jurid.Code, EnVentas."Tax Jurisdiction Code");
         ok := Jurid.FINDFIRST;
-        if Jurid."GMLocType of Tax" = Jurid."GMLocType of Tax"::IVA then begin
+        if Jurid."GMAType of Tax" = Jurid."GMAType of Tax"::IVA then begin
             //Si la persepcion es IVa no la informo
             //if not (Mostrar) then CurrReport.SKIP;
             //CurrReport.Skip();
@@ -1547,7 +1547,7 @@ report 80892 "PersPerceptions Book"
             else begin
                 Reportado := false;
                 for i := 1 to 10 do
-                    if Tax[i] = Jurid."GMLocType of Tax" then Reportado := true;
+                    if Tax[i] = Jurid."GMAType of Tax" then Reportado := true;
                 if not (Reportado) then begin
                     DocuInterno := NDocumento;
                     MovIVA.RESET;
@@ -1561,26 +1561,26 @@ report 80892 "PersPerceptions Book"
                     MostrarLinea := true;
                     Subtotal += Importe;
                     for i := 1 to 10 do
-                        if Tax[i] = 0 then Tax[i] := Jurid."GMLocType of Tax";
+                        if Tax[i] = 0 then Tax[i] := Jurid."GMAType of Tax";
                 end;
 
             end;
 
 
-            case EnVentas."GMLocDocument Type Loc." of
-                EnVentas."GMLocDocument Type Loc."::Invoice:
+            case EnVentas."GMADocument Type Loc." of
+                EnVentas."GMADocument Type Loc."::Invoice:
                     begin
                         if VTSHistFAc.GET(DocuInterno) then
                             VTSHistFAc.CALCFIELDS(Amount);
                         ValorNeto := CPRHistFac.Amount;
                     end;
-                EnVentas."GMLocDocument Type Loc."::"Nota Débito":
+                EnVentas."GMADocument Type Loc."::"GMANota Debito":
                     begin
                         if VTSHistFAc.GET(DocuInterno) then
                             VTSHistFAc.CALCFIELDS(Amount);
                         ValorNeto := CPRHistFac.Amount;
                     end;
-                EnVentas."GMLocDocument Type Loc."::"Credit Memo":
+                EnVentas."GMADocument Type Loc."::"Credit Memo":
                     begin
                         if VTSHistAbono.GET(DocuInterno) then
                             VTSHistAbono.CALCFIELDS(Amount);
@@ -1608,10 +1608,10 @@ report 80892 "PersPerceptions Book"
         ok := Jurid.FINDFIRST;
         if (EnCompras."Tax Jurisdiction Code" = '') then begin
             if ("VAT Product Posting Group".GET(EnCompras."VAT Prod. Posting Group")) then
-                Jurid."GMLocType of Tax" := "VAT Product Posting Group"."GMLocTax Type";
+                Jurid."GMAType of Tax" := "VAT Product Posting Group"."GMATax Type";
             ok := true;
         end;
-        //if Jurid."GMLocType of Tax" = Jurid."GMLocType of Tax"::IVA then begin
+        //if Jurid."GMAType of Tax" = Jurid."GMAType of Tax"::IVA then begin
         //    CurrReport.Skip();
         //end
         begin
@@ -1626,7 +1626,7 @@ report 80892 "PersPerceptions Book"
             else begin
                 Reportado := false;
                 for i := 1 to 10 do
-                    if Tax[i] = (Jurid."GMLocType of Tax") then Reportado := true;
+                    if Tax[i] = (Jurid."GMAType of Tax") then Reportado := true;
                 if not (Reportado) then begin
                     DocuInterno := NDocumento;
                     MovIVA.RESET;
@@ -1645,26 +1645,26 @@ report 80892 "PersPerceptions Book"
                     Subtotal += Importe;
                     for i := 1 to 10 do
                         if Tax[i] = 0 then
-                            Tax[i] := (Jurid."GMLocType of Tax")
+                            Tax[i] := (Jurid."GMAType of Tax")
            ;
                 end;
             end;
 
 
-            case EnCompras."GMLocDocument Type Loc." of
-                EnCompras."GMLocDocument Type Loc."::Invoice:
+            case EnCompras."GMADocument Type Loc." of
+                EnCompras."GMADocument Type Loc."::Invoice:
                     begin
                         if CPRHistFac.GET(DocuInterno) then
                             CPRHistFac.CALCFIELDS(Amount);
                         ValorNeto := CPRHistFac.Amount;
                     end;
-                EnCompras."GMLocDocument Type Loc."::"Nota Débito":
+                EnCompras."GMADocument Type Loc."::"GMANota Debito":
                     begin
                         if CPRHistFac.GET(DocuInterno) then
                             CPRHistFac.CALCFIELDS(Amount);
                         ValorNeto := CPRHistFac.Amount;
                     end;
-                EnCompras."GMLocDocument Type Loc."::"Credit Memo":
+                EnCompras."GMADocument Type Loc."::"Credit Memo":
                     begin
                         if CPRHistAbono.GET(DocuInterno) then
                             CPRHistAbono.CALCFIELDS(Amount);
@@ -1690,7 +1690,7 @@ report 80892 "PersPerceptions Book"
     var
         recSIH: Record "Sales Invoice Header";
         recSCM: Record "Sales Cr.Memo Header";
-        recInvoiceType: Record "GMLocAFIP - Voucher Type";
+        recInvoiceType: Record "GMAAFIP - Voucher Type";
     begin
         //7280  -  CAS-14859-M6Z2D4  -  20200827
         retorno := false;
@@ -1700,9 +1700,9 @@ report 80892 "PersPerceptions Book"
             recSIH.SetRange(recSIH."No.", DocumentNo);
             if recSIH.FindFirst() then begin
                 recInvoiceType.Reset();
-                recInvoiceType.SetRange(recInvoiceType.GMLocID, recSIH."GMLocAFIP Voucher Type");
+                recInvoiceType.SetRange(recInvoiceType.GMAID, recSIH."GMAAFIP Voucher Type");
                 if recInvoiceType.FindFirst() then begin
-                    if recInvoiceType."GMLocExclude Books" then
+                    if recInvoiceType."GMAExclude Books" then
                         retorno := true;
                 end;
             end;
@@ -1712,9 +1712,9 @@ report 80892 "PersPerceptions Book"
             recSCM.SetRange(recSCM."No.", DocumentNo);
             if recSCM.FindFirst() then begin
                 recInvoiceType.Reset();
-                recInvoiceType.SetRange(recInvoiceType.GMLocID, recSCM."GMLocAFIP Voucher Type");
+                recInvoiceType.SetRange(recInvoiceType.GMAID, recSCM."GMAAFIP Voucher Type");
                 if recInvoiceType.FindFirst() then begin
-                    if recInvoiceType."GMLocExclude Books" then
+                    if recInvoiceType."GMAExclude Books" then
                         retorno := true;
                 end;
             end;
@@ -1728,7 +1728,7 @@ report 80892 "PersPerceptions Book"
     var
         recPIH: Record "Purch. Inv. Header";
         recPCM: Record "Purch. Cr. Memo Hdr.";
-        recInvoiceType: Record "GMLocAFIP - Voucher Type";
+        recInvoiceType: Record "GMAAFIP - Voucher Type";
     begin
         //7280  -  CAS-14859-M6Z2D4  -  20200827
         retorno := false;
@@ -1738,9 +1738,9 @@ report 80892 "PersPerceptions Book"
             recPIH.SetRange(recPIH."No.", DocumentNo);
             if recPIH.FindFirst() then begin
                 recInvoiceType.Reset();
-                recInvoiceType.SetRange(recInvoiceType.GMLocID, recPIH."GMLocAFIP Invoice Voucher Type");
+                recInvoiceType.SetRange(recInvoiceType.GMAID, recPIH."GMAAFIP Invoice Voucher Type");
                 if recInvoiceType.FindFirst() then begin
-                    if recInvoiceType."GMLocExclude Books" then begin
+                    if recInvoiceType."GMAExclude Books" then begin
                         retorno := true;
                     end;
                 end;
@@ -1751,9 +1751,9 @@ report 80892 "PersPerceptions Book"
             recPCM.SetRange(recPCM."No.", DocumentNo);
             if recPCM.FindFirst() then begin
                 recInvoiceType.Reset();
-                recInvoiceType.SetRange(recInvoiceType.GMLocID, recPCM."GMLocAFIP Invoice Voucher Type");
+                recInvoiceType.SetRange(recInvoiceType.GMAID, recPCM."GMAAFIP Invoice Voucher Type");
                 if recInvoiceType.FindFirst() then begin
-                    if recInvoiceType."GMLocExclude Books" then begin
+                    if recInvoiceType."GMAExclude Books" then begin
                         retorno := true;
                     end;
                 end;

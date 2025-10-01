@@ -1,4 +1,4 @@
-﻿report 80877 "PER EARCIBA NC"
+﻿report 34006877 "PER EARCIBA NC"
 {
     caption = 'E-ARCIBA NC';
     ProcessingOnly = true;
@@ -39,8 +39,8 @@
 
             begin
 
-                If TaxJurisdiction.Get("Tax Jurisdiction Code") and (TaxJurisdiction."GMLocProvince Code" = '901') then
-                    if "GMlocTax Type Loc" = "GMloctax type loc"::"Ingresos Brutos" then begin
+                If TaxJurisdiction.Get("Tax Jurisdiction Code") and (TaxJurisdiction."GMAProvince Code" = '901') then
+                    if "GMATax Type Loc" = "GMAtax type loc"::"Ingresos Brutos" then begin
                         recTempVatEntry.Reset;
                         recTempVatEntry.SetRange("Document No.", "External Document No.");
                         if not recTempVatEntry.FindFirst then begin
@@ -190,7 +190,7 @@
             "#RellenaExcelBuff"(Texto);
 
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuff);
-            Xmlport.Run(80396, false, false, TempExcelBuff);
+            Xmlport.Run(34006396, false, false, TempExcelBuff);
         end;
     end;
 
@@ -209,7 +209,7 @@
         BssiDimension: Text;
 
         BssiDimensionForRestriction: Text;
-        XMLImporExport: XmlPort "GMLocXML ImportExport";
+        XMLImporExport: XmlPort "GMAXML ImportExport";
         FechaDesde: Date;
         Campo10Bis: Text[1];
         FechaHasta: Date;
@@ -326,7 +326,7 @@
         //13082-
         CLEAR(montocomprobante);
         CustLedgerEntry.Reset();
-        CustLedgerEntry.SetCurrentKey("Document No.", "GMLocDocument Type Loc.", "Customer No.", "Transaction No.");
+        CustLedgerEntry.SetCurrentKey("Document No.", "GMADocument Type Loc.", "Customer No.", "Transaction No.");
 
         CustLedgerEntry.SetRange("Document No.", "VAT Entry"."Document No.");
         CustLedgerEntry.SetRange("Document Type", "VAT Entry"."Document Type");
@@ -350,7 +350,7 @@
 
         Campo5 := '0000000000000000';
         Campo6 := '01';
-        case _recSalesCRMemoHeader."GMlocAFIP Voucher Type" of
+        case _recSalesCRMemoHeader."GMAAFIP Voucher Type" of
             '08':
                 Campo7 := 'B';
             else
@@ -488,16 +488,16 @@
         ItemAplicationEntry: Record "Item Application Entry";
         SalesInvoiceHeader: Record "Sales Invoice Header";
         ItemLedgerEntry: Record "Item Ledger Entry";
-        GMLocInvoicingRelatedDocs: Record "GMLoc Invoicing Related Docs";
+        GMAInvoicingRelatedDocs: Record "GMA Invoicing Related Docs";
     begin
         if (PreAssignedNo <> '') then BEGIN
-            GMLocInvoicingRelatedDocs.Reset();
-            GMLocInvoicingRelatedDocs.SetRange(GMLocInvoicingRelatedDocs."GMLoc Document No.", PreAssignedNo);
-            IF GMLocInvoicingRelatedDocs.FindFirst() then begin
+            GMAInvoicingRelatedDocs.Reset();
+            GMAInvoicingRelatedDocs.SetRange(GMAInvoicingRelatedDocs."GMA Document No.", PreAssignedNo);
+            IF GMAInvoicingRelatedDocs.FindFirst() then begin
                 SalesInvoiceHeader.Reset();
-                SalesInvoiceHeader.SetRange(SalesInvoiceHeader."No.", GMLocInvoicingRelatedDocs."GMLoc Related Document No.");
+                SalesInvoiceHeader.SetRange(SalesInvoiceHeader."No.", GMAInvoicingRelatedDocs."GMA Related Document No.");
                 IF SalesInvoiceHeader.FindFirst() then
-                    ReturnValue := GMLocInvoicingRelatedDocs."GMLoc Related Document No.";
+                    ReturnValue := GMAInvoicingRelatedDocs."GMA Related Document No.";
                 Clear(CAMPO11);
                 CAMPO11 := Format(SalesInvoiceHeader."Posting Date", 10, '<Day,2>/<Month,2>/<Year4>');
             end;

@@ -1,6 +1,6 @@
-﻿report 80896 "PersVAT Withholding Certifica"
+﻿report 34006896 "PersVAT Withholding Certifica"
 {
-    // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    GMLocDescription
+    // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    GMADescription
     // -----------------------------------------------------------------------------------------------------
     // 01  2018.01.01        DDS           GRUPOMAS                   NAVAR1.06  Localization ARG
     DefaultLayout = RDLC;
@@ -9,11 +9,11 @@
 
     dataset
     {
-        dataitem("Withholding Ledger Entry"; "GMLocWithholding Ledger Entry")
+        dataitem("Withholding Ledger Entry"; "GMAWithholding Ledger Entry")
         {
-            DataItemTableView = SORTING("GMLocNo.");
-            //RequestFilterFields = "GMLocNo.";
-            RequestFilterFields = "GMLocWithh. Certificate No.";
+            DataItemTableView = SORTING("GMANo.");
+            //RequestFilterFields = "GMANo.";
+            RequestFilterFields = "GMAWithh. Certificate No.";
 
             column(InfoEmpresa_Name; InfoEmpresa.BssiLegalNameFull)
             {
@@ -48,7 +48,7 @@
             column(InfoEmpresa_Provincia; InfoEmpresa.BssiProvinceCode)
             {
             }
-            column(Proveedor__No_ingresos_brutos_; Proveedor."GMLocGross Income Tax No")
+            column(Proveedor__No_ingresos_brutos_; Proveedor."GMAGross Income Tax No")
             {
             }
             column(Proveedor__VAT_Registration_No__; Proveedor."VAT Registration No.")
@@ -60,13 +60,13 @@
             column(Proveedor_Name; Proveedor.Name)
             {
             }
-            column(Movimiento_Retenciones__Withholding_Certification_No__; "GMLocWithh. Certificate No.")
+            column(Movimiento_Retenciones__Withholding_Certification_No__; "GMAWithh. Certificate No.")
             {
             }
-            column(Movimiento_Retenciones__Fecha_comprobante_; GMLocDocumentDate)
+            column(Movimiento_Retenciones__Fecha_comprobante_; GMADocumentDate)
             {
             }
-            column("Provincia_Descripción"; Provincia.GMLocDescription)
+            column("Provincia_Descripción"; Provincia.GMADescription)
             {
             }
             column(Descripcion; Descripcion)
@@ -75,7 +75,7 @@
             column(FORMAT_vbase_; '$ ' + FORMAT(vbase))
             {
             }
-            column(FORMAT__Movimiento_Retenciones___Importe_retencion__; '$ ' + FORMAT("Withholding Ledger Entry"."GMLocWithholding Amount"))
+            column(FORMAT__Movimiento_Retenciones___Importe_retencion__; '$ ' + FORMAT("Withholding Ledger Entry"."GMAWithholding Amount"))
             {
             }
             column(FORMAT_alicuota______; FORMAT(alicuota) + ' %')
@@ -84,7 +84,7 @@
             column(minimo; minimo)
             {
             }
-            column(Movimiento_Retenciones_Regimen; "GMLocTax System")
+            column(Movimiento_Retenciones_Regimen; "GMATax System")
             {
             }
             column(CERTIFICADO_DE_RETENCION_IVACaption; CERTIFICADO_DE_RETENCION_IVACaptionLbl)
@@ -165,30 +165,30 @@
             column(Cargo_Caption; Cargo_CaptionLbl)
             {
             }
-            column(Withholding_Ledger_Entry_No_; "GMLocNo.")
+            column(Withholding_Ledger_Entry_No_; "GMANo.")
             {
             }
-            column(Withholding_Ledger_Entry_Voucher_Number; "GMLocVoucher Number")
+            column(Withholding_Ledger_Entry_Voucher_Number; "GMAVoucher Number")
             {
             }
             // AW - Begin
-            column(Withholding_Ledger_Entry_GMLocCalculation_Base; "Withholding Ledger Entry"."GMLocCalculation Base")
+            column(Withholding_Ledger_Entry_GMACalculation_Base; "Withholding Ledger Entry"."GMACalculation Base")
             { }
             // AW - End
-            column(GMLocPictureSign; "GMLocTreasury Setup".GMLocSignPicture)
+            column(GMAPictureSign; "GMATreasury Setup".GMASignPicture)
             {
             }
-            dataitem("GMLocPosted Payment Order Vouchers"; "GMLocPosted Payment Ord Vouch")
+            dataitem("GMAPosted Payment Order Vouchers"; "GMAPosted Payment Ord Vouch")
             {
-                DataItemLink = "GMLocPayment Order No." = FIELD("GMLocVoucher Number");
-                DataItemTableView = SORTING("GMLocPayment Order No.", "GMLocVoucher No.") ORDER(Ascending);
-                column(Movimiento_Retenciones__Valor; "Withholding Ledger Entry".GMLocValue)
+                DataItemLink = "GMAPayment Order No." = FIELD("GMAVoucher Number");
+                DataItemTableView = SORTING("GMAPayment Order No.", "GMAVoucher No.") ORDER(Ascending);
+                column(Movimiento_Retenciones__Valor; "Withholding Ledger Entry".GMAValue)
                 {
                 }
                 column(FORMAT_Acumulado_; '$ ' + FORMAT(Acumulado))
                 {
                 }
-                column(Hist_Lin_Comp_OPago__Nro_Comprobante_; "GMLocVoucher No.")
+                column(Hist_Lin_Comp_OPago__Nro_Comprobante_; "GMAVoucher No.")
                 {
                 }
                 column(movfac__External_Document_No__; movfac."External Document No.")
@@ -215,10 +215,10 @@
                 column(EmptyStringCaption_Control1000000049; EmptyStringCaption_Control1000000049Lbl)
                 {
                 }
-                column(Posted_Payment_Order_Vouchers_Payment_Order_No_; "GMLocPayment Order No.")
+                column(Posted_Payment_Order_Vouchers_Payment_Order_No_; "GMAPayment Order No.")
                 {
                 }
-                column(Posted_Payment_Order_Vouchers_Entry_No_; "GMLocEntry No.")
+                column(Posted_Payment_Order_Vouchers_Entry_No_; "GMAEntry No.")
                 {
                 }
 
@@ -226,38 +226,38 @@
                 var
                     Facturas: Record "Purch. Inv. Header";
                     LineasFactura: Record "Purch. Inv. Line";
-                    Comportamiento: Record "GMLocWithholding Kind Line";
-                    DetRetencion: Record "GMLocWithholding Datail";
-                    retencion: Record "GMLocWithholding Calculation";
+                    Comportamiento: Record "GMAWithholding Kind Line";
+                    DetRetencion: Record "GMAWithholding Datail";
+                    retencion: Record "GMAWithholding Calculation";
                     ControlProv: Boolean;
-                    Escala: Record "GMLocWithholding Scale";
+                    Escala: Record "GMAWithholding Scale";
                     caja: Code[20];
-                    Valores: Record GMLocValues;
-                    retencionesempresa: Record GMLocTaxes;
+                    Valores: Record GMAValues;
+                    retencionesempresa: Record GMATaxes;
                     CodCondicion: Code[20];
-                    CondImpuesto: Record "GMLocVendor Condition";
+                    CondImpuesto: Record "GMAVendor Condition";
                     PorcMonto: Decimal;
-                    MovRetencion: Record "GMLocWithholding Ledger Entry";
-                    act_retencion: Record "GMLocWithholding Calculation";
-                    exencion: Record "GMLocWithholding Exention";
-                    CondImpositiva: Record "GMLocTax Conditions";
+                    MovRetencion: Record "GMAWithholding Ledger Entry";
+                    act_retencion: Record "GMAWithholding Calculation";
+                    exencion: Record "GMAWithholding Exention";
+                    CondImpositiva: Record "GMATax Conditions";
                     CodCondSICORE: Code[3];
                     inicio_mes: Date;
                     fin_mes: Date;
                     ProximoMovimiento: Integer;
                     ControlValor: Boolean;
-                    LinValores: Record "GMLocPayment Order Value Line";
+                    LinValores: Record "GMAPayment Order Value Line";
                 begin
                     Acumulado := 0;
                     ///Doy de alta los tipos de retenciones con el monto de pago correspondiente en la tabla Calculo de Retencion
                     movfac.RESET;
-                    movfac.SETRANGE(movfac."Document No.", "GMLocPosted Payment Order Vouchers"."GMLocVoucher No.");
+                    movfac.SETRANGE(movfac."Document No.", "GMAPosted Payment Order Vouchers"."GMAVoucher No.");
                     if movfac.FindSet() then begin
                         movfac.CALCFIELDS("Original Amt. (LCY)");
                         Acumulado := -movfac."Original Amt. (LCY)";
 
                         DetRetencion.RESET;
-                        DetRetencion.SETRANGE(DetRetencion."GMLocWithholding No.", "Withholding Ledger Entry"."GMLocWithholding No.");
+                        DetRetencion.SETRANGE(DetRetencion."GMAWithholding No.", "Withholding Ledger Entry"."GMAWithholding No.");
                         if DetRetencion.FindSet() then;
 
                     end;
@@ -265,7 +265,7 @@
                     Acumulado := 0;
                     LineasFactura.RESET;
                     LineasFactura.SETCURRENTKEY("Document No.", "Line No.");
-                    LineasFactura.SETRANGE("Document No.", "GMLocPosted Payment Order Vouchers"."GMLocVoucher No.");
+                    LineasFactura.SETRANGE("Document No.", "GMAPosted Payment Order Vouchers"."GMAVoucher No.");
                     if LineasFactura.FINDFIRST then begin
                         repeat
                             Acumulado := Acumulado + LineasFactura."VAT Base Amount";
@@ -280,26 +280,26 @@
                 BssiMEMSystemSetup: record BssiMEMSystemSetup;
             begin
                 DetRetencion.RESET;
-                DetRetencion.SETRANGE(DetRetencion."GMLocWithholding No.", "Withholding Ledger Entry"."GMLocWithholding No.");
+                DetRetencion.SETRANGE(DetRetencion."GMAWithholding No.", "Withholding Ledger Entry"."GMAWithholding No.");
                 if DetRetencion.FindSet() then
-                    Descripcion := DetRetencion.GMLocDescription;
+                    Descripcion := DetRetencion.GMADescription;
 
                 Escala.RESET;
-                Escala.SETRANGE(Escala."GMLocScale Code", "Withholding Ledger Entry"."GMLocScale Code");
-                Escala.SETRANGE(Escala."GMLocWithholding Condition", "Withholding Ledger Entry"."GMLocCondition Code");
-                Escala.SETRANGE(Escala."GMLocTax Code", "Withholding Ledger Entry"."GMLocTax Code");
+                Escala.SETRANGE(Escala."GMAScale Code", "Withholding Ledger Entry"."GMAScale Code");
+                Escala.SETRANGE(Escala."GMAWithholding Condition", "Withholding Ledger Entry"."GMACondition Code");
+                Escala.SETRANGE(Escala."GMATax Code", "Withholding Ledger Entry"."GMATax Code");
                 if Escala.FindSet() then
                     repeat
-                        if (Escala.GMLocFrom <= "Withholding Ledger Entry"."GMLocCalculation Base") then begin
-                            alicuota := Escala."GMLocExcedent %";
-                            minimo := Escala.GMLocFrom;
+                        if (Escala.GMAFrom <= "Withholding Ledger Entry"."GMACalculation Base") then begin
+                            alicuota := Escala."GMAExcedent %";
+                            minimo := Escala.GMAFrom;
                         end;
                     until Escala.NEXT = 0;
                 //11807+
                 "Withholding Kind Line".RESET;
-                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMLocWithholding Code", "Withholding Ledger Entry"."GMLocWithholding Code");
-                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMLocTax Code", "Withholding Ledger Entry"."GMLocTax Code");
-                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMLocIs vendor withholding", true);
+                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMAWithholding Code", "Withholding Ledger Entry"."GMAWithholding Code");
+                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMATax Code", "Withholding Ledger Entry"."GMATax Code");
+                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMAIs vendor withholding", true);
                 if ("Withholding Kind Line".FINDFIRST) then begin
                     if ("Withholding Ledger Entry"."Vendor withholding" <> '') then begin
                         Proveedor.RESET;
@@ -310,14 +310,14 @@
                     else begin
                         Proveedor.RESET;
                         Proveedor.SETCURRENTKEY("No.");
-                        Proveedor.SETRANGE("No.", "GMLocVendor Code");
+                        Proveedor.SETRANGE("No.", "GMAVendor Code");
                         if Proveedor.FINDFIRST then;
                     end;
                 end
                 else begin
                     Proveedor.RESET;
                     Proveedor.SETCURRENTKEY("No.");
-                    Proveedor.SETRANGE("No.", "GMLocVendor Code");
+                    Proveedor.SETRANGE("No.", "GMAVendor Code");
                     if Proveedor.FINDFIRST then;
                 end;
                 //11807-
@@ -332,14 +332,14 @@
 
                 InfoEmpresa.Reset();
                 InfoEmpresa.SetFilter("Dimension Code", BssiMEMSystemSetup.Bssi_cGetEntityCode());
-                InfoEmpresa.SetFilter(Code, "Withholding Ledger Entry"."GMLocShortcut Dimension 1");
+                InfoEmpresa.SetFilter(Code, "Withholding Ledger Entry"."GMAShortcut Dimension 1");
                 IF (InfoEmpresa.FindFirst()) THEN;
                 InfoEmpresa.CALCFIELDS(InfoEmpresa.BssiPicture);
                 Provincia.RESET;
-                Provincia.SETCURRENTKEY(Provincia."GMLocProvince Code");
-                Provincia.SETRANGE("GMLocProvince Code", InfoEmpresa.BssiProvinceCode);
+                Provincia.SETCURRENTKEY(Provincia."GMAProvince Code");
+                Provincia.SETRANGE("GMAProvince Code", InfoEmpresa.BssiProvinceCode);
                 if Provincia.FINDFIRST then
-                    gProvincia := Provincia.GMLocDescription;
+                    gProvincia := Provincia.GMADescription;
                 if (InfoEmpresa.BssiBillingAddr1 <> '') then direccionEmpresa := InfoEmpresa.BssiBillingAddr1;
                 if (InfoEmpresa.BssiBillingCity <> '') then direccionEmpresa := direccionEmpresa + ',  ' + InfoEmpresa.BssiBillingCity;
                 if (InfoEmpresa.BssiBillingZipCode <> '') then direccionEmpresa := direccionEmpresa + ', C.P. ' + InfoEmpresa.BssiBillingZipCode;
@@ -353,8 +353,8 @@
             trigger OnPreDataItem();
             begin
                 ok := InfoEmpresa.FindSet();
-                "GMLocTreasury Setup".GET();
-                "GMLocTreasury Setup".CALCFIELDS(GMLocSignPicture);
+                "GMATreasury Setup".GET();
+                "GMATreasury Setup".CALCFIELDS(GMASignPicture);
             end;
         }
     }
@@ -380,17 +380,17 @@
         Proveedor: Record Vendor;
         ok: Boolean;
         Descripcion: Text[100];
-        DetRetencion: Record "GMLocWithholding Datail";
-        Escala: Record "GMLocWithholding Scale";
+        DetRetencion: Record "GMAWithholding Datail";
+        Escala: Record "GMAWithholding Scale";
         alicuota: Decimal;
         minimo: Decimal;
-        Provincia: Record GMLocProvince;
-        Retenciones: Codeunit GMLocRetenciones;
-        retencion: Record "GMLocWithholding Calculation";
+        Provincia: Record GMAProvince;
+        Retenciones: Codeunit GMARetenciones;
+        retencion: Record "GMAWithholding Calculation";
         Acumulado: Decimal;
         movfac: Record "Vendor Ledger Entry";
         vbase: Decimal;
-        "Withholding Kind Line": Record "GMLocWithholding Kind Line";
+        "Withholding Kind Line": Record "GMAWithholding Kind Line";
         CERTIFICADO_DE_RETENCION_IVACaptionLbl: Label 'CERTIFICADO DE RETENCION IVA';
         AGENTE_DE_RETENCIONCaptionLbl: Label 'AGENTE DE RETENCION';
         "DirecciónCaptionLbl": Label 'Dirección';
@@ -428,6 +428,6 @@
         direccionProveedor: Text[250];
         direccionEmpresa: Text[250];
         maestroPais: Record "Country/Region";
-        "GMLocTreasury Setup": Record "GMLocTreasury Setup";
+        "GMATreasury Setup": Record "GMATreasury Setup";
 }
 

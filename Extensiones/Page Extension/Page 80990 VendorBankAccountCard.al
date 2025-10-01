@@ -1,4 +1,4 @@
-pageextension 80990 VendorBankAccountCard extends "Vendor Bank Account Card"
+pageextension 34006990 VendorBankAccountCard extends "Vendor Bank Account Card"
 {
     layout
     {

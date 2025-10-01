@@ -1,4 +1,4 @@
-page 80997 "Vat Entry Part"
+page 34006997 "Vat Entry Part"
 {
     ApplicationArea = All;
     Caption = 'Vat Entry Part';
@@ -44,7 +44,7 @@ page 80997 "Vat Entry Part"
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies the date when the related document was created.';
                 }
-                field("AFIP Voucher Type"; Rec."GMLocAFIP Voucher Type")
+                field("AFIP Voucher Type"; Rec."GMAAFIP Voucher Type")
                 {
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies the type of the AFIP voucher that the VAT entry belongs to.';

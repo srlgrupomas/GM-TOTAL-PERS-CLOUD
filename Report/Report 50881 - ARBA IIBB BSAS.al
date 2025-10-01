@@ -1,4 +1,4 @@
-report 80881 "PERARBA IIBB BSAS"
+report 34006881 "PERARBA IIBB BSAS"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -9,18 +9,18 @@ report 80881 "PERARBA IIBB BSAS"
     UsageCategory = "Reportsandanalysis";
     dataset
     {
-        dataitem("GMLocWithholding Ledger Entry"; "GMLocWithholding Ledger Entry")
+        dataitem("GMAWithholding Ledger Entry"; "GMAWithholding Ledger Entry")
         {
-            DataItemTableView = SORTING("GMLocNo.") ORDER(Ascending) WHERE("GMLocWithholding Type" = FILTER(Realizada));
+            DataItemTableView = SORTING("GMANo.") ORDER(Ascending) WHERE("GMAWithholding Type" = FILTER(Realizada));
 
             trigger OnAfterGetRecord();
             var
-                WithholdingLedgerEntryTemp: record "GMLocWithholding Ledger Entry";
+                WithholdingLedgerEntryTemp: record "GMAWithholding Ledger Entry";
             begin
-                IF ("GMLocWithholding Ledger Entry"."GMLocWithholding Amount" >= 0) THEN BEGIN
+                IF ("GMAWithholding Ledger Entry"."GMAWithholding Amount" >= 0) THEN BEGIN
                     WithholdingLedgerEntryTemp.RESET;
-                    WithholdingLedgerEntryTemp.SETFILTER("GMLocWithholding Serie Code", '%1', "GMLocWithholding Ledger Entry"."GMLocWithholding Serie Code");
-                    WithholdingLedgerEntryTemp.SETFILTER("GMLocWithholding Amount", '%1', "GMLocWithholding Ledger Entry"."GMLocWithholding Amount" * -1);
+                    WithholdingLedgerEntryTemp.SETFILTER("GMAWithholding Serie Code", '%1', "GMAWithholding Ledger Entry"."GMAWithholding Serie Code");
+                    WithholdingLedgerEntryTemp.SETFILTER("GMAWithholding Amount", '%1', "GMAWithholding Ledger Entry"."GMAWithholding Amount" * -1);
                     IF (NOT WithholdingLedgerEntryTemp.FindFirst()) THEN
                         IF NOT (EXIST) then
                             "#WithholdingLedgerEntry";
@@ -32,20 +32,20 @@ report 80881 "PERARBA IIBB BSAS"
             trigger OnPreDataItem();
             begin
                 IF (fechaposting) Then
-                    "GMLocWithholding Ledger Entry".SetRange("GMLocWithholding Ledger Entry"."GMLocWithholding Date", FechaDesde, FechaHasta)
+                    "GMAWithholding Ledger Entry".SetRange("GMAWithholding Ledger Entry"."GMAWithholding Date", FechaDesde, FechaHasta)
                 else
-                    "GMLocWithholding Ledger Entry".SetRange("GMLocWithholding Ledger Entry".GMLocDocumentDate, FechaDesde, FechaHasta);
+                    "GMAWithholding Ledger Entry".SetRange("GMAWithholding Ledger Entry".GMADocumentDate, FechaDesde, FechaHasta);
 
-                "GMLocWithholding Ledger Entry".SETFILTER("GMLocWithholding Ledger Entry"."GMLocTax Code", 'IB-BAS');
-                "GMLocWithholding Ledger Entry".SETFILTER("GMLocWithholding Ledger Entry"."GMLocProvince Code", '902');
+                "GMAWithholding Ledger Entry".SETFILTER("GMAWithholding Ledger Entry"."GMATax Code", 'IB-BAS');
+                "GMAWithholding Ledger Entry".SETFILTER("GMAWithholding Ledger Entry"."GMAProvince Code", '902');
 
                 if (BssiDimension <> '') then
                     if "BssiMEMSystemSetup".Bssi_iGetGlobalDimensionNoToUse() = 1 then
-                        "GMLocWithholding Ledger Entry".SetFilter("GMLocShortcut Dimension 1", BssiDimension)
+                        "GMAWithholding Ledger Entry".SetFilter("GMAShortcut Dimension 1", BssiDimension)
                     else
-                        "GMLocWithholding Ledger Entry".SetFilter("GMLocShortcut Dimension 2", BssiDimension);
+                        "GMAWithholding Ledger Entry".SetFilter("GMAShortcut Dimension 2", BssiDimension);
                 // JCG Segun la fecha elegida cambia el campo
-                "GMLocWithholding Ledger Entry".CalcFields(GMLocDocumentDate);
+                "GMAWithholding Ledger Entry".CalcFields(GMADocumentDate);
             end;
         }
     }
@@ -57,7 +57,7 @@ report 80881 "PERARBA IIBB BSAS"
         {
             area(content)
             {
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     Caption = 'Options';
                     field(FechaDesde; FechaDesde)
@@ -132,8 +132,8 @@ report 80881 "PERARBA IIBB BSAS"
         Texto: Text[1024];
         NumeroLineas: Integer;
         Text005: Label 'Error de CUIT Proveedor %1';
-        GMLocWithhCertificateNo: Text[30];
-        GMLocWithhCertificateNoLen: Integer;
+        GMAWithhCertificateNo: Text[30];
+        GMAWithhCertificateNoLen: Integer;
         BssiMEMSystemSetup: Record "BssiMEMSystemSetup";
         BssiMEMSecurityHelper: codeunit BssiMEMSecurityHelper;
         BssiMEMCoreGlobalCU: codeunit BssiMEMCoreGlobalCU;
@@ -151,7 +151,7 @@ report 80881 "PERARBA IIBB BSAS"
     var
         TempBlob: Codeunit "Temp Blob";
         DataCompression: Codeunit "Data Compression";
-        ledgerEntryLocal: record "GMLocWithholding Ledger Entry";
+        ledgerEntryLocal: record "GMAWithholding Ledger Entry";
         DimensionValue: Record "Dimension value";
         InS: InStream;
         OutS: OutStream;
@@ -163,8 +163,8 @@ report 80881 "PERARBA IIBB BSAS"
         FileName: Text[1024];
         LONGTEXT: BigText;
         dia: Integer;
-        "GMLocPosted Payment Order Valu": Record "GMLocPosted Payment Order Valu";
-        "Hist Cab OPago": Record "GMLocPosted Payment Order";
+        "GMAPosted Payment Order Valu": Record "GMAPosted Payment Order Valu";
+        "Hist Cab OPago": Record "GMAPosted Payment Order";
     begin
         EXIST := true;
         // Obtener información de la empresa
@@ -191,15 +191,15 @@ report 80881 "PERARBA IIBB BSAS"
             repeat
 
                 ledgerEntryLocal.Reset();
-                ledgerEntryLocal.SETRANGE(ledgerEntryLocal."GMLocVoucher Date", FechaDesde, FechaHasta);
-                ledgerEntryLocal.SETFILTER(ledgerEntryLocal."GMLocTax Code", 'IB-BAS');
-                ledgerEntryLocal.SETFILTER(ledgerEntryLocal."GMLocProvince Code", '902');
+                ledgerEntryLocal.SETRANGE(ledgerEntryLocal."GMAVoucher Date", FechaDesde, FechaHasta);
+                ledgerEntryLocal.SETFILTER(ledgerEntryLocal."GMATax Code", 'IB-BAS');
+                ledgerEntryLocal.SETFILTER(ledgerEntryLocal."GMAProvince Code", '902');
 
                 if (BssiDimension <> '') then
                     if "BssiMEMSystemSetup".Bssi_iGetGlobalDimensionNoToUse() = 1 then
-                        ledgerEntryLocal.SetFilter("GMLocShortcut Dimension 1", BssiDimension)
+                        ledgerEntryLocal.SetFilter("GMAShortcut Dimension 1", BssiDimension)
                     else
-                        ledgerEntryLocal.SetFilter("GMLocShortcut Dimension 2", BssiDimension);
+                        ledgerEntryLocal.SetFilter("GMAShortcut Dimension 2", BssiDimension);
 
                 if ledgerEntryLocal.FindFirst() then begin
 
@@ -227,7 +227,7 @@ report 80881 "PERARBA IIBB BSAS"
 
                         // Cuit contribuyente retenido.
                         Proveedor.RESET;
-                        Proveedor.SETRANGE(Proveedor."No.", ledgerEntryLocal."GMLocVendor Code");
+                        Proveedor.SETRANGE(Proveedor."No.", ledgerEntryLocal."GMAVendor Code");
                         if Proveedor.FIND('-') then begin
                             Campo1 := Proveedor."VAT Registration No.";
 
@@ -240,34 +240,34 @@ report 80881 "PERARBA IIBB BSAS"
                                 Campo1 := INSSTR((INSSTR(Campo1, '-', 3)), '-', 12);
                         end;
 
-                        "GMLocWithholding Ledger Entry".CalcFields(GMLocDocumentDate);
+                        "GMAWithholding Ledger Entry".CalcFields(GMADocumentDate);
 
                         // Fecha de retención (DD/MM/YYYY).
                         // JCG Se solicita mostrar solo la posting date
                         // if fechaposting = true then
-                        //     Campo2 := FORMAT("GMLocWithholding Ledger Entry"."GMLocWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>')
+                        //     Campo2 := FORMAT("GMAWithholding Ledger Entry"."GMAWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>')
                         // else
-                        Campo2 := FORMAT("GMLocWithholding Ledger Entry".GMLocDocumentDate, 10, '<Day,2>/<Month,2>/<Year4>');
+                        Campo2 := FORMAT("GMAWithholding Ledger Entry".GMADocumentDate, 10, '<Day,2>/<Month,2>/<Year4>');
 
                         // Número de sucursal.
                         //Número de emisión
-                        GMLocWithhCertificateNo := DELCHR(ledgerEntryLocal."GMLocWithh. Certificate No.", '=', '-+QWERTYUIOPASDFGHJKLÑZXCVBNM');
-                        GMLocWithhCertificateNo := DELCHR(GMLocWithhCertificateNo, '=', '-+QWERTYUIOPASDFGHJKLÑZXCVBNM');
-                        GMLocWithhCertificateNo := DELCHR(GMLocWithhCertificateNo, '=', '-+qwertyuiopasdfghjklñzxcvbnm');
-                        GMLocWithhCertificateNoLen := STRLEN(GMLocWithhCertificateNo);
+                        GMAWithhCertificateNo := DELCHR(ledgerEntryLocal."GMAWithh. Certificate No.", '=', '-+QWERTYUIOPASDFGHJKLÑZXCVBNM');
+                        GMAWithhCertificateNo := DELCHR(GMAWithhCertificateNo, '=', '-+QWERTYUIOPASDFGHJKLÑZXCVBNM');
+                        GMAWithhCertificateNo := DELCHR(GMAWithhCertificateNo, '=', '-+qwertyuiopasdfghjklñzxcvbnm');
+                        GMAWithhCertificateNoLen := STRLEN(GMAWithhCertificateNo);
 
-                        if GMLocWithhCertificateNoLen <= 8 then
-                            Campo4 := GMLocWithhCertificateNo
+                        if GMAWithhCertificateNoLen <= 8 then
+                            Campo4 := GMAWithhCertificateNo
                         else
-                            Campo4 := CopyStr(GMLocWithhCertificateNo, GMLocWithhCertificateNoLen - 7, 8);
+                            Campo4 := CopyStr(GMAWithhCertificateNo, GMAWithhCertificateNoLen - 7, 8);
 
                         Campo4 := Campo4.PadLeft(8, ' ');
 
                         //Importe de la retencion
-                        WHILE STRLEN(Campo5) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND(ledgerEntryLocal."GMLocWithholding Amount", 0.01), 0,
+                        WHILE STRLEN(Campo5) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND(ledgerEntryLocal."GMAWithholding Amount", 0.01), 0,
                         '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.')) < 11 DO Campo5 += '0';
                         BEGIN
-                            Campo5 += CONVERTSTR(DELCHR(FORMAT(ROUND(ledgerEntryLocal."GMLocWithholding Amount", 0.01), 0,
+                            Campo5 += CONVERTSTR(DELCHR(FORMAT(ROUND(ledgerEntryLocal."GMAWithholding Amount", 0.01), 0,
                             '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.');
                         END;
 

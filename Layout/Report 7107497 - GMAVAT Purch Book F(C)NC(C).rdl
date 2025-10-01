@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="BssiMEMCode">
+          <DataField>BssiMEMCode</DataField>
+        </Field>
+        <Field Name="BssiMEMName">
+          <DataField>BssiMEMName</DataField>
+        </Field>
+        <Field Name="BssiEntityLegalName">
+          <DataField>BssiEntityLegalName</DataField>
+        </Field>
+        <Field Name="BssiEntityTaxRegistrationNumber">
+          <DataField>BssiEntityTaxRegistrationNumber</DataField>
+        </Field>
+        <Field Name="BssiEntityPicture">
+          <DataField>BssiEntityPicture</DataField>
+        </Field>
+        <Field Name="BssiEntityEmail">
+          <DataField>BssiEntityEmail</DataField>
+        </Field>
+        <Field Name="BssiEntityHomePage">
+          <DataField>BssiEntityHomePage</DataField>
+        </Field>
+        <Field Name="BssiEntityBankAccount">
+          <DataField>BssiEntityBankAccount</DataField>
+        </Field>
+        <Field Name="BssiEntityIntercompanyCustomerNo">
+          <DataField>BssiEntityIntercompanyCustomerNo</DataField>
+        </Field>
+        <Field Name="BssiEntityIntercompanyVendorNo">
+          <DataField>BssiEntityIntercompanyVendorNo</DataField>
+        </Field>
+        <Field Name="BssiEntityIntercompanyLocationNo">
+          <DataField>BssiEntityIntercompanyLocationNo</DataField>
+        </Field>
+        <Field Name="BssiEntityApprovarUser">
+          <DataField>BssiEntityApprovarUser</DataField>
+        </Field>
+        <Field Name="BssiEntityBillingAddr1">
+          <DataField>BssiEntityBillingAddr1</DataField>
+        </Field>
+        <Field Name="BssiEntityBillingAddress2">
+          <DataField>BssiEntityBillingAddress2</DataField>
+        </Field>
+        <Field Name="BssiEntityBillingCity">
+          <DataField>BssiEntityBillingCity</DataField>
+        </Field>
+        <Field Name="BssiEntityBillingState">
+          <DataField>BssiEntityBillingState</DataField>
+        </Field>
+        <Field Name="BssiEntityBillingZipCode">
+          <DataField>BssiEntityBillingZipCode</DataField>
+        </Field>
+        <Field Name="BssiEntityBillingCountry">
+          <DataField>BssiEntityBillingCountry</DataField>
+        </Field>
+        <Field Name="BssiEntityBillingContactName">
+          <DataField>BssiEntityBillingContactName</DataField>
+        </Field>
+        <Field Name="BssiEntityBillingPhoneNumber">
+          <DataField>BssiEntityBillingPhoneNumber</DataField>
+        </Field>
+        <Field Name="BssiEntityShippingAddr1">
+          <DataField>BssiEntityShippingAddr1</DataField>
+        </Field>
+        <Field Name="BssiEntityShippingAddress2">
+          <DataField>BssiEntityShippingAddress2</DataField>
+        </Field>
+        <Field Name="BssiEntityShippingCity">
+          <DataField>BssiEntityShippingCity</DataField>
+        </Field>
+        <Field Name="BssiEntityShippingState">
+          <DataField>BssiEntityShippingState</DataField>
+        </Field>
+        <Field Name="BssiEntityShippingZipCode">
+          <DataField>BssiEntityShippingZipCode</DataField>
+        </Field>
+        <Field Name="BssiEntityShippingCountry">
+          <DataField>BssiEntityShippingCountry</DataField>
+        </Field>
+        <Field Name="BssiEntityShippingContactName">
+          <DataField>BssiEntityShippingContactName</DataField>
+        </Field>
+        <Field Name="BssiEntityShippingPhoneNumber">
+          <DataField>BssiEntityShippingPhoneNumber</DataField>
+        </Field>
+        <Field Name="BssiMEMPrint">
+          <DataField>BssiMEMPrint</DataField>
+        </Field>
+        <Field Name="ReportForNavId_6592">
+          <DataField>ReportForNavId_6592</DataField>
+        </Field>
+        <Field Name="Folio">
+          <DataField>Folio</DataField>
+        </Field>
+        <Field Name="Empresa_City">
+          <DataField>Empresa_City</DataField>
+        </Field>
+        <Field Name="Empresa__VAT_Registration_No__">
+          <DataField>Empresa__VAT_Registration_No__</DataField>
+        </Field>
+        <Field Name="Empresa_Name">
+          <DataField>Empresa_Name</DataField>
+        </Field>
+        <Field Name="Empresa_Address">
+          <DataField>Empresa_Address</DataField>
+        </Field>
+        <Field Name="Empresa__Post_Code_">
+          <DataField>Empresa__Post_Code_</DataField>
+        </Field>
+        <Field Name="Desde">
+          <DataField>Desde</DataField>
+        </Field>
+        <Field Name="Hasta">
+          <DataField>Hasta</DataField>
+        </Field>
+        <Field Name="Folio_Caption">
+          <DataField>Folio_Caption</DataField>
+        </Field>
+        <Field Name="LIBRO_IVA_COMPRASCaption">
+          <DataField>LIBRO_IVA_COMPRASCaption</DataField>
+        </Field>
+        <Field Name="CUIT_Caption">
+          <DataField>CUIT_Caption</DataField>
+        </Field>
+        <Field Name="Período_Caption">
+          <DataField>Período_Caption</DataField>
+        </Field>
+        <Field Name="FromCaption">
+          <DataField>FromCaption</DataField>
+        </Field>
+        <Field Name="ToCaption">
+          <DataField>ToCaption</DataField>
+        </Field>
+        <Field Name="Cabecera_Number">
+          <DataField>Cabecera_Number</DataField>
+        </Field>
+        <Field Name="ReportForNavId_5680">
+          <DataField>ReportForNavId_5680</DataField>
+        </Field>
+        <Field Name="recTempDatos__Fecha_Registros_">
+          <DataField>recTempDatos__Fecha_Registros_</DataField>
+        </Field>
+        <Field Name="recTempDatos__Num_Documento_Externo_">
+          <DataField>recTempDatos__Num_Documento_Externo_</DataField>
+        </Field>
+        <Field Name="recTempDatos__Razon_Social_">
+          <DataField>recTempDatos__Razon_Social_</DataField>
+        </Field>
+        <Field Name="recTempDatos_CUIT">
+          <DataField>recTempDatos_CUIT</DataField>
+        </Field>
+        <Field Name="recTempDatos__Total_Factura_">
+          <DataField>recTempDatos__Total_Factura_</DataField>
+        </Field>
+        <Field Name="recTempDatos__Total_Factura_Format">
+          <DataField>recTempDatos__Total_Factura_Format</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_10_5_">
+          <DataField>recTempDatos__IVA_10_5_</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_10_5_Format">
+          <DataField>recTempDatos__IVA_10_5_Format</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_2_5_">
+          <DataField>recTempDatos__IVA_2_5_</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_2_5_Format">
+          <DataField>recTempDatos__IVA_2_5_Format</DataField>
+        </Field>
+        <Field Name="recTempDatos_IIBB">
+          <DataField>recTempDatos_IIBB</DataField>
+        </Field>
+        <Field Name="recTempDatos_IIBBFormat">
+          <DataField>recTempDatos_IIBBFormat</DataField>
+        </Field>
+        <Field Name="recTempDatos__Impuestos_Internos_">
+          <DataField>recTempDatos__Impuestos_Internos_</DataField>
+        </Field>
+        <Field Name="recTempDatos__Impuestos_Internos_Format">
+          <DataField>recTempDatos__Impuestos_Internos_Format</DataField>
+        </Field>
+        <Field Name="recTempDatos_Gravado">
+          <DataField>recTempDatos_Gravado</DataField>
+        </Field>
+        <Field Name="recTempDatos_GravadoFormat">
+          <DataField>recTempDatos_GravadoFormat</DataField>
+        </Field>
+        <Field Name="recTempDatos__No_Gravado___Exento_">
+          <DataField>recTempDatos__No_Gravado___Exento_</DataField>
+        </Field>
+        <Field Name="recTempDatos__No_Gravado___Exento_Format">
+          <DataField>recTempDatos__No_Gravado___Exento_Format</DataField>
+        </Field>
+        <Field Name="recTempDatos__Fecha_Documento_">
+          <DataField>recTempDatos__Fecha_Documento_</DataField>
+        </Field>
+        <Field Name="recTempDatos__Numero_Interno_">
+          <DataField>recTempDatos__Numero_Interno_</DataField>
+        </Field>
+        <Field Name="recTempDatos_GAN">
+          <DataField>recTempDatos_GAN</DataField>
+        </Field>
+        <Field Name="recTempDatos_GANFormat">
+          <DataField>recTempDatos_GANFormat</DataField>
+        </Field>
+        <Field Name="recTempDatos__Tipo_Fiscal_">
+          <DataField>recTempDatos__Tipo_Fiscal_</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_27_">
+          <DataField>recTempDatos__IVA_27_</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_27_Format">
+          <DataField>recTempDatos__IVA_27_Format</DataField>
+        </Field>
+        <Field Name="recTempDatos__Tipo_Documento_">
+          <DataField>recTempDatos__Tipo_Documento_</DataField>
+        </Field>
+        <Field Name="FacturaVisibilidad">
+          <DataField>FacturaVisibilidad</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_Percep_">
+          <DataField>recTempDatos__IVA_Percep_</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_Percep_Format">
+          <DataField>recTempDatos__IVA_Percep_Format</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_21_">
+          <DataField>recTempDatos__IVA_21_</DataField>
+        </Field>
+        <Field Name="recTempDatos__IVA_21_Format">
+          <DataField>recTempDatos__IVA_21_Format</DataField>
+        </Field>
+        <Field Name="Fecha_Reg_Caption">
+          <DataField>Fecha_Reg_Caption</DataField>
+        </Field>
+        <Field Name="N___InternoCaption">
+          <DataField>N___InternoCaption</DataField>
+        </Field>
+        <Field Name="Impuesto_IVACaption">
+          <DataField>Impuesto_IVACaption</DataField>
+        </Field>
+        <Field Name="Base_GravadoCaption">
+          <DataField>Base_GravadoCaption</DataField>
+        </Field>
+        <Field Name="Doc_TypeCaption">
+          <DataField>Doc_TypeCaption</DataField>
+        </Field>
+        <Field Name="CUITCaption">
+          <DataField>CUITCaption</DataField>
+        </Field>
+        <Field Name="Razón_SocialCaption">
+          <DataField>Razón_SocialCaption</DataField>
+        </Field>
+        <Field Name="Doc__Nr_Caption">
+          <DataField>Doc__Nr_Caption</DataField>
+        </Field>
+        <Field Name="Fecha_Doc_Caption">
+          <DataField>Fecha_Doc_Caption</DataField>
+        </Field>
+        <Field Name="Tipo_FiscalCaption">
+          <DataField>Tipo_FiscalCaption</DataField>
+        </Field>
+        <Field Name="Tipo_DocumentoCaption">
+          <DataField>Tipo_DocumentoCaption</DataField>
+        </Field>
+        <Field Name="Imp__internosCaption">
+          <DataField>Imp__internosCaption</DataField>
+        </Field>
+        <Field Name="Ingresos_BrutosCaption">
+          <DataField>Ingresos_BrutosCaption</DataField>
+        </Field>
+        <Field Name="IVA_Percep_Caption">
+          <DataField>IVA_Percep_Caption</DataField>
+        </Field>
+        <Field Name="No_Grav____ExentoCaption">
+          <DataField>No_Grav____ExentoCaption</DataField>
+        </Field>
+        <Field Name="Ganan_Caption">
+          <DataField>Ganan_Caption</DataField>
+        </Field>
+        <Field Name="Impuesto_IVACaption_Control1102201001">
+          <DataField>Impuesto_IVACaption_Control1102201001</DataField>
+        </Field>
+        <Field Name="Impuesto_IVACaption_Control1102201005">
+          <DataField>Impuesto_IVACaption_Control1102201005</DataField>
+        </Field>
+        <Field Name="Impuesto_IVACaption_Control1102201005_1">
+          <DataField>Impuesto_IVACaption_Control1102201005_1</DataField>
+        </Field>
+        <Field Name="Total_FacturaCaption">
+          <DataField>Total_FacturaCaption</DataField>
+        </Field>
+        <Field Name="DatosTemporal_Number">
+          <DataField>DatosTemporal_Number</DataField>
+        </Field>
+        <Field Name="ReportForNavId_3788">
+          <DataField>ReportForNavId_3788</DataField>
+        </Field>
+        <Field Name="GTotalBaseGravado">
+          <DataField>GTotalBaseGravado</DataField>
+        </Field>
+        <Field Name="GTotalBaseGravadoFormat">
+          <DataField>GTotalBaseGravadoFormat</DataField>
+        </Field>
+        <Field Name="GTdecIVA105_GTdecIVA21_GTdecIVA27">
+          <DataField>GTdecIVA105_GTdecIVA21_GTdecIVA27</DataField>
+        </Field>
+        <Field Name="GTdecIVA105_GTdecIVA21_GTdecIVA27Format">
+          <DataField>GTdecIVA105_GTdecIVA21_GTdecIVA27Format</DataField>
+        </Field>
+        <Field Name="GTotalIPer">
+          <DataField>GTotalIPer</DataField>
+        </Field>
+        <Field Name="GTotalIPerFormat">
+          <DataField>GTotalIPerFormat</DataField>
+        </Field>
+        <Field Name="GTotalIIB">
+          <DataField>GTotalIIB</DataField>
+        </Field>
+        <Field Name="GTotalIIBFormat">
+          <DataField>GTotalIIBFormat</DataField>
+        </Field>
+        <Field Name="GTotalIOP">
+          <DataField>GTotalIOP</DataField>
+        </Field>
+        <Field Name="GTotalIOPFormat">
+          <DataField>GTotalIOPFormat</DataField>
+        </Field>
+        <Field Name="GTotalFactura">
+          <DataField>GTotalFactura</DataField>
+        </Field>
+        <Field Name="GTotalFacturaFormat">
+          <DataField>GTotalFacturaFormat</DataField>
+        </Field>
+        <Field Name="V0">
+          <DataField>V0</DataField>
+        </Field>
+        <Field Name="GTotalBaseNoGravado">
+          <DataField>GTotalBaseNoGravado</DataField>
+        </Field>
+        <Field Name="GTotalBaseNoGravadoFormat">
+          <DataField>GTotalBaseNoGravadoFormat</DataField>
+        </Field>
+        <Field Name="GTotalBaseExcento">
+          <DataField>GTotalBaseExcento</DataField>
+        </Field>
+        <Field Name="GTotalBaseExcentoFormat">
+          <DataField>GTotalBaseExcentoFormat</DataField>
+        </Field>
+        <Field Name="GTotalIGA">
+          <DataField>GTotalIGA</DataField>
+        </Field>
+        <Field Name="GTotalIGAFormat">
+          <DataField>GTotalIGAFormat</DataField>
+        </Field>
+        <Field Name="GTdecIVA105">
+          <DataField>GTdecIVA105</DataField>
+        </Field>
+        <Field Name="GTdecIVA105Format">
+          <DataField>GTdecIVA105Format</DataField>
+        </Field>
+        <Field Name="GTdecIVA21">
+          <DataField>GTdecIVA21</DataField>
+        </Field>
+        <Field Name="GTdecIVA21Format">
+          <DataField>GTdecIVA21Format</DataField>
+        </Field>
+        <Field Name="GTdecIVA27">
+          <DataField>GTdecIVA27</DataField>
+        </Field>
+        <Field Name="GTdecIVA27Format">
+          <DataField>GTdecIVA27Format</DataField>
+        </Field>
+        <Field Name="GTdecIVA25">
+          <DataField>GTdecIVA25</DataField>
+        </Field>
+        <Field Name="GTdecIVA25Format">
+          <DataField>GTdecIVA25Format</DataField>
+        </Field>
+        <Field Name="GTotalBaseGravadoC">
+          <DataField>GTotalBaseGravadoC</DataField>
+        </Field>
+        <Field Name="GTotalBaseGravadoCFormat">
+          <DataField>GTotalBaseGravadoCFormat</DataField>
+        </Field>
+        <Field Name="GTdecIVA105_GTdecIVA21_GTdecIVA27C">
+          <DataField>GTdecIVA105_GTdecIVA21_GTdecIVA27C</DataField>
+        </Field>
+        <Field Name="GTdecIVA105_GTdecIVA21_GTdecIVA27CFormat">
+          <DataField>GTdecIVA105_GTdecIVA21_GTdecIVA27CFormat</DataField>
+        </Field>
+        <Field Name="GTotalIPerC">
+          <DataField>GTotalIPerC</DataField>
+        </Field>
+        <Field Name="GTotalIPerCFormat">
+          <DataField>GTotalIPerCFormat</DataField>
+        </Field>
+        <Field Name="GTotalIIBC">
+          <DataField>GTotalIIBC</DataField>
+        </Field>
+        <Field Name="GTotalIIBCFormat">
+          <DataField>GTotalIIBCFormat</DataField>
+        </Field>
+        <Field Name="GTotalBaseNoGravadoC">
+          <DataField>GTotalBaseNoGravadoC</DataField>
+        </Field>
+        <Field Name="GTotalBaseNoGravadoCFormat">
+          <DataField>GTotalBaseNoGravadoCFormat</DataField>
+        </Field>
+        <Field Name="GTotalBaseExcentoC">
+          <DataField>GTotalBaseExcentoC</DataField>
+        </Field>
+        <Field Name="GTotalBaseExcentoCFormat">
+          <DataField>GTotalBaseExcentoCFormat</DataField>
+        </Field>
+        <Field Name="GTotalIOPC">
+          <DataField>GTotalIOPC</DataField>
+        </Field>
+        <Field Name="GTotalIOPCFormat">
+          <DataField>GTotalIOPCFormat</DataField>
+        </Field>
+        <Field Name="GTotalIGAC">
+          <DataField>GTotalIGAC</DataField>
+        </Field>
+        <Field Name="GTotalIGACFormat">
+          <DataField>GTotalIGACFormat</DataField>
+        </Field>
+        <Field Name="GTotalFacturaC">
+          <DataField>GTotalFacturaC</DataField>
+        </Field>
+        <Field Name="GTotalFacturaCFormat">
+          <DataField>GTotalFacturaCFormat</DataField>
+        </Field>
+        <Field Name="GTdecIVA21_Control1000000124">
+          <DataField>GTdecIVA21_Control1000000124</DataField>
+        </Field>
+        <Field Name="GTdecIVA21_Control1000000124Format">
+          <DataField>GTdecIVA21_Control1000000124Format</DataField>
+        </Field>
+        <Field Name="GTdecIVA105_Control1000000125">
+          <DataField>GTdecIVA105_Control1000000125</DataField>
+        </Field>
+        <Field Name="GTdecIVA105_Control1000000125Format">
+          <DataField>GTdecIVA105_Control1000000125Format</DataField>
+        </Field>
+        <Field Name="GTdecIVA27_Control1000000126">
+          <DataField>GTdecIVA27_Control1000000126</DataField>
+        </Field>
+        <Field Name="GTdecIVA27_Control1000000126Format">
+          <DataField>GTdecIVA27_Control1000000126Format</DataField>
+        </Field>
+        <Field Name="GTdecIVA105C">
+          <DataField>GTdecIVA105C</DataField>
+        </Field>
+        <Field Name="GTdecIVA105CFormat">
+          <DataField>GTdecIVA105CFormat</DataField>
+        </Field>
+        <Field Name="GTdecIVA21C">
+          <DataField>GTdecIVA21C</DataField>
+        </Field>
+        <Field Name="GTdecIVA21CFormat">
+          <DataField>GTdecIVA21CFormat</DataField>
+        </Field>
+        <Field Name="GTdecIVA27C">
+          <DataField>GTdecIVA27C</DataField>
+        </Field>
+        <Field Name="GTdecIVA27CFormat">
+          <DataField>GTdecIVA27CFormat</DataField>
+        </Field>
+        <Field Name="GTdecIVA27C_1">
+          <DataField>GTdecIVA27C_1</DataField>
+        </Field>
+        <Field Name="GTdecIVA27C_1Format">
+          <DataField>GTdecIVA27C_1Format</DataField>
+        </Field>
+        <Field Name="Total_Compras_Base_GravadasCaption">
+          <DataField>Total_Compras_Base_GravadasCaption</DataField>
+        </Field>
+        <Field Name="Total_IVA_ComprasCaption">
+          <DataField>Total_IVA_ComprasCaption</DataField>
+        </Field>
+        <Field Name="Total_IVA_Percepción_ComprasCaption">
+          <DataField>Total_IVA_Percepción_ComprasCaption</DataField>
+        </Field>
+        <Field Name="Total_Percepción_Ingresos_BrutosCaption">
+          <DataField>Total_Percepción_Ingresos_BrutosCaption</DataField>
+        </Field>
+        <Field Name="Total_Impuestos_InternosCaption">
+          <DataField>Total_Impuestos_InternosCaption</DataField>
+        </Field>
+        <Field Name="Total_Compras_con_ImpuestosCaption">
+          <DataField>Total_Compras_con_ImpuestosCaption</DataField>
+        </Field>
+        <Field Name="Diferencia_RedondeoCaption">
+          <DataField>Diferencia_RedondeoCaption</DataField>
+        </Field>
+        <Field Name="TotalsCaption">
+          <DataField>TotalsCaption</DataField>
+        </Field>
+        <Field Name="Total_Compras_Base_No_GravadasCaption">
+          <DataField>Total_Compras_Base_No_GravadasCaption</DataField>
+        </Field>
+        <Field Name="Total_Compras_Base_ExentasCaption">
+          <DataField>Total_Compras_Base_ExentasCaption</DataField>
+        </Field>
+        <Field Name="Total_GananciasCaption">
+          <DataField>Total_GananciasCaption</DataField>
+        </Field>
+        <Field Name="No_Caption_Control1102201055">
+          <DataField>No_Caption_Control1102201055</DataField>
+        </Field>
+        <Field Name="Impuesto_IVACaption_Control1102201057">
+          <DataField>Impuesto_IVACaption_Control1102201057</DataField>
+        </Field>
+        <Field Name="Impuesto_IVACaption_Control1102201058">
+          <DataField>Impuesto_IVACaption_Control1102201058</DataField>
+        </Field>
+        <Field Name="Impuesto_IVACaption_Control1102201064">
+          <DataField>Impuesto_IVACaption_Control1102201064</DataField>
+        </Field>
+        <Field Name="Total_Compras_Base_GravadasCaptionC">
+          <DataField>Total_Compras_Base_GravadasCaptionC</DataField>
+        </Field>
+        <Field Name="Total_Compras_Base_No_GravadasCaptionC">
+          <DataField>Total_Compras_Base_No_GravadasCaptionC</DataField>
+        </Field>
+        <Field Name="Total_Compras_Base_ExentasCaptionC">
+          <DataField>Total_Compras_Base_ExentasCaptionC</DataField>
+        </Field>
+        <Field Name="Total_IVA_ComprasCaptionC">
+          <DataField>Total_IVA_ComprasCaptionC</DataField>
+        </Field>
+        <Field Name="Total_IVA_Percepción_ComprasCaptionC">
+          <DataField>Total_IVA_Percepción_ComprasCaptionC</DataField>
+        </Field>
+        <Field Name="Total_Percepción_Ingresos_BrutosCaptionC">
+          <DataField>Total_Percepción_Ingresos_BrutosCaptionC</DataField>
+        </Field>
+        <Field Name="Total_Impuestos_InternosCaptionC">
+          <DataField>Total_Impuestos_InternosCaptionC</DataField>
+        </Field>
+        <Field Name="Total_GananciasCaptionC">
+          <DataField>Total_GananciasCaptionC</DataField>
+        </Field>
+        <Field Name="Diferencia_RedondeoCaptionC">
+          <DataField>Diferencia_RedondeoCaptionC</DataField>
+        </Field>
+        <Field Name="Total_Compras_con_ImpuestosCaptionC">
+          <DataField>Total_Compras_con_ImpuestosCaptionC</DataField>
+        </Field>
+        <Field Name="Impuesto_IVACaption_Control1102201064_1">
+          <DataField>Impuesto_IVACaption_Control1102201064_1</DataField>
+        </Field>
+        <Field Name="Totales_Number">
+          <DataField>Totales_Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

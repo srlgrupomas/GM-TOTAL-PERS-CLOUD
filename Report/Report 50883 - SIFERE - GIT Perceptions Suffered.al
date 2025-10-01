@@ -1,4 +1,4 @@
-report 80883 "PERSIFERE - GIT Perc. Suff."
+report 34006883 "PERSIFERE - GIT Perc. Suff."
 {
     caption = 'SIFERE - GIT Perceptions Suffered';
     ProcessingOnly = true;
@@ -37,7 +37,7 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                 PurchCrMemoHdr: Record 124;
             BEGIN
                 //NAVAR1.06004-
-                if ("VAT Entry"."GMLocTax Type Loc" = "VAT Entry"."GMLocTax Type Loc"::"IVA Percepcion") then
+                if ("VAT Entry"."GMATax Type Loc" = "VAT Entry"."GMATax Type Loc"::"IVA Percepcion") then
                     CurrReport.Skip();
 
                 IF "VAT Entry".Amount = 0 THEN
@@ -48,7 +48,7 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                     RecTaxJur.SETCURRENTKEY(Code);
                     RecTaxJur.SETRANGE(Code, "Tax Jurisdiction Code");
                     IF RecTaxJur.FINDFIRST THEN
-                        IF RecTaxJur."GMLocIs GIT" THEN BEGIN
+                        IF RecTaxJur."GMAIs GIT" THEN BEGIN
                             IF "VAT Entry".Amount <> 0 THEN BEGIN
                                 EscribirFichero := TRUE;
 
@@ -70,18 +70,18 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                                     ELSE
                                         CUITGlobal := RecVendor."VAT Registration No.";
                                 END;
-                                if (RecVendor."GMLocExlude SIFERE GIt Per" = false) then begin
-                                    IF (RecVendor."GMLocGross Income Vendor Type" = RecVendor."GMLocGross Income Vendor Type"::" ") THEN BEGIN
+                                if (RecVendor."GMAExlude SIFERE GIt Per" = false) then begin
+                                    IF (RecVendor."GMAGross Income Vendor Type" = RecVendor."GMAGross Income Vendor Type"::" ") THEN BEGIN
                                         NumeroLineas += 1;
                                         IF NOT (EXIST) then
                                             "#VatEntry";
                                     END;
-                                    IF (RecVendor."GMLocGross Income Vendor Type" = RecVendor."GMLocGross Income Vendor Type"::Aduaneras) THEN BEGIN
+                                    IF (RecVendor."GMAGross Income Vendor Type" = RecVendor."GMAGross Income Vendor Type"::Aduaneras) THEN BEGIN
                                         NumeroLineasadu += 1;
                                         IF NOT (EXISTADUANA) then
                                             "#VatEntryAduana";
                                     END;
-                                    IF (RecVendor."GMLocGross Income Vendor Type" = RecVendor."GMLocGross Income Vendor Type"::Bancarias) THEN BEGIN
+                                    IF (RecVendor."GMAGross Income Vendor Type" = RecVendor."GMAGross Income Vendor Type"::Bancarias) THEN BEGIN
                                         NumeroLineasBanc += 1;
                                         IF NOT (EXISTBANCO) then
                                             "#VatEntryBanco";
@@ -95,12 +95,12 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
 
                     IF (VATProductPostingGroup.GET("VAT Entry"."VAT Prod. Posting Group")) THEN begin
 
-                        if (VATProductPostingGroup."GMLocTax Type" = VATProductPostingGroup."GMLocTax Type"::"Ingresos Brutos") then begin
+                        if (VATProductPostingGroup."GMATax Type" = VATProductPostingGroup."GMATax Type"::"Ingresos Brutos") then begin
 
                             CLEAR(Campo1FULLVAT);//21/10/16
-                            IF (VATProductPostingGroup.GMLocProvince = '') THEN//21/10/16
+                            IF (VATProductPostingGroup.GMAProvince = '') THEN//21/10/16
                                 ERROR('Debe configurar Provincia en Grupo Registro IVA Prod. %1 ', VATProductPostingGroup.Code);//21/10/16
-                            Campo1FULLVAT := VATProductPostingGroup.GMLocProvince;//21/10/16
+                            Campo1FULLVAT := VATProductPostingGroup.GMAProvince;//21/10/16
                             EscribirFichero := TRUE;
 
                             CLEAR(CUITGlobal);
@@ -120,18 +120,18 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                                 ELSE
                                     CUITGlobal := RecVendor."VAT Registration No.";
                             END;
-                            if (RecVendor."GMLocExlude SIFERE GIt Per" = false) then begin
-                                IF (RecVendor."GMLocGross Income Vendor Type" = RecVendor."GMLocGross Income Vendor Type"::" ") THEN BEGIN
+                            if (RecVendor."GMAExlude SIFERE GIt Per" = false) then begin
+                                IF (RecVendor."GMAGross Income Vendor Type" = RecVendor."GMAGross Income Vendor Type"::" ") THEN BEGIN
                                     NumeroLineas += 1;
                                     IF NOT (EXIST) then
                                         "#VatEntry";
                                 END;
-                                IF (RecVendor."GMLocGross Income Vendor Type" = RecVendor."GMLocGross Income Vendor Type"::Aduaneras) THEN BEGIN
+                                IF (RecVendor."GMAGross Income Vendor Type" = RecVendor."GMAGross Income Vendor Type"::Aduaneras) THEN BEGIN
                                     NumeroLineasadu += 1;
                                     IF NOT (EXISTADUANA) then
                                         "#VatEntryAduana";
                                 END;
-                                IF (RecVendor."GMLocGross Income Vendor Type" = RecVendor."GMLocGross Income Vendor Type"::Bancarias) THEN BEGIN
+                                IF (RecVendor."GMAGross Income Vendor Type" = RecVendor."GMAGross Income Vendor Type"::Bancarias) THEN BEGIN
                                     NumeroLineasBanc += 1;
                                     IF NOT (EXISTBANCO) then
                                         "#VatEntryBanco";
@@ -150,7 +150,7 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
         {
             area(Content)
             {
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     Caption = 'Options',;
                     field(Anio; Anio)
@@ -244,11 +244,11 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
         Texto: Text[1024];
         Textoadu: Text[1024];
         Textobanc: Text[1024];
-        ExportaTxt: Codeunit "GMLocExporta TXT";
+        ExportaTxt: Codeunit "GMAExporta TXT";
         TempExcelBuff: Record 370 TEMPORARY;
         TempExcelBuffadu: Record 370 TEMPORARY;
         TempExcelBuffbanc: Record 370 TEMPORARY;
-        recValor: Record GMLocValues;
+        recValor: Record GMAValues;
         TextoBis: BigText;
         Text004: label 'There is no records to generate the perceptions report',;
         Text005: label 'There is no records to generate the perceptions bank report',;
@@ -257,9 +257,9 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
         TextoBisbanc: BigText;
         RecTaxJur: Record 320;
         RecVatProdPostingGroup: Record "VAT Product Posting Group";
-        RecMovRetencion: Record "GMLocWithholding Ledger Entry";
+        RecMovRetencion: Record "GMAWithholding Ledger Entry";
         RecVendor: Record 23;
-        RecHistLinValorOP: Record "GMLocPosted Payment Order Valu";
+        RecHistLinValorOP: Record "GMAPosted Payment Order Valu";
         facturasCompra: Record 122;
         NCCompra: Record 124;
         tempvatentry: Record 254 TEMPORARY;
@@ -388,7 +388,7 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                     else
                         VATentryLocal.SetFilter("Bssi Shortcut Dimension 2 Code", BssiDimension);
 
-                VATentryLocal.SETRANGE("GMLocTax Type Loc", VATentryLocal."GMLocTax Type Loc"::"Ingresos Brutos");
+                VATentryLocal.SETRANGE("GMATax Type Loc", VATentryLocal."GMATax Type Loc"::"Ingresos Brutos");
                 if VATentryLocal.FindFirst() then begin
                     // Generar un nombre único para cada archivo dentro del zip
                     FileName := 'SIFERE-' + VATentryLocal."Document No." + '.txt';
@@ -429,11 +429,11 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
 
                         //Jurisdiccion
                         IF RecTaxJur.GET(VATentryLocal."Tax Jurisdiction Code") THEN
-                            Campo1 := RecTaxJur."GMLocProvince Code";
+                            Campo1 := RecTaxJur."GMAProvince Code";
 
                         IF Campo1 = '' THEN BEGIN
                             IF RecVatProdPostingGroup.GET(VATentryLocal."VAT Bus. Posting Group") THEN
-                                Campo1 := RecVatProdPostingGroup."GMLocProvince";
+                                Campo1 := RecVatProdPostingGroup."GMAProvince";
                         END;
 
                         RecVendor.RESET;
@@ -470,7 +470,7 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                             END;
                         END;
                         //Tipo de comprobante
-                        IF (VATentryLocal."Document Type" = VATentryLocal."Document Type"::Invoice) OR (VATentryLocal."GMLocDocument Type Loc." = VATentryLocal."GMLocDocument Type Loc."::"Nota Débito") THEN
+                        IF (VATentryLocal."Document Type" = VATentryLocal."Document Type"::Invoice) OR (VATentryLocal."GMADocument Type Loc." = VATentryLocal."GMADocument Type Loc."::"GMANota Debito") THEN
                             Campo6 := 'F'
                         ELSE
                             Campo6 := 'C';
@@ -484,7 +484,7 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                         auxVatEntry.RESET;
                         auxVatEntry.SETRANGE("Document No.", VATentryLocal."Document No.");
                         //auxVatEntry.SETRANGE("External Document No.","VAT Entry"."External Document No.");
-                        auxVatEntry.SETRANGE("GMLocTax Type Loc", auxVatEntry."GMLocTax Type Loc"::"Ingresos Brutos");
+                        auxVatEntry.SETRANGE("GMATax Type Loc", auxVatEntry."GMATax Type Loc"::"Ingresos Brutos");
                         IF VATentryLocal."VAT Calculation Type" = VATentryLocal."VAT Calculation Type"::"Full VAT" THEN
                             auxVatEntry.SETRANGE("VAT Prod. Posting Group", VATentryLocal."VAT Prod. Posting Group")
                         ELSE
@@ -521,11 +521,11 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                         FL := 10;
 
                         IF RecTaxJur.GET(VATentryLocal."Tax Jurisdiction Code") THEN
-                            Campo1 := RecTaxJur."GMLocProvince Code";
+                            Campo1 := RecTaxJur."GMAProvince Code";
 
                         IF Campo1 = '' THEN BEGIN
                             IF RecVatProdPostingGroup.GET(VATentryLocal."VAT Bus. Posting Group") THEN
-                                Campo1 := RecVatProdPostingGroup."GMLocProvince";
+                                Campo1 := RecVatProdPostingGroup."GMAProvince";
                         END;
 
                         CLEAR(Texto);
@@ -638,11 +638,11 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
 
                         //Jurisdiccion
                         IF RecTaxJur.GET("VAT Entry"."Tax Jurisdiction Code") THEN
-                            ACampo1 := RecTaxJur."GMLocProvince Code";
+                            ACampo1 := RecTaxJur."GMAProvince Code";
 
                         IF ACampo1 = '' THEN BEGIN
                             IF RecVatProdPostingGroup.GET("VAT Entry"."VAT Bus. Posting Group") THEN
-                                ACampo1 := RecVatProdPostingGroup."GMLocProvince";
+                                ACampo1 := RecVatProdPostingGroup."GMAProvince";
                         END;
 
                         RecVendor.RESET;
@@ -664,19 +664,19 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                         //N£mero de sucursal + N£mero de constancia
 
                         IF (PurchInvHeader.GET("VAT Entry"."Document No.")) THEN BEGIN
-                            IF (PurchInvHeader."GMLocImport Dispatch" <> '') THEN BEGIN
-                                WHILE STRLEN(ACampo4) + STRLEN(PurchInvHeader."GMLocImport Dispatch") < 20 DO ACampo4 += '0';
+                            IF (PurchInvHeader."GMAImport Dispatch" <> '') THEN BEGIN
+                                WHILE STRLEN(ACampo4) + STRLEN(PurchInvHeader."GMAImport Dispatch") < 20 DO ACampo4 += '0';
                                 BEGIN
-                                    ACampo4 += PurchInvHeader."GMLocImport Dispatch";
+                                    ACampo4 += PurchInvHeader."GMAImport Dispatch";
                                 END;
                             END;
                         END
                         ELSE BEGIN
                             IF (PurchCrMemoHdr.GET("VAT Entry"."Document No.")) THEN BEGIN
-                                IF (PurchCrMemoHdr."GMLocImport Dispatch" <> '') THEN BEGIN
-                                    WHILE STRLEN(ACampo4) + STRLEN(PurchCrMemoHdr."GMLocImport Dispatch") < 20 DO ACampo4 += '0';
+                                IF (PurchCrMemoHdr."GMAImport Dispatch" <> '') THEN BEGIN
+                                    WHILE STRLEN(ACampo4) + STRLEN(PurchCrMemoHdr."GMAImport Dispatch") < 20 DO ACampo4 += '0';
                                     BEGIN
-                                        ACampo4 += PurchCrMemoHdr."GMLocImport Dispatch";
+                                        ACampo4 += PurchCrMemoHdr."GMAImport Dispatch";
                                     END;
                                 END;
                             END;
@@ -689,7 +689,7 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
 
                         auxVatEntry.RESET;
                         auxVatEntry.SETRANGE("Document No.", "VAT Entry"."Document No.");
-                        auxVatEntry.SETRANGE("GMLocTax Type Loc", auxVatEntry."GMLocTax Type Loc"::"Ingresos Brutos");
+                        auxVatEntry.SETRANGE("GMATax Type Loc", auxVatEntry."GMATax Type Loc"::"Ingresos Brutos");
                         IF "VAT Entry"."VAT Calculation Type" = "VAT Entry"."VAT Calculation Type"::"Full VAT" THEN
                             auxVatEntry.SETRANGE("VAT Prod. Posting Group", "VAT Entry"."VAT Prod. Posting Group")
                         ELSE
@@ -722,11 +722,11 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                         FL := 10;
 
                         IF RecTaxJur.GET("VAT Entry"."Tax Jurisdiction Code") THEN
-                            ACampo6 := RecTaxJur."GMLocProvince Code";
+                            ACampo6 := RecTaxJur."GMAProvince Code";
 
                         IF ACampo6 = '' THEN BEGIN
                             IF RecVatProdPostingGroup.GET("VAT Entry"."VAT Bus. Posting Group") THEN
-                                ACampo6 := RecVatProdPostingGroup."GMLocProvince";
+                                ACampo6 := RecVatProdPostingGroup."GMAProvince";
                         END;
 
                         CLEAR(Textoadu);
@@ -835,11 +835,11 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
 
                         //Jurisdiccion
                         IF RecTaxJur.GET("VAT Entry"."Tax Jurisdiction Code") THEN
-                            BCampo1 := RecTaxJur."GMLocProvince Code";
+                            BCampo1 := RecTaxJur."GMAProvince Code";
 
                         IF BCampo1 = '' THEN BEGIN
                             IF RecVatProdPostingGroup.GET("VAT Entry"."VAT Bus. Posting Group") THEN
-                                BCampo1 := RecVatProdPostingGroup."GMLocProvince";
+                                BCampo1 := RecVatProdPostingGroup."GMAProvince";
                         END;
 
                         RecVendor.RESET;
@@ -859,13 +859,13 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                             BCampo3 := FORMAT("VAT Entry"."Posting Date", 7, '<Year4>/<Month,2>');
 
                         //N£mero de sucursal + N£mero de constancia
-                        IF (RecVendor.GMLocCBU2 <> '') THEN
-                            BCampo4 := RecVendor.GMLocCBU2
+                        IF (RecVendor.GMACBU2 <> '') THEN
+                            BCampo4 := RecVendor.GMACBU2
                         ELSE
                             BCampo4 := '0000000000000000000000';
 
-                        IF (RecVendor."GMLocAccount Type2" <> RecVendor."GMLocAccount Type2"::" ") THEN
-                            Campo5 := FORMAT(RecVendor."GMLocAccount Type2");
+                        IF (RecVendor."GMAAccount Type2" <> RecVendor."GMAAccount Type2"::" ") THEN
+                            Campo5 := FORMAT(RecVendor."GMAAccount Type2");
 
                         BCampo6 := 'P';
 
@@ -873,7 +873,7 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
 
                         auxVatEntry.RESET;
                         auxVatEntry.SETRANGE("Document No.", "VAT Entry"."Document No.");
-                        auxVatEntry.SETRANGE("GMLocTax Type Loc", auxVatEntry."GMLocTax Type Loc"::"Ingresos Brutos");
+                        auxVatEntry.SETRANGE("GMATax Type Loc", auxVatEntry."GMATax Type Loc"::"Ingresos Brutos");
                         IF "VAT Entry"."VAT Calculation Type" = "VAT Entry"."VAT Calculation Type"::"Full VAT" THEN
                             auxVatEntry.SETRANGE("VAT Prod. Posting Group", "VAT Entry"."VAT Prod. Posting Group")
                         ELSE
@@ -906,11 +906,11 @@ report 80883 "PERSIFERE - GIT Perc. Suff."
                         FL := 10;
 
                         IF RecTaxJur.GET("VAT Entry"."Tax Jurisdiction Code") THEN
-                            BCampo8 := RecTaxJur."GMLocProvince Code";
+                            BCampo8 := RecTaxJur."GMAProvince Code";
 
                         IF BCampo8 = '' THEN BEGIN
                             IF RecVatProdPostingGroup.GET("VAT Entry"."VAT Bus. Posting Group") THEN
-                                BCampo8 := RecVatProdPostingGroup."GMLocProvince";
+                                BCampo8 := RecVatProdPostingGroup."GMAProvince";
                         END;
                         CLEAR(Textobanc);
                         Textobanc := (

@@ -1597,38 +1597,35 @@ End Function
         <Field Name="Cash_Bank_Account_Description">
           <DataField>Cash_Bank_Account_Description</DataField>
         </Field>
-        <Field Name="GMLocRemaining_Amount_Bank_Acc">
-          <DataField>GMLocRemaining_Amount_Bank_Acc</DataField>
+        <Field Name="GMARemaining_Amount_Bank_Acc">
+          <DataField>GMARemaining_Amount_Bank_Acc</DataField>
         </Field>
-        <Field Name="GMLocRemaining_Amount_Bank_AccFormat">
-          <DataField>GMLocRemaining_Amount_Bank_AccFormat</DataField>
+        <Field Name="GMARemaining_Amount_Bank_AccFormat">
+          <DataField>GMARemaining_Amount_Bank_AccFormat</DataField>
         </Field>
-        <Field Name="BssiDimension">
-          <DataField>BssiDimension</DataField>
+        <Field Name="GMAPosting_Date">
+          <DataField>GMAPosting_Date</DataField>
         </Field>
-        <Field Name="GMLocPosting_Date">
-          <DataField>GMLocPosting_Date</DataField>
+        <Field Name="GMADocument_No_">
+          <DataField>GMADocument_No_</DataField>
         </Field>
-        <Field Name="GMLocDocument_No_">
-          <DataField>GMLocDocument_No_</DataField>
+        <Field Name="GMAExternal_Document_No_">
+          <DataField>GMAExternal_Document_No_</DataField>
         </Field>
-        <Field Name="GMLocExternal_Document_No_">
-          <DataField>GMLocExternal_Document_No_</DataField>
+        <Field Name="GMADescription">
+          <DataField>GMADescription</DataField>
         </Field>
-        <Field Name="GMLocDescription">
-          <DataField>GMLocDescription</DataField>
+        <Field Name="GMARemaining_Amount_Neg">
+          <DataField>GMARemaining_Amount_Neg</DataField>
         </Field>
-        <Field Name="GMLocRemaining_Amount_Neg">
-          <DataField>GMLocRemaining_Amount_Neg</DataField>
+        <Field Name="GMARemaining_Amount_NegFormat">
+          <DataField>GMARemaining_Amount_NegFormat</DataField>
         </Field>
-        <Field Name="GMLocRemaining_Amount_NegFormat">
-          <DataField>GMLocRemaining_Amount_NegFormat</DataField>
+        <Field Name="GMARemaining_Amount_Pos">
+          <DataField>GMARemaining_Amount_Pos</DataField>
         </Field>
-        <Field Name="GMLocRemaining_Amount_Pos">
-          <DataField>GMLocRemaining_Amount_Pos</DataField>
-        </Field>
-        <Field Name="GMLocRemaining_Amount_PosFormat">
-          <DataField>GMLocRemaining_Amount_PosFormat</DataField>
+        <Field Name="GMARemaining_Amount_PosFormat">
+          <DataField>GMARemaining_Amount_PosFormat</DataField>
         </Field>
         <Field Name="RunningBalance">
           <DataField>RunningBalance</DataField>

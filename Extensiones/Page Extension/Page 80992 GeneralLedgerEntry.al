@@ -2,7 +2,7 @@ namespace GMTOTALPERS.GMTOTALPERS;
 
 using Microsoft.Finance.GeneralLedger.Ledger;
 
-pageextension 80992 GeneralLedgerEntry extends "General Ledger Entries"
+pageextension 34006992 GeneralLedgerEntry extends "General Ledger Entries"
 {
     layout
     {

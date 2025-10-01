@@ -1,6 +1,6 @@
 
 
-codeunit 80998 "LocPurch.-Post (Yes/No)"
+codeunit 34006998 "LocPurch.-Post (Yes/No)"
 {
     EventSubscriberInstance = Manual;
     TableNo = "Purchase Header";

@@ -1,4 +1,4 @@
-Codeunit 80900 PERExchRateAdjmtProcess
+Codeunit 34006900 PERExchRateAdjmtProcess
 {
     TableNo = "Exch. Rate Adjmt. Parameters";
     Permissions = TableData "Exch. Rate Adjmt. Reg." = rimd,

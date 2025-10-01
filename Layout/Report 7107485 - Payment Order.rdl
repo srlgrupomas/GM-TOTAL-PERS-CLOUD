@@ -12106,8 +12106,8 @@ End Function
         <Field Name="FIRMA_GERENTE_FINANCIEROCaption">
           <DataField>FIRMA_GERENTE_FINANCIEROCaption</DataField>
         </Field>
-        <Field Name="GMLocPictureSign">
-          <DataField>GMLocPictureSign</DataField>
+        <Field Name="GMAPictureSign">
+          <DataField>GMAPictureSign</DataField>
         </Field>
         <Field Name="FIRMA_GERENTE_GENERALCaption">
           <DataField>FIRMA_GERENTE_GENERALCaption</DataField>
@@ -12478,8 +12478,8 @@ End Function
         <Field Name="ValueType">
           <DataField>ValueType</DataField>
         </Field>
-        <Field Name="GMLocWithholdingNo">
-          <DataField>GMLocWithholdingNo</DataField>
+        <Field Name="GMAWithholdingNo">
+          <DataField>GMAWithholdingNo</DataField>
         </Field>
         <Field Name="InfoEmpresa_Picture_hdr">
           <DataField>InfoEmpresa_Picture_hdr</DataField>
@@ -12649,8 +12649,8 @@ End Function
         <Field Name="Withholding_Ledger_Entry_Voucher_Number">
           <DataField>Withholding_Ledger_Entry_Voucher_Number</DataField>
         </Field>
-        <Field Name="GMLocPictureSign2">
-          <DataField>GMLocPictureSign2</DataField>
+        <Field Name="GMAPictureSign2">
+          <DataField>GMAPictureSign2</DataField>
         </Field>
         <Field Name="Movimiento_Retenciones__Valor">
           <DataField>Movimiento_Retenciones__Valor</DataField>
@@ -12817,8 +12817,8 @@ End Function
         <Field Name="Movimiento_Retenciones_Voucher_Number894">
           <DataField>Movimiento_Retenciones_Voucher_Number894</DataField>
         </Field>
-        <Field Name="GMLocPictureSign894">
-          <DataField>GMLocPictureSign894</DataField>
+        <Field Name="GMAPictureSign894">
+          <DataField>GMAPictureSign894</DataField>
         </Field>
         <Field Name="DetRetencion_Titulo894">
           <DataField>DetRetencion_Titulo894</DataField>
@@ -13318,14 +13318,14 @@ End Function
         <Field Name="Withholding_Ledger_Entry_Voucher_Number896">
           <DataField>Withholding_Ledger_Entry_Voucher_Number896</DataField>
         </Field>
-        <Field Name="Withholding_Ledger_Entry_GMLocCalculation_Base896">
-          <DataField>Withholding_Ledger_Entry_GMLocCalculation_Base896</DataField>
+        <Field Name="Withholding_Ledger_Entry_GMACalculation_Base896">
+          <DataField>Withholding_Ledger_Entry_GMACalculation_Base896</DataField>
         </Field>
-        <Field Name="Withholding_Ledger_Entry_GMLocCalculation_Base896Format">
-          <DataField>Withholding_Ledger_Entry_GMLocCalculation_Base896Format</DataField>
+        <Field Name="Withholding_Ledger_Entry_GMACalculation_Base896Format">
+          <DataField>Withholding_Ledger_Entry_GMACalculation_Base896Format</DataField>
         </Field>
-        <Field Name="GMLocPictureSign896">
-          <DataField>GMLocPictureSign896</DataField>
+        <Field Name="GMAPictureSign896">
+          <DataField>GMAPictureSign896</DataField>
         </Field>
         <Field Name="Movimiento_Retenciones__Valor896">
           <DataField>Movimiento_Retenciones__Valor896</DataField>
@@ -13540,8 +13540,8 @@ End Function
         <Field Name="ACLARACIÓN_CARGOCaption897">
           <DataField>ACLARACIÓN_CARGOCaption897</DataField>
         </Field>
-        <Field Name="GMLocPictureSign897">
-          <DataField>GMLocPictureSign897</DataField>
+        <Field Name="GMAPictureSign897">
+          <DataField>GMAPictureSign897</DataField>
         </Field>
         <Field Name="Movimiento_Retenciones__Valor897">
           <DataField>Movimiento_Retenciones__Valor897</DataField>

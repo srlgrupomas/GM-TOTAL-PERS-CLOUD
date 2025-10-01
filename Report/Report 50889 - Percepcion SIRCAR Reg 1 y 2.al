@@ -1,7 +1,7 @@
 /// <summary>
-/// Report GMLocSIRCAR_REG_1y2 (ID 34006419).
+/// Report GMASIRCAR_REG_1y2 (ID 34006419).
 /// </summary>
-report 80889 "PERSIRCAR_REG_1y2"
+report 34006889 "PERSIRCAR_REG_1y2"
 {
     Caption = 'SIRCAR registro 1 y 2';
     ProcessingOnly = true;
@@ -10,7 +10,7 @@ report 80889 "PERSIRCAR_REG_1y2"
     {
         dataitem(IVA; "VAT Entry")
         {
-            DataItemTableView = sorting("Entry No.") where("GMLocDocument Type Loc." = filter(Invoice | "Credit Memo" | "Nota Débito"), Amount = filter(<> 0));
+            DataItemTableView = sorting("Entry No.") where("GMADocument Type Loc." = filter(Invoice | "Credit Memo" | "GMANota Debito"), Amount = filter(<> 0));
             column(ReportForNavId_1537; 1537)
             {
             }
@@ -41,7 +41,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                 if FileName <> '' then begin
                     SetRange("Posting Date", FechaDesde, FechaHasta);
                     SetRange(Type, IVA.Type::Purchase);
-                    SetRange("GMLocTax Type Loc", IVA."GMLocTax Type Loc"::"IVA Percepcion");
+                    SetRange("GMATax Type Loc", IVA."GMATax Type Loc"::"IVA Percepcion");
                     SetFilter("Tax Jurisdiction Code", '=%1', 'PIVA-ANA');
                 end else
                     SetRange("Document No.", 'NoAplicaEXC');
@@ -56,7 +56,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         }
         dataitem(Cordoba; "VAT Entry")
         {
-            DataItemTableView = sorting("Entry No.") where("GMLocDocument Type Loc." = filter(Invoice | "Credit Memo" | "Nota Débito"), Amount = filter(<> 0));
+            DataItemTableView = sorting("Entry No.") where("GMADocument Type Loc." = filter(Invoice | "Credit Memo" | "GMANota Debito"), Amount = filter(<> 0));
             column(ReportForNavId_4198; 4198)
             {
             }
@@ -70,24 +70,24 @@ report 80889 "PERSIRCAR_REG_1y2"
                 case Type of
                     Type::Sale:
                         begin
-                            case "GMLocDocument Type Loc." of
-                                "GMLocDocument Type Loc."::Invoice, "GMLocDocument Type Loc."::"Nota Débito":
+                            case "GMADocument Type Loc." of
+                                "GMADocument Type Loc."::Invoice, "GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recSalesInvHeader.Reset;
                                         recSalesInvHeader.SetRange("No.", "Document No.");
                                         if recSalesInvHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                        TipoComprobante := recSalesInvHeader."GMLocAFIP Voucher Type";
+                                        TipoComprobante := recSalesInvHeader."GMAAFIP Voucher Type";
                                         IsSales := true;
                                     end;
 
-                                "GMLocDocument Type Loc."::"Credit Memo":
+                                "GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recSalesCrMemoHeader.Reset;
                                         recSalesCrMemoHeader.SetRange("No.", "Document No.");
                                         if recSalesCrMemoHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                        TipoComprobante := recSalesCrMemoHeader."GMLocAFIP Voucher Type";
+                                        TipoComprobante := recSalesCrMemoHeader."GMAAFIP Voucher Type";
                                         IsSales := true;
                                     end;
                             end;
@@ -95,23 +95,23 @@ report 80889 "PERSIRCAR_REG_1y2"
 
                     Type::Purchase:
                         begin
-                            case "GMLocDocument Type Loc." of
-                                "GMLocDocument Type Loc."::Invoice, "GMLocDocument Type Loc."::"Nota Débito":
+                            case "GMADocument Type Loc." of
+                                "GMADocument Type Loc."::Invoice, "GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recPurchInvHeader.Reset;
                                         recPurchInvHeader.SetRange("No.", "Document No.");
                                         if recPurchInvHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                        TipoComprobante := recPurchInvHeader."GMLocInvoice Document Type";
+                                        TipoComprobante := recPurchInvHeader."GMAInvoice Document Type";
                                     end;
 
-                                "GMLocDocument Type Loc."::"Credit Memo":
+                                "GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recPurchCrMemoHeader.Reset;
                                         recPurchCrMemoHeader.SetRange("No.", "Document No.");
                                         if recPurchCrMemoHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                        TipoComprobante := recPurchCrMemoHeader."GMLocInvoice Document Type";
+                                        TipoComprobante := recPurchCrMemoHeader."GMAInvoice Document Type";
                                     end;
                             end;
                         end;
@@ -129,7 +129,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                     SetRange("Posting Date", FechaDesde, FechaHasta);
                     SetRange(Type, Cordoba.Type::Sale);
 
-                    SetRange("GMLocTax Type Loc", "GMLoctax type loc"::"Ingresos Brutos");
+                    SetRange("GMATax Type Loc", "GMAtax type loc"::"Ingresos Brutos");
 
                 end else
                     SetRange("Document No.", 'NoAplicaEXC');//Filtro para evitar que corra el dataitem
@@ -142,35 +142,35 @@ report 80889 "PERSIRCAR_REG_1y2"
 
             end;
         }
-        dataitem(CordobaRetenciones; "GMLocWithholding Ledger Entry")
+        dataitem(CordobaRetenciones; "GMAWithholding Ledger Entry")
         {
-            DataItemTableView = sorting("GMLocNo.") order(ascending);
+            DataItemTableView = sorting("GMANo.") order(ascending);
             column(ReportForNavId_8720; 8720)
             {
             }
 
             trigger OnAfterGetRecord()
             var
-                _recTaxes: Record GMLocTaxes;
-                _recValues: Record GMLocValues;
+                _recTaxes: Record GMATaxes;
+                _recValues: Record GMAValues;
             begin
-                if "GMLocTax Code" <> '' then begin
+                if "GMATax Code" <> '' then begin
 
                     _recValues.Reset;
-                    _recValues.SetRange(GMlocCode, CordobaRetenciones.GMLocValue);
+                    _recValues.SetRange(GMACode, CordobaRetenciones.GMAValue);
                     if _recValues.FindFirst then begin
-                        if (_recValues.GMLocProvince = FiltrorecProvince) then begin
+                        if (_recValues.GMAProvince = FiltrorecProvince) then begin
                             recCordobaTempIIBB.Reset;
-                            recCordobaTempIIBB.SetRange("GMLocVendor Code", "GMLocVendor Code");
-                            recCordobaTempIIBB.SetRange("GMLocVoucher Number", "GMLocVoucher Number");
+                            recCordobaTempIIBB.SetRange("GMAVendor Code", "GMAVendor Code");
+                            recCordobaTempIIBB.SetRange("GMAVoucher Number", "GMAVoucher Number");
                             if not recCordobaTempIIBB.FindFirst then begin
                                 recCordobaTempIIBB.Init;
                                 recCordobaTempIIBB.TransferFields(CordobaRetenciones);
                                 recCordobaTempIIBB.Insert(false);
                             end else begin
-                                recCordobaTempIIBB."GMLocCalculation Base" += "GMLocCalculation Base";
-                                recCordobaTempIIBB."GMLocWithholding Amount" += "GMLocWithholding Amount";
-                                recCordobaTempIIBB.GMLocBase += GMLocBase;
+                                recCordobaTempIIBB."GMACalculation Base" += "GMACalculation Base";
+                                recCordobaTempIIBB."GMAWithholding Amount" += "GMAWithholding Amount";
+                                recCordobaTempIIBB.GMABase += GMABase;
                                 recCordobaTempIIBB.Modify(false);
                             end;
 
@@ -185,24 +185,24 @@ report 80889 "PERSIRCAR_REG_1y2"
             begin
 
                 if FileNameCordobaIIBB <> '' then begin
-                    SetRange("GMLocWithholding Date", FechaDesde, FechaHasta);
-                    SetRange("GMLocWithholding Type", "GMLocwithholding type"::Realizada);
-                    SetFilter("GMLocTax Code", 'IB*');
-                    SetFilter("GMLocWithholding Amount", '>%1', 0);
+                    SetRange("GMAWithholding Date", FechaDesde, FechaHasta);
+                    SetRange("GMAWithholding Type", "GMAwithholding type"::Realizada);
+                    SetFilter("GMATax Code", 'IB*');
+                    SetFilter("GMAWithholding Amount", '>%1', 0);
                 end else
-                    SetRange("GMLocVendor Code", 'NoAplicaEXC');//Filtro para evitar que corra el dataitem
+                    SetRange("GMAVendor Code", 'NoAplicaEXC');//Filtro para evitar que corra el dataitem
 
                 if (BssiDimension <> '') then
                     if "BssiMEMSystemSetup".Bssi_iGetGlobalDimensionNoToUse() = 1 then
-                        CordobaRetenciones.SetFilter("GMLocShortcut Dimension 1", BssiDimension)
+                        CordobaRetenciones.SetFilter("GMAShortcut Dimension 1", BssiDimension)
                     else
-                        CordobaRetenciones.SetFilter("GMLocShortcut Dimension 2", BssiDimension);
+                        CordobaRetenciones.SetFilter("GMAShortcut Dimension 2", BssiDimension);
 
             end;
         }
         dataitem(SantaFe; "VAT Entry")
         {
-            DataItemTableView = sorting("Entry No.") where("GMLocDocument Type Loc." = filter(Invoice | "Credit Memo" | "Nota Débito"), "Document No." = filter(<> ''), Amount = filter(<> 0));
+            DataItemTableView = sorting("Entry No.") where("GMADocument Type Loc." = filter(Invoice | "Credit Memo" | "GMANota Debito"), "Document No." = filter(<> ''), Amount = filter(<> 0));
             column(ReportForNavId_3959; 3959)
             {
             }
@@ -216,28 +216,28 @@ report 80889 "PERSIRCAR_REG_1y2"
                 case Type of
                     Type::Sale:
                         begin
-                            case "GMLocDocument Type Loc." of
-                                "GMLocDocument Type Loc."::Invoice, "GMLocDocument Type Loc."::"Nota Débito":
+                            case "GMADocument Type Loc." of
+                                "GMADocument Type Loc."::Invoice, "GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recSalesInvHeader.Reset;
                                         recSalesInvHeader.SetRange("No.", "Document No.");
                                         if recSalesInvHeader.FindFirst then begin
                                             recSalesInvHeader.CalcFields(Amount, "Amount Including VAT");
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                            TipoComprobante := recSalesInvHeader."GMLocAFIP Voucher Type";
+                                            TipoComprobante := recSalesInvHeader."GMAAFIP Voucher Type";
                                             MontoCompTotal := recSalesInvHeader."Amount Including VAT";
                                             MontoComp := recSalesInvHeader.Amount;
                                         end;
                                     end;
 
-                                "GMLocDocument Type Loc."::"Credit Memo":
+                                "GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recSalesCrMemoHeader.Reset;
                                         recSalesCrMemoHeader.SetRange("No.", "Document No.");
                                         if recSalesCrMemoHeader.FindFirst then begin
                                             recSalesCrMemoHeader.CalcFields(Amount, "Amount Including VAT");
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                            TipoComprobante := recSalesCrMemoHeader."GMLocAFIP Voucher Type";
+                                            TipoComprobante := recSalesCrMemoHeader."GMAAFIP Voucher Type";
                                             MontoCompTotal := recSalesCrMemoHeader."Amount Including VAT";
                                             MontoComp := recSalesCrMemoHeader.Amount;
                                         end;
@@ -247,8 +247,8 @@ report 80889 "PERSIRCAR_REG_1y2"
 
                     Type::Purchase:
                         begin
-                            case "GMLocDocument Type Loc." of
-                                "GMLocDocument Type Loc."::Invoice, "GMLocDocument Type Loc."::"Nota Débito":
+                            case "GMADocument Type Loc." of
+                                "GMADocument Type Loc."::Invoice, "GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recPurchInvHeader.Reset;
                                         recPurchInvHeader.SetRange("No.", "Document No.");
@@ -256,13 +256,13 @@ report 80889 "PERSIRCAR_REG_1y2"
                                             recPurchInvHeader.CalcFields(Amount, "Amount Including VAT");
 
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                            TipoComprobante := recPurchInvHeader."GMLocInvoice Document Type";
+                                            TipoComprobante := recPurchInvHeader."GMAInvoice Document Type";
                                             MontoCompTotal := recPurchInvHeader."Amount Including VAT";
                                             MontoComp := recPurchInvHeader.Amount;
                                         end;
                                     end;
 
-                                "GMLocDocument Type Loc."::"Credit Memo":
+                                "GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recPurchCrMemoHeader.Reset;
                                         recPurchCrMemoHeader.SetRange("No.", "Document No.");
@@ -270,7 +270,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                                             recPurchCrMemoHeader.CalcFields(Amount, "Amount Including VAT");
 
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                            TipoComprobante := recPurchCrMemoHeader."GMLocInvoice Document Type";
+                                            TipoComprobante := recPurchCrMemoHeader."GMAInvoice Document Type";
                                             MontoCompTotal := recPurchCrMemoHeader."Amount Including VAT";
                                             MontoComp := recPurchCrMemoHeader.Amount;
                                         end;
@@ -293,7 +293,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                 if (FileNameSantaFe <> '') or (FileNameEntreRios <> '') then begin
                     SetRange("Posting Date", FechaDesde, FechaHasta);
                     SetRange(Type, SantaFe.Type::Sale);
-                    SetRange("GMLocTax Type Loc", "GMLocTax type loc"::"Ingresos Brutos");
+                    SetRange("GMATax Type Loc", "GMATax type loc"::"Ingresos Brutos");
                 end else
                     SetRange("Document No.", 'NoAplicaEXC');//Filtro para evitar que corra el dataitem
 
@@ -307,7 +307,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         }
         dataitem(Tucuman; "VAT Entry")
         {
-            DataItemTableView = sorting("Entry No.") where("GMLocDocument Type Loc." = filter(Invoice | "Credit Memo" | "Nota Débito"), Amount = filter(<> 0));
+            DataItemTableView = sorting("Entry No.") where("GMADocument Type Loc." = filter(Invoice | "Credit Memo" | "GMANota Debito"), Amount = filter(<> 0));
             column(ReportForNavId_6769; 6769)
             {
             }
@@ -326,8 +326,8 @@ report 80889 "PERSIRCAR_REG_1y2"
                 case Type of
                     Type::Sale:
                         begin
-                            case "GMLocDocument Type Loc." of
-                                "GMLocDocument Type Loc."::Invoice, "GMLocDocument Type Loc."::"Nota Débito":
+                            case "GMADocument Type Loc." of
+                                "GMADocument Type Loc."::Invoice, "GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recSalesInvHeader.Reset;
                                         recSalesInvHeader.SetRange("No.", "Document No.");
@@ -353,7 +353,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                                         CodPostal := recSalesInvHeader."Bill-to Post Code";
                                     end;
 
-                                "GMLocDocument Type Loc."::"Credit Memo":
+                                "GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recSalesCrMemoHeader.Reset;
                                         recSalesCrMemoHeader.SetRange("No.", "Document No.");
@@ -379,27 +379,27 @@ report 80889 "PERSIRCAR_REG_1y2"
 
                     Type::Purchase:
                         begin
-                            case "GMLocDocument Type Loc." of
-                                "GMLocDocument Type Loc."::Invoice, "GMLocDocument Type Loc."::"Nota Débito":
+                            case "GMADocument Type Loc." of
+                                "GMADocument Type Loc."::Invoice, "GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recPurchInvHeader.Reset;
                                         recPurchInvHeader.SetRange("No.", "Document No.");
                                         if recPurchInvHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
                                         if (LocTaxArea.Get(recPurchInvHeader."Tax Area Code")) then begin
-                                            if (LocTaxArea."GMLocInvoice Letter" = 'A') then begin
-                                                if (recPurchInvHeader."GMLocInvoice Type" = recPurchInvHeader."GMLocinvoice type"::Factura) then
+                                            if (LocTaxArea."GMAInvoice Letter" = 'A') then begin
+                                                if (recPurchInvHeader."GMAInvoice Type" = recPurchInvHeader."GMAinvoice type"::Factura) then
                                                     TipoComprobante := '01';
 
-                                                if (recPurchInvHeader."GMLocInvoice Type" = recPurchInvHeader."GMLocinvoice type"::"Nota Débito") then
+                                                if (recPurchInvHeader."GMAInvoice Type" = recPurchInvHeader."GMAinvoice type"::"Nota Debito") then
                                                     TipoComprobante := '02';
 
                                             end;
-                                            if (LocTaxArea."GMLocInvoice Letter" = 'B') then begin
-                                                if (recPurchInvHeader."GMLocInvoice Type" = recPurchInvHeader."GMLocinvoice type"::Factura) then
+                                            if (LocTaxArea."GMAInvoice Letter" = 'B') then begin
+                                                if (recPurchInvHeader."GMAInvoice Type" = recPurchInvHeader."GMAinvoice type"::Factura) then
                                                     TipoComprobante := '06';
 
-                                                if (recPurchInvHeader."GMLocInvoice Type" = recPurchInvHeader."GMLocinvoice type"::"Nota Débito") then
+                                                if (recPurchInvHeader."GMAInvoice Type" = recPurchInvHeader."GMAinvoice type"::"Nota Debito") then
                                                     TipoComprobante := '07';
                                             end;
                                         end;
@@ -409,16 +409,16 @@ report 80889 "PERSIRCAR_REG_1y2"
                                         CodPostal := recPurchInvHeader."Pay-to Post Code";
                                     end;
 
-                                "GMLocDocument Type Loc."::"Credit Memo":
+                                "GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recPurchCrMemoHeader.Reset;
                                         recPurchCrMemoHeader.SetRange("No.", "Document No.");
                                         if recPurchCrMemoHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
                                         if (LocTaxArea.Get(recPurchCrMemoHeader."Tax Area Code")) then begin
-                                            if (LocTaxArea."GMLocInvoice Letter" = 'A') then
+                                            if (LocTaxArea."GMAInvoice Letter" = 'A') then
                                                 TipoComprobante := '03';
-                                            if (LocTaxArea."GMLocInvoice Letter" = 'B') then
+                                            if (LocTaxArea."GMAInvoice Letter" = 'B') then
                                                 TipoComprobante := '08';
                                         end;
 
@@ -445,7 +445,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                 if FileNameTucuman <> '' then begin
                     SetRange("Posting Date", FechaDesde, FechaHasta);
                     SetRange(Type, Tucuman.Type::Sale);
-                    SetRange("GMLocTax Type Loc", "GMLoctax type loc"::"Ingresos Brutos");
+                    SetRange("GMATax Type Loc", "GMAtax type loc"::"Ingresos Brutos");
                 end else
                     SetRange("Document No.", 'NoAplicaEXC');//Filtro para evitar que corra el dataitem
 
@@ -458,7 +458,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         }
         dataitem(Misiones; "VAT Entry")
         {
-            DataItemTableView = sorting("Entry No.") where("GMLocDocument Type Loc." = filter(Invoice | "Credit Memo" | "Nota Débito"), Amount = filter(<> 0));
+            DataItemTableView = sorting("Entry No.") where("GMADocument Type Loc." = filter(Invoice | "Credit Memo" | "GMANota Debito"), Amount = filter(<> 0));
             column(ReportForNavId_2274; 2274)
             {
             }
@@ -473,26 +473,26 @@ report 80889 "PERSIRCAR_REG_1y2"
                 case Type of
                     Type::Sale:
                         begin
-                            case "GMLocDocument Type Loc." of
-                                "GMLocDocument Type Loc."::Invoice, "GMLocDocument Type Loc."::"Nota Débito":
+                            case "GMADocument Type Loc." of
+                                "GMADocument Type Loc."::Invoice, "GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recSalesInvHeader.Reset;
                                         recSalesInvHeader.SetRange("No.", "Document No.");
                                         if recSalesInvHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                        TipoComprobante := recSalesInvHeader."GMLocAFIP Voucher Type";
+                                        TipoComprobante := recSalesInvHeader."GMAAFIP Voucher Type";
                                         Nombre_RazSoc := recSalesInvHeader."Bill-to Name";
                                         Domicilio := recSalesInvHeader."Bill-to Address";
                                         CodPostal := recSalesInvHeader."Bill-to Post Code";
                                     end;
 
-                                "GMLocDocument Type Loc."::"Credit Memo":
+                                "GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recSalesCrMemoHeader.Reset;
                                         recSalesCrMemoHeader.SetRange("No.", "Document No.");
                                         if recSalesCrMemoHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                        TipoComprobante := recSalesCrMemoHeader."GMLocAFIP Voucher Type";
+                                        TipoComprobante := recSalesCrMemoHeader."GMAAFIP Voucher Type";
                                         Nombre_RazSoc := recSalesCrMemoHeader."Bill-to Name";
                                         Domicilio := recSalesCrMemoHeader."Bill-to Address";
                                         CodPostal := recSalesCrMemoHeader."Bill-to Post Code";
@@ -502,26 +502,26 @@ report 80889 "PERSIRCAR_REG_1y2"
 
                     Type::Purchase:
                         begin
-                            case "GMLocDocument Type Loc." of
-                                "GMLocDocument Type Loc."::Invoice, "GMLocDocument Type Loc."::"Nota Débito":
+                            case "GMADocument Type Loc." of
+                                "GMADocument Type Loc."::Invoice, "GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recPurchInvHeader.Reset;
                                         recPurchInvHeader.SetRange("No.", "Document No.");
                                         if recPurchInvHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                        TipoComprobante := recPurchInvHeader."GMLocInvoice Document Type";
+                                        TipoComprobante := recPurchInvHeader."GMAInvoice Document Type";
                                         Nombre_RazSoc := recPurchInvHeader."Pay-to Vendor No.";
                                         Domicilio := recPurchInvHeader."Pay-to Address";
                                         CodPostal := recPurchInvHeader."Pay-to Post Code";
                                     end;
 
-                                "GMLocDocument Type Loc."::"Credit Memo":
+                                "GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recPurchCrMemoHeader.Reset;
                                         recPurchCrMemoHeader.SetRange("No.", "Document No.");
                                         if recPurchCrMemoHeader.FindFirst then
                                             Provincia := "#Provincia"("Tax Jurisdiction Code", "VAT Prod. Posting Group");
-                                        TipoComprobante := recPurchCrMemoHeader."GMLocInvoice Document Type";
+                                        TipoComprobante := recPurchCrMemoHeader."GMAInvoice Document Type";
                                         Nombre_RazSoc := recPurchCrMemoHeader."Pay-to Vendor No.";
                                         Domicilio := recPurchCrMemoHeader."Pay-to Address";
                                         CodPostal := recPurchCrMemoHeader."Pay-to Post Code";
@@ -543,7 +543,7 @@ report 80889 "PERSIRCAR_REG_1y2"
 
                     SetRange(Type, Misiones.Type::Sale);
 
-                    SetRange("GMLocTax Type Loc", "GMLoctax type loc"::"Ingresos Brutos");
+                    SetRange("GMATax Type Loc", "GMAtax type loc"::"Ingresos Brutos");
                 end else
                     SetRange("Document No.", 'NoAplicaEXC');//Filtro para evitar que corra el dataitem
 
@@ -556,7 +556,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         }
         dataitem(IIBB; "VAT Entry")
         {
-            DataItemTableView = sorting("Entry No.") where("GMLocDocument Type Loc." = filter(Invoice | "Credit Memo" | "Nota Débito"), Amount = filter(<> 0));
+            DataItemTableView = sorting("Entry No.") where("GMADocument Type Loc." = filter(Invoice | "Credit Memo" | "GMANota Debito"), Amount = filter(<> 0));
             column(ReportForNavId_6570; 6570)
             {
             }
@@ -575,7 +575,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                 if FileNameIIBB <> '' then begin
                     SetRange("Posting Date", FechaDesde, FechaHasta);
                     SetRange(Type, IVA.Type::Purchase);
-                    SetRange("GMLocTax Type Loc", IIBB."GMLoctax type loc"::"Ingresos Brutos");
+                    SetRange("GMATax Type Loc", IIBB."GMAtax type loc"::"Ingresos Brutos");
 
                     SetFilter("Tax Area Code", '*ADUANA*');
 
@@ -753,8 +753,8 @@ report 80889 "PERSIRCAR_REG_1y2"
                 case recMisionesTemp.Type of
                     recMisionesTemp.Type::Sale:
                         begin
-                            case recMisionesTemp."GMLocDocument Type Loc." of
-                                recMisionesTemp."GMLocDocument Type Loc."::Invoice, recMisionesTemp."GMLocDocument Type Loc."::"Nota Débito":
+                            case recMisionesTemp."GMADocument Type Loc." of
+                                recMisionesTemp."GMADocument Type Loc."::Invoice, recMisionesTemp."GMADocument Type Loc."::"GMANota Debito":
                                     begin
                                         recSalesInvHeader.Reset;
                                         recSalesInvHeader.SetRange("No.", recMisionesTemp."Document No.");
@@ -762,7 +762,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                                             _recTaxArea.Reset;
                                             _recTaxArea.SetRange(Code, recSalesInvHeader."Tax Area Code");
                                             if _recTaxArea.FindFirst then;
-                                            case recSalesInvHeader."GMLocAFIP Voucher Type" of
+                                            case recSalesInvHeader."GMAAFIP Voucher Type" of
                                                 '001':
                                                     TipoComprobante := 'FA_A';
                                                 '006':
@@ -800,16 +800,16 @@ report 80889 "PERSIRCAR_REG_1y2"
                                                 '212':
                                                     TipoComprobante := 'NDE_C';
                                             end;
-                                            //TipoComprobante := _recTaxArea."GMLocInvoice Letter";
+                                            //TipoComprobante := _recTaxArea."GMAInvoice Letter";
 
-                                            Provincia := recSalesInvHeader.GMLocProvince;
+                                            Provincia := recSalesInvHeader.GMAProvince;
                                             Nombre_RazSoc := recSalesInvHeader."Bill-to Name";
                                             Domicilio := recSalesInvHeader."Sell-to Address";
                                             CodPostal := recSalesInvHeader."Sell-to Post Code";
                                         end;
                                     end;
 
-                                recMisionesTemp."GMLocDocument Type Loc."::"Credit Memo":
+                                recMisionesTemp."GMADocument Type Loc."::"Credit Memo":
                                     begin
                                         recSalesCrMemoHeader.Reset;
                                         recSalesCrMemoHeader.SetRange("No.", recMisionesTemp."Document No.");
@@ -817,7 +817,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                                             _recTaxArea.Reset;
                                             _recTaxArea.SetRange(Code, recSalesCrMemoHeader."Tax Area Code");
                                             if _recTaxArea.FindFirst then;
-                                            case recSalesCrMemoHeader."GMLocAFIP Voucher Type" of
+                                            case recSalesCrMemoHeader."GMAAFIP Voucher Type" of
                                                 '001':
                                                     TipoComprobante := 'FA_A';
                                                 '006':
@@ -855,9 +855,9 @@ report 80889 "PERSIRCAR_REG_1y2"
                                                 '212':
                                                     TipoComprobante := 'NDE_C';
                                             end;
-                                            //TipoComprobante := _recTaxArea."GMLocInvoice Letter";
+                                            //TipoComprobante := _recTaxArea."GMAInvoice Letter";
 
-                                            Provincia := recSalesCrMemoHeader.GMLocProvince;
+                                            Provincia := recSalesCrMemoHeader.GMAProvince;
                                             Nombre_RazSoc := recSalesCrMemoHeader."Bill-to Name";
                                             Domicilio := recSalesCrMemoHeader."Sell-to Address";
                                             CodPostal := recSalesCrMemoHeader."Sell-to Post Code";
@@ -1003,7 +1003,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                     {
                         ApplicationArea = Basic;
                         Caption = 'Tipo retencion';
-                        TableRelation = GMLocValues;
+                        TableRelation = GMAValues;
                         Visible = false;
                     }
                     field(FileName; FileName)
@@ -1068,7 +1068,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                     {
                         ApplicationArea = Basic;
                         Caption = 'Filtro Province';
-                        TableRelation = GMLocProvince;
+                        TableRelation = GMAProvince;
                     }
                     field(FileNameSantaFe; FileNameSantaFe)
                     {
@@ -1095,7 +1095,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                         {
                             ApplicationArea = Basic;
                             Caption = 'Filtro Province';
-                            TableRelation = GMLocProvince;
+                            TableRelation = GMAProvince;
                         }
                         field(FileNameEntreRios; FileNameEntreRios)
                         {
@@ -1123,7 +1123,7 @@ report 80889 "PERSIRCAR_REG_1y2"
                             ApplicationArea = Basic;
                             Caption = 'Filtro Province';
                             Editable = false;
-                            TableRelation = GMLocProvince;
+                            TableRelation = GMAProvince;
                         }
                         field(FileNameCordoba; FileNameCordoba)
                         {
@@ -1263,49 +1263,49 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         if NumeroLineas > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuff);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
 
         if NumeroLineasCordoba > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffCordoba);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
         if NumeroLineasCordobaIIBB > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffCordobaIIBB);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
 
         if NumeroLineasCordobaARP > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffCordobaARP);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
 
 
         if NumeroLineasSantaFe > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffSantaFe);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
 
 
         if NumeroLineasEntreRios > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffEntreRios);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
         if NumeroLineasTucuman > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffTucuman);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
 
         if NumeroLineasMisiones > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffMisiones);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
         // ExportaTxt."#ExportaTxtWithName"(FileNameNull, TempExcelBuffMisiones, FileNameMisiones);
 
@@ -1313,7 +1313,7 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         if NumeroLineasIIBB > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffIIBB);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
 
@@ -1322,13 +1322,13 @@ report 80889 "PERSIRCAR_REG_1y2"
          end;*/
         if NumeroLineasTucuman2 > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffTucuman2);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
 
         if NumeroLineasTucuman3 > 0 then begin
             XMLImporExport."#CargaExcelBuffTemp"(TempExcelBuffTucuman3);
-            Xmlport.Run(80396, false, false);
+            Xmlport.Run(34006396, false, false);
         end;
 
         if ((NumeroLineas = 0) and (NumeroLineasCordoba = 0) and
@@ -1351,7 +1351,7 @@ report 80889 "PERSIRCAR_REG_1y2"
     end;
 
     var
-        XMLImporExport: XmlPort "GMLocXML ImportExport";
+        XMLImporExport: XmlPort "GMAXML ImportExport";
         FechaDesde: Date;
         FechaHasta: Date;
         Proveedor: Record Vendor;
@@ -1453,7 +1453,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         Nombre_RazSoc: Text[100];
         Domicilio: Text[100];
         CodPostal: Text[50];
-        recProvince: Record GMLocProvince;
+        recProvince: Record GMAProvince;
         recPostCode: Record "Post Code";
         Localidad: Text[100];
         IsSales: Boolean;
@@ -1503,7 +1503,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         EscribirFicheroCordobaIIBB: Boolean;
         TextoBisCordobaIIBB: BigText;
         TempExcelBuffCordobaIIBB: Record "Excel Buffer" temporary;
-        recCordobaTempIIBB: Record "GMLocWithholding Ledger Entry" temporary;
+        recCordobaTempIIBB: Record "GMAWithholding Ledger Entry" temporary;
         "-------Cordoba APR------": Integer;
         OutFileCordobaARP: File;
         TextoCordobaARP: Text[1024];
@@ -1684,11 +1684,11 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         //Tipo de comprobante
         case recCordobaTemp."Document Type" of
-            recCordobaTemp."GMLocDocument Type Loc."::Invoice:
+            recCordobaTemp."GMADocument Type Loc."::Invoice:
                 Campo2 := '001';
-            recCordobaTemp."GMLocDocument Type Loc."::"Credit Memo":
+            recCordobaTemp."GMADocument Type Loc."::"Credit Memo":
                 Campo2 := '102';
-            recCordobaTemp."GMLocDocument Type Loc."::"Nota Débito":
+            recCordobaTemp."GMADocument Type Loc."::"GMANota Debito":
                 Campo2 := '002';
         end;
 
@@ -1697,8 +1697,8 @@ report 80889 "PERSIRCAR_REG_1y2"
         _recTaxArea.SetRange(Code, recCordobaTemp."Tax Area Code");
         if _recTaxArea.FindFirst then
             //++@r ARIBM.SPR-200610 @v 29594 @m1
-            //Campo3 := _recTaxArea."GMLocInvoice Letter" old code
-            Campo3 := UpperCase(_recTaxArea."GMLocInvoice Letter")
+            //Campo3 := _recTaxArea."GMAInvoice Letter" old code
+            Campo3 := UpperCase(_recTaxArea."GMAInvoice Letter")
         //++@r ARIBM.SPR-200610 @v 29594 @m1
         else
             Campo3 := 'Z';
@@ -1949,7 +1949,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         Campo3 := '1';
 
         //Numero Comprobante
-        Campo4 := recCordobaTempIIBB."GMLocVoucher Number";
+        Campo4 := recCordobaTempIIBB."GMAVoucher Number";
         //++@r ARIBM.SPR-200610 @v 29594 @m1
         //old code
         //Campo4 := DELCHR(Campo4, '=', 'QWERTYUIOP├É*ASDFGHJKL┬Ñ[]>ZXCVBNM;:_');
@@ -1962,26 +1962,26 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         //CUIT
         _recVendor.Reset;
-        _recVendor.SetRange("No.", recCordobaTempIIBB."GMLocVendor Code");
+        _recVendor.SetRange("No.", recCordobaTempIIBB."GMAVendor Code");
         if _recVendor.FindFirst then;
         Campo5 := DelChr(_recVendor."VAT Registration No.", '=', '-./');
         while StrLen(Campo5) < 11 do
             Campo5 := '0' + Campo5;
 
         //Fecha de retencion
-        Campo6 := Format(recCordobaTempIIBB."GMLocWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>');
+        Campo6 := Format(recCordobaTempIIBB."GMAWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>');
 
         //Monto sujeto retencion
-        while StrLen(Campo7) + StrLen(ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB.GMLocBase, 0.01), 0,
+        while StrLen(Campo7) + StrLen(ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB.GMABase, 0.01), 0,
           '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.')) < 12 do Campo7 += '0';
         begin
-            Campo7 += ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB.GMLocBase, 0.01), 0,
+            Campo7 += ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB.GMABase, 0.01), 0,
             '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.');
         end;
 
         //Alicuota
-        if recCordobaTempIIBB.GMLocBase <> 0 then
-            _Alicuota := ROUND(((recCordobaTempIIBB."GMLocWithholding Amount" * 100) / recCordobaTempIIBB.GMLocBase), 0.0001);
+        if recCordobaTempIIBB.GMABase <> 0 then
+            _Alicuota := ROUND(((recCordobaTempIIBB."GMAWithholding Amount" * 100) / recCordobaTempIIBB.GMABase), 0.0001);
         while StrLen(Campo8) + StrLen(ConvertStr(DelChr(Format(ROUND(_Alicuota, 0.0001), 0,
           '<Precision,4:4><integer><decimals>'), '.', ''), ',', '.')) < 6 do Campo8 += '0';
         begin
@@ -1990,17 +1990,17 @@ report 80889 "PERSIRCAR_REG_1y2"
         end;
         //--@r ARIBM.SPR-200610 @v 29594 @m1
         //Monto retenido
-        while StrLen(Campo9) + StrLen(ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB."GMLocWithholding Amount", 0.01), 0,
+        while StrLen(Campo9) + StrLen(ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB."GMAWithholding Amount", 0.01), 0,
           '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.')) < 12 do Campo9 += '0';
         begin
-            Campo9 += ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB."GMLocWithholding Amount", 0.01), 0,
+            Campo9 += ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB."GMAWithholding Amount", 0.01), 0,
             '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.');
         end;
 
         //Tipo de regimen
 
-        if (recCordobaTempIIBB."GMLocTax System" <> '') then
-            Campo10 := recCordobaTempIIBB."GMlocTax System"
+        if (recCordobaTempIIBB."GMATax System" <> '') then
+            Campo10 := recCordobaTempIIBB."GMATax System"
         else
             Campo10 := '001';
 
@@ -2017,10 +2017,10 @@ report 80889 "PERSIRCAR_REG_1y2"
             Campo12 := '1';
 
             //Fecha Emision de constancia
-            Campo13 := Format(recCordobaTempIIBB."GMLocWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>');
+            Campo13 := Format(recCordobaTempIIBB."GMAWithholding Date", 10, '<Day,2>/<Month,2>/<Year4>');
 
             //Numero de Constancia
-            Campo14 := recCordobaTempIIBB."GMLocWithh. Certificate No.";
+            Campo14 := recCordobaTempIIBB."GMAWithh. Certificate No.";
 
             Campo14 := DelChr(Campo14, '=', DELDOCNUM);
             //--@r ARIBM.SPR-200610 @v 29594 @m1
@@ -2100,7 +2100,7 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         //CUIT
         _recVendor.Reset;
-        _recVendor.SetRange("No.", recCordobaTempIIBB."GMLocVendor Code");
+        _recVendor.SetRange("No.", recCordobaTempIIBB."GMAVendor Code");
         if _recVendor.FindFirst then
             Campo5 := DelChr(_recVendor."VAT Registration No.", '=', '-./ ');
 
@@ -2119,28 +2119,28 @@ report 80889 "PERSIRCAR_REG_1y2"
             Campo24 := Campo24 + ' ';
 
         //Fecha Emision de constancia
-        Campo13 := Format(recCordobaTempIIBB."GMLocWithholding Date", 8, '<Day,2><Month,2><Year4>');
+        Campo13 := Format(recCordobaTempIIBB."GMAWithholding Date", 8, '<Day,2><Month,2><Year4>');
 
         //Numero Comprobante
-        Campo4 := recCordobaTempIIBB."GMLocVoucher Number";
+        Campo4 := recCordobaTempIIBB."GMAVoucher Number";
         Campo4 := DelChr(Campo4, '=', DELDOCNUM);
         while StrLen(Campo4) < 12 do
             Campo4 := '0' + Campo4;
 
         //Fecha de retencion
-        Campo6 := Format(recCordobaTempIIBB."GMLocWithholding Date", 8, '<Day,2><Month,2><Year4>');
+        Campo6 := Format(recCordobaTempIIBB."GMAWithholding Date", 8, '<Day,2><Month,2><Year4>');
 
         //Monto sujeto retencion
-        while StrLen(Campo7) + StrLen(ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB.GMLocBase, 0.01), 0,
+        while StrLen(Campo7) + StrLen(ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB.GMABase, 0.01), 0,
           '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.')) < 15 do Campo7 += '0';
         begin
-            Campo7 += ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB.GMLocBase, 0.01), 0,
+            Campo7 += ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB.GMABase, 0.01), 0,
             '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.');
         end;
 
         //Alicuota
-        if recCordobaTempIIBB.GMLocBase <> 0 then
-            _Alicuota := ROUND(((recCordobaTempIIBB."GMLocWithholding Amount" * 100) / recCordobaTempIIBB.GMLocBase), 0.01);
+        if recCordobaTempIIBB.GMABase <> 0 then
+            _Alicuota := ROUND(((recCordobaTempIIBB."GMAWithholding Amount" * 100) / recCordobaTempIIBB.GMABase), 0.01);
         while StrLen(Campo8) + StrLen(ConvertStr(DelChr(Format(ROUND(_Alicuota, 0.01), 0,
           '<Precision,4:4><integer><decimals>'), '.', ''), ',', '.')) < 4 do Campo8 += '0';
         begin
@@ -2148,10 +2148,10 @@ report 80889 "PERSIRCAR_REG_1y2"
             '<Precision,4:4><integer><decimals>'), '.', ''), ',', '.');
         end;
         //Monto retenido
-        while StrLen(Campo9) + StrLen(ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB."GMLocWithholding Amount", 0.01), 0,
+        while StrLen(Campo9) + StrLen(ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB."GMAWithholding Amount", 0.01), 0,
           '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.')) < 15 do Campo9 += '0';
         begin
-            Campo9 += ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB."GMLocWithholding Amount", 0.01), 0,
+            Campo9 += ConvertStr(DelChr(Format(ROUND(recCordobaTempIIBB."GMAWithholding Amount", 0.01), 0,
             '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.');
         end;
 
@@ -2217,11 +2217,11 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         //Tipo de comprobante
         case recSantaFeTemp."Document Type" of
-            recSantaFeTemp."GMLocDocument Type Loc."::Invoice:
+            recSantaFeTemp."GMADocument Type Loc."::Invoice:
                 Campo2 := '001';
-            recSantaFeTemp."GMLocDocument Type Loc."::"Credit Memo":
+            recSantaFeTemp."GMADocument Type Loc."::"Credit Memo":
                 Campo2 := '102';
-            recSantaFeTemp."GMLocDocument Type Loc."::"Nota Débito":
+            recSantaFeTemp."GMADocument Type Loc."::"GMANota Debito":
                 Campo2 := '002';
         end;
 
@@ -2229,7 +2229,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         _recTaxArea.Reset;
         _recTaxArea.SetRange(Code, recSantaFeTemp."Tax Area Code");
         if _recTaxArea.FindFirst then
-            Campo3 := UpperCase(_recTaxArea."GMLocInvoice Letter")
+            Campo3 := UpperCase(_recTaxArea."GMAInvoice Letter")
         else
             Campo3 := 'Z';
 
@@ -2484,11 +2484,11 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         //Tipo de comprobante
         case recEntreRiosTemp."Document Type" of
-            recEntreRiosTemp."GMLocDocument Type Loc."::Invoice:
+            recEntreRiosTemp."GMADocument Type Loc."::Invoice:
                 Campo5 := 'F     ';
-            recEntreRiosTemp."GMLocDocument Type Loc."::"Credit Memo":
+            recEntreRiosTemp."GMADocument Type Loc."::"Credit Memo":
                 Campo5 := 'C     ';
-            recEntreRiosTemp."GMLocDocument Type Loc."::"Nota Débito":
+            recEntreRiosTemp."GMADocument Type Loc."::"GMANota Debito":
                 Campo5 := 'D     ';
         end;
 
@@ -2496,7 +2496,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         _recTaxArea.Reset;
         _recTaxArea.SetRange(Code, recEntreRiosTemp."Tax Area Code");
         if _recTaxArea.FindFirst then
-            Campo6 := UpperCase(_recTaxArea."GMLocInvoice Letter")
+            Campo6 := UpperCase(_recTaxArea."GMAInvoice Letter")
         else
             Campo6 := 'Z';
 
@@ -2576,11 +2576,11 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         //Tipo regimen Percepcion
         case recEntreRiosTemp."Document Type" of
-            recEntreRiosTemp."GMLocDocument Type Loc."::Invoice:
+            recEntreRiosTemp."GMADocument Type Loc."::Invoice:
                 Campo11 := '0';
-            recEntreRiosTemp."GMLocDocument Type Loc."::"Credit Memo":
+            recEntreRiosTemp."GMADocument Type Loc."::"Credit Memo":
                 Campo11 := '1';
-            recEntreRiosTemp."GMLocDocument Type Loc."::"Nota Débito":
+            recEntreRiosTemp."GMADocument Type Loc."::"GMANota Debito":
                 Campo11 := '0';
         end;
 
@@ -2625,7 +2625,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         _Provincia: Text[15];
         _Ningbru: Text[11];
         _CPostal: Text[8];
-        _recProvince: Record GMLocProvince;
+        _recProvince: Record GMAProvince;
         _recVendor: Record Vendor;
         _recSalesCrMemoHeader: Record "Sales Cr.Memo Header";
         _Campo3Aux: Text[30];
@@ -2671,8 +2671,8 @@ report 80889 "PERSIRCAR_REG_1y2"
             _recVendor.SetRange("No.", recTucumanTemp."Bill-to/Pay-to No.");
             if _recVendor.FindFirst then begin
                 //Tipo Doc
-                if (_recVendor."GMLocAFIP Document Type" <> '') then
-                    Campo2 := _recVendor."GMLocAFIP Document Type"
+                if (_recVendor."GMAAFIP Document Type" <> '') then
+                    Campo2 := _recVendor."GMAAFIP Document Type"
                 else
                     Campo2 := '80';
                 //Documento
@@ -2686,8 +2686,8 @@ report 80889 "PERSIRCAR_REG_1y2"
             _recCustomer.SetRange("No.", recTucumanTemp."Bill-to/Pay-to No.");
             if _recCustomer.FindFirst then begin
                 //Tipo Doc
-                if (_recCustomer."GMLocAFIP Document Type" <> '') then
-                    Campo2 := _recCustomer."GMLocAFIP Document Type"
+                if (_recCustomer."GMAAFIP Document Type" <> '') then
+                    Campo2 := _recCustomer."GMAAFIP Document Type"
                 else
                     Campo2 := '80';
                 //Documento
@@ -2700,11 +2700,11 @@ report 80889 "PERSIRCAR_REG_1y2"
 
         //Tipo Comp
 
-        if (recTucumanTemp."GMLocPoint of Sales" <> '') then
-            Campo4 := CopyStr(recTucumanTemp."GMLocPoint of Sales", 1, 2);
+        if (recTucumanTemp."GMAPoint of Sales" <> '') then
+            Campo4 := CopyStr(recTucumanTemp."GMAPoint of Sales", 1, 2);
 
         //Letra
-        case recTucumanTemp."GMLocPoint of Sales" of
+        case recTucumanTemp."GMAPoint of Sales" of
             '01', '02', '03':
                 Campo5 := 'A';
             '06', '07', '08':
@@ -2826,8 +2826,8 @@ report 80889 "PERSIRCAR_REG_1y2"
             _recCustomer.SetRange("No.", recTucumanTemp."Bill-to/Pay-to No.");
             if _recCustomer.FindFirst then begin
                 //++@r ARIBM.CPA-160613 @v 14397 @m 1
-                if (_recCustomer."GMLocAFIP Document Type" <> '') then
-                    _TipoDoc := _recCustomer."GMLocAFIP Document Type"
+                if (_recCustomer."GMAAFIP Document Type" <> '') then
+                    _TipoDoc := _recCustomer."GMAAFIP Document Type"
                 else
                     _TipoDoc := '80';
                 //--@r ARIBM.CPA-160613 @v 14397 @m 1
@@ -2856,9 +2856,9 @@ report 80889 "PERSIRCAR_REG_1y2"
                     _Localidad := _Localidad + ' ';
 
                 _recProvince.Reset;
-                _recProvince.SetRange("GMLocProvince Code", _recCustomer."GMLocProvince Code");
+                _recProvince.SetRange("GMAProvince Code", _recCustomer."GMAProvince Code");
                 if _recProvince.FindFirst then;
-                _Provincia := CopyStr(_recProvince.GMLocDescription, 1, 15);
+                _Provincia := CopyStr(_recProvince.GMADescription, 1, 15);
                 while StrLen(_Provincia) < 15 do
                     _Provincia := _Provincia + ' ';
 
@@ -2873,8 +2873,8 @@ report 80889 "PERSIRCAR_REG_1y2"
             _recVendor.SetRange("No.", recTucumanTemp."Bill-to/Pay-to No.");
             if _recVendor.FindFirst then begin
                 //++@r ARIBM.CPA-160613 @v 14397 @m 1
-                if (_recCustomer."GMLocAFIP Document Type" <> '') then
-                    _TipoDoc := _recCustomer."GMLocAFIP Document Type"
+                if (_recCustomer."GMAAFIP Document Type" <> '') then
+                    _TipoDoc := _recCustomer."GMAAFIP Document Type"
                 else
                     _TipoDoc := '80';
                 //--@r ARIBM.CPA-160613 @v 14397 @m 1
@@ -2893,7 +2893,7 @@ report 80889 "PERSIRCAR_REG_1y2"
 
                 _No := '00000';
 
-                //++@r ARIBM.MJI-160809 @v 15738 @m 2
+                //++@r ARIBM.MJI-160340069 @v 15738 @m 2
                 //ORG+
                 //_Localidad := _recVendor.City;
                 _Localidad := CopyStr(_recVendor.City, 1, 15);
@@ -2903,9 +2903,9 @@ report 80889 "PERSIRCAR_REG_1y2"
                     _Localidad := _Localidad + ' ';
 
                 _recProvince.Reset;
-                _recProvince.SetRange("GMLocProvince Code", _recVendor."GMLocProvince Code");
+                _recProvince.SetRange("GMAProvince Code", _recVendor."GMAProvince Code");
                 if _recProvince.FindFirst then;
-                _Provincia := CopyStr(_recProvince.GMLocDescription, 1, 15);
+                _Provincia := CopyStr(_recProvince.GMADescription, 1, 15);
                 while StrLen(_Provincia) < 15 do
                     _Provincia := _Provincia + ' ';
 
@@ -3120,10 +3120,10 @@ report 80889 "PERSIRCAR_REG_1y2"
         _recTaxJur.Reset;
         _recTaxJur.SetRange(Code, IIBB."Tax Jurisdiction Code");
         if _recTaxJur.FindFirst then begin //++@r ARIBM.CPA-160613 @v 14749 @m 1-
-            if (_recTaxJur."GMLocProvince Code" = '') then
+            if (_recTaxJur."GMAProvince Code" = '') then
                 Error(Text005, IIBB."Tax Jurisdiction Code")
             else
-                Campo1 := _recTaxJur."GMLocProvince Code"
+                Campo1 := _recTaxJur."GMAProvince Code"
         end
         else
             Error(Text005, IIBB."Tax Jurisdiction Code");
@@ -3362,7 +3362,7 @@ report 80889 "PERSIRCAR_REG_1y2"
         if not recTucumanTemp.FindFirst then begin
             recTucumanTemp.Init;
             recTucumanTemp.TransferFields(Tucuman);
-            recTucumanTemp."GMLocPoint of Sales" := TipoComprobante;//dds14397 Se completo ese campo para saber que factura es
+            recTucumanTemp."GMAPoint of Sales" := TipoComprobante;//dds14397 Se completo ese campo para saber que factura es
             recTucumanTemp.Insert(false);
         end else begin
             recTucumanTemp.Base += Tucuman.Base;
@@ -3429,10 +3429,10 @@ report 80889 "PERSIRCAR_REG_1y2"
             LocTaxJurisdiction.Reset;
             LocTaxJurisdiction.SetRange(Code, Jurisdiccion);
             if LocTaxJurisdiction.FindFirst then begin
-                if (LocTaxJurisdiction."GMLocProvince Code" = '') then
+                if (LocTaxJurisdiction."GMAProvince Code" = '') then
                     Error(Text005, Jurisdiccion)
                 else
-                    ReturnValue := LocTaxJurisdiction."GMLocProvince Code";
+                    ReturnValue := LocTaxJurisdiction."GMAProvince Code";
             end
             else
                 Error(Text005, Jurisdiccion);
@@ -3442,10 +3442,10 @@ report 80889 "PERSIRCAR_REG_1y2"
                 LocVatProdPostingGroup.Reset();
                 LocVatProdPostingGroup.SetRange(Code, VATProdPostGroup);
                 if LocVatProdPostingGroup.FindFirst() then
-                    if (LocVatProdPostingGroup.GMLocProvince = '') then
+                    if (LocVatProdPostingGroup.GMAProvince = '') then
                         Error(Text006, VATProdPostGroup)
                     else
-                        ReturnValue := LocVatProdPostingGroup.GMLocProvince;
+                        ReturnValue := LocVatProdPostingGroup.GMAProvince;
             end;
         end;
     end;
@@ -3629,22 +3629,22 @@ report 80889 "PERSIRCAR_REG_1y2"
 
     local procedure RegimenSircar(ParJurisdiccion: Code[3]) ReturnValue: Text
     var
-        recProvince: Record GMlocProvince;
+        recProvince: Record GMAProvince;
     begin
         //++@r ARMAS.DDS-230404 @v 46688 @m 1
         recProvince.Get(ParJurisdiccion);
-        recProvince.TestField("GMLocReg.Percepciones Sircar");
-        ReturnValue := recProvince."GMLocReg.Percepciones Sircar";
+        recProvince.TestField("GMAReg.Percepciones Sircar");
+        ReturnValue := recProvince."GMAReg.Percepciones Sircar";
         //--@r ARMAS.DDS-230404 @v 46688 @m 1
     end;
 
     local procedure DisSircar(ParJurisdiccion: Code[3]) ReturnValue: Text
     var
-        recProvince: Record GMlocProvince;
+        recProvince: Record GMAProvince;
     begin
         //++@r ARMAS.DDS-230404 @v 46688 @m 1
         recProvince.Get(ParJurisdiccion);
-        ReturnValue := Format(recProvince.GMLocDis_Sircar);
+        ReturnValue := Format(recProvince.GMADis_Sircar);
         //--@r ARMAS.DDS-230404 @v 46688 @m 1
     end;
 }

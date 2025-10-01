@@ -1,4 +1,4 @@
-tableextension 80904 "PerGeneral Ledger Setup" extends "General Ledger Setup"
+tableextension 34006904 "PerGeneral Ledger Setup" extends "General Ledger Setup"
 {
     fields
     {

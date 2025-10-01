@@ -1,4 +1,4 @@
-﻿report 80891 PersReceipts
+﻿report 34006891 PersReceipts
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -10,19 +10,19 @@
 
     dataset
     {
-        dataitem("GMLocPosted Receipt"; "GMLocPosted Receipt")
+        dataitem("GMAPosted Receipt"; "GMAPosted Receipt")
         {
-            RequestFilterFields = "GMLocNro Recibo";
+            RequestFilterFields = "GMANro Recibo";
             column(numero; numero)
             {
             }
-            column(Hist__Cab_Recibos__Hist__Cab_Recibos___Fecha_de_Recibo_; "GMLocPosted Receipt"."GMLocDocument Date")
+            column(Hist__Cab_Recibos__Hist__Cab_Recibos___Fecha_de_Recibo_; "GMAPosted Receipt"."GMADocument Date")
             {
             }
-            column(Hist__Cab_Recibos_Nombre; GMLocName)
+            column(Hist__Cab_Recibos_Nombre; GMAName)
             {
             }
-            column(Hist__Cab_Recibos_Domicilio; GMLocAddress)
+            column(Hist__Cab_Recibos_Domicilio; GMAAddress)
             {
             }
             column(Cliente__Post_Code_; Cliente."Post Code")
@@ -34,16 +34,16 @@
             column(Cliente_County; Cliente.County)
             {
             }
-            column(Hist__Cab_Recibos_LocARCUIT; GMLocCUIT)
+            column(Hist__Cab_Recibos_LocARCUIT; GMACUIT)
             {
             }
-            column(Hist__Cab_Recibos__Hist__Cab_Recibos___Nro_Cliente_; "GMLocPosted Receipt"."GMLocCustomer No.")
+            column(Hist__Cab_Recibos__Hist__Cab_Recibos___Nro_Cliente_; "GMAPosted Receipt"."GMACustomer No.")
             {
             }
-            column(Cliente__No__ingresos_brutos_; Cliente."GMLocIIBB Code")
+            column(Cliente__No__ingresos_brutos_; Cliente."GMAIIBB Code")
             {
             }
-            column(SerieFactura_Letra; SerieFactura.GMLocLetter)
+            column(SerieFactura_Letra; SerieFactura.GMALetter)
             {
             }
             column(InfoEmpresa__Phone_No__; InfoEmpresa.BssiBillingPhoneNumber)
@@ -58,7 +58,7 @@
             column(InfoEmpresa_LocARName; InfoEmpresa.BssiLegalNameFull)
             {
             }
-            column(Hist__Cab_Recibos__No__; "GMLocNo.")
+            column(Hist__Cab_Recibos__No__; "GMANo.")
             {
             }
             column(InfoEmpresa_Picture; InfoEmpresa.BssiPicture)
@@ -73,7 +73,7 @@
             column(InfoEmpresa_Activity_Starting_Date; InfoEmpresa.BssiActivityStratDate)
             { }
             // AW - END
-            column(Hist__Cab_Recibos__Id__usuario_; "GMLocUser Id")
+            column(Hist__Cab_Recibos__Id__usuario_; "GMAUser Id")
             {
             }
             column(R_E_C_I_B_O___O_F_I_C_I_A_LCaption; R_E_C_I_B_O___O_F_I_C_I_A_LCaptionLbl)
@@ -97,7 +97,7 @@
             column(N__RECIBO_Caption; N__RECIBO_CaptionLbl)
             {
             }
-            column(Hist__Cab_Recibos__Id__usuario_Caption; FIELDCAPTION("GMLocUser Id"))
+            column(Hist__Cab_Recibos__Id__usuario_Caption; FIELDCAPTION("GMAUser Id"))
             {
             }
             column(Cuyo_importe_una_vez_hecho_efectivo_le_s__acreditaremos_seg_n_liquidaci_nCaption; Cuyo_importe_una_vez_hecho_efectivo_le_s__acreditaremos_seg_n_liquidaci_nCaptionLbl)
@@ -106,32 +106,32 @@
             column(indicada_mas_arriba__Agradecemos_su_remesa_y_saludamos_a_Uds__atte_Caption; indicada_mas_arriba__Agradecemos_su_remesa_y_saludamos_a_Uds__atte_CaptionLbl)
             {
             }
-            column(Posted_Receipt_Nro_Recibo; "GMLocNro Recibo")
+            column(Posted_Receipt_Nro_Recibo; "GMANro Recibo")
             {
             }
 
 
-            dataitem("GMLocPosted Receipt Vouchers"; "GMLocPosted Receipt Vouchers")
+            dataitem("GMAPosted Receipt Vouchers"; "GMAPosted Receipt Vouchers")
             {
-                DataItemLink = "GMLocReceipt No." = FIELD("GMLocNro Recibo");
-                DataItemTableView = SORTING("GMLocReceipt No.", "GMLocVoucher No.");
+                DataItemLink = "GMAReceipt No." = FIELD("GMANro Recibo");
+                DataItemTableView = SORTING("GMAReceipt No.", "GMAVoucher No.");
                 MaxIteration = 0;
                 column(Hist__Lin_Comp__Recibo__Nro_Comprobante_; Ndoc)
                 {
                 }
-                column(Hist__Lin_Comp__Recibo_Fecha; GMLocDate)
+                column(Hist__Lin_Comp__Recibo_Fecha; GMADate)
                 {
                 }
-                column(Hist__Lin_Comp__Recibo_Importe; GMLocAmount)
+                column(Hist__Lin_Comp__Recibo_Importe; GMAAmount)
                 {
                 }
-                column(Hist__Lin_Comp__Recibo_ImpPendiente; "GMLocPending Amount")
+                column(Hist__Lin_Comp__Recibo_ImpPendiente; "GMAPending Amount")
                 {
                 }
                 column(Valordivisa; Valordivisa)
                 {
                 }
-                column(Hist__Lin_Comp__Recibo_Cancelado; GMLocCancelled)
+                column(Hist__Lin_Comp__Recibo_Cancelado; GMACancelled)
                 {
                 }
                 column(ImporteDolares; ImporteDolares)
@@ -143,10 +143,10 @@
                 column(ImportePesoTP; ImportePesoTP)
                 {
                 }
-                column(Hist__Lin_Comp__Recibo_Importe_Control1000000027; GMLocAmount)
+                column(Hist__Lin_Comp__Recibo_Importe_Control1000000027; GMAAmount)
                 {
                 }
-                column(Hist__Lin_Comp__Recibo_Cancelado_Control1000000028; GMLocCancelled)
+                column(Hist__Lin_Comp__Recibo_Cancelado_Control1000000028; GMACancelled)
                 {
                 }
                 column(Totalpesos; Totalpesos)
@@ -158,10 +158,10 @@
                 column(Hist__Lin_Comp__Recibo__Nro_Comprobante_Caption; Hist__Lin_Comp__Recibo__Nro_Comprobante_CaptionLbl)
                 {
                 }
-                column(Hist__Lin_Comp__Recibo_FechaCaption; FIELDCAPTION(GMLocDate))
+                column(Hist__Lin_Comp__Recibo_FechaCaption; FIELDCAPTION(GMADate))
                 {
                 }
-                column(Hist__Lin_Comp__Recibo_ImporteCaption; FIELDCAPTION(GMLocAmount))
+                column(Hist__Lin_Comp__Recibo_ImporteCaption; FIELDCAPTION(GMAAmount))
                 {
                 }
                 column(DivisaCaption; DivisaCaptionLbl)
@@ -179,13 +179,13 @@
                 column(EmptyStringCaption; EmptyStringCaptionLbl)
                 {
                 }
-                column(Posted_Receipt_Vouchers_Receipt_No_; "GMLocReceipt No.")
+                column(Posted_Receipt_Vouchers_Receipt_No_; "GMAReceipt No.")
                 {
                 }
-                column(Posted_Receipt_Vouchers_Voucher_No_; "GMLocVoucher No.")
+                column(Posted_Receipt_Vouchers_Voucher_No_; "GMAVoucher No.")
                 {
                 }
-                column(Posted_Receipt_Vouchers_Entry_No_; "GMLocEntry No.")
+                column(Posted_Receipt_Vouchers_Entry_No_; "GMAEntry No.")
                 {
                 }
                 column(TipoCambio; TipoCambio)
@@ -200,25 +200,25 @@
                 var
                     recCLE: Record "Cust. Ledger Entry";
                 begin
-                    if "GMLocPosted Receipt Vouchers"."GMLocCurrency Code" = '' then begin
+                    if "GMAPosted Receipt Vouchers"."GMACurrency Code" = '' then begin
                         Valordivisa := 'PESOS';
                         importedolares := 0;
-                        ImportePesoTP := GMLocCancelled;
+                        ImportePesoTP := GMACancelled;
                     end else begin
-                        Valordivisa := "GMLocPosted Receipt Vouchers"."GMLocCurrency Code";
-                        ImporteDolares := GMLocCancelled;
+                        Valordivisa := "GMAPosted Receipt Vouchers"."GMACurrency Code";
+                        ImporteDolares := GMACancelled;
                     end;
-                    if "GMLocExchange Rate" <> 0 then
-                        Importepesos := GMLocCancelled / "GMLocExchange Rate"
+                    if "GMAExchange Rate" <> 0 then
+                        Importepesos := GMACancelled / "GMAExchange Rate"
                     else
-                        Importepesos := GMLocCancelled;
+                        Importepesos := GMACancelled;
                     Totalpesos := Totalpesos + Importepesos;
 
                     //NAVAR1.06001-
                     CLEAR(Ndoc);
                     RecSalesHeader.RESET;
                     RecSalesHeader.SETCURRENTKEY("No.");
-                    RecSalesHeader.SETRANGE("No.", "GMLocVoucher No.");
+                    RecSalesHeader.SETRANGE("No.", "GMAVoucher No.");
                     if RecSalesHeader.FINDFIRST then
                         Ndoc := RecSalesHeader."External Document No."
                     else
@@ -227,15 +227,15 @@
                     if Ndoc = '' then begin
                         RecSalesCrMemo.RESET;
                         RecSalesCrMemo.SETCURRENTKEY("No.");
-                        RecSalesCrMemo.SETRANGE("No.", "GMLocVoucher No.");
+                        RecSalesCrMemo.SETRANGE("No.", "GMAVoucher No.");
                         if RecSalesCrMemo.FINDFIRST then
                             Ndoc := RecSalesCrMemo."External Document No."
                         else
                             Ndoc := '';
                     end;
 
-                    if (Ndoc = '') and ("GMLocVoucher No." <> '') then begin
-                        Ndoc := "GMLocVoucher No.";
+                    if (Ndoc = '') and ("GMAVoucher No." <> '') then begin
+                        Ndoc := "GMAVoucher No.";
                     end;
 
                     //NAVAR1.06001+
@@ -245,15 +245,15 @@
                     importePendienteTotalFactura := 0;
 
                     recCLE.Reset();
-                    recCLE.SetRange(recCLE."Customer No.", "GMLocPosted Receipt Vouchers".GMLocCustomer);
-                    recCLE.SetRange(recCLE."Document No.", "GMLocPosted Receipt Vouchers"."GMLocVoucher No.");
-                    recCLE.SetRange(recCLE."Entry No.", "GMLocPosted Receipt Vouchers"."GMLocEntry No.");
+                    recCLE.SetRange(recCLE."Customer No.", "GMAPosted Receipt Vouchers".GMACustomer);
+                    recCLE.SetRange(recCLE."Document No.", "GMAPosted Receipt Vouchers"."GMAVoucher No.");
+                    recCLE.SetRange(recCLE."Entry No.", "GMAPosted Receipt Vouchers"."GMAEntry No.");
                     if recCLE.FindFirst() then
                         repeat
                             recCLE.CalcFields("Remaining Amount", "Remaining Amount");
                             importePendienteTotalFactura += recCLE."Remaining Amount";
                         until recCLE.Next() = 0;
-                    importePendienteTotalFactura += "GMLocPosted Receipt Vouchers".GMLocCancelled;
+                    importePendienteTotalFactura += "GMAPosted Receipt Vouchers".GMACancelled;
                     //SDT+
                 end;
 
@@ -262,23 +262,23 @@
                     Totalpesos := 0;
                 end;
             }
-            dataitem("Posted Receipt Values"; "GMLocPosted Receipt Values")
+            dataitem("Posted Receipt Values"; "GMAPosted Receipt Values")
             {
-                DataItemLink = "GMLocReceipt No." = FIELD("GMLocNro Recibo");
-                DataItemTableView = SORTING("GMLocReceipt No.", "GMLocLine No.");
-                column(Hist__Lin_Valores_Recibos__N__Valor_; "GMLocValue No.")
+                DataItemLink = "GMAReceipt No." = FIELD("GMANro Recibo");
+                DataItemTableView = SORTING("GMAReceipt No.", "GMALine No.");
+                column(Hist__Lin_Valores_Recibos__N__Valor_; "GMAValue No.")
                 {
                 }
-                column(Valores_Descripcion; Valores.GMLocDescription)
+                column(Valores_Descripcion; Valores.GMADescription)
                 {
                 }
-                column(Hist__Lin_Valores_Recibos_Entidad; GMLocEntity)
+                column(Hist__Lin_Valores_Recibos_Entidad; GMAEntity)
                 {
                 }
-                column(Hist__Lin_Valores_Recibos__A_Fecha_; "GMLocTo Date")
+                column(Hist__Lin_Valores_Recibos__A_Fecha_; "GMATo Date")
                 {
                 }
-                column(Hist__Lin_Valores_Recibos_Importe; GMLocAmount)
+                column(Hist__Lin_Valores_Recibos_Importe; GMAAmount)
                 {
                 }
                 column(Valordivisa_Control1000000044; Valordivisa)
@@ -287,7 +287,7 @@
                 column(Importepesos_Control1000000046; Importepesos)
                 {
                 }
-                column(Hist__Lin_Valores_Recibos_Importe_Control1000000048; GMLocAmount)
+                column(Hist__Lin_Valores_Recibos_Importe_Control1000000048; GMAAmount)
                 {
                 }
                 column(Totalpesos_Control1000000053; Totalpesos)
@@ -302,13 +302,13 @@
                 column(ValorCaption; ValorCaptionLbl)
                 {
                 }
-                column(Hist__Lin_Valores_Recibos_EntidadCaption; FIELDCAPTION(GMLocEntity))
+                column(Hist__Lin_Valores_Recibos_EntidadCaption; FIELDCAPTION(GMAEntity))
                 {
                 }
-                column(Hist__Lin_Valores_Recibos__A_Fecha_Caption; FIELDCAPTION("GMLocTo Date"))
+                column(Hist__Lin_Valores_Recibos__A_Fecha_Caption; FIELDCAPTION("GMATo Date"))
                 {
                 }
-                column(Hist__Lin_Valores_Recibos_ImporteCaption; FIELDCAPTION(GMLocAmount))
+                column(Hist__Lin_Valores_Recibos_ImporteCaption; FIELDCAPTION(GMAAmount))
                 {
                 }
                 column(DivisaCaption_Control1000000045; DivisaCaption_Control1000000045Lbl)
@@ -323,24 +323,24 @@
                 column(T_O_T_A_L_E_S_Caption_Control1000000035; T_O_T_A_L_E_S_Caption_Control1000000035Lbl)
                 {
                 }
-                column(Posted_Receipt_Values_Receipt_No_; "GMLocReceipt No.")
+                column(Posted_Receipt_Values_Receipt_No_; "GMAReceipt No.")
                 {
                 }
-                column(Posted_Receipt_Values_Line_No_; "GMLocLine No.")
+                column(Posted_Receipt_Values_Line_No_; "GMALine No.")
                 {
                 }
 
                 trigger OnAfterGetRecord();
                 begin
-                    Valores.GET("Posted Receipt Values".GMLocValue);
-                    if "Posted Receipt Values"."GMLocCurrency Code" = '' then
+                    Valores.GET("Posted Receipt Values".GMAValue);
+                    if "Posted Receipt Values"."GMACurrency Code" = '' then
                         Valordivisa := 'PESOS'
                     else
-                        Valordivisa := "Posted Receipt Values"."GMLocCurrency Code";
-                    if "GMLocExchange Rate" <> 0 then
-                        Importepesos := GMLocAmount / "GMLocExchange Rate"
+                        Valordivisa := "Posted Receipt Values"."GMACurrency Code";
+                    if "GMAExchange Rate" <> 0 then
+                        Importepesos := GMAAmount / "GMAExchange Rate"
                     else
-                        Importepesos := GMLocAmount;
+                        Importepesos := GMAAmount;
                     Totalpesos := Totalpesos + Importepesos;
                 end;
 
@@ -352,37 +352,37 @@
 
             trigger OnAfterGetRecord();
             var
-                recVouchers: record "GMLocPosted Receipt Vouchers";
+                recVouchers: record "GMAPosted Receipt Vouchers";
                 varImportePesos: decimal;
                 varImporteDolares: decimal;
-                recValues: record "GMLocPosted Receipt Values";
+                recValues: record "GMAPosted Receipt Values";
                 varTotalPagoPeso: decimal;
                 varEnPesos: decimal;
                 BssiMEMSystemSetup: record BssiMEMSystemSetup;
             begin
-                Cliente.GET("GMLocPosted Receipt"."GMLocCustomer No.");
-                numero := "GMLocNro Recibo";
+                Cliente.GET("GMAPosted Receipt"."GMACustomer No.");
+                numero := "GMANro Recibo";
 
                 recVouchers.Reset();
-                recVouchers.SetRange("GMLocReceipt No.", "GMLocPosted Receipt"."GMLocNro Recibo");
+                recVouchers.SetRange("GMAReceipt No.", "GMAPosted Receipt"."GMANro Recibo");
                 if recVouchers.findfirst then
                     repeat
-                        if recVouchers."GMLocCurrency Code" = '' then
-                            varImportePesos := varImportePesos + recVouchers.GMLocCancelled
+                        if recVouchers."GMACurrency Code" = '' then
+                            varImportePesos := varImportePesos + recVouchers.GMACancelled
                         else begin
-                            varImporteDolares := varImporteDolares + recVouchers.GMLocCancelled;
+                            varImporteDolares := varImporteDolares + recVouchers.GMACancelled;
                         end;
 
                     until recvouchers.Next = 0;
 
                 recValues.reset();
-                recValues.SetRange("GMLocReceipt No.", "GMLocPosted Receipt"."GMLocNro Recibo");
+                recValues.SetRange("GMAReceipt No.", "GMAPosted Receipt"."GMANro Recibo");
                 if recvalues.FindFirst() then
                     repeat
-                        if recValues.GMLocCurrency = '' then
-                            varTotalPagoPeso := varTotalPagoPeso + recValues.GMLocAmount
+                        if recValues.GMACurrency = '' then
+                            varTotalPagoPeso := varTotalPagoPeso + recValues.GMAAmount
                         else
-                            varTotalPagoPeso := varTotalPagoPeso + (recValues.GMLocAmount * (1 / recValues."GMLocExchange Rate"));
+                            varTotalPagoPeso := varTotalPagoPeso + (recValues.GMAAmount * (1 / recValues."GMAExchange Rate"));
                     until recValues.next = 0;
                 if varImporteDolares <> 0 then
                     TipoCambio := (varTotalPagoPeso) / varImporteDolares
@@ -390,14 +390,14 @@
                     TipoCambio := 1;
 
                 SerieFactura.RESET;
-                SerieFactura.SETCURRENTKEY("GMLocInvoice Type", "GMLocFiscal Type", "GMLocCompany Activity");
-                SerieFactura.SETRANGE(SerieFactura."GMLocInvoice Type", SerieFactura."GMLocInvoice Type"::Recibo);
-                SerieFactura.SETRANGE(SerieFactura."GMLocCompany Activity", COPYSTR("GMLocPosted Receipt"."GMLocNro Recibo", 3, 4));
+                SerieFactura.SETCURRENTKEY("GMAInvoice Type", "GMAFiscal Type", "GMACompany Activity");
+                SerieFactura.SETRANGE(SerieFactura."GMAInvoice Type", SerieFactura."GMAInvoice Type"::Recibo);
+                SerieFactura.SETRANGE(SerieFactura."GMACompany Activity", COPYSTR("GMAPosted Receipt"."GMANro Recibo", 3, 4));
                 if SerieFactura.FINDFIRST then;
 
                 InfoEmpresa.Reset();
                 InfoEmpresa.SetFilter("Dimension Code", BssiMEMSystemSetup.Bssi_cGetEntityCode());
-                InfoEmpresa.SetFilter(Code, "GMLocPosted Receipt".BssiMEMEntityID);
+                //DDSDESCOMENTAR  InfoEmpresa.SetFilter(Code, "GMAPosted Receipt".BssiMEMEntityID);
                 IF (InfoEmpresa.FindFirst()) THEN;
                 InfoEmpresa.CALCFIELDS(InfoEmpresa.BssiPicture);
             end;
@@ -426,12 +426,12 @@
         TipoCambio: decimal;
         Cliente: Record Customer;
         Valordivisa: Code[10];
-        Valores: Record GMLocValues;
+        Valores: Record GMAValues;
         ImporteDolares: Decimal;
         Importepesos: Decimal;
         Totalpesos: Decimal;
         numero: Text[20];
-        SerieFactura: Record "GMLocInvoice Series Setup2";
+        SerieFactura: Record "GMAInvoice Series Setup2";
         InfoEmpresa: Record "Dimension Value";
         RecSalesHeader: Record "Sales Invoice Header";
         RecSalesCrMemo: Record "Sales Cr.Memo Header";

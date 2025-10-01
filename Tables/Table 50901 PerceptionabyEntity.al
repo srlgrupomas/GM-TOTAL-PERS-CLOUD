@@ -1,4 +1,4 @@
-table 80901 PerceptionabyEntity
+table 34006901 PerceptionabyEntity
 {
     DataClassification = ToBeClassified;
     LookupPageId = PerceptionabyEntity;
@@ -8,7 +8,7 @@ table 80901 PerceptionabyEntity
         field(1; ProvinceCode; Code[10])
         {
             DataClassification = ToBeClassified;
-            TableRelation = GMLocProvince."GMLocProvince Code";
+            TableRelation = GMAProvince."GMAProvince Code";
             Caption = 'Province Code';
         }
         field(2; EntityID; Code[20])

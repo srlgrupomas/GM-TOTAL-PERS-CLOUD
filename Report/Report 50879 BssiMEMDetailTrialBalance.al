@@ -1,5 +1,5 @@
 
-report 80870 PERDetailTrialBalance
+report 34006870 PERDetailTrialBalance
 {
     // *********************************************************************************
     // Description: Duplicate D365BC Detail Trial Balance (Object ID: 4)
@@ -206,17 +206,17 @@ report 80870 PERDetailTrialBalance
                             ClosingEntry := false;
 
                         if UsarNombreCorporativo then
-                            AccountName := "G/L Account"."GMLocCorporate Account Name"
+                            AccountName := "G/L Account"."GMACorporate Account Name"
                         else
                             AccountName := "G/L Account".Name;
 
 
 
-                        if ("GMLocDocument Type Loc." = "GMLocDocument Type Loc."::"Transferencia") then
+                        if ("GMADocument Type Loc." = "GMADocument Type Loc."::GMATransferencia) then
                             DatoDescriptivo := ' Transferencia a cuenta: ' + "G/L Entry"."PERNombre Cuenta Corporacion";
-                        if "GMLocDocument Type Loc." = "GMLocDocument Type Loc."::"Recibo" then
+                        if "GMADocument Type Loc." = "GMADocument Type Loc."::GMARecibo then
                             DatoDescriptivo := ' Recibo al cliente: ' + "G/L Entry"."PERNombre Cliente";
-                        if "GMLocDocument Type Loc." = "GMLocDocument Type Loc."::"Payment" then
+                        if "GMADocument Type Loc." = "GMADocument Type Loc."::"Payment" then
                             DatoDescriptivo := ' Pago al proveedor: ' + "G/L Entry"."PERNombre Proveedor";
                     end;
 
@@ -231,7 +231,7 @@ report 80870 PERDetailTrialBalance
                 begin
                     // CurrReport.PrintOnlyIfDetail := ExcludeBalanceOnly or (StartBalance = 0);
                     if UsarNombreCorporativo then
-                        AccountName := "G/L Account"."GMLocCorporate Account Name"
+                        AccountName := "G/L Account"."GMACorporate Account Name"
                     else
                         AccountName := "G/L Account".Name;
                 end;
@@ -264,7 +264,7 @@ report 80870 PERDetailTrialBalance
                 end;
 
                 if UsarNombreCorporativo then
-                    AccountName := "G/L Account"."GMLocCorporate Account Name"
+                    AccountName := "G/L Account"."GMACorporate Account Name"
                 else
                     AccountName := "G/L Account".Name;
 

@@ -1,4 +1,4 @@
-page 80872 "Previsualización IVA"
+page 34006872 "Previsualización IVA"
 {
     PageType = List;
     SourceTable = "VAT Entry";

@@ -1,6 +1,6 @@
  
 
-page 80998 "LOCELEntries Part"
+page 34006998 "LOCELEntries Part"
 {
     ApplicationArea = All;
     Caption = 'G/L Entries Part';

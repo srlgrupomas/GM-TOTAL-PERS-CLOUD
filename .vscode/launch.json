@@ -1,58 +1,26 @@
 {
     "version": "0.2.0",
     "configurations": [
-        // {
-        //    "name": "Your own server",
-        //     "request": "launch",
-        //     "type": "al",
-        //     "environmentType": "OnPrem",
-        //     "server": "http://localhost",
-        //     "serverInstance": "BC240W1",
-        //     "port": 2449, 
-        //     "authentication": "Windows",
-        //     "startupObjectId": 22,
-        //     "startupObjectType": "Page",
-        //     "breakOnError": true,
-        //     "launchBrowser": true,
-        //     "enableLongRunningSqlStatements": true,
-        //     "enableSqlInformationDebugger": true,
-        //     "tenant": "default",
-        //     "schemaUpdateMode": "ForceSync"
-        // }
+        
 
-        // {
-        //     "name": " Your own server",
-        //     "request": "launch",
-        //     "type": "al",
-        //     "environmentType": "Sandbox",
-        //     "environmentName": "LOC_TOTAL_W1",
-        //    "schemaUpdateMode": "ForceSync",
-        //     "startupObjectId": 22,
-        //     "startupObjectType": "Page",
-        //     "breakOnError": true,
-        //     "launchBrowser": true,
-        //     "enableLongRunningSqlStatements": true,
-        //     "enableSqlInformationDebugger": true,
-        //     "forceUpgrade": true,
-        //    "tenant": "c6f45c53-13cd-45b9-a95a-67e2115020d8"
-        // }
-            
         {
             "name": " Your own server",
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "Renewables_LATAM_PreprodQA",
+            "environmentName": "NEW_LOC_TOTAL_W1",
            "schemaUpdateMode": "ForceSync",
-            "startupObjectId": 22,
-            "startupObjectType": "Page",
-            "breakOnError": true,
+           "startupObjectType": "Page",
+           "breakOnError": true,
+           "startupObjectId": 22,
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
             "forceUpgrade": true,
-            "tenant": "329e91b0-e21f-48fb-a071-456717ecc28e"
+            "tenant": "c6f45c53-13cd-45b9-a95a-67e2115020d8"
         }
+
+         
             
     ]
 }

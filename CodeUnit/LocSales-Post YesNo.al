@@ -1,4 +1,4 @@
-codeunit 80995 "LocSales-Post (Yes/No)"
+codeunit 34006995 "LocSales-Post (Yes/No)"
 {
     EventSubscriberInstance = Manual;
     TableNo = "Sales Header";

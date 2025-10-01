@@ -5052,8 +5052,8 @@ gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA
         <Field Name="ShiptoCity">
           <DataField>ShiptoCity</DataField>
         </Field>
-        <Field Name="GMLocProvince">
-          <DataField>GMLocProvince</DataField>
+        <Field Name="GMAProvince">
+          <DataField>GMAProvince</DataField>
         </Field>
         <Field Name="NombreProv">
           <DataField>NombreProv</DataField>
@@ -5073,8 +5073,8 @@ gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA
         <Field Name="Sales_Invoice_Header_InvDiscountAmountFormat">
           <DataField>Sales_Invoice_Header_InvDiscountAmountFormat</DataField>
         </Field>
-        <Field Name="GMLocCUITExtranjero">
-          <DataField>GMLocCUITExtranjero</DataField>
+        <Field Name="GMACUITExtranjero">
+          <DataField>GMACUITExtranjero</DataField>
         </Field>
         <Field Name="Sales_Invoice_Line_Description">
           <DataField>Sales_Invoice_Line_Description</DataField>

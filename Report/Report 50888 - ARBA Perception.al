@@ -1,4 +1,4 @@
-report 80888 "PERARBA Perception"
+report 34006888 "PERARBA Perception"
 {
     Caption = 'ARBA Percepciones Percibidas';
     ProcessingOnly = true;
@@ -12,7 +12,7 @@ report 80888 "PERARBA Perception"
             DataItemTableView = SORTING("Entry No.");
             trigger OnAfterGetRecord();
             begin
-                IF "VAT Entry"."GMLocTax Type Loc" = "VAT Entry"."GMLocTax Type Loc"::"Ingresos Brutos" THEN
+                IF "VAT Entry"."GMATax Type Loc" = "VAT Entry"."GMATax Type Loc"::"Ingresos Brutos" THEN
                     IF NOT (EXIST) then
                         "#VatEntry3"
             end;
@@ -44,7 +44,7 @@ report 80888 "PERARBA Perception"
         {
             area(content)
             {
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     Caption = 'Options';
                     field(FechaDesde; FechaDesde)
@@ -253,11 +253,11 @@ report 80888 "PERARBA Perception"
                             Campo2 := FORMAT(VATentryLocal."Posting Date", 10, '<Day,2>/<Month,2>/<Year4>');
                         // JCG Segun la fecha elegida cambia el campo
 
-                        IF (VATentryLocal."GMLocDocument Type Loc." = VATentryLocal."GMLocDocument Type Loc."::Invoice) THEN
+                        IF (VATentryLocal."GMADocument Type Loc." = VATentryLocal."GMADocument Type Loc."::Invoice) THEN
                             Campo3 := 'F';
-                        IF (VATentryLocal."GMLocDocument Type Loc." = VATentryLocal."GMLocDocument Type Loc."::"Credit Memo") THEN
+                        IF (VATentryLocal."GMADocument Type Loc." = VATentryLocal."GMADocument Type Loc."::"Credit Memo") THEN
                             Campo3 := 'C';
-                        IF (VATentryLocal."GMLocDocument Type Loc." = VATentryLocal."GMLocDocument Type Loc."::"Nota Débito") THEN
+                        IF (VATentryLocal."GMADocument Type Loc." = VATentryLocal."GMADocument Type Loc."::"GMANota Debito") THEN
                             Campo3 := 'D';
 
                         // Letra de comprobante
@@ -288,7 +288,7 @@ report 80888 "PERARBA Perception"
                         CLEAR(aux2);
                         auxvatentry.RESET;
                         auxvatentry.SETRANGE(auxvatentry."Document No.", VATentryLocal."Document No.");
-                        auxvatentry.SETRANGE(auxvatentry."GMLocTax Type Loc", auxvatentry."GMLocTax Type Loc"::"Ingresos Brutos");
+                        auxvatentry.SETRANGE(auxvatentry."GMATax Type Loc", auxvatentry."GMATax Type Loc"::"Ingresos Brutos");
                         auxvatentry.SETFILTER("Tax Jurisdiction Code", FiltroJur);
                         IF (auxvatentry.FINDSET) THEN
                             REPEAT

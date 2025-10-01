@@ -3364,8 +3364,8 @@ End Function
         <Field Name="Movimiento_Retenciones_Voucher_Number">
           <DataField>Movimiento_Retenciones_Voucher_Number</DataField>
         </Field>
-        <Field Name="GMLocPictureSign">
-          <DataField>GMLocPictureSign</DataField>
+        <Field Name="GMAPictureSign">
+          <DataField>GMAPictureSign</DataField>
         </Field>
         <Field Name="DetRetencion_Titulo">
           <DataField>DetRetencion_Titulo</DataField>

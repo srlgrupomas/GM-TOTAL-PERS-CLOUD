@@ -1,4 +1,4 @@
-page 80871 "Previsualización Asientos"
+page 34006871 "Previsualización Asientos"
 {
     PageType = List;
     SourceTable = "Gen. Journal Line";

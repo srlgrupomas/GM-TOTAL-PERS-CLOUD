@@ -1,4 +1,4 @@
-permissionset 80871 GeneratedPermission
+permissionset 34006871 GeneratedPermission
 {
     Assignable = true;
     Permissions = tabledata "AXI Ajuste Inflacion" = RIMD,

@@ -1,4 +1,4 @@
-﻿report 80893 "PersTreasury Transfer"
+﻿report 34006893 "PersTreasury Transfer"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -10,25 +10,25 @@
 
     dataset
     {
-        dataitem("Hist. Cab. Transferencias"; "GMLocPosted Transfer")
+        dataitem("Hist. Cab. Transferencias"; "GMAPosted Transfer")
         {
-            RequestFilterFields = "GMLocNo.";
+            RequestFilterFields = "GMANo.";
             column(InfoEmpresa_Picture; InfoEmpresa.BssiPicture)
             {
             }
-            column(Hist__Cab__Transferencias__Hist__Cab__Transferencias___N__; "Hist. Cab. Transferencias"."GMLocNo.")
+            column(Hist__Cab__Transferencias__Hist__Cab__Transferencias___N__; "Hist. Cab. Transferencias"."GMANo.")
             {
             }
-            column(Hist__Cab__Transferencias__Hist__Cab__Transferencias___Fecha_de_Registro_; "Hist. Cab. Transferencias"."GMLocPosting Date")
+            column(Hist__Cab__Transferencias__Hist__Cab__Transferencias___Fecha_de_Registro_; "Hist. Cab. Transferencias"."GMAPosting Date")
             {
             }
-            column(Hist__Cab__Transferencias__Desde_cja_bco_; "GMLocFrom Cash/Bank")
+            column(Hist__Cab__Transferencias__Desde_cja_bco_; "GMAFrom Cash/Bank")
             {
             }
-            column(Hist__Cab__Transferencias__Hasta_cja_bco_; "GMLocTo Cash/Bank")
+            column(Hist__Cab__Transferencias__Hasta_cja_bco_; "GMATo Cash/Bank")
             {
             }
-            column(Hist__Cab__Transferencias_Comentario; GMLocComment)
+            column(Hist__Cab__Transferencias_Comentario; GMAComment)
             {
             }
             column(InfoEmpresa__Phone_No__; InfoEmpresa."BssiBillingPhoneNumber")
@@ -40,7 +40,7 @@
             column(InfoEmpresa_Name; InfoEmpresa.BssiLegalNameFull)
             {
             }
-            column(Hist__Cab__Transferencias_Comentario_Control1100227000; GMLocComment)
+            column(Hist__Cab__Transferencias_Comentario_Control1100227000; GMAComment)
             {
             }
             column(nombrebancodesde; nombrebancodesde)
@@ -49,10 +49,10 @@
             column(nombrebancohasta; nombrebancohasta)
             {
             }
-            column(Hist__Cab__Transferencias_Importe; GMLocAmount)
+            column(Hist__Cab__Transferencias_Importe; GMAAmount)
             {
             }
-            column(Hist__Cab__Transferencias__Importe__DL__; "GMLocAmount (LCY)")
+            column(Hist__Cab__Transferencias__Importe__DL__; "GMAAmount (LCY)")
             {
             }
             column(Fecha_Caption; Fecha_CaptionLbl)
@@ -67,16 +67,16 @@
             column(Datos_de_la_TransferenciaCaption; Datos_de_la_TransferenciaCaptionLbl)
             {
             }
-            column(Hist__Cab__Transferencias__Desde_cja_bco_Caption; FIELDCAPTION("GMLocFrom Cash/Bank"))
+            column(Hist__Cab__Transferencias__Desde_cja_bco_Caption; FIELDCAPTION("GMAFrom Cash/Bank"))
             {
             }
-            column(Hist__Cab__Transferencias__Hasta_cja_bco_Caption; FIELDCAPTION("GMLocTo Cash/Bank"))
+            column(Hist__Cab__Transferencias__Hasta_cja_bco_Caption; FIELDCAPTION("GMATo Cash/Bank"))
             {
             }
             column(Tel_Caption; Tel_CaptionLbl)
             {
             }
-            column(Hist__Cab__Transferencias_Comentario_Control1100227000Caption; FIELDCAPTION(GMLocComment))
+            column(Hist__Cab__Transferencias_Comentario_Control1100227000Caption; FIELDCAPTION(GMAComment))
             {
             }
             column(EmptyStringCaption; EmptyStringCaptionLbl)
@@ -97,10 +97,10 @@
             column(FIRMA_SOLICITANTECaption; FIRMA_SOLICITANTECaptionLbl)
             {
             }
-            dataitem("GMLocPosted Transfer Line"; "GMLocPosted Transfer Line")
+            dataitem("GMAPosted Transfer Line"; "GMAPosted Transfer Line")
             {
-                DataItemLink = "GMLocTransfer No." = FIELD("GMLocNo.");
-                DataItemTableView = SORTING("GMLocTransfer No.", "GMLocLine No.") ORDER(Ascending);
+                DataItemLink = "GMATransfer No." = FIELD("GMANo.");
+                DataItemTableView = SORTING("GMATransfer No.", "GMALine No.") ORDER(Ascending);
                 MaxIteration = 0;
                 column(Valordivisa; Valordivisa)
                 {
@@ -111,16 +111,16 @@
                 column(Hist__Lin__Transferencias_Descripcion; Description)
                 {
                 }
-                column(Hist__Lin__Transferencias_Importe; GMLocAmount)
+                column(Hist__Lin__Transferencias_Importe; GMAAmount)
                 {
                 }
-                column(Hist__Lin__Transferencias__Importe__DL__; "GMLocAmount (LCY)")
+                column(Hist__Lin__Transferencias__Importe__DL__; "GMAAmount (LCY)")
                 {
                 }
-                column(Hist__Lin__Transferencias__N__Valor_; "GMLocValue No.")
+                column(Hist__Lin__Transferencias__N__Valor_; "GMAValue No.")
                 {
                 }
-                column(Hist__Lin__Transferencias_Entidad; GMLocEntity)
+                column(Hist__Lin__Transferencias_Entidad; GMAEntity)
                 {
                 }
                 column(DivisaCaption; DivisaCaptionLbl)
@@ -135,28 +135,28 @@
                 column(Hist__Lin__Transferencias_DescripcionCaption; FIELDCAPTION(Description))
                 {
                 }
-                column(Hist__Lin__Transferencias_ImporteCaption; FIELDCAPTION(GMLocAmount))
+                column(Hist__Lin__Transferencias_ImporteCaption; FIELDCAPTION(GMAAmount))
                 {
                 }
-                column(Hist__Lin__Transferencias__N__Valor_Caption; FIELDCAPTION("GMLocValue No."))
+                column(Hist__Lin__Transferencias__N__Valor_Caption; FIELDCAPTION("GMAValue No."))
                 {
                 }
-                column(Hist__Lin__Transferencias_EntidadCaption; FIELDCAPTION(GMLocEntity))
+                column(Hist__Lin__Transferencias_EntidadCaption; FIELDCAPTION(GMAEntity))
                 {
                 }
-                column(Posted_Transfer_Line_Transfer_No_; "GMLocTransfer No.")
+                column(Posted_Transfer_Line_Transfer_No_; "GMATransfer No.")
                 {
                 }
-                column(Posted_Transfer_Line_Line_No_; "GMLocLine No.")
+                column(Posted_Transfer_Line_Line_No_; "GMALine No.")
                 {
                 }
 
                 trigger OnAfterGetRecord();
                 begin
-                    if "GMLocPosted Transfer Line"."GMLocCurrency Code" = '' then
+                    if "GMAPosted Transfer Line"."GMACurrency Code" = '' then
                         Valordivisa := 'PESO ARG'
                     else
-                        Valordivisa := "GMLocPosted Transfer Line"."GMLocCurrency Code";
+                        Valordivisa := "GMAPosted Transfer Line"."GMACurrency Code";
                 end;
             }
 
@@ -166,21 +166,21 @@
             begin
                 InfoEmpresa.Reset();
                 InfoEmpresa.SetFilter("Dimension Code", BssiMEMSystemSetup.Bssi_cGetEntityCode());
-                InfoEmpresa.SetFilter(Code, "Hist. Cab. Transferencias".BssiMEMEntityID);
+                //DDSDESCOMENTAR InfoEmpresa.SetFilter(Code, "Hist. Cab. Transferencias".BssiMEMEntityID);
                 IF (InfoEmpresa.FindFirst()) THEN;
                 InfoEmpresa.CALCFIELDS(BssiPicture);
 
                 if "Hist. Cab. Transferencias".FINDFIRST then begin
                     cajas.RESET;
-                    cajas.SETRANGE(cajas."GMLocNo.", "Hist. Cab. Transferencias"."GMLocFrom Cash/Bank");
+                    cajas.SETRANGE(cajas."GMANo.", "Hist. Cab. Transferencias"."GMAFrom Cash/Bank");
                     if cajas.FINDFIRST then begin
-                        nombrebancodesde := cajas.GMLocDescription;
+                        nombrebancodesde := cajas.GMADescription;
                     end;
 
                     cajas.RESET;
-                    cajas.SETRANGE(cajas."GMLocNo.", "Hist. Cab. Transferencias"."GMLocTo Cash/Bank");
+                    cajas.SETRANGE(cajas."GMANo.", "Hist. Cab. Transferencias"."GMATo Cash/Bank");
                     if cajas.FINDFIRST then begin
-                        nombrebancohasta := cajas.GMLocDescription;
+                        nombrebancohasta := cajas.GMADescription;
                     end;
 
                 end;
@@ -206,11 +206,11 @@
 
     var
         Valordivisa: Code[10];
-        Valores: Record GMLocValues;
+        Valores: Record GMAValues;
         InfoEmpresa: Record "Dimension Value";
         nombrebancodesde: Text[30];
         nombrebancohasta: Text[30];
-        cajas: Record "GMLocCash/Bank Account";
+        cajas: Record "GMACash/Bank Account";
         Fecha_CaptionLbl: Label 'Fecha:';
         T_R_A_N_S_F_E_R_E_N_C_I_ACaptionLbl: Label 'T R A N S F E R E N C I A';
         N__CaptionLbl: Label 'Nº:';

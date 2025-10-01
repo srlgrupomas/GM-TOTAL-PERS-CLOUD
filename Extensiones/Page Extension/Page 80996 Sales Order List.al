@@ -1,4 +1,4 @@
-pageextension 80996 "GMLocSales Order List" extends "Sales Order List"
+pageextension 34006996 "GMLocSales Order List" extends "Sales Order List"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------

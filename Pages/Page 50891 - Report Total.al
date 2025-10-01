@@ -1,4 +1,4 @@
-page 80891 "Report Total"
+page 34006891 "Report Total"
 {
     ApplicationArea = All;
     Caption = 'Report Total';

@@ -1,4 +1,4 @@
-table 80999 "PreviewMasivoBool"
+table 34006999 "PreviewMasivoBool"
 {
     DataClassification = ToBeClassified;
     Caption = 'PreviewMasivoBool';

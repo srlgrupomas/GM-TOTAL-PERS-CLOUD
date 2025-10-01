@@ -1,4 +1,4 @@
-page 80901 "Gen. Journal Batch List"
+page 34006901 "Gen. Journal Batch List"
 {
     PageType = List;
     SourceTable = "Gen. Journal Batch";

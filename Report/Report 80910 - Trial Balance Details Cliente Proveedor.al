@@ -1,4 +1,4 @@
-report 80910 "PersTrial Balance Det Cli/Pro"
+report 34006910 "PersTrial Balance Det Cli/Pro"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './Layout/BSSIMEMDetailTrialBalanceCliPro.rdl';
@@ -262,7 +262,7 @@ report 80910 "PersTrial Balance Det Cli/Pro"
                             ClosingEntry := false;
 
                         if UsarNombreCorporativo then
-                            AccountName := "G/L Account"."GMLocCorporate Account Name"
+                            AccountName := "G/L Account"."GMACorporate Account Name"
                         else
                             AccountName := "G/L Account".Name;
                     end;
@@ -281,7 +281,7 @@ report 80910 "PersTrial Balance Det Cli/Pro"
                 trigger OnAfterGetRecord()
                 begin
                     if UsarNombreCorporativo then
-                        AccountName := "G/L Account"."GMLocCorporate Account Name"
+                        AccountName := "G/L Account"."GMACorporate Account Name"
                     else
                         AccountName := "G/L Account".Name;
                 end;
@@ -312,7 +312,7 @@ report 80910 "PersTrial Balance Det Cli/Pro"
                 end;
 
                 if UsarNombreCorporativo then
-                    AccountName := "G/L Account"."GMLocCorporate Account Name"
+                    AccountName := "G/L Account"."GMACorporate Account Name"
                 else
                     AccountName := "G/L Account".Name;
 

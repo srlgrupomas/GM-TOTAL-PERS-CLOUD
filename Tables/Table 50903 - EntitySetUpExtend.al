@@ -1,4 +1,4 @@
-table 80903 "EntitySetUpExtend"
+table 34006903 "EntitySetUpExtend"
 {
     DataClassification = ToBeClassified;
 

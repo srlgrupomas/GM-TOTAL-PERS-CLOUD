@@ -1,4 +1,4 @@
-page 80904 "Ledger Code Selection"
+page 34006904 "Ledger Code Selection"
 {
     Caption = 'Select Ledger Codes';
     PageType = List;

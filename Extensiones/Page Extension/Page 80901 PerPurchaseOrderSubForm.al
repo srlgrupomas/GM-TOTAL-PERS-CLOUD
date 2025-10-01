@@ -1,4 +1,4 @@
-pageextension 80901 "PersExtendPurchaseOrderSubForm" extends "Purchase Order SubForm"
+pageextension 34006901 "PersExtendPurchaseOrderSubForm" extends "Purchase Order SubForm"
 {
     layout
     {
@@ -18,11 +18,11 @@ pageextension 80901 "PersExtendPurchaseOrderSubForm" extends "Purchase Order Sub
         {
             ShowMandatory = true;
         }
-        modify("GMLocProvince")
+        modify("GMAProvince")
         {
             ShowMandatory = true;
         }
-        modify("GMLocWithholding Code")
+        modify("GMAWithholding Code")
         {
             ShowMandatory = true;
         }

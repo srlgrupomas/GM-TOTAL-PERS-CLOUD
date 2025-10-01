@@ -1,8 +1,8 @@
-pageextension 80987 "PersGeneral Ledger Setup" extends "General Ledger Setup"
+pageextension 34006987 "PersGeneral Ledger Setup" extends "General Ledger Setup"
 {
     layout
     {
-        addafter(GMLoc)
+        addafter(GMA)
         {
             group("GMLocDifExch")
             {

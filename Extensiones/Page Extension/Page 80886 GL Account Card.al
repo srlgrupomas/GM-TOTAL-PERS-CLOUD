@@ -1,8 +1,8 @@
-pageextension 80886 "PersG/L Account Card" extends "G/L Account Card"
+pageextension 34006886 "PersG/L Account Card" extends "G/L Account Card"
 {
     layout
     {
-        addafter("GMLocHideOnMatrixHistory")
+        addafter("GMAHideOnMatrixHistory")
         {
             field("Trial Balance Vendor/Customer"; rec."Trial Balance Vendor/Customer")
             {

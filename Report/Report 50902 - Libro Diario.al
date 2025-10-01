@@ -1,12 +1,12 @@
 ﻿/// <summary>
-///  File Description : MEM Copy of Localization Argentina report: G/L Journal Book (report 34006539 "GMLocLibro Diario") 
+///  File Description : MEM Copy of Localization Argentina report: G/L Journal Book (report 34006539 "GMALibro Diario") 
 /// </summary>
 /// <remarks>
 /// | Rev No. | Date | By | Ticket | Description |
 /// |:-------:|:----:|:--:|:------:|:------------|
 /// | 000 | 20241224 | Arvind | NAVMEM-#### | Initial Release |
 /// </remarks>
-report 80902 "PersLibro Diario"
+report 34006902 "PersLibro Diario"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ report 80902 "PersLibro Diario"
                         //Bssi End
 
                         if UsarNombreCorporativo then
-                            AccountName := Cuentas."GMLocCorporate Account Name"
+                            AccountName := Cuentas."GMACorporate Account Name"
                         else
                             AccountName := Cuentas.Name;
 
@@ -485,7 +485,7 @@ report 80902 "PersLibro Diario"
                                 OK := Cuentas.FINDFIRST;
 
                                 if UsarNombreCorporativo then
-                                    AccountName := Cuentas."GMLocCorporate Account Name"
+                                    AccountName := Cuentas."GMACorporate Account Name"
                                 else
                                     AccountName := Cuentas.Name;
 
@@ -563,7 +563,7 @@ report 80902 "PersLibro Diario"
                             mCodigoCliente := '';
                             mNombreCLiente := '';
                             Agregame := false;
-                            //IF ("Document Type"="Document Type"::Invoice) OR ("Document Type"="Document Type"::"Nota Débito") THEN BEGIN
+                            //IF ("Document Type"="Document Type"::Invoice) OR ("Document Type"="Document Type"::"GMANota Debito") THEN BEGIN
                             if Agregame = false then begin
                                 rSINVH.RESET;
                                 rSINVH.SETCURRENTKEY("No.");
@@ -592,7 +592,7 @@ report 80902 "PersLibro Diario"
                                 end;
                             end;
 
-                            //IF ("Document Type"="Document Type"::Invoice) OR ("Document Type"="Document Type"::"Nota Débito") THEN BEGIN
+                            //IF ("Document Type"="Document Type"::Invoice) OR ("Document Type"="Document Type"::"GMANota Debito") THEN BEGIN
                             if Agregame = false then begin
                                 rSIH.RESET;
                                 rSIH.SETCURRENTKEY("No.");
@@ -623,11 +623,11 @@ report 80902 "PersLibro Diario"
                             //IF "Document Type"="Document Type"::"Orden Pago" THEN BEGIN
                             if Agregame = false then begin
                                 rOPH.RESET;
-                                rOPH.SETCURRENTKEY("GMLocPayment O. No.");
-                                rOPH.SETRANGE("GMLocPayment O. No.", "Document No.");
+                                rOPH.SETCURRENTKEY("GMAPayment O. No.");
+                                rOPH.SETRANGE("GMAPayment O. No.", "Document No.");
                                 if rOPH.FINDFIRST then begin
                                     mCodigoCliente := 'Proveedor';
-                                    mNombreCLiente := rOPH.GMLocName;
+                                    mNombreCLiente := rOPH.GMAName;
                                     Agregame := true;
                                 end else begin
                                     mCodigoCliente := '';
@@ -637,11 +637,11 @@ report 80902 "PersLibro Diario"
                             //IF "Document Type"="Document Type"::Recibo THEN BEGIN
                             if Agregame = false then begin
                                 rRH.RESET;
-                                rRH.SETCURRENTKEY("GMLocNro Recibo");
-                                rRH.SETRANGE("GMLocNro Recibo", "Document No.");
+                                rRH.SETCURRENTKEY("GMANro Recibo");
+                                rRH.SETRANGE("GMANro Recibo", "Document No.");
                                 if rRH.FINDFIRST then begin
                                     mCodigoCliente := 'Cliente';
-                                    mNombreCLiente := rRH.GMLocName;
+                                    mNombreCLiente := rRH.GMAName;
                                     Agregame := true;
                                 end else begin
                                     mCodigoCliente := '';
@@ -651,8 +651,8 @@ report 80902 "PersLibro Diario"
                             //IF "Document Type"="Document Type"::Transferencia THEN BEGIN
                             if Agregame = false then begin
                                 rCTH.RESET;
-                                rCTH.SETCURRENTKEY("GMLocNo.");
-                                rCTH.SETRANGE("GMLocNo.", "Document No.");
+                                rCTH.SETCURRENTKEY("GMANo.");
+                                rCTH.SETRANGE("GMANo.", "Document No.");
                                 if rCTH.FINDFIRST then begin
                                     mCodigoCliente := '';
                                     mNombreCLiente := '';
@@ -665,8 +665,8 @@ report 80902 "PersLibro Diario"
                             //IF "Document Type"="Document Type"::"Ingreso/Egreso" THEN BEGIN
                             if Agregame = false then begin
                                 rCIE.RESET;
-                                rCIE.SETCURRENTKEY("GMLocNo.");
-                                rCIE.SETRANGE("GMLocNo.", "Document No.");
+                                rCIE.SETCURRENTKEY("GMANo.");
+                                rCIE.SETRANGE("GMANo.", "Document No.");
                                 if rCIE.FINDFIRST then begin
                                     mCodigoCliente := '';
                                     mNombreCLiente := '';
@@ -914,7 +914,7 @@ report 80902 "PersLibro Diario"
                         //Bssi End
 
                         if UsarNombreCorporativo then
-                            AccountName := Cuentas."GMLocCorporate Account Name"
+                            AccountName := Cuentas."GMACorporate Account Name"
                         else
                             AccountName := Cuentas.Name;
 
@@ -988,7 +988,7 @@ report 80902 "PersLibro Diario"
         {
             area(content)
             {
-                group(GMLocPeriod)
+                group(GMAPeriod)
                 {
                     Caption = 'Period',
                                 ;
@@ -1028,7 +1028,7 @@ report 80902 "PersLibro Diario"
                         end;
                     }
                 }
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     Caption = 'Opciones';
                     field(NroAsiento; NroAsiento)
@@ -1240,10 +1240,10 @@ report 80902 "PersLibro Diario"
         MRecTempGLentry2: Record "G/L Entry" temporary;
         rSIH: Record "Purch. Inv. Header";
         rCRM: Record "Purch. Cr. Memo Hdr.";
-        rOPH: Record "GMLocPosted Payment Order";
-        rCTH: Record "GMLocPosted Transfer";
-        rRH: Record "GMLocPosted Receipt";
-        rCIE: Record "GMLocPosted Deposit/Withdrawal";
+        rOPH: Record "GMAPosted Payment Order";
+        rCTH: Record "GMAPosted Transfer";
+        rRH: Record "GMAPosted Receipt";
+        rCIE: Record "GMAPosted Deposit/Withdrawal";
         rVEN: Record Vendor;
         rVLG: Record "Vendor Ledger Entry";
         rSINVH: Record "Sales Invoice Header";

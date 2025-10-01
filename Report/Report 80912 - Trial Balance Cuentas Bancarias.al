@@ -1,4 +1,4 @@
-report 80912 "PersTrial Balance Bank Acc"
+report 34006912 "PersTrial Balance Bank Acc"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './Layout/BssiMEMTrialBalanceBankAcc.rdl';
@@ -10,28 +10,28 @@ report 80912 "PersTrial Balance Bank Acc"
 
     dataset
     {
-        dataitem("GMLocCash/Bank Account item"; "GMLocCash/Bank Account")
+        dataitem("GMACash/Bank Account item"; "GMACash/Bank Account")
         {
-            DataItemTableView = SORTING("GMLocNo.");
-            RequestFilterFields = "GMLocNo.", "GMLocAccount Type", "GMLocGlobal Dimension 1", "GMLocGlobal Dimension 2";
+            DataItemTableView = SORTING("GMANo.");
+            RequestFilterFields = "GMANo.", "GMAAccount Type", "GMAGlobal Dimension 1", "GMAGlobal Dimension 2";
 
-            column(Cash_Bank_Account_No; "GMLocCash/Bank Account item"."GMLocNo.") { }
-            column(Cash_Bank_Account_Description; "GMLocCash/Bank Account item".GMLocDescription) { }
-            column(GMLocRemaining_Amount_Bank_Acc; "GMLocCash/Bank Account item"."GMLocSaldo Pendiente") { }
-            column(BssiDimension; "GMLocCash/Bank Account item".BssiGetMEMEntityDimValue()) { }
+            column(Cash_Bank_Account_No; "GMACash/Bank Account item"."GMANo.") { }
+            column(Cash_Bank_Account_Description; "GMACash/Bank Account item".GMADescription) { }
+            column(GMARemaining_Amount_Bank_Acc; "GMACash/Bank Account item"."GMASaldo Pendiente") { }
+            //DDSDESCOMENTAR column(BssiDimension; "GMACash/Bank Account item".BssiGetMEMEntityDimValue()) { }
 
-            dataitem("GMLocValues Entry"; "GMLocValues Entry")
+            dataitem("GMAValues Entry"; "GMAValues Entry")
             {
-                DataItemTableView = SORTING("GMLocEntry No.");
-                DataItemLinkReference = "GMLocCash/Bank Account item";
-                DataItemLink = "GMLocCash/Bank Account" = field("GMLocNo.");
+                DataItemTableView = SORTING("GMAEntry No.");
+                DataItemLinkReference = "GMACash/Bank Account item";
+                DataItemLink = "GMACash/Bank Account" = field("GMANo.");
 
-                column(GMLocPosting_Date; "GMLocValues Entry"."GMLocPosting Date") { }
-                column(GMLocDocument_No_; ReportDocumentNo) { }
-                column(GMLocExternal_Document_No_; ReportExternalDocumentNo) { }
-                column(GMLocDescription; ReportDescription) { }
-                column(GMLocRemaining_Amount_Neg; -"GMLocValues Entry".GMLocAmount) { }
-                column(GMLocRemaining_Amount_Pos; "GMLocValues Entry".GMLocAmount) { }
+                column(GMAPosting_Date; "GMAValues Entry"."GMAPosting Date") { }
+                column(GMADocument_No_; ReportDocumentNo) { }
+                column(GMAExternal_Document_No_; ReportExternalDocumentNo) { }
+                column(GMADescription; ReportDescription) { }
+                column(GMARemaining_Amount_Neg; -"GMAValues Entry".GMAAmount) { }
+                column(GMARemaining_Amount_Pos; "GMAValues Entry".GMAAmount) { }
                 column(RunningBalance; RunningBalance) { }
 
                 trigger OnAfterGetRecord()
@@ -44,23 +44,23 @@ report 80912 "PersTrial Balance Bank Acc"
                     CustLedgerEntry: Record "Cust. Ledger Entry";
                 begin
                     // Inicializar variables temporales
-                    ReportDescription := "GMLocValues Entry".GMLocDescription;
-                    ReportExternalDocumentNo := "GMLocValues Entry"."GMLocExternal Document No.";
-                    ReportDocumentNo := PADSTR("GMLocValues Entry"."GMLocDocument No.", 13, '0');
+                    ReportDescription := "GMAValues Entry".GMADescription;
+                    ReportExternalDocumentNo := "GMAValues Entry"."GMAExternal Document No.";
+                    ReportDocumentNo := PADSTR("GMAValues Entry"."GMADocument No.", 13, '0');
 
                     // Lógica para "Payment" o "Pago"
-                    // if ("GMLocValues Entry"."GMLocDocument Type" ="GMLocValues Entry"."GMLocDocument Type"::Pago ) then begin
-                    //     if Vendor.Get("GMLocValues Entry"."GMLocSource No.") then
+                    // if ("GMAValues Entry"."GMADocument Type" ="GMAValues Entry"."GMADocument Type"::Pago ) then begin
+                    //     if Vendor.Get("GMAValues Entry"."GMASource No.") then
                     //         ReportDescription := Vendor.Name;
-                    //     VendorLedgerEntry.SetRange("GMLocDocument No.", "GMLocValues Entry"."GMLocDocument No.");
+                    //     VendorLedgerEntry.SetRange("GMADocument No.", "GMAValues Entry"."GMADocument No.");
                     //     if VendorLedgerEntry.FindFirst() then
                     //         ReportExternalDocumentNo := VendorLedgerEntry."External Document No.";
                     // end;
 
                     // Lógica para "Receipt" o "Recibo"
-                    if ("GMLocValues Entry"."GMLocDocument Type" = "GMLocValues Entry"."GMLocDocument Type"::Recibo) then begin
+                    if ("GMAValues Entry"."GMADocument Type" = "GMAValues Entry"."GMADocument Type"::Recibo) then begin
                         CustLedgerEntry.Reset();
-                        CustLedgerEntry.SetRange("Document No.", "GMLocValues Entry"."GMLocDocument No.");
+                        CustLedgerEntry.SetRange("Document No.", "GMAValues Entry"."GMADocument No.");
                         if CustLedgerEntry.FindFirst() then begin
                             ReportExternalDocumentNo := CustLedgerEntry."External Document No.";
                             ReportDescription := CustLedgerEntry."Customer Name";
@@ -68,35 +68,35 @@ report 80912 "PersTrial Balance Bank Acc"
                     end;
 
                     // Lógica para "Transfer" o "Transferencia"
-                    // if ("GMLocValues Entry"."GMLocDocument Type" = "GMLocValues Entry"."GMLocDocument Type"::Transferencia) then begin
-                    //     if "GMLocValues Entry".GMLocAmount > 0 then begin
-                    //         if BankAccount.Get("GMLocValues Entry"."GMLocSource No.") then
+                    // if ("GMAValues Entry"."GMADocument Type" = "GMAValues Entry"."GMADocument Type"::Transferencia) then begin
+                    //     if "GMAValues Entry".GMAAmount > 0 then begin
+                    //         if BankAccount.Get("GMAValues Entry"."GMASource No.") then
                     //             ReportDescription := BankAccount.Name;
                     //     end else begin
-                    //         if BankAccount.Get("GMLocValues Entry"."GMLocDestination") then
+                    //         if BankAccount.Get("GMAValues Entry"."GMADestination") then
                     //             ReportDescription := BankAccount.Name;
                     //     end;
                     // end;
 
                     // Lógica para "Ingreso/Egreso"
-                    if "GMLocValues Entry"."GMLocDocument Type" = "GMLocValues Entry"."GMLocDocument Type"::"Ing/Egreso" then begin
+                    if "GMAValues Entry"."GMADocument Type" = "GMAValues Entry"."GMADocument Type"::"Ing/Egreso" then begin
                         GLAccount.Reset();
                         GLAccount.SetRange("Trial Balance Bank Account", true);
-                        GLAccount.setrange("No.", "GMLocValues Entry"."GMLocGL Account");
+                        GLAccount.setrange("No.", "GMAValues Entry"."GMAGL Account");
                         if GLAccount.FindFirst() then
                             ReportDescription := GLAccount.Name;
                     end;
 
                     // Actualizar RunningBalance (ya existente)
-                    if "GMLocValues Entry".GMLocAmount > 0 then
-                        RunningBalance := RunningBalance + -"GMLocValues Entry".GMLocAmount
-                    else if -"GMLocValues Entry".GMLocAmount > 0 then
-                        RunningBalance := RunningBalance + "GMLocValues Entry".GMLocAmount;
+                    if "GMAValues Entry".GMAAmount > 0 then
+                        RunningBalance := RunningBalance + -"GMAValues Entry".GMAAmount
+                    else if -"GMAValues Entry".GMAAmount > 0 then
+                        RunningBalance := RunningBalance + "GMAValues Entry".GMAAmount;
                 end;
 
                 trigger OnPreDataItem()
                 begin
-                    RunningBalance := "GMLocCash/Bank Account item"."GMLocSaldo Pendiente";
+                    RunningBalance := "GMACash/Bank Account item"."GMASaldo Pendiente";
                 end;
             }
 
@@ -104,10 +104,10 @@ report 80912 "PersTrial Balance Bank Acc"
             begin
                 if BssiMEMSystemSetup.Get() then
                     if BSsiMEMSystemSetup.BssiEntityDimension = BSsiMEMSystemSetup.BssiEntityDimension::"Global Dimension 1 Code" then
-                        "GMLocCash/Bank Account item".SetFilter("GMLocGlobal Dimension 1", BssiDimension)
+                        "GMACash/Bank Account item".SetFilter("GMAGlobal Dimension 1", BssiDimension)
                     else
-                        "GMLocCash/Bank Account item".SetFilter("GMLocGlobal Dimension 2", BssiDimension);
-                RunningBalance := "GMLocCash/Bank Account item"."GMLocSaldo Pendiente";
+                        "GMACash/Bank Account item".SetFilter("GMAGlobal Dimension 2", BssiDimension);
+                RunningBalance := "GMACash/Bank Account item"."GMASaldo Pendiente";
             end;
         }
     }
@@ -206,9 +206,9 @@ report 80912 "PersTrial Balance Bank Acc"
         //Added By Bssi Developer        
         if BssiMEMSystemSetup.Get() then
             if BSsiMEMSystemSetup.BssiEntityDimension = BSsiMEMSystemSetup.BssiEntityDimension::"Global Dimension 1 Code" then
-                "GMLocCash/Bank Account item".SetFilter("GMLocGlobal Dimension 1", BssiDimension)
+                "GMACash/Bank Account item".SetFilter("GMAGlobal Dimension 1", BssiDimension)
             else
-                "GMLocCash/Bank Account item".SetFilter("GMLocGlobal Dimension 2", BssiDimension);
+                "GMACash/Bank Account item".SetFilter("GMAGlobal Dimension 2", BssiDimension);
         Empresa.Reset();
         Empresa.SetFilter("Dimension Code", BssiMEMSystemSetup.Bssi_cGetEntityCode());
         Empresa.SetFilter(Code, BssiDimension);

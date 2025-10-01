@@ -1,4 +1,4 @@
-table 80902 "AXI Ajuste Inflacion"
+table 34006902 "AXI Ajuste Inflacion"
 {
     DataClassification = ToBeClassified;
     fields

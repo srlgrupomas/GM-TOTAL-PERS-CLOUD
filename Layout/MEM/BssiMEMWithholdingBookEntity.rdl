@@ -3798,8 +3798,8 @@ End Function
         <Field Name="Integer_Number">
           <DataField>Integer_Number</DataField>
         </Field>
-        <Field Name="GMLocPictureSign">
-          <DataField>GMLocPictureSign</DataField>
+        <Field Name="GMAPictureSign">
+          <DataField>GMAPictureSign</DataField>
         </Field>
         <Field Name="EnVentas__Fecha_registro_">
           <DataField>EnVentas__Fecha_registro_</DataField>
@@ -3870,8 +3870,8 @@ End Function
         <Field Name="EnVentas_Transaction_No_">
           <DataField>EnVentas_Transaction_No_</DataField>
         </Field>
-        <Field Name="EnVentas_GMLocTax_Code_">
-          <DataField>EnVentas_GMLocTax_Code_</DataField>
+        <Field Name="EnVentas_GMATax_Code_">
+          <DataField>EnVentas_GMATax_Code_</DataField>
         </Field>
         <Field Name="TipoRegimen_EnVentas">
           <DataField>TipoRegimen_EnVentas</DataField>
@@ -3954,8 +3954,8 @@ End Function
         <Field Name="EnCompras_Transaction_No_">
           <DataField>EnCompras_Transaction_No_</DataField>
         </Field>
-        <Field Name="EnCompras_GMLocTax_Code_">
-          <DataField>EnCompras_GMLocTax_Code_</DataField>
+        <Field Name="EnCompras_GMATax_Code_">
+          <DataField>EnCompras_GMATax_Code_</DataField>
         </Field>
         <Field Name="TipoRegimen_EnCompras">
           <DataField>TipoRegimen_EnCompras</DataField>

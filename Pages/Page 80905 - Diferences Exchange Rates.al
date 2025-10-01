@@ -1,4 +1,4 @@
-page 80905 "Differences Exchange Rates"
+page 34006905 "Differences Exchange Rates"
 {
     PageType = Worksheet;
     ApplicationArea = All;
@@ -154,12 +154,12 @@ page 80905 "Differences Exchange Rates"
                     ToolTip = 'Specifies the code for Shortcut Dimension 2, which is one of two global dimension codes that you set up in the General Ledger Setup window.';
                     Editable = false;
                 }
-                field("GMLocEntityCode"; Rec."GMLocEntityCode")
+                field("GMAEntityCode"; Rec."GMAEntityCode")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field(GMLocEntity; rec.GMLocEntity)
+                field(GMAEntity; rec.GMAEntity)
                 {
                     ApplicationArea = basic, suite;
                     editable = false;
@@ -250,17 +250,17 @@ page 80905 "Differences Exchange Rates"
                 GenJournalLine."Additional-Currency Posting" := 2;
                 GenJournalLine."Shortcut Dimension 1 Code" := GlEntries."Global Dimension 1 Code";
                 GenJournalLine."Shortcut Dimension 2 Code" := GlEntries."Global Dimension 2 Code";
-                GenJournalLine.GMLocEntityCode := GlEntries."Global Dimension 1 Code";
+                GenJournalLine.GMAEntityCode := GlEntries."Global Dimension 1 Code";
                 GenJournalLine."Dimension Set ID" := GlEntries."Dimension Set ID";
-                if GenJournalLine.GMLocEntityCode <> '' then begin
-                    DimensionValue.SetFilter(code, GenJournalLine.GMLocEntityCode);
+                if GenJournalLine.GMAEntityCode <> '' then begin
+                    DimensionValue.SetFilter(code, GenJournalLine.GMAEntityCode);
                     DimensionValue.FindFirst();
-                    GenJournalLine.GMLocEntity := DimensionValue.Name;
+                    GenJournalLine.GMAEntity := DimensionValue.Name;
                 end;
                 if GlEntries.BssiEntityID <> '' then
                     GenJournalLine.BssiEntityID := GlEntries.BssiEntityID
                 else
-                    GenJournalLine.BssiEntityID := GlEntries.GMLocEntityCode;
+                    GenJournalLine.BssiEntityID := GlEntries.GMAEntityCode;
 
                 if EsPrueba = false then begin
                     GenJournalLine."Additional-currency Adjusted" := true;
@@ -297,17 +297,17 @@ page 80905 "Differences Exchange Rates"
                 GenJournalLine."Additional-Currency Posting" := 2;
                 GenJournalLine."Shortcut Dimension 1 Code" := GlEntries."Global Dimension 1 Code";
                 GenJournalLine."Shortcut Dimension 2 Code" := GlEntries."Global Dimension 2 Code";
-                GenJournalLine.GMLocEntityCode := GlEntries."Global Dimension 1 Code";
+                GenJournalLine.GMAEntityCode := GlEntries."Global Dimension 1 Code";
                 GenJournalLine."Dimension Set ID" := GlEntries."Dimension Set ID";
-                if GenJournalLine.GMLocEntityCode <> '' then begin
-                    DimensionValue.SetFilter(code, GenJournalLine.GMLocEntityCode);
+                if GenJournalLine.GMAEntityCode <> '' then begin
+                    DimensionValue.SetFilter(code, GenJournalLine.GMAEntityCode);
                     DimensionValue.FindFirst();
-                    GenJournalLine.GMLocEntity := DimensionValue.Name;
+                    GenJournalLine.GMAEntity := DimensionValue.Name;
                 end;
                 if GlEntries.BssiEntityID <> '' then
                     GenJournalLine.BssiEntityID := GlEntries.BssiEntityID
                 else
-                    GenJournalLine.BssiEntityID := GlEntries.GMLocEntityCode;
+                    GenJournalLine.BssiEntityID := GlEntries.GMAEntityCode;
 
                 if EsPrueba = false then begin
                     GenJournalLine."Additional-currency Adjusted" := true;

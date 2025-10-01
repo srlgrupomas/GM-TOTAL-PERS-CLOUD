@@ -1,4 +1,4 @@
-report 80884 "PERSIFERE - GIT With. Suff."
+report 34006884 "PERSIFERE - GIT With. Suff."
 {
     Caption = 'SIFERE - GIT Withhold. Suffered';
     ProcessingOnly = true;
@@ -6,30 +6,30 @@ report 80884 "PERSIFERE - GIT With. Suff."
 
     dataset
     {
-        dataitem("GMLocValues Entry"; "GMLocValues Entry")
+        dataitem("GMAValues Entry"; "GMAValues Entry")
         {
-            DataItemTableView = SORTING("GMLocEntry No.") ORDER(Ascending) WHERE("GMLocDocument Type" = FILTER(1));
+            DataItemTableView = SORTING("GMAEntry No.") ORDER(Ascending) WHERE("GMADocument Type" = FILTER(1));
 
             trigger OnPreDataItem()
             begin
                 FechaDesde := DMY2DATE(1, Mes, Anio);
                 EVALUATE(FechaHasta, FORMAT(CALCDATE('+1M', FechaDesde) - 1));
                 if UseDocumentDate then
-                    "GMLocValues Entry".SETRANGE("GMLocDocument Date", FechaDesde, FechaHasta)
+                    "GMAValues Entry".SETRANGE("GMADocument Date", FechaDesde, FechaHasta)
                 else
-                    "GMLocValues Entry".SETRANGE("GMLocPosting Date", FechaDesde, FechaHasta);
+                    "GMAValues Entry".SETRANGE("GMAPosting Date", FechaDesde, FechaHasta);
 
                 if (BssiDimension <> '') then
                     if "BssiMEMSystemSetup".Bssi_iGetGlobalDimensionNoToUse() = 1 then
-                        "GMLocValues Entry".SetFilter("GMLocGlobal Dimension 1", BssiDimension)
+                        "GMAValues Entry".SetFilter("GMAGlobal Dimension 1", BssiDimension)
                     else
-                        "GMLocValues Entry".SetFilter("GMLocGlobal Dimension 2", BssiDimension);
+                        "GMAValues Entry".SetFilter("GMAGlobal Dimension 2", BssiDimension);
             end;
 
             trigger OnAfterGetRecord()
             begin
-                IF recValor.GET("GMLocValues Entry".GMLocValue) THEN
-                    IF (recValor."GMLocIs Withholding") AND (recValor."GMLocIs GGII") THEN BEGIN
+                IF recValor.GET("GMAValues Entry".GMAValue) THEN
+                    IF (recValor."GMAIs Withholding") AND (recValor."GMAIs GGII") THEN BEGIN
                         EscribirFichero := TRUE;
                         NumeroLineas += 1;
                         IF NOT (EXIST) then
@@ -45,7 +45,7 @@ report 80884 "PERSIFERE - GIT With. Suff."
         {
             area(Content)
             {
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     caption = 'Options',;
                     field(Anio; Anio)
@@ -121,7 +121,7 @@ report 80884 "PERSIFERE - GIT With. Suff."
         TextTemp: Text[20];
         FechaDesde: Date;
         FechaHasta: Date;
-        CabRecibo: Record "GMLocPosted Receipt";
+        CabRecibo: Record "GMAPosted Receipt";
         Cliente: Record 18;
         EscribirFichero: Boolean;
         NumeroLineas: Integer;
@@ -129,7 +129,7 @@ report 80884 "PERSIFERE - GIT With. Suff."
         Mes: Integer;
         Texto: Text[1024];
         TempExcelBuff: Record 370 TEMPORARY;
-        recValor: Record GMLocValues;
+        recValor: Record GMAValues;
         Text004: label 'There is no records to generate the report',;
 
         BssiMEMSystemSetup: Record "BssiMEMSystemSetup";
@@ -150,7 +150,7 @@ report 80884 "PERSIFERE - GIT With. Suff."
     var
         TempBlob: Codeunit "Temp Blob";
         DataCompression: Codeunit "Data Compression";
-        ValuesEntryLocal: Record "GMLocValues Entry";
+        ValuesEntryLocal: Record "GMAValues Entry";
         DimensionValue: Record "Dimension value";
         InS: InStream;
         OutS: OutStream;
@@ -184,27 +184,27 @@ report 80884 "PERSIFERE - GIT With. Suff."
                 FechaDesde := DMY2DATE(1, Mes, Anio);
                 EVALUATE(FechaHasta, FORMAT(CALCDATE('+1M', FechaDesde) - 1));
                 ValuesEntryLocal.Reset();
-                ValuesEntryLocal.SetFilter(ValuesEntryLocal."GMLocDocument Type", '=%1', ValuesEntryLocal."GMLocDocument Type"::Recibo);
+                ValuesEntryLocal.SetFilter(ValuesEntryLocal."GMADocument Type", '=%1', ValuesEntryLocal."GMADocument Type"::Recibo);
                 // JCG usa la fecha adecuada
                 if UseDocumentDate then
-                    ValuesEntryLocal.SETRANGE("GMLocDocument Date", FechaDesde, FechaHasta)
+                    ValuesEntryLocal.SETRANGE("GMADocument Date", FechaDesde, FechaHasta)
                 else
-                    ValuesEntryLocal.SETRANGE("GMLocPosting Date", FechaDesde, FechaHasta);
+                    ValuesEntryLocal.SETRANGE("GMAPosting Date", FechaDesde, FechaHasta);
 
                 if (BssiDimension <> '') then
                     if "BssiMEMSystemSetup".Bssi_iGetGlobalDimensionNoToUse() = 1 then
-                        ValuesEntryLocal.SetFilter("GMLocGlobal Dimension 1", BssiDimension)
+                        ValuesEntryLocal.SetFilter("GMAGlobal Dimension 1", BssiDimension)
                     else
-                        ValuesEntryLocal.SetFilter("GMLocGlobal Dimension 2", BssiDimension);
+                        ValuesEntryLocal.SetFilter("GMAGlobal Dimension 2", BssiDimension);
 
                 if ValuesEntryLocal.FindFirst() then begin
                     // Generar un nombre único para cada archivo dentro del zip
-                    FileName := 'SIFERE-' + ValuesEntryLocal."GMLocDocument No." + '.txt';
+                    FileName := 'SIFERE-' + ValuesEntryLocal."GMADocument No." + '.txt';
 
                     Clear(LONGTEXT);
                     repeat
-                        IF recValor.GET(ValuesEntryLocal.GMLocValue) THEN
-                            IF (recValor."GMLocIs Withholding") AND (recValor."GMLocIs GGII") THEN BEGIN
+                        IF recValor.GET(ValuesEntryLocal.GMAValue) THEN
+                            IF (recValor."GMAIs Withholding") AND (recValor."GMAIs GGII") THEN BEGIN
                                 Campo1 := '';
                                 Campo2 := '';
                                 Campo3 := '';
@@ -216,16 +216,16 @@ report 80884 "PERSIFERE - GIT With. Suff."
                                 Campo9 := '';
                                 TextTemp := '';
 
-                                Campo1 := recValor.GMLocProvince;
+                                Campo1 := recValor.GMAProvince;
 
                                 //CUIT del Agente de Retenci¢n
                                 CabRecibo.RESET;
-                                CabRecibo.SETCURRENTKEY("GMLocNro Recibo");
-                                CabRecibo.SETRANGE(CabRecibo."GMLocNro Recibo", ValuesEntryLocal."GMLocDocument No.");
+                                CabRecibo.SETCURRENTKEY("GMANro Recibo");
+                                CabRecibo.SETRANGE(CabRecibo."GMANro Recibo", ValuesEntryLocal."GMADocument No.");
                                 IF CabRecibo.FINDFIRST THEN BEGIN
                                     Cliente.RESET;
                                     Cliente.SETCURRENTKEY("No.");
-                                    Cliente.SETRANGE(Cliente."No.", CabRecibo."GMLocCustomer No.");
+                                    Cliente.SETRANGE(Cliente."No.", CabRecibo."GMACustomer No.");
                                     IF Cliente.FINDFIRST THEN BEGIN
                                         Campo2 := DELCHR(Cliente."VAT Registration No.", '=', '-');
                                         Campo2 := INSSTR(Campo2, '-', 3);
@@ -234,17 +234,17 @@ report 80884 "PERSIFERE - GIT With. Suff."
                                 END;
 
                                 //Fecha de la retenci¢n
-                                Campo3 := FORMAT(ValuesEntryLocal."GMLocDocument Date", 10, '<Day,2>/<Month,2>/<Year4>');
+                                Campo3 := FORMAT(ValuesEntryLocal."GMADocument Date", 10, '<Day,2>/<Month,2>/<Year4>');
 
                                 //Num Sucursal
                                 Campo4 := '0000';
 
                                 //N£mero de constancia
-                                IF (ValuesEntryLocal."GMLocDocument No." = '') THEN
+                                IF (ValuesEntryLocal."GMADocument No." = '') THEN
                                     Campo5 := '0000000000000000'
                                 ELSE
-                                    WHILE STRLEN(Campo5) + STRLEN(DELCHR(ValuesEntryLocal."GMLocDocument No.", '=', 'ZXCVBNMASDFGHJKLPOIUYTREWQ-_')) < 16 DO Campo5 += '0';
-                                Campo5 += DELCHR(ValuesEntryLocal."GMLocDocument No.", '=', 'ZXCVBNMASDFGHJKLPOIUYTREWQ-_');
+                                    WHILE STRLEN(Campo5) + STRLEN(DELCHR(ValuesEntryLocal."GMADocument No.", '=', 'ZXCVBNMASDFGHJKLPOIUYTREWQ-_')) < 16 DO Campo5 += '0';
+                                Campo5 += DELCHR(ValuesEntryLocal."GMADocument No.", '=', 'ZXCVBNMASDFGHJKLPOIUYTREWQ-_');
 
                                 //Tipo de comprobante
                                 Campo6 := 'R';
@@ -253,14 +253,14 @@ report 80884 "PERSIFERE - GIT With. Suff."
                                 Campo7 := 'A';
 
                                 //N£mero de comprobante original
-                                WHILE STRLEN(Campo8) + STRLEN(ValuesEntryLocal."GMLocValue No.") < 20 DO Campo8 += '0';
-                                Campo8 += ValuesEntryLocal."GMLocValue No.";
+                                WHILE STRLEN(Campo8) + STRLEN(ValuesEntryLocal."GMAValue No.") < 20 DO Campo8 += '0';
+                                Campo8 += ValuesEntryLocal."GMAValue No.";
 
                                 //Importe Retenido
-                                WHILE STRLEN(Campo9) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND(ValuesEntryLocal."GMLocAmount (LCY)", 0.01), 0,
+                                WHILE STRLEN(Campo9) + STRLEN(CONVERTSTR(DELCHR(FORMAT(ROUND(ValuesEntryLocal."GMAAmount (LCY)", 0.01), 0,
                                 '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.')) < 11 DO Campo9 += '0';
                                 BEGIN
-                                    Campo9 += CONVERTSTR(DELCHR(FORMAT(ROUND(ValuesEntryLocal."GMLocAmount (LCY)", 0.01), 0,
+                                    Campo9 += CONVERTSTR(DELCHR(FORMAT(ROUND(ValuesEntryLocal."GMAAmount (LCY)", 0.01), 0,
                                     '<Precision,2:2><integer><decimals>'), '.', ''), ',', '.');
                                 END;
 

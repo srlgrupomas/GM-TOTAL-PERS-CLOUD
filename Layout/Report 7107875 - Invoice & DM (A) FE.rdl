@@ -8681,8 +8681,8 @@ MGbMmDFjxowZ//lGBLN27drVq1czBMOYMWPGjBkz/q+YqcEwZsyYMWPGjP97bkcw8AdGjBgxYsSIEaP/
         <Field Name="ShiptoCity">
           <DataField>ShiptoCity</DataField>
         </Field>
-        <Field Name="GMLocProvince">
-          <DataField>GMLocProvince</DataField>
+        <Field Name="GMAProvince">
+          <DataField>GMAProvince</DataField>
         </Field>
         <Field Name="NombreProv">
           <DataField>NombreProv</DataField>

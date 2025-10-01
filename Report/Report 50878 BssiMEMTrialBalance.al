@@ -1,5 +1,5 @@
 
-report 80878 PERMEMTrialBalance
+report 34006878 PERMEMTrialBalance
 {
     // *********************************************************************************
     // Description: Duplicate D365BC - Trial Balance (Object ID: 6)
@@ -149,7 +149,7 @@ report 80878 PERMEMTrialBalance
                         BlankLineNo -= 1;
 
                         if UsarNombreCorporativo then
-                            AccountName := "G/L Account"."GMLocCorporate Account Name"
+                            AccountName := "G/L Account"."GMACorporate Account Name"
                         else
                             AccountName := "G/L Account".Name;
                     end;
@@ -163,7 +163,7 @@ report 80878 PERMEMTrialBalance
                         CurrReport.Skip();
 
                     if UsarNombreCorporativo then
-                        AccountName := "G/L Account"."GMLocCorporate Account Name"
+                        AccountName := "G/L Account"."GMACorporate Account Name"
                     else
                         AccountName := "G/L Account".Name;
                 end;
@@ -181,7 +181,7 @@ report 80878 PERMEMTrialBalance
                 ChangeGroupNo := "New Page";
 
                 if UsarNombreCorporativo then
-                    AccountName := "G/L Account"."GMLocCorporate Account Name"
+                    AccountName := "G/L Account"."GMACorporate Account Name"
                 else
                     AccountName := "G/L Account".Name;
             end;

@@ -1,4 +1,4 @@
-pageextension 80885 "Fixed Asset gl journal" extends "Fixed Asset G/L Journal"
+pageextension 34006885 "Fixed Asset gl journal" extends "Fixed Asset G/L Journal"
 {
     layout
     {

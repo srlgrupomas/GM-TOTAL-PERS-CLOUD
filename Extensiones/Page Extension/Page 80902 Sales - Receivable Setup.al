@@ -1,4 +1,4 @@
-pageextension 80902 "PERSales & Receivables Setup" extends "Sales & Receivables Setup"
+pageextension 34006902 "PERSales & Receivables Setup" extends "Sales & Receivables Setup"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -6,7 +6,7 @@ pageextension 80902 "PERSales & Receivables Setup" extends "Sales & Receivables 
 
     layout
     {
-        addafter(GMlocNotCreateTaxArea)
+        addafter(GMANotCreateTaxArea)
         {
             field(PerCreateTaxArea; Rec.PerCreateTaxArea)
             {
@@ -25,7 +25,7 @@ pageextension 80902 "PERSales & Receivables Setup" extends "Sales & Receivables 
 
     var
 
-        CodArgentina: codeunit GMLocArgentina2;
+        CodArgentina: codeunit GMAArgentina2;
         VisibleArgentina: Boolean;
         VisibleChile: Boolean;
         VisibleColombia: Boolean;

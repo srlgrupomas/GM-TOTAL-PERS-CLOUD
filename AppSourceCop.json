@@ -1,0 +1,8 @@
+{
+    "name": "Total Customizations",
+    "publisher": "Grupo MAS SRL",
+   
+   "mandatoryAffixes": ["GMA"],
+   "mandatorySuffix": "Msg"
+   
+}

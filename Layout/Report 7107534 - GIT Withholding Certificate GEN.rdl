@@ -2043,8 +2043,8 @@ End Function
         <Field Name="Withholding_Ledger_Entry_Voucher_Number">
           <DataField>Withholding_Ledger_Entry_Voucher_Number</DataField>
         </Field>
-        <Field Name="GMLocPictureSign">
-          <DataField>GMLocPictureSign</DataField>
+        <Field Name="GMAPictureSign">
+          <DataField>GMAPictureSign</DataField>
         </Field>
         <Field Name="Movimiento_Retenciones__Valor">
           <DataField>Movimiento_Retenciones__Valor</DataField>

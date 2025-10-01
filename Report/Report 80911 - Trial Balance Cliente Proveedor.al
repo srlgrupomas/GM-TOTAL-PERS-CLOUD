@@ -1,4 +1,4 @@
-report 80911 "PersTrial Balance Cli/Pro"
+report 34006911 "PersTrial Balance Cli/Pro"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './Layout/BssiMEMTrialBalanceCliPro.rdl';
@@ -254,7 +254,7 @@ report 80911 "PersTrial Balance Cli/Pro"
                         BlankLineNo -= 1;
 
                         if UsarNombreCorporativo then
-                            AccountName := "G/L Account"."GMLocCorporate Account Name"
+                            AccountName := "G/L Account"."GMACorporate Account Name"
                         else
                             AccountName := "G/L Account".Name;
                     end;
@@ -268,7 +268,7 @@ report 80911 "PersTrial Balance Cli/Pro"
                         CurrReport.Skip();
 
                     if UsarNombreCorporativo then
-                        AccountName := "G/L Account"."GMLocCorporate Account Name"
+                        AccountName := "G/L Account"."GMACorporate Account Name"
                     else
                         AccountName := "G/L Account".Name;
                 end;
@@ -286,7 +286,7 @@ report 80911 "PersTrial Balance Cli/Pro"
                 ChangeGroupNo := "New Page";
 
                 if UsarNombreCorporativo then
-                    AccountName := "G/L Account"."GMLocCorporate Account Name"
+                    AccountName := "G/L Account"."GMACorporate Account Name"
                 else
                     AccountName := "G/L Account".Name;
             end;

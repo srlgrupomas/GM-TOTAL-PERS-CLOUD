@@ -1043,20 +1043,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PersPayment Order - Control fechaposting - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 3428202714 - Control 1535392835 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2374926060">
+        <trans-unit id="PageExtension 3428202714 - Control 2526998452 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 685406355">
           <source>Specifies the date of the document.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension GMLocWitholdingLedEntry - Control GMLocDocumentDate - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension GMLocWitholdingLedEntry - Control GMADocumentDate - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="PageExtension 3428202714 - Control 1535392835 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2374926060">
+        <trans-unit id="PageExtension 3428202714 - Control 2526998452 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 685406355">
           <source>Document Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension GMLocWitholdingLedEntry - Control GMLocDocumentDate - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension GMLocWitholdingLedEntry - Control GMADocumentDate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="TableExtension 2101757809 - Field 1535392835 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1852772498">
+        <trans-unit id="TableExtension 3977469890 - Field 2526998452 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 2412338001">
           <source>Document Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">TableExtension GMlocWitholdngLedgerEntry - Field GMLocDocumentDate - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension GMAWitholdngLedgerEntry - Field GMADocumentDate - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2359898517 - Field 1579757074 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Coeficiente</source>
@@ -2653,10 +2653,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PER EARCIBA RET PERC - NamedType Text01</note>
         </trans-unit>
-        <trans-unit id="Report 1231692889 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1231692889 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PER EARCIBA RET PERC - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PER EARCIBA RET PERC - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1231692889 - Control 2218418189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Select the Entity to restrict the report.</source>
@@ -2728,10 +2728,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PER R.G. 3685 CITI Compras - NamedType Text01</note>
         </trans-unit>
-        <trans-unit id="Report 1531461712 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1531461712 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PER R.G. 3685 CITI Compras - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PER R.G. 3685 CITI Compras - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1531461712 - Control 2218418189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Select the Entity to restrict the report.</source>
@@ -2808,10 +2808,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PER R.G. 3685 CITI Ventas - NamedType Text01</note>
         </trans-unit>
-        <trans-unit id="Report 1124555122 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1124555122 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PER R.G. 3685 CITI Ventas - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PER R.G. 3685 CITI Ventas - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1124555122 - Control 2218418189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Select the Entity to restrict the report.</source>
@@ -2843,10 +2843,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PER SICORE - NamedType Text004</note>
         </trans-unit>
-        <trans-unit id="Report 266893730 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 266893730 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PER SICORE - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PER SICORE - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 266893730 - Control 1496202531 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Year</source>
@@ -2878,10 +2878,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PERARBA IIBB BSAS - NamedType Text005</note>
         </trans-unit>
-        <trans-unit id="Report 822802952 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 822802952 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PERARBA IIBB BSAS - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PERARBA IIBB BSAS - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 822802952 - Control 2218418189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Select the Entity to restrict the report.</source>
@@ -2918,10 +2918,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PERARBA Perception - NamedType Text006</note>
         </trans-unit>
-        <trans-unit id="Report 3994688614 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 3994688614 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PERARBA Perception - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PERARBA Perception - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3994688614 - Control 2218418189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Select the Entity to restrict the report.</source>
@@ -3688,10 +3688,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PERS SIRE IVA - NamedType Text004</note>
         </trans-unit>
-        <trans-unit id="Report 150269193 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 150269193 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PERS SIRE IVA - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PERS SIRE IVA - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 150269193 - Control 1135162134 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>From date</source>
@@ -3718,10 +3718,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PERS SUSS - NamedType Text004</note>
         </trans-unit>
-        <trans-unit id="Report 790011006 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 790011006 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PERS SUSS - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PERS SUSS - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 790011006 - Control 1135162134 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>From date</source>
@@ -4863,10 +4863,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PERSIFERE - GIT Perc. Suff. - NamedType Text006</note>
         </trans-unit>
-        <trans-unit id="Report 1889680544 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 1889680544 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PERSIFERE - GIT Perc. Suff. - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PERSIFERE - GIT Perc. Suff. - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1889680544 - Control 1496202531 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Year</source>
@@ -4903,10 +4903,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PERSIFERE - GIT With. Suff. - NamedType Text004</note>
         </trans-unit>
-        <trans-unit id="Report 3705721230 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 3705721230 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PERSIFERE - GIT With. Suff. - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PERSIFERE - GIT With. Suff. - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3705721230 - Control 1496202531 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Year</source>
@@ -5798,10 +5798,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PersLibro Diario - NamedType TOTAL_DEL_ASIENTO_CIERRECaptionLbl</note>
         </trans-unit>
-        <trans-unit id="Report 3698954554 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 3698954554 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Opciones</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PersLibro Diario - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PersLibro Diario - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3698954554 - Control 2679103935 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Asiento de apertura</source>
@@ -5843,10 +5843,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PersLibro Diario - Control UsarNombreCorporativo - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Report 3698954554 - Control 2167324369 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 3698954554 - Control 4049806114 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Period</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PersLibro Diario - Control GMLocPeriod - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PersLibro Diario - Control GMAPeriod - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3698954554 - Control 2218418189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the entity range for which to restrict the suggested vendor payment information.</source>
@@ -6058,10 +6058,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PersPerceptions Book - ReportDataItem EnVentas - Property RequestFilterHeading</note>
         </trans-unit>
-        <trans-unit id="Report 758362285 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 758362285 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Options</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PersPerceptions Book - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PersPerceptions Book - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 758362285 - Control 2218418189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the entity range for which to restrict the suggested vendor payment information.</source>
@@ -8233,10 +8233,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report PersWithholdings Book - ReportDataItem EnVentas - Property RequestFilterHeading</note>
         </trans-unit>
-        <trans-unit id="Report 3120530517 - Control 3241788406 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Report 3120530517 - Control 1664495421 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Opciones</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Report PersWithholdings Book - Control GMLocOptions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PersWithholdings Book - Control GMAOptions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 3120530517 - Control 2218418189 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the entity range for which to restrict the suggested vendor payment information.</source>
@@ -8733,10 +8733,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8901 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 343187857 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4105562392">
+        <trans-unit id="PageExtension 343187857 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4105562392">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8901 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8901 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 343187857 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4105562392">
           <source>Differences Exchange Rates</source>
@@ -8913,10 +8913,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8905 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2893974325 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2704021542">
+        <trans-unit id="PageExtension 2893974325 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2704021542">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8905 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8905 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2893974325 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2704021542">
           <source>Differences Exchange Rates</source>
@@ -9093,10 +9093,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8908 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 1787490114 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1696917291">
+        <trans-unit id="PageExtension 1787490114 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1696917291">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8908 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8908 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1787490114 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1696917291">
           <source>Differences Exchange Rates</source>
@@ -9273,10 +9273,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8909 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 1149793497 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 523480083">
+        <trans-unit id="PageExtension 1149793497 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 523480083">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8909 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8909 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1149793497 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 523480083">
           <source>Differences Exchange Rates</source>
@@ -9453,10 +9453,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8910 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 725140553 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3703463247">
+        <trans-unit id="PageExtension 725140553 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3703463247">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8910 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu8910 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 725140553 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3703463247">
           <source>Differences Exchange Rates</source>
@@ -9633,10 +9633,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9005 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 901782597 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3540437152">
+        <trans-unit id="PageExtension 901782597 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3540437152">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9005 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9005 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 901782597 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3540437152">
           <source>Differences Exchange Rates</source>
@@ -9813,10 +9813,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9006 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 264085980 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2747922353">
+        <trans-unit id="PageExtension 264085980 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2747922353">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9006 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9006 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 264085980 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2747922353">
           <source>Differences Exchange Rates</source>
@@ -9993,10 +9993,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9007 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 3921356659 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 743575308">
+        <trans-unit id="PageExtension 3921356659 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 743575308">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9007 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9007 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 3921356659 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 743575308">
           <source>Differences Exchange Rates</source>
@@ -10173,10 +10173,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9018 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2200522129 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3513039640">
+        <trans-unit id="PageExtension 2200522129 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3513039640">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9018 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9018 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2200522129 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3513039640">
           <source>Differences Exchange Rates</source>
@@ -10353,10 +10353,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9022 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 800354522 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2458191494">
+        <trans-unit id="PageExtension 800354522 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2458191494">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9022 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9022 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 800354522 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2458191494">
           <source>Differences Exchange Rates</source>
@@ -10533,10 +10533,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9027 - Action extrate - Property Caption</note>
         </trans-unit>
-        <trans-unit id="PageExtension 2713444373 - Action 421692320 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3470244815">
+        <trans-unit id="PageExtension 2713444373 - Action 3183962991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3470244815">
           <source>Differences Exchange Rates</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9027 - Action GMLocAXDC - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9027 - Action GMAAXDC - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 2713444373 - Action 1907166170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3470244815">
           <source>Differences Exchange Rates</source>
@@ -10562,6 +10562,11 @@
           <source>AXI Generation</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension persMenu9027 - Action GeneracionAXI - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 3108123758 - Field 1782760333 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 4274826855">
+          <source>Trial Balance Bank Account</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PerG/L Account - Field Trial Balance Bank Account - Property Caption</note>
         </trans-unit>
         <trans-unit id="TableExtension 3108123758 - Field 1500423893 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 4274826855">
           <source>Trial Balance Vendor/Customer</source>

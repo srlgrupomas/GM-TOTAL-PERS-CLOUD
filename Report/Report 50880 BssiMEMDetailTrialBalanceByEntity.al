@@ -1,5 +1,5 @@
 
-report 80880 PERDetailTrialBalByEntity
+report 34006880 PERDetailTrialBalByEntity
 {
     // *********************************************************************************
     // Description: Duplicate D365BC Detail Trial Balance (Object ID: 4)
@@ -197,7 +197,7 @@ report 80880 PERDetailTrialBalByEntity
                             end;
 
                             if UsarNombreCorporativo then
-                                AccountName := "G/L Account"."GMLocCorporate Account Name"
+                                AccountName := "G/L Account"."GMACorporate Account Name"
                             else
                                 AccountName := "G/L Account".Name;
 
@@ -218,7 +218,7 @@ report 80880 PERDetailTrialBalByEntity
                     begin
                         // CurrReport.PrintOnlyIfDetail := ExcludeBalanceOnly or (StartBalance = 0);
                         if UsarNombreCorporativo then
-                            AccountName := "G/L Account"."GMLocCorporate Account Name"
+                            AccountName := "G/L Account"."GMACorporate Account Name"
                         else
                             AccountName := "G/L Account".Name;
                     end;
@@ -243,7 +243,7 @@ report 80880 PERDetailTrialBalByEntity
                     end;
 
                     if UsarNombreCorporativo then
-                        AccountName := "G/L Account"."GMLocCorporate Account Name"
+                        AccountName := "G/L Account"."GMACorporate Account Name"
                     else
                         AccountName := "G/L Account".Name;
 

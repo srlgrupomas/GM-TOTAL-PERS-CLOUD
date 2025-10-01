@@ -1,4 +1,4 @@
-report 80886 "PER R.G. 3685 CITI Ventas"
+report 34006886 "PER R.G. 3685 CITI Ventas"
 {
     Caption = 'R.G. 3685 Ventas Comprobante';
     ProcessingOnly = true;
@@ -30,27 +30,27 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                 trigger OnAfterGetRecord()
                 VAR
-                    "AFIP - Tipo Comprobante": Record "GMLocAFIP - Voucher Type";
-                    "Actividad empresa": Record "GMLocCompany Activity";
-                    "Tipo fiscal": Record "GMLocFiscal Type";
+                    "AFIP - Tipo Comprobante": Record "GMAAFIP - Voucher Type";
+                    "Actividad empresa": Record "GMACompany Activity";
+                    "Tipo fiscal": Record "GMAFiscal Type";
                     Currency: Record 4;
                     FechaVtoCAIT: Text[8];
                     LclTaxGroup: Record 321;
-                    recCompActivity: Record "GMLocCompany Activity";
-                    recAuxTipoFiscal: Record "GMLocFiscal Type";
+                    recCompActivity: Record "GMACompany Activity";
+                    recAuxTipoFiscal: Record "GMAFiscal Type";
                 begin
                     recCompActivity.Reset();
-                    recCompActivity.SetRange(recCompActivity."GMLocActivity Code", "Sales Invoice Header"."GMLocPoint of Sales");
+                    recCompActivity.SetRange(recCompActivity."GMAActivity Code", "Sales Invoice Header"."GMAPoint of Sales");
                     if recCompActivity.FindFirst() then begin
-                        if recCompActivity.GMLocInternalPOS then
+                        if recCompActivity.GMAInternalPOS then
                             CurrReport.Skip();
                     end;
 
 
                     recAuxTipoFiscal.Reset();
-                    recAuxTipoFiscal.SetRange(recAuxTipoFiscal.GMLocCode, "Sales Invoice Header"."GMLocFiscal Type");
+                    recAuxTipoFiscal.SetRange(recAuxTipoFiscal.GMACode, "Sales Invoice Header"."GMAFiscal Type");
                     if recAuxTipoFiscal.FindFirst() then
-                        if not recAuxTipoFiscal."GMLocSummary in CITI" then
+                        if not recAuxTipoFiscal."GMASummary in CITI" then
                             CurrReport.Skip();
 
 
@@ -84,31 +84,31 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     CLEAR(Tipo_de_Comprobante);
 
-                    IF ("AFIP - Tipo Comprobante".GET("Sales Invoice Header"."GMLocAFIP Voucher Type")) THEN BEGIN
-                        IF ("AFIP - Tipo Comprobante"."GMLocCod 3685" = '') THEN
+                    IF ("AFIP - Tipo Comprobante".GET("Sales Invoice Header"."GMAAFIP Voucher Type")) THEN BEGIN
+                        IF ("AFIP - Tipo Comprobante"."GMACod 3685" = '') THEN
                             ERROR(Text005)
                         ELSE
-                            Tipo_de_Comprobante := "AFIP - Tipo Comprobante"."GMLocCod 3685"
+                            Tipo_de_Comprobante := "AFIP - Tipo Comprobante"."GMACod 3685"
                     END
                     ELSE
                         Tipo_de_Comprobante := '001';
 
                     CLEAR(Punto_de_Venta);
-                    IF ("Actividad empresa".GET("Sales Invoice Header"."GMLocPoint of Sales")) THEN BEGIN
-                        IF ("Actividad empresa"."GMLocCod 3685" = '') THEN
+                    IF ("Actividad empresa".GET("Sales Invoice Header"."GMAPoint of Sales")) THEN BEGIN
+                        IF ("Actividad empresa"."GMACod 3685" = '') THEN
                             ERROR(Text006)
                         ELSE
-                            Punto_de_Venta := "Actividad empresa"."GMLocCod 3685"
+                            Punto_de_Venta := "Actividad empresa"."GMACod 3685"
                     END
                     ELSE
                         Punto_de_Venta := '00001';
 
                     CLEAR(Numero_de_Comprobante);
-                    IF ("Sales Invoice Header"."GMLocAFIP Voucher No." <> 0) THEN BEGIN
-                        WHILE STRLEN(Numero_de_Comprobante + FORMAT("Sales Invoice Header"."GMLocAFIP Voucher No.")) < 8 DO
+                    IF ("Sales Invoice Header"."GMAAFIP Voucher No." <> 0) THEN BEGIN
+                        WHILE STRLEN(Numero_de_Comprobante + FORMAT("Sales Invoice Header"."GMAAFIP Voucher No.")) < 8 DO
                             Numero_de_Comprobante := Numero_de_Comprobante + '0';
 
-                        Numero_de_Comprobante := Numero_de_Comprobante + FORMAT("Sales Invoice Header"."GMLocAFIP Voucher No.");
+                        Numero_de_Comprobante := Numero_de_Comprobante + FORMAT("Sales Invoice Header"."GMAAFIP Voucher No.");
                     END
                     ELSE BEGIN
                         IF (STRLEN("Sales Invoice Header"."No.") > 8) THEN
@@ -144,8 +144,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                             WHILE STRLEN(CUIT) < 20 DO
                                 CUIT := '0' + CUIT;
 
-                        IF (Cliente."GMLocAFIP Document Type" <> '') THEN
-                            Codigo_de_Documento := Cliente."GMLocAFIP Document Type"
+                        IF (Cliente."GMAAFIP Document Type" <> '') THEN
+                            Codigo_de_Documento := Cliente."GMAAFIP Document Type"
                         ELSE
                             Codigo_de_Documento := '80';
                     END;
@@ -154,11 +154,11 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     TempTotalesCITI.INIT;
                     //12896-
                     ID_Totals += 1;
-                    TempTotalesCITI.GMLocID := FORMAT(ID_Totals);
+                    TempTotalesCITI.GMAID := FORMAT(ID_Totals);
                     //12896+
-                    TempTotalesCITI.GMLocLineNo := NumeroLineas;
-                    TempTotalesCITI."GMLocVoucher No" := "Sales Invoice Header"."No.";
-                    TempTotalesCITI.GMLocDescription := 'FACTURA';
+                    TempTotalesCITI.GMALineNo := NumeroLineas;
+                    TempTotalesCITI."GMAVoucher No" := "Sales Invoice Header"."No.";
+                    TempTotalesCITI.GMADescription := 'FACTURA';
                     // Campo IMPORTE TOTAL CON IMPUESTOS en Divisa de la Factura con dos decimales Redondeados
                     // en 15 caracteres sin puntos ni comas
                     IF "Sales Invoice Header"."Currency Factor" <> 0 THEN
@@ -176,16 +176,16 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                         "Sales Invoice Header"."Bill-to Name" := COPYSTR("Sales Invoice Header"."Bill-to Name", 1, 30);
 
                     IF (Valor12 < 1000) THEN BEGIN
-                        IF ("Tipo fiscal".GET("Sales Invoice Header"."GMLocFiscal Type")) THEN BEGIN
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                        IF ("Tipo fiscal".GET("Sales Invoice Header"."GMAFiscal Type")) THEN BEGIN
+                            IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                                 ERROR(Text008);
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '5') THEN
+                            IF ("Tipo fiscal"."GMACod 3685" = '5') THEN
                                 "Sales Invoice Header"."Bill-to Name" := 'CONSUMIDOR FINAL              ';
                         END;
                     END
                     ELSE BEGIN
-                        IF ("Tipo fiscal".GET("Sales Invoice Header"."GMLocFiscal Type")) THEN
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                        IF ("Tipo fiscal".GET("Sales Invoice Header"."GMAFiscal Type")) THEN
+                            IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                                 ERROR(Text008);
                     END;
 
@@ -195,30 +195,30 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     IF Lineas.FIND('-') THEN
                         REPEAT
-                            IF (RecProvincia.GET("Sales Invoice Header".GMLocProvince)) THEN BEGIN
-                                IF (RecProvincia."GMLocCod 3685" = '') THEN
+                            IF (RecProvincia.GET("Sales Invoice Header".GMAProvince)) THEN BEGIN
+                                IF (RecProvincia."GMACod 3685" = '') THEN
                                     ERROR(Text009);
-                                IF (RecProvincia."GMLocCod 3685" = '23') THEN BEGIN
+                                IF (RecProvincia."GMACod 3685" = '23') THEN BEGIN
                                     Valor17 += Lineas.Amount;// * Tipocambio;
                                 END
                                 ELSE BEGIN
-                                    IF ("Tipo fiscal"."GMLocCod 3685" = '08') OR ("Tipo fiscal"."GMLocCod 3685" = '09') THEN BEGIN
+                                    IF ("Tipo fiscal"."GMACod 3685" = '08') OR ("Tipo fiscal"."GMACod 3685" = '09') THEN BEGIN
                                         Valor13 += Lineas.Amount;// * Tipocambio
                                     END
                                     ELSE BEGIN
                                         /* IF (Lineas."Tax Liable") THEN BEGIN
                                              IF (LclTaxGroup.GET(Lineas."Tax Group Code")) THEN;
-                                             IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                             IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                                  Valor13 += Lineas.Amount * Tipocambio
                                              ELSE
-                                                 IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                                 IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                      Valor17 += Lineas.Amount * Tipocambio;
                                          END
                                          ELSE BEGIN
                                              Valor17 += Lineas.Amount * Tipocambio;
                                          END;*/
                                         CLEAR(VATBUSPOSTINGGROUP);
-                                        IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                        IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                             if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Normal VAT") then
                                                 Valor13 += Lineas."VAT Base Amount";// * Tipocambio;
 
@@ -227,10 +227,10 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                                             if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Sales Tax") then begin
                                                 IF (LclTaxGroup.GET(Lineas."Tax Group Code")) THEN;
 
-                                                IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                                IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                                     Valor13 += Lineas.Amount// * Tipocambio
                                                 ELSE
-                                                    IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                                    IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                         Valor17 += Lineas.Amount;//* Tipocambio;
                                             end;
 
@@ -247,17 +247,17 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                             ELSE BEGIN
                                 /*IF (Lineas."Tax Liable") THEN BEGIN
                                     IF (LclTaxGroup.GET(Lineas."Tax Group Code")) THEN;
-                                    IF LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado" THEN
+                                    IF LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado" THEN
                                         Valor13 += Lineas.Amount * Tipocambio
                                     ELSE
-                                        IF LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento THEN
+                                        IF LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento THEN
                                             Valor17 += Lineas.Amount * Tipocambio;
                                 END
                                 ELSE BEGIN
                                     Valor17 += Lineas.Amount * Tipocambio;
                                 END;*/
                                 CLEAR(VATBUSPOSTINGGROUP);
-                                IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                     if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Normal VAT") then
                                         Valor13 += Lineas."VAT Base Amount";// * Tipocambio;
 
@@ -266,10 +266,10 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                                     if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Sales Tax") then begin
                                         IF (LclTaxGroup.GET(Lineas."Tax Group Code")) THEN;
 
-                                        IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                        IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                             Valor13 += Lineas.Amount// * Tipocambio
                                         ELSE
-                                            IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                            IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                 Valor17 += Lineas.Amount;//* Tipocambio;
                                     end;
 
@@ -296,19 +296,19 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 				    Impuestos.RESET;
                     Impuestos.SETRANGE(Impuestos."Document No.", "Sales Invoice Header"."No.");
 
-                    Impuestos.SetRange(Impuestos."GMLocDocument Type Loc.", "Sales Invoice Header"."GMLocDocument Type Loc.");
+                    Impuestos.SetRange(Impuestos."GMADocument Type Loc.", "Sales Invoice Header"."GMADocument Type Loc.");
                     IF Impuestos.FIND('-') THEN
                         REPEAT
-                            IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::IVA) THEN
+                            IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::IVA) THEN
                                 Valor15 += (Impuestos.Amount / Tipocambio)
                             ELSE BEGIN
-                                IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::"Ingresos Brutos") THEN
+                                IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::"Ingresos Brutos") THEN
                                     Valor19 += (Impuestos.Amount / Tipocambio)
                                 ELSE BEGIN
-                                    IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::"IVA Percepcion") THEN
+                                    IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::"IVA Percepcion") THEN
                                         Valor18 += (Impuestos.Amount / Tipocambio)
                                     ELSE BEGIN
-                                        IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::Otros) THEN
+                                        IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::Otros) THEN
                                             Valor21 += (Impuestos.Amount / Tipocambio)
                                     END;
                                 END;
@@ -322,14 +322,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Total2_8 += Entero;
                     // FIN campo 9
 
-                    TempTotalesCITI."GMLocOperation total amount" := Valor12;
+                    TempTotalesCITI."GMAOperation total amount" := Valor12;
 
                     //Campo 10 Importe total de conceptos que no integran el precio neto gravado
                     CLEAR(Entero);
                     Campo13 := Formatvalor(Valor13, 15);
                     EVALUATE(Entero, Campo13);
                     Total2_9 += Entero;
-                    TempTotalesCITI."GMLocImporte no Gravado" := Valor13;
+                    TempTotalesCITI."GMAImporte no Gravado" := Valor13;
                     // FIN campo10
 
                     //Total2_10+=Entero; 
@@ -346,7 +346,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo16 := Formatvalor(Valor16, 15);
                     EVALUATE(Entero, Campo16);
                     Total2_12 += Entero;
-                    TempTotalesCITI."GMLocNon categorized perceptio" := Valor16;
+                    TempTotalesCITI."GMANon categorized perceptio" := Valor16;
                     //Fin campo1 
 
                     //Campo 12 Importe de operaciones exentas
@@ -354,7 +354,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo17 := Formatvalor(Valor17, 15);
                     EVALUATE(Entero, Campo17);
                     Total2_13 += Entero;
-                    TempTotalesCITI."GMLocNon taxable Amount" := Valor17;
+                    TempTotalesCITI."GMANon taxable Amount" := Valor17;
                     //Fin Campo 12
 
                     // campo 13   Importe de percepciones o pagos a cuenta de impuestos Nacionales
@@ -362,7 +362,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo18 := Formatvalor(Valor18, 15);
                     EVALUATE(Entero, Campo18);
                     Total2_14 += Entero;
-                    TempTotalesCITI."GMLocNational Perceptions Amou" := Valor18;
+                    TempTotalesCITI."GMANational Perceptions Amou" := Valor18;
                     //Fin campo 13   
 
                     //  campo 14 ingresos brutos
@@ -370,14 +370,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo19 := Formatvalor(Valor19, 15);
                     EVALUATE(Entero, Campo19);
                     Total2_15 += Entero;
-                    TempTotalesCITI."GMLocGIT Amount" := Valor19;
+                    TempTotalesCITI."GMAGIT Amount" := Valor19;
                     //Fin campo 14   
 
                     //campo campo 15 Importe de percepciones impuestos Municipales
                     Campo20 := Formatvalor(Valor20, 15);
                     EVALUATE(Entero, Campo20);
                     Total2_16 += Entero;
-                    TempTotalesCITI."GMLocCity Perceptions Amount" := Valor20;
+                    TempTotalesCITI."GMACity Perceptions Amount" := Valor20;
                     //Fin campo 15  
 
                     // campo 16 Importe impuestos internos
@@ -385,23 +385,23 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo21 := Formatvalor(Valor21, 15);
                     EVALUATE(Entero, Campo21);
                     Total2_17 += Entero;
-                    TempTotalesCITI."GMLocInternal Tax Amount" := Valor21;
+                    TempTotalesCITI."GMAInternal Tax Amount" := Valor21;
                     //Fin Campo 16  
 
                     IF (Taxarea.GET("Sales Invoice Header"."Tax Area Code")) THEN;
 
-                    IF ("Tipo fiscal".GET("Sales Invoice Header"."GMLocFiscal Type")) THEN BEGIN
-                        IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                    IF ("Tipo fiscal".GET("Sales Invoice Header"."GMAFiscal Type")) THEN BEGIN
+                        IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                             ERROR(Text008)
                         ELSE
-                            Tiporesp := "Tipo fiscal"."GMLocCod 3685";
+                            Tiporesp := "Tipo fiscal"."GMACod 3685";
                     END;
 
                     IF (Currency.GET("Sales Invoice Header"."Currency Code")) THEN BEGIN
-                        IF (Currency."GMLocAFIP Code" = '') THEN
+                        IF (Currency."GMAAFIP Code" = '') THEN
                             ERROR(Text007)
                         ELSE
-                            Moneda := Currency."GMLocAFIP Code";
+                            Moneda := Currency."GMAAFIP Code";
                     END
                     ELSE
                         Moneda := 'PES';
@@ -446,7 +446,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     calculoImpuestosBaseIVA("Sales Invoice Header"."No.");
                     Cantiva := I105 + I21 + I27 + I5;
                     /*
-                    Impuestos.SETRANGE(Impuestos."GMLocTax Type Loc", Impuestos."GMLocTax Type Loc"::IVA);
+                    Impuestos.SETRANGE(Impuestos."GMATax Type Loc", Impuestos."GMATax Type Loc"::IVA);
                     IF Impuestos.FIND('-') THEN
                         REPEAT
                             Detalleimpuesto.RESET;
@@ -475,8 +475,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
 
                     IF (I105 <> 0) THEN BEGIN
-                        TempTotalesCITI."GMLocVAT10,5" := ImporteI105;
-                        TempTotalesCITI.GMLocBase105 := ImporteBaseI105;
+                        TempTotalesCITI."GMAVAT10,5" := ImporteI105;
+                        TempTotalesCITI.GMABase105 := ImporteBaseI105;
                         IF (ImporteI105 <> 0) THEN
                             ImporteI105 := ABS(ImporteI105);
                         TextImporteI105 := Formatvalor(ImporteI105, 15);
@@ -506,8 +506,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I5 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLocVAT5 := ImporteI5;
-                        TempTotalesCITI.GMLocBase5 := ImporteBaseI5;
+                        TempTotalesCITI.GMAVAT5 := ImporteI5;
+                        TempTotalesCITI.GMABase5 := ImporteBaseI5;
                         IF (ImporteI5 <> 0) THEN
                             ImporteI5 := ABS(ImporteI5);
                         TextImporteI5 := Formatvalor(ImporteI5, 15);
@@ -534,8 +534,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I21 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLocVAT21 := ImporteI21;
-                        TempTotalesCITI.GMLocBase21 := ImporteBaseI21;
+                        TempTotalesCITI.GMAVAT21 := ImporteI21;
+                        TempTotalesCITI.GMABase21 := ImporteBaseI21;
                         IF (ImporteI21 <> 0) THEN
                             ImporteI21 := ABS(ImporteI21);
                         TextImporteI21 := Formatvalor(ImporteI21, 15);
@@ -565,8 +565,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I27 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLociva27 := ImporteI27;
-                        TempTotalesCITI.GMLocBase27 := ImporteBaseI27;
+                        TempTotalesCITI.GMAiva27 := ImporteI27;
+                        TempTotalesCITI.GMABase27 := ImporteBaseI27;
                         IF (ImporteI27 <> 0) THEN
                             ImporteI27 := ABS(ImporteI27);
 
@@ -609,8 +609,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                         END;
 
                     IF (Cantiva = 0) THEN BEGIN
-                        TempTotalesCITI."GMLocVAT10,5" := ImporteI105;
-                        TempTotalesCITI.GMLocBase105 := 0; // es importe total de la factura
+                        TempTotalesCITI."GMAVAT10,5" := ImporteI105;
+                        TempTotalesCITI.GMABase105 := 0; // es importe total de la factura
                         IF (ImporteI105 <> 0) THEN
                             ImporteI105 := ABS(ImporteI105);
                         TextImporteI105 := Formatvalor(0, 15);
@@ -648,12 +648,12 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     IF Cantiva = 0 THEN Cantiva := 1;  // Se debe indicar 1 aun cuando la operaci¢n sea Exenta
 
                     OtrosTributos := '000000000000000';
-                    IF (GMLocCAI2 = '') THEN
-                        GMLocCAI2 := '00000000000000';
-                    IF ("GMLocCAI Due Date2" = 0D) THEN
+                    IF (GMACAI2 = '') THEN
+                        GMACAI2 := '00000000000000';
+                    IF ("GMACAI Due Date2" = 0D) THEN
                         FechaVtoCAIT := '00000000'
                     ELSE
-                        FechaVtoCAIT := FORMAT("GMLocCAI Due Date2", 8, '<Year4><Month,2><Day,2>');
+                        FechaVtoCAIT := FORMAT("GMACAI Due Date2", 8, '<Year4><Month,2><Day,2>');
 
                     TempTotalesCITI.INSERT;
                     CLEAR(postingDocDate);
@@ -714,14 +714,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                 trigger OnAfterGetRecord()
                 VAR
-                    "AFIP - Tipo Comprobante": Record "GMLocAFIP - Voucher Type";
-                    "Actividad empresa": Record "GMLocCompany Activity";
-                    "Tipo fiscal": Record "GMLocFiscal Type";
+                    "AFIP - Tipo Comprobante": Record "GMAAFIP - Voucher Type";
+                    "Actividad empresa": Record "GMACompany Activity";
+                    "Tipo fiscal": Record "GMAFiscal Type";
                     Currency: Record 4;
                     FechaVtoCAIT: Text[8];
                     LclTaxGroup: Record 321;
-                    recCompActivity: Record "GMLocCompany Activity";
-                    recAuxTipoFiscal: Record "GMLocFiscal Type";
+                    recCompActivity: Record "GMACompany Activity";
+                    recAuxTipoFiscal: Record "GMAFiscal Type";
                 begin
 
                     if ("Shortcut Dimension 1 Code" = '') or ("Shortcut Dimension 2 Code" = '') then
@@ -729,21 +729,21 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     if not ("Shortcut Dimension 1 Code" = BssiDimension) or not ("Shortcut Dimension 2 Code" = BssiDimension) then
                         CurrReport.Skip();
 
-                    if ("Service Invoice Header"."GMLocFiscal Type" = '90-NO LIBRO IVA') then
+                    if ("Service Invoice Header"."GMAFiscal Type" = '90-NO LIBRO IVA') then
                         CurrReport.skip();
 
                     recCompActivity.Reset();
-                    recCompActivity.SetRange(recCompActivity."GMLocActivity Code", "Service Invoice Header"."GMLocPoint of Sales");
+                    recCompActivity.SetRange(recCompActivity."GMAActivity Code", "Service Invoice Header"."GMAPoint of Sales");
                     if recCompActivity.FindFirst() then begin
-                        if recCompActivity.GMLocInternalPOS then
+                        if recCompActivity.GMAInternalPOS then
                             CurrReport.Skip();
                     end;
 
 
                     recAuxTipoFiscal.Reset();
-                    recAuxTipoFiscal.SetRange(recAuxTipoFiscal.GMLocCode, "Service Invoice Header"."GMLocFiscal Type");
+                    recAuxTipoFiscal.SetRange(recAuxTipoFiscal.GMACode, "Service Invoice Header"."GMAFiscal Type");
                     if recAuxTipoFiscal.FindFirst() then
-                        if not recAuxTipoFiscal."GMLocSummary in CITI" then
+                        if not recAuxTipoFiscal."GMASummary in CITI" then
                             CurrReport.Skip();
 
 
@@ -777,31 +777,31 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     CLEAR(Tipo_de_Comprobante);
 
-                    IF ("AFIP - Tipo Comprobante".GET("Service Invoice Header"."GMLocAFIP Voucher Type")) THEN BEGIN
-                        IF ("AFIP - Tipo Comprobante"."GMLocCod 3685" = '') THEN
+                    IF ("AFIP - Tipo Comprobante".GET("Service Invoice Header"."GMAAFIP Voucher Type")) THEN BEGIN
+                        IF ("AFIP - Tipo Comprobante"."GMACod 3685" = '') THEN
                             ERROR(Text005)
                         ELSE
-                            Tipo_de_Comprobante := "AFIP - Tipo Comprobante"."GMLocCod 3685"
+                            Tipo_de_Comprobante := "AFIP - Tipo Comprobante"."GMACod 3685"
                     END
                     ELSE
                         Tipo_de_Comprobante := '001';
 
                     CLEAR(Punto_de_Venta);
-                    IF ("Actividad empresa".GET("Service Invoice Header"."GMLocPoint of Sales")) THEN BEGIN
-                        IF ("Actividad empresa"."GMLocCod 3685" = '') THEN
+                    IF ("Actividad empresa".GET("Service Invoice Header"."GMAPoint of Sales")) THEN BEGIN
+                        IF ("Actividad empresa"."GMACod 3685" = '') THEN
                             ERROR(Text006)
                         ELSE
-                            Punto_de_Venta := "Actividad empresa"."GMLocCod 3685"
+                            Punto_de_Venta := "Actividad empresa"."GMACod 3685"
                     END
                     ELSE
                         Punto_de_Venta := '00001';
 
                     CLEAR(Numero_de_Comprobante);
-                    IF ("Service Invoice Header"."GMLocAFIP Voucher No." <> 0) THEN BEGIN
-                        WHILE STRLEN(Numero_de_Comprobante + FORMAT("Service Invoice Header"."GMLocAFIP Voucher No.")) < 8 DO
+                    IF ("Service Invoice Header"."GMAAFIP Voucher No." <> 0) THEN BEGIN
+                        WHILE STRLEN(Numero_de_Comprobante + FORMAT("Service Invoice Header"."GMAAFIP Voucher No.")) < 8 DO
                             Numero_de_Comprobante := Numero_de_Comprobante + '0';
 
-                        Numero_de_Comprobante := Numero_de_Comprobante + FORMAT("Service Invoice Header"."GMLocAFIP Voucher No.");
+                        Numero_de_Comprobante := Numero_de_Comprobante + FORMAT("Service Invoice Header"."GMAAFIP Voucher No.");
                     END
                     ELSE BEGIN
                         IF (STRLEN("Service Invoice Header"."No.") > 8) THEN
@@ -837,8 +837,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                             WHILE STRLEN(CUIT) < 20 DO
                                 CUIT := '0' + CUIT;
 
-                        IF (Cliente."GMLocAFIP Document Type" <> '') THEN
-                            Codigo_de_Documento := Cliente."GMLocAFIP Document Type"
+                        IF (Cliente."GMAAFIP Document Type" <> '') THEN
+                            Codigo_de_Documento := Cliente."GMAAFIP Document Type"
                         ELSE
                             Codigo_de_Documento := '80';
                     END;
@@ -847,11 +847,11 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     TempTotalesCITI.INIT;
                     //12896-
                     ID_Totals += 1;
-                    TempTotalesCITI.GMLocID := FORMAT(ID_Totals);
+                    TempTotalesCITI.GMAID := FORMAT(ID_Totals);
                     //12896+
-                    TempTotalesCITI.GMLocLineNo := NumeroLineas;
-                    TempTotalesCITI."GMLocVoucher No" := "Service Invoice Header"."No.";
-                    TempTotalesCITI.GMLocDescription := 'FACTURA';
+                    TempTotalesCITI.GMALineNo := NumeroLineas;
+                    TempTotalesCITI."GMAVoucher No" := "Service Invoice Header"."No.";
+                    TempTotalesCITI.GMADescription := 'FACTURA';
                     // Campo IMPORTE TOTAL CON IMPUESTOS en Divisa de la Factura con dos decimales Redondeados
                     // en 15 caracteres sin puntos ni comas
                     IF "Service Invoice Header"."Currency Factor" <> 0 THEN
@@ -869,16 +869,16 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                         "Service Invoice Header"."Bill-to Name" := COPYSTR("Service Invoice Header"."Bill-to Name", 1, 30);
 
                     IF (Valor12 < 1000) THEN BEGIN
-                        IF ("Tipo fiscal".GET("Service Invoice Header"."GMLocFiscal Type")) THEN BEGIN
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                        IF ("Tipo fiscal".GET("Service Invoice Header"."GMAFiscal Type")) THEN BEGIN
+                            IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                                 ERROR(Text008);
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '5') THEN
+                            IF ("Tipo fiscal"."GMACod 3685" = '5') THEN
                                 "Service Invoice Header"."Bill-to Name" := 'CONSUMIDOR FINAL              ';
                         END;
                     END
                     ELSE BEGIN
-                        IF ("Tipo fiscal".GET("Service Invoice Header"."GMLocFiscal Type")) THEN
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                        IF ("Tipo fiscal".GET("Service Invoice Header"."GMAFiscal Type")) THEN
+                            IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                                 ERROR(Text008);
                     END;
 
@@ -888,30 +888,30 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     IF SLineas.FIND('-') THEN
                         REPEAT
-                            IF (RecProvincia.GET("Service Invoice Header".GMLocProvince)) THEN BEGIN
-                                IF (RecProvincia."GMLocCod 3685" = '') THEN
+                            IF (RecProvincia.GET("Service Invoice Header".GMAProvince)) THEN BEGIN
+                                IF (RecProvincia."GMACod 3685" = '') THEN
                                     ERROR(Text009);
-                                IF (RecProvincia."GMLocCod 3685" = '23') THEN BEGIN
+                                IF (RecProvincia."GMACod 3685" = '23') THEN BEGIN
                                     Valor17 += SLineas.Amount;// * Tipocambio;
                                 END
                                 ELSE BEGIN
-                                    IF ("Tipo fiscal"."GMLocCod 3685" = '08') OR ("Tipo fiscal"."GMLocCod 3685" = '09') THEN BEGIN
+                                    IF ("Tipo fiscal"."GMACod 3685" = '08') OR ("Tipo fiscal"."GMACod 3685" = '09') THEN BEGIN
                                         Valor13 += SLineas.Amount;// * Tipocambio
                                     END
                                     ELSE BEGIN
                                         /* IF (SLineas."Tax Liable") THEN BEGIN
                                              IF (LclTaxGroup.GET(SLineas."Tax Group Code")) THEN;
-                                             IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                             IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                                  Valor13 += SLineas.Amount * Tipocambio
                                              ELSE
-                                                 IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                                 IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                      Valor17 += SLineas.Amount * Tipocambio;
                                          END
                                          ELSE BEGIN
                                              Valor17 += SLineas.Amount * Tipocambio;
                                          END;*/
                                         CLEAR(VATBUSPOSTINGGROUP);
-                                        IF (VATBUSPOSTINGGROUP.GET(SLineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                        IF (VATBUSPOSTINGGROUP.GET(SLineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                             if (SLineas."VAT Calculation Type" = SLineas."VAT Calculation Type"::"Normal VAT") then
                                                 Valor13 += SLineas."VAT Base Amount";// * Tipocambio;
 
@@ -920,10 +920,10 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                                             if (SLineas."VAT Calculation Type" = SLineas."VAT Calculation Type"::"Sales Tax") then begin
                                                 IF (LclTaxGroup.GET(SLineas."Tax Group Code")) THEN;
 
-                                                IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                                IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                                     Valor13 += SLineas.Amount// * Tipocambio
                                                 ELSE
-                                                    IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                                    IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                         Valor17 += SLineas.Amount;//* Tipocambio;
                                             end;
 
@@ -940,17 +940,17 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                             ELSE BEGIN
                                 /*IF (SLineas."Tax Liable") THEN BEGIN
                                     IF (LclTaxGroup.GET(SLineas."Tax Group Code")) THEN;
-                                    IF LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado" THEN
+                                    IF LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado" THEN
                                         Valor13 += SLineas.Amount * Tipocambio
                                     ELSE
-                                        IF LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento THEN
+                                        IF LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento THEN
                                             Valor17 += SLineas.Amount * Tipocambio;
                                 END
                                 ELSE BEGIN
                                     Valor17 += SLineas.Amount * Tipocambio;
                                 END;*/
                                 CLEAR(VATBUSPOSTINGGROUP);
-                                IF (VATBUSPOSTINGGROUP.GET(SLineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                IF (VATBUSPOSTINGGROUP.GET(SLineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                     if (SLineas."VAT Calculation Type" = SLineas."VAT Calculation Type"::"Normal VAT") then
                                         Valor13 += SLineas."VAT Base Amount";// * Tipocambio;
 
@@ -959,10 +959,10 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                                     if (SLineas."VAT Calculation Type" = SLineas."VAT Calculation Type"::"Sales Tax") then begin
                                         IF (LclTaxGroup.GET(SLineas."Tax Group Code")) THEN;
 
-                                        IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                        IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                             Valor13 += SLineas.Amount// * Tipocambio
                                         ELSE
-                                            IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                            IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                 Valor17 += SLineas.Amount;//* Tipocambio;
                                     end;
 
@@ -988,19 +988,19 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Impuestos.RESET;
                     Impuestos.SETRANGE(Impuestos."Document No.", "Service Invoice Header"."No.");
 
-                    Impuestos.SetRange(Impuestos."GMLocDocument Type Loc.", "Service Invoice Header"."GMLocDocument Type Loc.");
+                    Impuestos.SetRange(Impuestos."GMADocument Type Loc.", "Service Invoice Header"."GMADocument Type Loc.");
                     IF Impuestos.FIND('-') THEN
                         REPEAT
-                            IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::IVA) THEN
+                            IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::IVA) THEN
                                 Valor15 += (Impuestos.Amount / Tipocambio)
                             ELSE BEGIN
-                                IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::"Ingresos Brutos") THEN
+                                IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::"Ingresos Brutos") THEN
                                     Valor19 += (Impuestos.Amount / Tipocambio)
                                 ELSE BEGIN
-                                    IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::"IVA Percepcion") THEN
+                                    IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::"IVA Percepcion") THEN
                                         Valor18 += (Impuestos.Amount / Tipocambio)
                                     ELSE BEGIN
-                                        IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::Otros) THEN
+                                        IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::Otros) THEN
                                             Valor21 += (Impuestos.Amount / Tipocambio)
                                     END;
                                 END;
@@ -1014,14 +1014,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Total2_8 += Entero;
                     // FIN campo 9
 
-                    TempTotalesCITI."GMLocOperation total amount" := Valor12;
+                    TempTotalesCITI."GMAOperation total amount" := Valor12;
 
                     //Campo 10 Importe total de conceptos que no integran el precio neto gravado
                     CLEAR(Entero);
                     Campo13 := Formatvalor(Valor13, 15);
                     EVALUATE(Entero, Campo13);
                     Total2_9 += Entero;
-                    TempTotalesCITI."GMLocImporte no Gravado" := Valor13;
+                    TempTotalesCITI."GMAImporte no Gravado" := Valor13;
                     // FIN campo10
 
                     //Total2_10+=Entero; 
@@ -1038,7 +1038,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo16 := Formatvalor(Valor16, 15);
                     EVALUATE(Entero, Campo16);
                     Total2_12 += Entero;
-                    TempTotalesCITI."GMLocNon categorized perceptio" := Valor16;
+                    TempTotalesCITI."GMANon categorized perceptio" := Valor16;
                     //Fin campo1 
 
                     //Campo 12 Importe de operaciones exentas
@@ -1046,7 +1046,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo17 := Formatvalor(Valor17, 15);
                     EVALUATE(Entero, Campo17);
                     Total2_13 += Entero;
-                    TempTotalesCITI."GMLocNon taxable Amount" := Valor17;
+                    TempTotalesCITI."GMANon taxable Amount" := Valor17;
                     //Fin Campo 12
 
                     // campo 13   Importe de percepciones o pagos a cuenta de impuestos Nacionales
@@ -1054,7 +1054,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo18 := Formatvalor(Valor18, 15);
                     EVALUATE(Entero, Campo18);
                     Total2_14 += Entero;
-                    TempTotalesCITI."GMLocNational Perceptions Amou" := Valor18;
+                    TempTotalesCITI."GMANational Perceptions Amou" := Valor18;
                     //Fin campo 13   
 
                     //  campo 14 ingresos brutos
@@ -1062,14 +1062,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo19 := Formatvalor(Valor19, 15);
                     EVALUATE(Entero, Campo19);
                     Total2_15 += Entero;
-                    TempTotalesCITI."GMLocGIT Amount" := Valor19;
+                    TempTotalesCITI."GMAGIT Amount" := Valor19;
                     //Fin campo 14   
 
                     //campo campo 15 Importe de percepciones impuestos Municipales
                     Campo20 := Formatvalor(Valor20, 15);
                     EVALUATE(Entero, Campo20);
                     Total2_16 += Entero;
-                    TempTotalesCITI."GMLocCity Perceptions Amount" := Valor20;
+                    TempTotalesCITI."GMACity Perceptions Amount" := Valor20;
                     //Fin campo 15  
 
                     // campo 16 Importe impuestos internos
@@ -1077,23 +1077,23 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo21 := Formatvalor(Valor21, 15);
                     EVALUATE(Entero, Campo21);
                     Total2_17 += Entero;
-                    TempTotalesCITI."GMLocInternal Tax Amount" := Valor21;
+                    TempTotalesCITI."GMAInternal Tax Amount" := Valor21;
                     //Fin Campo 16  
 
                     IF (Taxarea.GET("Service Invoice Header"."Tax Area Code")) THEN;
 
-                    IF ("Tipo fiscal".GET("Service Invoice Header"."GMLocFiscal Type")) THEN BEGIN
-                        IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                    IF ("Tipo fiscal".GET("Service Invoice Header"."GMAFiscal Type")) THEN BEGIN
+                        IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                             ERROR(Text008)
                         ELSE
-                            Tiporesp := "Tipo fiscal"."GMLocCod 3685";
+                            Tiporesp := "Tipo fiscal"."GMACod 3685";
                     END;
 
                     IF (Currency.GET("Service Invoice Header"."Currency Code")) THEN BEGIN
-                        IF (Currency."GMLocAFIP Code" = '') THEN
+                        IF (Currency."GMAAFIP Code" = '') THEN
                             ERROR(Text007)
                         ELSE
-                            Moneda := Currency."GMLocAFIP Code";
+                            Moneda := Currency."GMAAFIP Code";
                     END
                     ELSE
                         Moneda := 'PES';
@@ -1132,7 +1132,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     calculoImpuestosBaseIVA("Service Invoice Header"."No.");
                     /*
-                                        Impuestos.SETRANGE(Impuestos."GMLocTax Type Loc", Impuestos."GMLocTax Type Loc"::IVA);
+                                        Impuestos.SETRANGE(Impuestos."GMATax Type Loc", Impuestos."GMATax Type Loc"::IVA);
                                         IF Impuestos.FIND('-') THEN
                                             REPEAT
                                                 Detalleimpuesto.RESET;
@@ -1161,8 +1161,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
 
                     IF (I105 <> 0) THEN BEGIN
-                        TempTotalesCITI."GMLocVAT10,5" := ImporteI105;
-                        TempTotalesCITI.GMLocBase105 := ImporteBaseI105;
+                        TempTotalesCITI."GMAVAT10,5" := ImporteI105;
+                        TempTotalesCITI.GMABase105 := ImporteBaseI105;
                         IF (ImporteI105 <> 0) THEN
                             ImporteI105 := ABS(ImporteI105);
                         TextImporteI105 := Formatvalor(ImporteI105, 15);
@@ -1192,8 +1192,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I21 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLocVAT21 := ImporteI21;
-                        TempTotalesCITI.GMLocBase21 := ImporteBaseI21;
+                        TempTotalesCITI.GMAVAT21 := ImporteI21;
+                        TempTotalesCITI.GMABase21 := ImporteBaseI21;
                         IF (ImporteI21 <> 0) THEN
                             ImporteI21 := ABS(ImporteI21);
                         TextImporteI21 := Formatvalor(ImporteI21, 15);
@@ -1223,8 +1223,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I27 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLociva27 := ImporteI27;
-                        TempTotalesCITI.GMLocBase27 := ImporteBaseI27;
+                        TempTotalesCITI.GMAiva27 := ImporteI27;
+                        TempTotalesCITI.GMABase27 := ImporteBaseI27;
                         IF (ImporteI27 <> 0) THEN
                             ImporteI27 := ABS(ImporteI27);
 
@@ -1267,8 +1267,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                         END;
 
                     IF (Cantiva = 0) THEN BEGIN
-                        TempTotalesCITI."GMLocVAT10,5" := ImporteI105;
-                        TempTotalesCITI.GMLocBase105 := 0; // es importe total de la factura
+                        TempTotalesCITI."GMAVAT10,5" := ImporteI105;
+                        TempTotalesCITI.GMABase105 := 0; // es importe total de la factura
                         IF (ImporteI105 <> 0) THEN
                             ImporteI105 := ABS(ImporteI105);
                         TextImporteI105 := Formatvalor(0, 15);
@@ -1306,12 +1306,12 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     IF Cantiva = 0 THEN Cantiva := 1;  // Se debe indicar 1 aun cuando la operaci¢n sea Exenta
 
                     OtrosTributos := '000000000000000';
-                    IF (GMLocCAI2 = '') THEN
-                        GMLocCAI2 := '00000000000000';
-                    IF ("GMLocCAI Due Date2" = 0D) THEN
+                    IF (GMACAI2 = '') THEN
+                        GMACAI2 := '00000000000000';
+                    IF ("GMACAI Due Date2" = 0D) THEN
                         FechaVtoCAIT := '00000000'
                     ELSE
-                        FechaVtoCAIT := FORMAT("GMLocCAI Due Date2", 8, '<Year4><Month,2><Day,2>');
+                        FechaVtoCAIT := FORMAT("GMACAI Due Date2", 8, '<Year4><Month,2><Day,2>');
 
                     TempTotalesCITI.INSERT;
                     CLEAR(postingDocDate);
@@ -1361,36 +1361,36 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                 trigger OnAfterGetRecord()
                 var
-                    "AFIP - Tipo Comprobante": Record "GMLocAFIP - Voucher Type";
-                    "Actividad empresa": Record "GMLocCompany Activity";
-                    "Tipo fiscal": Record "GMLocFiscal Type";
+                    "AFIP - Tipo Comprobante": Record "GMAAFIP - Voucher Type";
+                    "Actividad empresa": Record "GMACompany Activity";
+                    "Tipo fiscal": Record "GMAFiscal Type";
                     Currency: Record 4;
                     FechaVtoCAIT: Text[8];
                     LclTaxGroup: Record 321;
 
-                    recCompActivity: Record "GMLocCompany Activity";
-                    recAuxTipoFiscal: Record "GMLocFiscal Type";
+                    recCompActivity: Record "GMACompany Activity";
+                    recAuxTipoFiscal: Record "GMAFiscal Type";
                 begin
                     if ("Shortcut Dimension 1 Code" = '') or ("Shortcut Dimension 2 Code" = '') then
                         CurrReport.Skip();
                     if not ("Shortcut Dimension 1 Code" = BssiDimension) or not ("Shortcut Dimension 2 Code" = BssiDimension) then
                         CurrReport.Skip();
 
-                    if ("Sales Cr.Memo Header"."GMLocFiscal Type" = '90-NO LIBRO IVA') then
+                    if ("Sales Cr.Memo Header"."GMAFiscal Type" = '90-NO LIBRO IVA') then
                         CurrReport.skip();
 
                     recCompActivity.Reset();
-                    recCompActivity.SetRange(recCompActivity."GMLocActivity Code", "Sales Cr.Memo Header"."GMLocPoint of Sales");
+                    recCompActivity.SetRange(recCompActivity."GMAActivity Code", "Sales Cr.Memo Header"."GMAPoint of Sales");
                     if recCompActivity.FindFirst() then begin
-                        if recCompActivity.GMLocInternalPOS then
+                        if recCompActivity.GMAInternalPOS then
                             CurrReport.Skip();
                     end;
 
 
                     recAuxTipoFiscal.Reset();
-                    recAuxTipoFiscal.SetRange(recAuxTipoFiscal.GMLocCode, "Sales Cr.Memo Header"."GMLocFiscal Type");
+                    recAuxTipoFiscal.SetRange(recAuxTipoFiscal.GMACode, "Sales Cr.Memo Header"."GMAFiscal Type");
                     if recAuxTipoFiscal.FindFirst() then
-                        if not recAuxTipoFiscal."GMLocSummary in CITI" then
+                        if not recAuxTipoFiscal."GMASummary in CITI" then
                             CurrReport.Skip();
 
                     CLEAR(Tipocambio);
@@ -1407,11 +1407,11 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     CLEAR(Tipo_de_Comprobante);
 
-                    IF ("AFIP - Tipo Comprobante".GET("Sales Cr.Memo Header"."GMLocAFIP Voucher Type")) THEN BEGIN
-                        IF ("AFIP - Tipo Comprobante"."GMLocCod 3685" = '') THEN
+                    IF ("AFIP - Tipo Comprobante".GET("Sales Cr.Memo Header"."GMAAFIP Voucher Type")) THEN BEGIN
+                        IF ("AFIP - Tipo Comprobante"."GMACod 3685" = '') THEN
                             ERROR(Text005)
                         ELSE
-                            Tipo_de_Comprobante := "AFIP - Tipo Comprobante"."GMLocCod 3685"
+                            Tipo_de_Comprobante := "AFIP - Tipo Comprobante"."GMACod 3685"
                     END
                     ELSE
                         Tipo_de_Comprobante := '003';
@@ -1424,21 +1424,21 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     // 3) Punto de venta
                     CLEAR(Punto_de_Venta);
 
-                    IF ("Actividad empresa".GET("Sales Cr.Memo Header"."GMLocPoint of Sales")) THEN BEGIN
-                        IF ("Actividad empresa"."GMLocCod 3685" = '') THEN
+                    IF ("Actividad empresa".GET("Sales Cr.Memo Header"."GMAPoint of Sales")) THEN BEGIN
+                        IF ("Actividad empresa"."GMACod 3685" = '') THEN
                             ERROR(Text006)
                         ELSE
-                            Punto_de_Venta := "Actividad empresa"."GMLocCod 3685"
+                            Punto_de_Venta := "Actividad empresa"."GMACod 3685"
                     END
                     ELSE
                         Punto_de_Venta := '00001';
 
                     CLEAR(Numero_de_Comprobante);
-                    IF ("Sales Cr.Memo Header"."GMLocAFIP Voucher No." <> 0) THEN BEGIN
-                        WHILE STRLEN(Numero_de_Comprobante + FORMAT("Sales Cr.Memo Header"."GMLocAFIP Voucher No.")) < 8 DO
+                    IF ("Sales Cr.Memo Header"."GMAAFIP Voucher No." <> 0) THEN BEGIN
+                        WHILE STRLEN(Numero_de_Comprobante + FORMAT("Sales Cr.Memo Header"."GMAAFIP Voucher No.")) < 8 DO
                             Numero_de_Comprobante := Numero_de_Comprobante + '0';
 
-                        Numero_de_Comprobante := Numero_de_Comprobante + FORMAT("Sales Cr.Memo Header"."GMLocAFIP Voucher No.");
+                        Numero_de_Comprobante := Numero_de_Comprobante + FORMAT("Sales Cr.Memo Header"."GMAAFIP Voucher No.");
 
 
                     END
@@ -1479,8 +1479,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                             WHILE STRLEN(CUIT) < 20 DO
                                 CUIT := '0' + CUIT;
 
-                        IF (Cliente."GMLocAFIP Document Type" <> '') THEN
-                            Codigo_de_Documento := Cliente."GMLocAFIP Document Type"
+                        IF (Cliente."GMAAFIP Document Type" <> '') THEN
+                            Codigo_de_Documento := Cliente."GMAAFIP Document Type"
                         ELSE
                             Codigo_de_Documento := '80';
                     END;
@@ -1489,11 +1489,11 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     TempTotalesCITI.INIT;
                     //12896-
                     ID_Totals += 1;
-                    TempTotalesCITI.GMLocID := FORMAT(ID_Totals);
+                    TempTotalesCITI.GMAID := FORMAT(ID_Totals);
                     //12896+
-                    TempTotalesCITI.GMLocLineNo := NumeroLineas;
-                    TempTotalesCITI."GMLocVoucher No" := "Sales Cr.Memo Header"."No.";
-                    TempTotalesCITI.GMLocDescription := 'N/C';
+                    TempTotalesCITI.GMALineNo := NumeroLineas;
+                    TempTotalesCITI."GMAVoucher No" := "Sales Cr.Memo Header"."No.";
+                    TempTotalesCITI.GMADescription := 'N/C';
 
                     // Campo IMPORTE TOTAL CON IMPUESTOS en Divisa de la Factura con dos decimales Redondeados
                     // en 15 caracteres sin puntos ni comas
@@ -1512,16 +1512,16 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                         "Bill-to Name" := COPYSTR("Bill-to Name", 1, 30);
 
                     IF (Valor12 < 1000) THEN BEGIN
-                        IF ("Tipo fiscal".GET("Sales Cr.Memo Header"."GMLocFiscal Type")) THEN BEGIN
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                        IF ("Tipo fiscal".GET("Sales Cr.Memo Header"."GMAFiscal Type")) THEN BEGIN
+                            IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                                 ERROR(Text008);
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '5') THEN
+                            IF ("Tipo fiscal"."GMACod 3685" = '5') THEN
                                 "Sales Cr.Memo Header"."Bill-to Name" := 'CONSUMIDOR FINAL              ';
                         END;
                     END
                     ELSE BEGIN
-                        IF ("Tipo fiscal".GET("Sales Cr.Memo Header"."GMLocFiscal Type")) THEN
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                        IF ("Tipo fiscal".GET("Sales Cr.Memo Header"."GMAFiscal Type")) THEN
+                            IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                                 ERROR(Text008);
                     END;
 
@@ -1531,30 +1531,30 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     IF LineasCredito.FIND('-') THEN
                         REPEAT
-                            IF (RecProvincia.GET("Sales Cr.Memo Header".GMLocProvince)) THEN BEGIN
-                                IF (RecProvincia."GMLocCod 3685" = '') THEN
+                            IF (RecProvincia.GET("Sales Cr.Memo Header".GMAProvince)) THEN BEGIN
+                                IF (RecProvincia."GMACod 3685" = '') THEN
                                     ERROR(Text009);
-                                IF (RecProvincia."GMLocCod 3685" = '23') THEN BEGIN
+                                IF (RecProvincia."GMACod 3685" = '23') THEN BEGIN
                                     Valor17 += LineasCredito.Amount;// * Tipocambio;
                                 END
                                 ELSE BEGIN
-                                    IF ("Tipo fiscal"."GMLocCod 3685" = '08') OR ("Tipo fiscal"."GMLocCod 3685" = '09') THEN BEGIN
+                                    IF ("Tipo fiscal"."GMACod 3685" = '08') OR ("Tipo fiscal"."GMACod 3685" = '09') THEN BEGIN
                                         Valor13 += LineasCredito.Amount;// * Tipocambio
                                     END
                                     ELSE BEGIN
                                         /*IF (LineasCredito."Tax Liable") THEN BEGIN
                                             IF (LclTaxGroup.GET(LineasCredito."Tax Group Code")) THEN;
-                                            IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                            IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                                 Valor13 += LineasCredito.Amount * Tipocambio
                                             ELSE
-                                                IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                                IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                     Valor17 += LineasCredito.Amount * Tipocambio;
                                         END
                                         ELSE BEGIN
                                             Valor17 += LineasCredito.Amount * Tipocambio;
                                         END;*/
                                         CLEAR(VATBUSPOSTINGGROUP);
-                                        IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                        IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                             if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Normal VAT") then
                                                 Valor13 += Lineas."VAT Base Amount";// * Tipocambio;
 
@@ -1563,10 +1563,10 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                                             if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Sales Tax") then begin
                                                 IF (LclTaxGroup.GET(Lineas."Tax Group Code")) THEN;
 
-                                                IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                                IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                                     Valor13 += Lineas.Amount// * Tipocambio
                                                 ELSE
-                                                    IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                                    IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                         Valor17 += Lineas.Amount;//* Tipocambio;
                                             end;
 
@@ -1583,17 +1583,17 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                             ELSE BEGIN
                                 /*IF (LineasCredito."Tax Liable") THEN BEGIN
                                     IF (LclTaxGroup.GET(LineasCredito."Tax Group Code")) THEN;
-                                    IF LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado" THEN
+                                    IF LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado" THEN
                                         Valor13 += LineasCredito.Amount * Tipocambio
                                     ELSE
-                                        IF LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento THEN
+                                        IF LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento THEN
                                             Valor17 += LineasCredito.Amount * Tipocambio;
                                 END
                                 ELSE BEGIN
                                     Valor17 += LineasCredito.Amount * Tipocambio;
                                 END;*/
                                 CLEAR(VATBUSPOSTINGGROUP);
-                                IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                     if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Normal VAT") then
                                         Valor13 += Lineas."VAT Base Amount";// * Tipocambio;
 
@@ -1602,10 +1602,10 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                                     if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Sales Tax") then begin
                                         IF (LclTaxGroup.GET(Lineas."Tax Group Code")) THEN;
 
-                                        IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                        IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                             Valor13 += Lineas.Amount// * Tipocambio
                                         ELSE
-                                            IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                            IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                 Valor17 += Lineas.Amount;//* Tipocambio;
                                     end;
 
@@ -1633,19 +1633,19 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 				    Impuestos.RESET;
                     Impuestos.SETRANGE(Impuestos."Document No.", "Sales Cr.Memo Header"."No.");
 
-                    Impuestos.SetRange(Impuestos."GMLocDocument Type Loc.", "Sales Cr.Memo Header"."GMLocDocument Type Loc.");
+                    Impuestos.SetRange(Impuestos."GMADocument Type Loc.", "Sales Cr.Memo Header"."GMADocument Type Loc.");
                     IF Impuestos.FIND('-') THEN
                         REPEAT
-                            IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::IVA) THEN
+                            IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::IVA) THEN
                                 Valor15 += (Impuestos.Amount / Tipocambio)
                             ELSE BEGIN
-                                IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::"Ingresos Brutos") THEN
+                                IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::"Ingresos Brutos") THEN
                                     Valor19 += (Impuestos.Amount / Tipocambio)
                                 ELSE BEGIN
-                                    IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::"IVA Percepcion") THEN
+                                    IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::"IVA Percepcion") THEN
                                         Valor18 += (Impuestos.Amount / Tipocambio)
                                     ELSE BEGIN
-                                        IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::Otros) THEN
+                                        IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::Otros) THEN
                                             Valor21 += (Impuestos.Amount / Tipocambio)
                                     END;
                                 END;
@@ -1659,14 +1659,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Total2_8 += Entero;
                     // FIN campo 9
 
-                    TempTotalesCITI."GMLocOperation total amount" := -Valor12;
+                    TempTotalesCITI."GMAOperation total amount" := -Valor12;
 
                     //Campo 10 Importe total de conceptos que no integran el precio neto gravado
                     CLEAR(Entero);
                     Campo13 := Formatvalor(Valor13, 15);
                     EVALUATE(Entero, Campo13);
                     Total2_9 += Entero;
-                    TempTotalesCITI."GMLocImporte no Gravado" := -Valor13;
+                    TempTotalesCITI."GMAImporte no Gravado" := -Valor13;
                     // FIN campo10
 
                     //Total2_10+=Entero;
@@ -1683,7 +1683,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo16 := Formatvalor(Valor16, 15);
                     EVALUATE(Entero, Campo16);
                     Total2_12 -= Entero;
-                    TempTotalesCITI."GMLocNon categorized perceptio" := Valor16;
+                    TempTotalesCITI."GMANon categorized perceptio" := Valor16;
                     //Fin campo1
 
                     //Campo 12 Importe de operaciones exentas
@@ -1691,7 +1691,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo17 := Formatvalor(Valor17, 15);
                     EVALUATE(Entero, Campo17);
                     Total2_13 -= Entero;
-                    TempTotalesCITI."GMLocNon taxable Amount" := -Valor17;
+                    TempTotalesCITI."GMANon taxable Amount" := -Valor17;
                     //Fin Campo 12
 
                     // campo 13   Importe de percepciones o pagos a cuenta de impuestos Nacionales
@@ -1699,7 +1699,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo18 := Formatvalor(Valor18, 15);
                     EVALUATE(Entero, Campo18);
                     Total2_14 -= Entero;
-                    TempTotalesCITI."GMLocNational Perceptions Amou" := Valor18;
+                    TempTotalesCITI."GMANational Perceptions Amou" := Valor18;
                     //Fin campo 13  
 
                     //  campo 14 ingresos brutos
@@ -1707,14 +1707,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo19 := Formatvalor(Valor19, 15);
                     EVALUATE(Entero, Campo19);
                     Total2_15 -= Entero;
-                    TempTotalesCITI."GMLocGIT Amount" := Valor19;
+                    TempTotalesCITI."GMAGIT Amount" := Valor19;
                     //Fin campo 14
 
                     //campo campo 15 Importe de percepciones impuestos Municipales
                     Campo20 := Formatvalor(Valor20, 15);
                     EVALUATE(Entero, Campo20);
                     Total2_16 += Entero;
-                    TempTotalesCITI."GMLocCity Perceptions Amount" := Valor20;
+                    TempTotalesCITI."GMACity Perceptions Amount" := Valor20;
                     //Fin campo 15
 
                     // campo 16 Importe impuestos internos
@@ -1722,23 +1722,23 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo21 := Formatvalor(Valor21, 15);
                     EVALUATE(Entero, Campo21);
                     Total2_17 += Entero;
-                    TempTotalesCITI."GMLocInternal Tax Amount" := Valor21;
+                    TempTotalesCITI."GMAInternal Tax Amount" := Valor21;
                     //Fin Campo 16  
 
                     IF (Taxarea.GET("Sales Cr.Memo Header"."Tax Area Code")) THEN;
 
-                    IF ("Tipo fiscal".GET("Sales Cr.Memo Header"."GMLocFiscal Type")) THEN BEGIN
-                        IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                    IF ("Tipo fiscal".GET("Sales Cr.Memo Header"."GMAFiscal Type")) THEN BEGIN
+                        IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                             ERROR(Text008)
                         ELSE
-                            Tiporesp := "Tipo fiscal"."GMLocCod 3685";
+                            Tiporesp := "Tipo fiscal"."GMACod 3685";
                     END;
 
                     IF (Currency.GET("Sales Cr.Memo Header"."Currency Code")) THEN BEGIN
-                        IF (Currency."GMLocAFIP Code" = '') THEN
+                        IF (Currency."GMAAFIP Code" = '') THEN
                             ERROR(Text007)
                         ELSE
-                            Moneda := Currency."GMLocAFIP Code";
+                            Moneda := Currency."GMAAFIP Code";
                     END
                     ELSE
                         Moneda := 'PES';
@@ -1776,7 +1776,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     calculoImpuestosBaseIVA("Sales Cr.Memo Header"."No.");
                     /*
-                                        Impuestos.SETRANGE(Impuestos."GMLocTax Type Loc", Impuestos."GMLocTax Type Loc"::IVA);
+                                        Impuestos.SETRANGE(Impuestos."GMATax Type Loc", Impuestos."GMATax Type Loc"::IVA);
                                         IF Impuestos.FIND('-') THEN
                                             REPEAT
                                                 Detalleimpuesto.RESET;
@@ -1805,8 +1805,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
 
                     IF (I105 <> 0) THEN BEGIN
-                        TempTotalesCITI."GMLocVAT10,5" := ImporteI105;
-                        TempTotalesCITI.GMLocBase105 := ImporteBaseI105;
+                        TempTotalesCITI."GMAVAT10,5" := ImporteI105;
+                        TempTotalesCITI.GMABase105 := ImporteBaseI105;
                         IF (ImporteI105 <> 0) THEN
                             ImporteI105 := ABS(ImporteI105);
                         TextImporteI105 := Formatvalor(ImporteI105, 15);
@@ -1836,8 +1836,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I21 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLocVAT21 := ImporteI21;
-                        TempTotalesCITI.GMLocBase21 := ImporteBaseI21;
+                        TempTotalesCITI.GMAVAT21 := ImporteI21;
+                        TempTotalesCITI.GMABase21 := ImporteBaseI21;
                         IF (ImporteI21 <> 0) THEN
                             ImporteI21 := ABS(ImporteI21);
                         TextImporteI21 := Formatvalor(ImporteI21, 15);
@@ -1867,8 +1867,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I27 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLociva27 := ImporteI27;
-                        TempTotalesCITI.GMLOcBase27 := ImporteBaseI27;
+                        TempTotalesCITI.GMAiva27 := ImporteI27;
+                        TempTotalesCITI.GMABase27 := ImporteBaseI27;
                         IF (ImporteI27 <> 0) THEN
                             ImporteI27 := ABS(ImporteI27);
 
@@ -1910,8 +1910,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                         END;
 
                     IF (Cantiva = 0) THEN BEGIN
-                        TempTotalesCITI."GMLocVAT10,5" := ImporteI105;
-                        TempTotalesCITI.GMLocBase105 := 0; // es importe total de la factura
+                        TempTotalesCITI."GMAVAT10,5" := ImporteI105;
+                        TempTotalesCITI.GMABase105 := 0; // es importe total de la factura
                         IF (ImporteI105 <> 0) THEN
                             ImporteI105 := ABS(ImporteI105);
                         TextImporteI105 := Formatvalor(0, 15);
@@ -1948,12 +1948,12 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     IF Cantiva = 0 THEN Cantiva := 1;  // Se debe indicar 1 aun cuando la operaci¢n sea Exenta
 
                     OtrosTributos := '000000000000000';
-                    IF (GMLocCAI2 = '') THEN
-                        GMLocCAI2 := '00000000000000';
-                    IF ("GMLocCAI Due Date2" = 0D) THEN
+                    IF (GMACAI2 = '') THEN
+                        GMACAI2 := '00000000000000';
+                    IF ("GMACAI Due Date2" = 0D) THEN
                         FechaVtoCAIT := '00000000'
                     ELSE
-                        FechaVtoCAIT := FORMAT("GMLocCAI Due Date2", 8, '<Year4><Month,2><Day,2>');
+                        FechaVtoCAIT := FORMAT("GMACAI Due Date2", 8, '<Year4><Month,2><Day,2>');
 
                     TempTotalesCITI.INSERT;
                     CLEAR(postingDocDate);
@@ -2003,28 +2003,28 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                 trigger OnAfterGetRecord()
                 var
-                    "AFIP - Tipo Comprobante": Record "GMLocAFIP - Voucher Type";
-                    "Actividad empresa": Record "GMLocCompany Activity";
-                    "Tipo fiscal": Record "GMLocFiscal Type";
+                    "AFIP - Tipo Comprobante": Record "GMAAFIP - Voucher Type";
+                    "Actividad empresa": Record "GMACompany Activity";
+                    "Tipo fiscal": Record "GMAFiscal Type";
                     Currency: Record 4;
                     FechaVtoCAIT: Text[8];
                     LclTaxGroup: Record 321;
 
-                    recCompActivity: Record "GMLocCompany Activity";
-                    recAuxTipoFiscal: Record "GMLocFiscal Type";
+                    recCompActivity: Record "GMACompany Activity";
+                    recAuxTipoFiscal: Record "GMAFiscal Type";
                 begin
                     recCompActivity.Reset();
-                    recCompActivity.SetRange(recCompActivity."GMLocActivity Code", "Service Cr.Memo Header"."GMLocPoint of Sales");
+                    recCompActivity.SetRange(recCompActivity."GMAActivity Code", "Service Cr.Memo Header"."GMAPoint of Sales");
                     if recCompActivity.FindFirst() then begin
-                        if recCompActivity.GMLocInternalPOS then
+                        if recCompActivity.GMAInternalPOS then
                             CurrReport.Skip();
                     end;
 
 
                     recAuxTipoFiscal.Reset();
-                    recAuxTipoFiscal.SetRange(recAuxTipoFiscal.GMLocCode, "Service Cr.Memo Header"."GMLocFiscal Type");
+                    recAuxTipoFiscal.SetRange(recAuxTipoFiscal.GMACode, "Service Cr.Memo Header"."GMAFiscal Type");
                     if recAuxTipoFiscal.FindFirst() then
-                        if not recAuxTipoFiscal."GMLocSummary in CITI" then
+                        if not recAuxTipoFiscal."GMASummary in CITI" then
                             CurrReport.Skip();
 
                     CLEAR(Tipocambio);
@@ -2041,11 +2041,11 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     CLEAR(Tipo_de_Comprobante);
 
-                    IF ("AFIP - Tipo Comprobante".GET("Service Cr.Memo Header"."GMLocAFIP Voucher Type")) THEN BEGIN
-                        IF ("AFIP - Tipo Comprobante"."GMLocCod 3685" = '') THEN
+                    IF ("AFIP - Tipo Comprobante".GET("Service Cr.Memo Header"."GMAAFIP Voucher Type")) THEN BEGIN
+                        IF ("AFIP - Tipo Comprobante"."GMACod 3685" = '') THEN
                             ERROR(Text005)
                         ELSE
-                            Tipo_de_Comprobante := "AFIP - Tipo Comprobante"."GMLocCod 3685"
+                            Tipo_de_Comprobante := "AFIP - Tipo Comprobante"."GMACod 3685"
                     END
                     ELSE
                         Tipo_de_Comprobante := '003';
@@ -2058,21 +2058,21 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     // 3) Punto de venta
                     CLEAR(Punto_de_Venta);
 
-                    IF ("Actividad empresa".GET("Service Cr.Memo Header"."GMLocPoint of Sales")) THEN BEGIN
-                        IF ("Actividad empresa"."GMLocCod 3685" = '') THEN
+                    IF ("Actividad empresa".GET("Service Cr.Memo Header"."GMAPoint of Sales")) THEN BEGIN
+                        IF ("Actividad empresa"."GMACod 3685" = '') THEN
                             ERROR(Text006)
                         ELSE
-                            Punto_de_Venta := "Actividad empresa"."GMLocCod 3685"
+                            Punto_de_Venta := "Actividad empresa"."GMACod 3685"
                     END
                     ELSE
                         Punto_de_Venta := '00001';
 
                     CLEAR(Numero_de_Comprobante);
-                    IF ("Service Cr.Memo Header"."GMLocAFIP Voucher No." <> 0) THEN BEGIN
-                        WHILE STRLEN(Numero_de_Comprobante + FORMAT("Service Cr.Memo Header"."GMLocAFIP Voucher No.")) < 8 DO
+                    IF ("Service Cr.Memo Header"."GMAAFIP Voucher No." <> 0) THEN BEGIN
+                        WHILE STRLEN(Numero_de_Comprobante + FORMAT("Service Cr.Memo Header"."GMAAFIP Voucher No.")) < 8 DO
                             Numero_de_Comprobante := Numero_de_Comprobante + '0';
 
-                        Numero_de_Comprobante := Numero_de_Comprobante + FORMAT("Service Cr.Memo Header"."GMLocAFIP Voucher No.");
+                        Numero_de_Comprobante := Numero_de_Comprobante + FORMAT("Service Cr.Memo Header"."GMAAFIP Voucher No.");
 
 
                     END
@@ -2113,8 +2113,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                             WHILE STRLEN(CUIT) < 20 DO
                                 CUIT := '0' + CUIT;
 
-                        IF (Cliente."GMLocAFIP Document Type" <> '') THEN
-                            Codigo_de_Documento := Cliente."GMLocAFIP Document Type"
+                        IF (Cliente."GMAAFIP Document Type" <> '') THEN
+                            Codigo_de_Documento := Cliente."GMAAFIP Document Type"
                         ELSE
                             Codigo_de_Documento := '80';
                     END;
@@ -2123,11 +2123,11 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     TempTotalesCITI.INIT;
                     //12896-
                     ID_Totals += 1;
-                    TempTotalesCITI.GMLocID := FORMAT(ID_Totals);
+                    TempTotalesCITI.GMAID := FORMAT(ID_Totals);
                     //12896+
-                    TempTotalesCITI.GMLocLineNo := NumeroLineas;
-                    TempTotalesCITI."GMLocVoucher No" := "Service Cr.Memo Header"."No.";
-                    TempTotalesCITI.GMLocDescription := 'N/C';
+                    TempTotalesCITI.GMALineNo := NumeroLineas;
+                    TempTotalesCITI."GMAVoucher No" := "Service Cr.Memo Header"."No.";
+                    TempTotalesCITI.GMADescription := 'N/C';
 
                     // Campo IMPORTE TOTAL CON IMPUESTOS en Divisa de la Factura con dos decimales Redondeados
                     // en 15 caracteres sin puntos ni comas
@@ -2146,16 +2146,16 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                         "Bill-to Name" := COPYSTR("Bill-to Name", 1, 30);
 
                     IF (Valor12 < 1000) THEN BEGIN
-                        IF ("Tipo fiscal".GET("Service Cr.Memo Header"."GMLocFiscal Type")) THEN BEGIN
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                        IF ("Tipo fiscal".GET("Service Cr.Memo Header"."GMAFiscal Type")) THEN BEGIN
+                            IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                                 ERROR(Text008);
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '5') THEN
+                            IF ("Tipo fiscal"."GMACod 3685" = '5') THEN
                                 "Service Cr.Memo Header"."Bill-to Name" := 'CONSUMIDOR FINAL              ';
                         END;
                     END
                     ELSE BEGIN
-                        IF ("Tipo fiscal".GET("Service Cr.Memo Header"."GMLocFiscal Type")) THEN
-                            IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                        IF ("Tipo fiscal".GET("Service Cr.Memo Header"."GMAFiscal Type")) THEN
+                            IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                                 ERROR(Text008);
                     END;
 
@@ -2165,30 +2165,30 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     IF SLineasCredito.FIND('-') THEN
                         REPEAT
-                            IF (RecProvincia.GET("Service Cr.Memo Header".GMLocProvince)) THEN BEGIN
-                                IF (RecProvincia."GMLocCod 3685" = '') THEN
+                            IF (RecProvincia.GET("Service Cr.Memo Header".GMAProvince)) THEN BEGIN
+                                IF (RecProvincia."GMACod 3685" = '') THEN
                                     ERROR(Text009);
-                                IF (RecProvincia."GMLocCod 3685" = '23') THEN BEGIN
+                                IF (RecProvincia."GMACod 3685" = '23') THEN BEGIN
                                     Valor17 += SLineasCredito.Amount;// * Tipocambio;
                                 END
                                 ELSE BEGIN
-                                    IF ("Tipo fiscal"."GMLocCod 3685" = '08') OR ("Tipo fiscal"."GMLocCod 3685" = '09') THEN BEGIN
+                                    IF ("Tipo fiscal"."GMACod 3685" = '08') OR ("Tipo fiscal"."GMACod 3685" = '09') THEN BEGIN
                                         Valor13 += SLineasCredito.Amount;// * Tipocambio
                                     END
                                     ELSE BEGIN
                                         /*IF (SLineasCredito."Tax Liable") THEN BEGIN
                                             IF (LclTaxGroup.GET(SLineasCredito."Tax Group Code")) THEN;
-                                            IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                            IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                                 Valor13 += SLineasCredito.Amount * Tipocambio
                                             ELSE
-                                                IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                                IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                     Valor17 += SLineasCredito.Amount * Tipocambio;
                                         END
                                         ELSE BEGIN
                                             Valor17 += SLineasCredito.Amount * Tipocambio;
                                         END;*/
                                         CLEAR(VATBUSPOSTINGGROUP);
-                                        IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                        IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                             if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Normal VAT") then
                                                 Valor13 += Lineas."VAT Base Amount";// * Tipocambio;
 
@@ -2197,10 +2197,10 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                                             if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Sales Tax") then begin
                                                 IF (LclTaxGroup.GET(Lineas."Tax Group Code")) THEN;
 
-                                                IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                                IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                                     Valor13 += Lineas.Amount// * Tipocambio
                                                 ELSE
-                                                    IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                                    IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                         Valor17 += Lineas.Amount;//* Tipocambio;
                                             end;
 
@@ -2217,17 +2217,17 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                             ELSE BEGIN
                                 /*IF (SLineasCredito."Tax Liable") THEN BEGIN
                                     IF (LclTaxGroup.GET(SLineasCredito."Tax Group Code")) THEN;
-                                    IF LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado" THEN
+                                    IF LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado" THEN
                                         Valor13 += SLineasCredito.Amount * Tipocambio
                                     ELSE
-                                        IF LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento THEN
+                                        IF LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento THEN
                                             Valor17 += SLineasCredito.Amount * Tipocambio;
                                 END
                                 ELSE BEGIN
                                     Valor17 += SLineasCredito.Amount * Tipocambio;
                                 END;*/
                                 CLEAR(VATBUSPOSTINGGROUP);
-                                IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMLocCalForTaxGroupCode)) THEN begin
+                                IF (VATBUSPOSTINGGROUP.GET(Lineas."VAT Bus. Posting Group") AND (VATBUSPOSTINGGROUP.GMACalForTaxGroupCode)) THEN begin
                                     if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Normal VAT") then
                                         Valor13 += Lineas."VAT Base Amount";// * Tipocambio;
 
@@ -2236,10 +2236,10 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                                     if (lineas."VAT Calculation Type" = lineas."VAT Calculation Type"::"Sales Tax") then begin
                                         IF (LclTaxGroup.GET(Lineas."Tax Group Code")) THEN;
 
-                                        IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::"No gravado") THEN
+                                        IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::"No gravado") THEN
                                             Valor13 += Lineas.Amount// * Tipocambio
                                         ELSE
-                                            IF (LclTaxGroup."GMLocRes 3685" = LclTaxGroup."GMLocRes 3685"::Exento) THEN
+                                            IF (LclTaxGroup."GMARes 3685" = LclTaxGroup."GMARes 3685"::Exento) THEN
                                                 Valor17 += Lineas.Amount;//* Tipocambio;
                                     end;
 
@@ -2267,19 +2267,19 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 				    Impuestos.RESET;
                     Impuestos.SETRANGE(Impuestos."Document No.", "Service Cr.Memo Header"."No.");
 
-                    Impuestos.SetRange(Impuestos."GMLocDocument Type Loc.", "Sales Cr.Memo Header"."GMLocDocument Type Loc.");
+                    Impuestos.SetRange(Impuestos."GMADocument Type Loc.", "Sales Cr.Memo Header"."GMADocument Type Loc.");
                     IF Impuestos.FIND('-') THEN
                         REPEAT
-                            IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::IVA) THEN
+                            IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::IVA) THEN
                                 Valor15 += (Impuestos.Amount / Tipocambio)
                             ELSE BEGIN
-                                IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::"Ingresos Brutos") THEN
+                                IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::"Ingresos Brutos") THEN
                                     Valor19 += (Impuestos.Amount / Tipocambio)
                                 ELSE BEGIN
-                                    IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::"IVA Percepcion") THEN
+                                    IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::"IVA Percepcion") THEN
                                         Valor18 += (Impuestos.Amount / Tipocambio)
                                     ELSE BEGIN
-                                        IF (Impuestos."GMLocTax Type Loc" = Impuestos."GMLocTax Type Loc"::Otros) THEN
+                                        IF (Impuestos."GMATax Type Loc" = Impuestos."GMATax Type Loc"::Otros) THEN
                                             Valor21 += (Impuestos.Amount / Tipocambio)
                                     END;
                                 END;
@@ -2293,14 +2293,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Total2_8 += Entero;
                     // FIN campo 9
 
-                    TempTotalesCITI."GMLocOperation total amount" := -Valor12;
+                    TempTotalesCITI."GMAOperation total amount" := -Valor12;
 
                     //Campo 10 Importe total de conceptos que no integran el precio neto gravado
                     CLEAR(Entero);
                     Campo13 := Formatvalor(Valor13, 15);
                     EVALUATE(Entero, Campo13);
                     Total2_9 += Entero;
-                    TempTotalesCITI."GMLocImporte no Gravado" := -Valor13;
+                    TempTotalesCITI."GMAImporte no Gravado" := -Valor13;
                     // FIN campo10
 
                     //Total2_10+=Entero;
@@ -2317,7 +2317,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo16 := Formatvalor(Valor16, 15);
                     EVALUATE(Entero, Campo16);
                     Total2_12 -= Entero;
-                    TempTotalesCITI."GMLocNon categorized perceptio" := Valor16;
+                    TempTotalesCITI."GMANon categorized perceptio" := Valor16;
                     //Fin campo1
 
                     //Campo 12 Importe de operaciones exentas
@@ -2325,7 +2325,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo17 := Formatvalor(Valor17, 15);
                     EVALUATE(Entero, Campo17);
                     Total2_13 -= Entero;
-                    TempTotalesCITI."GMLocNon taxable Amount" := -Valor17;
+                    TempTotalesCITI."GMANon taxable Amount" := -Valor17;
                     //Fin Campo 12
 
                     // campo 13   Importe de percepciones o pagos a cuenta de impuestos Nacionales
@@ -2333,7 +2333,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo18 := Formatvalor(Valor18, 15);
                     EVALUATE(Entero, Campo18);
                     Total2_14 -= Entero;
-                    TempTotalesCITI."GMLocNational Perceptions Amou" := Valor18;
+                    TempTotalesCITI."GMANational Perceptions Amou" := Valor18;
                     //Fin campo 13  
 
                     //  campo 14 ingresos brutos
@@ -2341,14 +2341,14 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo19 := Formatvalor(Valor19, 15);
                     EVALUATE(Entero, Campo19);
                     Total2_15 -= Entero;
-                    TempTotalesCITI."GMLocGIT Amount" := Valor19;
+                    TempTotalesCITI."GMAGIT Amount" := Valor19;
                     //Fin campo 14
 
                     //campo campo 15 Importe de percepciones impuestos Municipales
                     Campo20 := Formatvalor(Valor20, 15);
                     EVALUATE(Entero, Campo20);
                     Total2_16 += Entero;
-                    TempTotalesCITI."GMLocCity Perceptions Amount" := Valor20;
+                    TempTotalesCITI."GMACity Perceptions Amount" := Valor20;
                     //Fin campo 15
 
                     // campo 16 Importe impuestos internos
@@ -2356,23 +2356,23 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     Campo21 := Formatvalor(Valor21, 15);
                     EVALUATE(Entero, Campo21);
                     Total2_17 += Entero;
-                    TempTotalesCITI."GMLocInternal Tax Amount" := Valor21;
+                    TempTotalesCITI."GMAInternal Tax Amount" := Valor21;
                     //Fin Campo 16  
 
                     IF (Taxarea.GET("Service Cr.Memo Header"."Tax Area Code")) THEN;
 
-                    IF ("Tipo fiscal".GET("Service Cr.Memo Header"."GMLocFiscal Type")) THEN BEGIN
-                        IF ("Tipo fiscal"."GMLocCod 3685" = '') THEN
+                    IF ("Tipo fiscal".GET("Service Cr.Memo Header"."GMAFiscal Type")) THEN BEGIN
+                        IF ("Tipo fiscal"."GMACod 3685" = '') THEN
                             ERROR(Text008)
                         ELSE
-                            Tiporesp := "Tipo fiscal"."GMLocCod 3685";
+                            Tiporesp := "Tipo fiscal"."GMACod 3685";
                     END;
 
                     IF (Currency.GET("Service Cr.Memo Header"."Currency Code")) THEN BEGIN
-                        IF (Currency."GMLocAFIP Code" = '') THEN
+                        IF (Currency."GMAAFIP Code" = '') THEN
                             ERROR(Text007)
                         ELSE
-                            Moneda := Currency."GMLocAFIP Code";
+                            Moneda := Currency."GMAAFIP Code";
                     END
                     ELSE
                         Moneda := 'PES';
@@ -2410,7 +2410,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
                     calculoImpuestosBaseIVA("Service Cr.Memo Header"."No.");
                     /*
-                                        Impuestos.SETRANGE(Impuestos."GMLocTax Type Loc", Impuestos."GMLocTax Type Loc"::IVA);
+                                        Impuestos.SETRANGE(Impuestos."GMATax Type Loc", Impuestos."GMATax Type Loc"::IVA);
                                         IF Impuestos.FIND('-') THEN
                                             REPEAT
                                                 Detalleimpuesto.RESET;
@@ -2439,8 +2439,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
 
 
                     IF (I105 <> 0) THEN BEGIN
-                        TempTotalesCITI."GMLocVAT10,5" := ImporteI105;
-                        TempTotalesCITI.GMLocBase105 := ImporteBaseI105;
+                        TempTotalesCITI."GMAVAT10,5" := ImporteI105;
+                        TempTotalesCITI.GMABase105 := ImporteBaseI105;
                         IF (ImporteI105 <> 0) THEN
                             ImporteI105 := ABS(ImporteI105);
                         TextImporteI105 := Formatvalor(ImporteI105, 15);
@@ -2470,8 +2470,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I21 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLocVAT21 := ImporteI21;
-                        TempTotalesCITI.GMLocBase21 := ImporteBaseI21;
+                        TempTotalesCITI.GMAVAT21 := ImporteI21;
+                        TempTotalesCITI.GMABase21 := ImporteBaseI21;
                         IF (ImporteI21 <> 0) THEN
                             ImporteI21 := ABS(ImporteI21);
                         TextImporteI21 := Formatvalor(ImporteI21, 15);
@@ -2501,8 +2501,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     END;
 
                     IF (I27 <> 0) THEN BEGIN
-                        TempTotalesCITI.GMLociva27 := ImporteI27;
-                        TempTotalesCITI.GMLOcBase27 := ImporteBaseI27;
+                        TempTotalesCITI.GMAiva27 := ImporteI27;
+                        TempTotalesCITI.GMABase27 := ImporteBaseI27;
                         IF (ImporteI27 <> 0) THEN
                             ImporteI27 := ABS(ImporteI27);
 
@@ -2544,8 +2544,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                         END;
 
                     IF (Cantiva = 0) THEN BEGIN
-                        TempTotalesCITI."GMLocVAT10,5" := ImporteI105;
-                        TempTotalesCITI.GMLocBase105 := 0; // es importe total de la factura
+                        TempTotalesCITI."GMAVAT10,5" := ImporteI105;
+                        TempTotalesCITI.GMABase105 := 0; // es importe total de la factura
                         IF (ImporteI105 <> 0) THEN
                             ImporteI105 := ABS(ImporteI105);
                         TextImporteI105 := Formatvalor(0, 15);
@@ -2582,12 +2582,12 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     IF Cantiva = 0 THEN Cantiva := 1;  // Se debe indicar 1 aun cuando la operaci¢n sea Exenta
 
                     OtrosTributos := '000000000000000';
-                    IF (GMLocCAI2 = '') THEN
-                        GMLocCAI2 := '00000000000000';
-                    IF ("GMLocCAI Due Date2" = 0D) THEN
+                    IF (GMACAI2 = '') THEN
+                        GMACAI2 := '00000000000000';
+                    IF ("GMACAI Due Date2" = 0D) THEN
                         FechaVtoCAIT := '00000000'
                     ELSE
-                        FechaVtoCAIT := FORMAT("GMLocCAI Due Date2", 8, '<Year4><Month,2><Day,2>');
+                        FechaVtoCAIT := FORMAT("GMACAI Due Date2", 8, '<Year4><Month,2><Day,2>');
 
                     TempTotalesCITI.INSERT;
                     CLEAR(postingDocDate);
@@ -2652,7 +2652,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
         {
             area(Content)
             {
-                group("GMLocOptions")
+                group("GMAOptions")
                 {
                     caption = 'Options',;
                     field(FechaDesde; FechaDesde)
@@ -2732,7 +2732,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
         d: Text[30];
         t: Text[30];
         Archivo: Text[1024];
-        ExportaTxt: Codeunit "GMLocExporta TXT";
+        ExportaTxt: Codeunit "GMAExporta TXT";
         pFileName: Text;
     begin
         if NumeroLineas = 0 then
@@ -2765,8 +2765,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
     var
         postingDocDate: Date;
         seePostDate: Boolean;
-        xmlport1: XmlPort "GMLocXML ImportExport";
-        xmlport2: XmlPort "GMLocXML ImportExport";
+        xmlport1: XmlPort "GMAXML ImportExport";
+        xmlport2: XmlPort "GMAXML ImportExport";
         Text003: label 'The date must be less or equal than to date',;
         Text01: label 'File cannot be created',;
         Text004: label 'There is no records to generate the report',;
@@ -2878,7 +2878,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
         TextoAlic: Text[1024];
         NumeroLineas: Integer;
         EscribirFichero: Boolean;
-        ExportaTxt: Codeunit "GMLocExporta TXT";
+        ExportaTxt: Codeunit "GMAExporta TXT";
         TempExcelBuff: Record 370 temporary;
         TempExcelBuffCbte: Record 370 temporary;
         TempExcelBuffAlic: Record 370 temporary;
@@ -2901,8 +2901,8 @@ report 80886 "PER R.G. 3685 CITI Ventas"
         OutFileTOTAL: File;
         NumLinTotal: Integer;
         "//Fin totales": Integer;
-        TempTotalesCITI: Record "GMLocAFIP - Concept Type" temporary;
-        RecProvincia: Record GMLocProvince;
+        TempTotalesCITI: Record "GMAAFIP - Concept Type" temporary;
+        RecProvincia: Record GMAProvince;
         NumeroLineasAlic: Integer;
         ID_Totals: Integer;
         TipocambioOriginal: Decimal;
@@ -2985,51 +2985,51 @@ report 80886 "PER R.G. 3685 CITI Ventas"
         if Impuestos.FindSet then
             repeat
                 IF (Impuestos."Tax Jurisdiction Code" <> '') THEN begin
-                    case Impuestos."GMLocTax Type Loc" of
+                    case Impuestos."GMATax Type Loc" of
                         0:
                             begin
                                 Clear(recTaxJurisdiction);
                                 recTaxJurisdiction.Reset;
                                 recTaxJurisdiction.SetRange(Code, Impuestos."Tax Jurisdiction Code");
                                 if recTaxJurisdiction.FindFirst then
-                                    case recTaxJurisdiction.GMLocTipo of
-                                        recTaxJurisdiction.GMLocTipo::IVA21:
+                                    case recTaxJurisdiction.GMATipo of
+                                        recTaxJurisdiction.GMATipo::IVA21:
                                             Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                        recTaxJurisdiction.GMLocTipo::"IVA2.5":
+                                        recTaxJurisdiction.GMATipo::"IVA2.5":
                                             Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                        recTaxJurisdiction.GMLocTipo::"IVA5":
+                                        recTaxJurisdiction.GMATipo::"IVA5":
                                             Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                        recTaxJurisdiction.GMLocTipo::"IVA10.5":
+                                        recTaxJurisdiction.GMATipo::"IVA10.5":
                                             Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                        recTaxJurisdiction.GMLocTipo::IVA27:
+                                        recTaxJurisdiction.GMATipo::IVA27:
                                             Valor15 += (Impuestos.Amount / Tipocambio);
 
 
-                                        recTaxJurisdiction.GMLocTipo::" ":
+                                        recTaxJurisdiction.GMATipo::" ":
                                             begin
                                                 GRUPOREGIVAPROD.Reset;
                                                 GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, Impuestos."VAT Prod. Posting Group");
                                                 if GRUPOREGIVAPROD.FindFirst then begin
-                                                    case GRUPOREGIVAPROD."GMLocTax Type" of
+                                                    case GRUPOREGIVAPROD."GMATax Type" of
                                                         0:
                                                             begin
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') then
                                                                     Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '9') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '9') then
                                                                     Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') then
                                                                     Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then
                                                                     Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                                                if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '8') then
+                                                                if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '8') then
                                                                     Valor15 += (Impuestos.Amount / Tipocambio);
                                                             end;
 
@@ -3059,22 +3059,22 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     GRUPOREGIVAPROD.Reset;
                     GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, Impuestos."VAT Prod. Posting Group");
                     if GRUPOREGIVAPROD.FindFirst then begin
-                        case GRUPOREGIVAPROD."GMLocTax Type" of
+                        case GRUPOREGIVAPROD."GMATax Type" of
                             0:
                                 begin
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '5') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '5') then
                                         Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '9') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '9') then
                                         Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '4') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '4') then
                                         Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '6') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '6') then
                                         Valor15 += (Impuestos.Amount / Tipocambio);
 
-                                    if (GRUPOREGIVAPROD."GMLocAFIP VAT Type Code" = '8') then
+                                    if (GRUPOREGIVAPROD."GMAAFIP VAT Type Code" = '8') then
                                         Valor15 += (Impuestos.Amount / Tipocambio);
                                 end;
                             1:
@@ -3099,7 +3099,7 @@ report 80886 "PER R.G. 3685 CITI Ventas"
         Impuestos.Reset;
         Impuestos.SetCurrentkey("Document No.", "Posting Date");
         Impuestos.SetRange(Impuestos."Document Type", GlobalDocumentType);
-        Impuestos.SETRANGE(Impuestos."GMLocTax Type Loc", Impuestos."GMLocTax Type Loc"::IVA);
+        Impuestos.SETRANGE(Impuestos."GMATax Type Loc", Impuestos."GMATax Type Loc"::IVA);
         Impuestos.SetRange(Impuestos."Document No.", DocNo);
         Impuestos.setrange(type, impuestos.type::Sale);
         if Impuestos.FindSet then
@@ -3109,87 +3109,87 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     recTaxJurisdiction.Reset;
                     recTaxJurisdiction.SetRange(Code, Impuestos."Tax Jurisdiction Code");
                     if recTaxJurisdiction.FindFirst then begin
-                        case recTaxJurisdiction.GMLocTipo of
+                        case recTaxJurisdiction.GMATipo of
                             //no va para ventas
                             /*
-                                                                    recTaxJurisdiction.GMLocTipo::"IVA2.5":
+                                                                    recTaxJurisdiction.GMATipo::"IVA2.5":
                                                                         begin
                                                                             I205 := 1;
                                                                             ImporteI205 += (Impuestos.Amount / Tipocambio);
                                                                             ImporteBaseI205 += (Impuestos.Base / Tipocambio);
                                                                         end;
                             */
-                            recTaxJurisdiction.GMLocTipo::"IVA10.5":
+                            recTaxJurisdiction.GMATipo::"IVA10.5":
                                 begin
                                     I105 := 1;
                                     ImporteI105 += (Impuestos.Amount / Tipocambio);
                                     ImporteBaseI105 += (Impuestos.Base / Tipocambio);
                                 end;
 
-                            recTaxJurisdiction.GMLocTipo::"IVA21":
+                            recTaxJurisdiction.GMATipo::"IVA21":
                                 begin
                                     I21 := 1;
                                     ImporteI21 += (Impuestos.Amount / Tipocambio);
                                     ImporteBaseI21 += (Impuestos.Base / Tipocambio);
                                 end;
-                            recTaxJurisdiction.GMLocTipo::"IVA27":
+                            recTaxJurisdiction.GMATipo::"IVA27":
                                 begin
                                     I27 := 1;
                                     ImporteI27 += (Impuestos.Amount / Tipocambio);
                                     ImporteBaseI27 += (Impuestos.Base / Tipocambio);
                                 end;
-                            recTaxJurisdiction.GMLocTipo::"IVA5":
+                            recTaxJurisdiction.GMATipo::"IVA5":
                                 begin
                                     I5 := 1;
                                     ImporteI5 += (Impuestos.Amount / Tipocambio);
                                     ImporteBaseI5 += (Impuestos.Base / Tipocambio);
                                 end;
-                            recTaxJurisdiction.GMLocTipo::" ":
+                            recTaxJurisdiction.GMATipo::" ":
                                 begin
                                     GRUPOREGIVAPROD.Reset;
                                     GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, Impuestos."VAT Prod. Posting Group");
                                     if GRUPOREGIVAPROD.FindFirst then begin
-                                        case GRUPOREGIVAPROD."GMLocTax Type" of
+                                        case GRUPOREGIVAPROD."GMATax Type" of
                                             0:
                                                 begin
-                                                    if (GRUPOREGIVAPROD.GMLocPorIva = 21) then
+                                                    if (GRUPOREGIVAPROD.GMAPorIva = 21) then
                                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                                             I21 := 1;
                                                             ImporteI21 := ImporteI21 + (Impuestos.Amount / Tipocambio);
-                                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                                ImporteBaseI21 := ImporteBaseI21 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                                ImporteBaseI21 := ImporteBaseI21 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                                         END;
 
-                                                    if (GRUPOREGIVAPROD.GMLocPorIva = 10.5) then
+                                                    if (GRUPOREGIVAPROD.GMAPorIva = 10.5) then
                                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                                             I105 := 1;
                                                             ImporteI105 := ImporteI105 + (Impuestos.Amount / Tipocambio);
-                                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                                ImporteBaseI105 := ImporteBaseI105 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                                ImporteBaseI105 := ImporteBaseI105 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                                         END;
                                                     //no va para ventas
                                                     /*
-                                                                                                                    if (GRUPOREGIVAPROD.GMLocPorIva = 2.5) then
+                                                                                                                    if (GRUPOREGIVAPROD.GMAPorIva = 2.5) then
                                                                                                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                                                                                                             I205 := 1;
                                                                                                                             ImporteI205 := ImporteI205 + (Impuestos.Amount / Tipocambio);
-                                                                                                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                                                                                                ImporteBaseI205 := ImporteBaseI205 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                                                                                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                                                                                                ImporteBaseI205 := ImporteBaseI205 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                                                                                                         END;
                                                     */
-                                                    if (GRUPOREGIVAPROD.GMLocPorIva = 27) then
+                                                    if (GRUPOREGIVAPROD.GMAPorIva = 27) then
                                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                                             I27 := 1;
                                                             ImporteI27 := ImporteI27 + (Impuestos.Amount / Tipocambio);
-                                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                                ImporteBaseI27 := ImporteBaseI27 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                                ImporteBaseI27 := ImporteBaseI27 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                                         END;
-                                                    if (GRUPOREGIVAPROD.GMLocPorIva = 5) then
+                                                    if (GRUPOREGIVAPROD.GMAPorIva = 5) then
                                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                                             I5 := 1;
                                                             ImporteI5 := ImporteI5 + (Impuestos.Amount / Tipocambio);
-                                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                                ImporteBaseI5 := ImporteBaseI5 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                                ImporteBaseI5 := ImporteBaseI5 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                                         end;
                                                 end;
 
@@ -3203,47 +3203,47 @@ report 80886 "PER R.G. 3685 CITI Ventas"
                     GRUPOREGIVAPROD.Reset;
                     GRUPOREGIVAPROD.SetRange(GRUPOREGIVAPROD.Code, Impuestos."VAT Prod. Posting Group");
                     if GRUPOREGIVAPROD.FindFirst then begin
-                        case GRUPOREGIVAPROD."GMLocTax Type" of
+                        case GRUPOREGIVAPROD."GMATax Type" of
                             0:
                                 begin
-                                    if (GRUPOREGIVAPROD.GMLocPorIva = 21) then
+                                    if (GRUPOREGIVAPROD.GMAPorIva = 21) then
                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                             I21 := 1;
                                             ImporteI21 := ImporteI21 + (Impuestos.Amount / Tipocambio);
-                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                ImporteBaseI21 := ImporteBaseI21 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                ImporteBaseI21 := ImporteBaseI21 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                         END;
 
-                                    if (GRUPOREGIVAPROD.GMLocPorIva = 10.5) then
+                                    if (GRUPOREGIVAPROD.GMAPorIva = 10.5) then
                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                             I105 := 1;
                                             ImporteI105 := ImporteI105 + (Impuestos.Amount / Tipocambio);
-                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                ImporteBaseI105 := ImporteBaseI105 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                ImporteBaseI105 := ImporteBaseI105 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                         END;
                                     //no va para ventas
                                     /*
-                                                                                    if (GRUPOREGIVAPROD.GMLocPorIva = 2.5) then
+                                                                                    if (GRUPOREGIVAPROD.GMAPorIva = 2.5) then
                                                                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                                                                             I205 := 1;
                                                                                             ImporteI205 := ImporteI205 + (Impuestos.Amount / Tipocambio);
-                                                                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                                                                ImporteBaseI205 := ImporteBaseI205 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                                                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                                                                ImporteBaseI205 := ImporteBaseI205 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                                                                         END;
                                     */
-                                    if (GRUPOREGIVAPROD.GMLocPorIva = 27) then
+                                    if (GRUPOREGIVAPROD.GMAPorIva = 27) then
                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                             I27 := 1;
                                             ImporteI27 := ImporteI27 + (Impuestos.Amount / Tipocambio);
-                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                ImporteBaseI27 := ImporteBaseI27 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                ImporteBaseI27 := ImporteBaseI27 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                         END;
-                                    if (GRUPOREGIVAPROD.GMLocPorIva = 5) then
+                                    if (GRUPOREGIVAPROD.GMAPorIva = 5) then
                                         IF (Impuestos.Amount <> 0) THEN BEGIN
                                             I5 := 1;
                                             ImporteI5 := ImporteI5 + (Impuestos.Amount / Tipocambio);
-                                            if (GRUPOREGIVAPROD.GMLocPorIva <> 0) then
-                                                ImporteBaseI5 := ImporteBaseI5 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMLocPorIva) * 100, 0.01) / Tipocambio);
+                                            if (GRUPOREGIVAPROD.GMAPorIva <> 0) then
+                                                ImporteBaseI5 := ImporteBaseI5 + (ROUND((Impuestos.Amount / GRUPOREGIVAPROD.GMAPorIva) * 100, 0.01) / Tipocambio);
                                         end;
                                 end;
 

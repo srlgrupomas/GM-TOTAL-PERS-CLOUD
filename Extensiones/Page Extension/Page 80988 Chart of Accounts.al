@@ -1,4 +1,4 @@
-pageextension 80988 "PersChartofAccounts" extends "Chart of Accounts"
+pageextension 34006988 "PersChartofAccounts" extends "Chart of Accounts"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -8,12 +8,12 @@ pageextension 80988 "PersChartofAccounts" extends "Chart of Accounts"
     {
         addafter(Name)
         {
-            field("GMLocCorporate Account Code"; Rec."GMLocCorporate Account Code")
+            field("GMACorporate Account Code"; Rec."GMACorporate Account Code")
             {
                 ApplicationArea = ALL;
                 Description = 'Corporate Account Code';
             }
-            field("GMLocCorporate Account Name"; Rec."GMLocCorporate Account Name")
+            field("GMACorporate Account Name"; Rec."GMACorporate Account Name")
             {
                 ApplicationArea = ALL;
                 Description = 'Corporate Account Name';

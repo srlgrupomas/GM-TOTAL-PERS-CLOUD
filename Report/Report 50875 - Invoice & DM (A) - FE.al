@@ -1,4 +1,4 @@
-report 80875 "PersInvoice & DM (A) - FE"
+report 34006875 "PersInvoice & DM (A) - FE"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                     column(Sales_Invoice_Header___VAT_Registration_No__; "Sales Invoice Header"."VAT Registration No.")
                     {
                     }
-                    column(TipoFisca_Description; TipoFisca.GMLocDescription)
+                    column(TipoFisca_Description; TipoFisca.GMADescription)
                     {
                     }
                     column(Sales_Invoice_Header___Bill_to_Name_; "Sales Invoice Header"."Sell-to Customer Name")
@@ -73,7 +73,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                     column(InfoEmpresa_Name; InfoEmpresa.BssiLegalNameFull)
                     {
                     }
-                    column(recTipoFisca_Description; recTipoFisca.GMLocDescription)
+                    column(recTipoFisca_Description; recTipoFisca.GMADescription)
                     {
                     }
                     column(Sales_Invoice_Header___No__; "Sales Invoice Header"."No.")
@@ -193,7 +193,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                     column(ShiptoCity; "Sales Invoice Header"."ship-to City")
                     {
                     }
-                    column(GMLocProvince; "Sales Invoice Header".GMLocProvince)
+                    column(GMAProvince; "Sales Invoice Header".GMAProvince)
                     {
                     }
                     column(NombreProv; NombreProv)
@@ -212,7 +212,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                     column(InicioActividades; "InfoEmpresa".BssiActivityStratDate)
                     {
                     }
-                    column(CAE_Due_Date; "Sales Invoice Header"."GMLocCAEA Due Date")
+                    column(CAE_Due_Date; "Sales Invoice Header"."GMACAEA Due Date")
                     {
                     }
                     //SL End
@@ -221,7 +221,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                     { }
                     // AW - END
 
-                    column(QRCode; "Sales Invoice Header"."GMLoc QRCode")
+                    column(QRCode; "Sales Invoice Header"."GMA QRCode")
                     {
                     }
                     column(AgruparUnaLinea; AgruparUnaLinea)
@@ -275,10 +275,10 @@ report 80875 "PersInvoice & DM (A) - FE"
                         column(FechaVencimiento; fechavencimiento)
                         {
                         }
-                        column(Sales_Invoice_Header__FechaVtoCAI; "Sales Invoice Header"."GMLocCAI Due Date2")
+                        column(Sales_Invoice_Header__FechaVtoCAI; "Sales Invoice Header"."GMACAI Due Date2")
                         {
                         }
-                        column(Sales_Invoice_Header__CAI; "Sales Invoice Header".GMLocCAI2)
+                        column(Sales_Invoice_Header__CAI; "Sales Invoice Header".GMACAI2)
                         {
                         }
                         column(Sales_Invoice_Header___Amount_Including_VAT_; "Sales Invoice Header"."Amount Including VAT")
@@ -479,7 +479,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                         column(Sales_Invoice_Line_LineDiscountAmount; "Sales Invoice Line"."Line Discount Amount")
                         { }
                         // AW - END
-                        column(Sales_Invoice_Linea_Print; "Sales Invoice Line".GMLocPrint)
+                        column(Sales_Invoice_Linea_Print; "Sales Invoice Line".GMAPrint)
                         { }
                         column(Sales_Invoice_Linea_Lote; NumeroLote)
                         { }
@@ -584,7 +584,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                                 tmoviva2.SETRANGE("Document No.", "Sales Invoice Header"."No.");
                                 tmoviva2.SETRANGE(Type, tmoviva.Type::Sale);
                                 //tmoviva2.SETRANGE("Tax Group Code","Tax Group Code");
-                                tmoviva2.SETFILTER("Document Type", '%1|%2', tmoviva."Document Type"::Invoice, tmoviva."GMLocDocument Type Loc."::"Nota Débito");
+                                tmoviva2.SETFILTER("Document Type", '%1|%2', tmoviva."Document Type"::Invoice, tmoviva."GMADocument Type Loc."::"GMANota Debito");
                                 if tmoviva2.FINDSET then
                                     repeat
                                         if gPrincipal = true then begin
@@ -688,7 +688,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                             end;
 
                             //Comentado hasta que implementes facturacion electronica-
-                            if ("Sales Invoice Header".GMLocCAI2 <> '') then begin
+                            if ("Sales Invoice Header".GMACAI2 <> '') then begin
                                 leyenda := '';
                                 //      leyenda := 'EFECTIVO vencimiento '+FORMAT("Sales Invoice Header"."Due Date");
                                 //--Codifico a Interleaved 2of5
@@ -821,8 +821,8 @@ report 80875 "PersInvoice & DM (A) - FE"
                 IIBBarrImpuestos: array[10] of Text[200];
                 IIBBarrValoresImpuestos: array[10] of Decimal;
                 iterArray: Integer;
-                tipoDocAFIP: record "GMLocAFIP - Voucher Type";
-                wsgrupomas: Codeunit GMLocws_GrupoMAS_FE;
+                tipoDocAFIP: record "GMAAFIP - Voucher Type";
+                wsgrupomas: Codeunit GMAws_GrupoMAS_FE;
                 EntitySetUpExtend: record EntitySetUpExtend;
             begin
                 InfoEmpresa.Reset();
@@ -831,8 +831,8 @@ report 80875 "PersInvoice & DM (A) - FE"
                 IF (InfoEmpresa.FindFirst()) THEN;
                 InfoEmpresa.CalcFields(BssiPicture);
 
-                if "Sales Invoice Header"."GMLocAFIP Voucher Type" = '' then
-                    "Sales Invoice Header"."GMLocAFIP Voucher Type" := '00';
+                if "Sales Invoice Header"."GMAAFIP Voucher Type" = '' then
+                    "Sales Invoice Header"."GMAAFIP Voucher Type" := '00';
 
                 EntitySetUpExtend.SetFilter("Dimension Code", InfoEmpresa.Code);
                 EntitySetUpExtend.FindFirst();
@@ -846,9 +846,9 @@ report 80875 "PersInvoice & DM (A) - FE"
 
                 Entro := false;
                 "#InicializaVariables";
-                if ("sales invoice header"."GMLocElectronic Invoicing" <> "sales invoice header"."GMLocElectronic Invoicing"::NO) and ("sales invoice header"."GMLocElectronic Invoicing" <> "sales invoice header"."GMLocElectronic Invoicing"::HASAR) then
+                if ("sales invoice header"."GMAElectronic Invoicing" <> "sales invoice header"."GMAElectronic Invoicing"::NO) and ("sales invoice header"."GMAElectronic Invoicing" <> "sales invoice header"."GMAElectronic Invoicing"::HASAR) then
                     wsgrupomas.FE_GenerarQR("sales invoice header"."No.", 1);
-                "sales invoice header".CalcFields("GMLoc QRCode");
+                "sales invoice header".CalcFields("GMA QRCode");
                 "Sales Invoice Header".CALCFIELDS(Amount);
                 CLEAR(factor);
                 CLEAR(nombreimp[1]);
@@ -869,24 +869,24 @@ report 80875 "PersInvoice & DM (A) - FE"
                 ok := PaymentTerms.GET("Sales Invoice Header"."Payment Terms Code");
                 ok := FormaPago.GET("Sales Invoice Header"."Payment Method Code");
                 ok := AreaImp.GET("Sales Invoice Header"."Tax Area Code");
-                ok := TipoFisca.GET(AreaImp."GMLocFiscal Type");
+                ok := TipoFisca.GET(AreaImp."GMAFiscal Type");
                 "Sales Invoice Header".CALCFIELDS("Amount Including VAT");
                 Auxx := 0;
                 gPrincipal := true;
                 RecProvincia.RESET;
-                RecProvincia.SETCURRENTKEY(RecProvincia."GMLocProvince Code");
-                RecProvincia.SETRANGE("GMLocProvince Code", InfoEmpresa.BssiProvinceCode);
+                RecProvincia.SETCURRENTKEY(RecProvincia."GMAProvince Code");
+                RecProvincia.SETRANGE("GMAProvince Code", InfoEmpresa.BssiProvinceCode);
                 if RecProvincia.FINDFIRST then
-                    gProvincia := RecProvincia.GMLocDescription;
+                    gProvincia := RecProvincia.GMADescription;
 
 
                 //WDL - Agregar provincia del cliente
 
                 RecProvincia.RESET;
-                RecProvincia.SETCURRENTKEY(RecProvincia."GMLocProvince Code");
-                RecProvincia.SETRANGE("GMLocProvince Code", "Sales Invoice Header".GMLocProvince);
+                RecProvincia.SETCURRENTKEY(RecProvincia."GMAProvince Code");
+                RecProvincia.SETRANGE("GMAProvince Code", "Sales Invoice Header".GMAProvince);
                 if RecProvincia.FINDFIRST then
-                    NombreProv := RecProvincia.GMLocDescription;
+                    NombreProv := RecProvincia.GMADescription;
                 //WDL
 
 
@@ -904,7 +904,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                             NoRemito := ItemLedgerEntry."Document No.";
                 end;
 
-                if ("Sales Invoice Header"."GMLocDocument Type Loc." = "Sales Invoice Header"."GMLocDocument Type Loc."::Invoice) then begin
+                if ("Sales Invoice Header"."GMADocument Type Loc." = "Sales Invoice Header"."GMADocument Type Loc."::Invoice) then begin
                     TipoDocumento := 'FACTURA';
                     DocNUMAF := '01';
                 end
@@ -913,27 +913,27 @@ report 80875 "PersInvoice & DM (A) - FE"
                     DocNUMAF := '02';
                 end;
 
-                if "Sales Invoice Header"."GMLocAFIP Voucher Type" = '201' then begin
+                if "Sales Invoice Header"."GMAAFIP Voucher Type" = '201' then begin
                     TipoDocumento := 'FACTURA DE CREDITO ELECTRONICA';
                     DocNUMAF := '201'
                 end;
 
-                if "Sales Invoice Header"."GMLocAFIP Voucher Type" = '202' then begin
+                if "Sales Invoice Header"."GMAAFIP Voucher Type" = '202' then begin
                     TipoDocumento := 'NOTA DE DEBITO PYME ELECTRONICA';
                     DocNUMAF := '202'
                 end;
 
-                if "Sales Invoice Header"."GMLocAFIP Voucher Type" = '63' then begin
+                if "Sales Invoice Header"."GMAAFIP Voucher Type" = '63' then begin
                     TipoDocumento := 'LIQUIDACION DE VENTAS';
                     DocNUMAF := '63'
                 end;
 
-                DocNUMAF := "Sales Invoice Header"."GMLocAFIP Voucher Type";
+                DocNUMAF := "Sales Invoice Header"."GMAAFIP Voucher Type";
 
                 tipoDocAFIP.reset;
-                tipoDocAFIP.SetRange(GMLocID, "Sales Invoice Header"."GMLocAFIP Voucher Type");
+                tipoDocAFIP.SetRange(GMAID, "Sales Invoice Header"."GMAAFIP Voucher Type");
                 if tipoDocAFIP.FindFirst() then
-                    TipoDocumento := tipoDocAFIP.GMLocDescription;
+                    TipoDocumento := tipoDocAFIP.GMADescription;
 
                 "RecSalesperson/Purchaser".RESET;
                 "RecSalesperson/Purchaser".SETCURRENTKEY(Code);
@@ -979,22 +979,22 @@ report 80875 "PersInvoice & DM (A) - FE"
                 tmoviva.RESET;
                 tmoviva.SETRANGE("Document No.", "Sales Invoice Header"."No.");
                 tmoviva.SETRANGE(Type, tmoviva.Type::Sale);
-                tmoviva.SETFILTER("Document Type", '%1|%2', tmoviva."Document Type"::Invoice, tmoviva."GMLocDocument Type Loc."::"Nota Débito");
+                tmoviva.SETFILTER("Document Type", '%1|%2', tmoviva."Document Type"::Invoice, tmoviva."GMADocument Type Loc."::"GMANota Debito");
                 if tmoviva.FINDFIRST then
                     repeat
-                        case tmoviva."GMLocTax Type Loc" of
-                            tmoviva."GMLocTax Type Loc"::IVA:
+                        case tmoviva."GMATax Type Loc" of
+                            tmoviva."GMATax Type Loc"::IVA:
                                 begin
                                     recTaxJurisdictions.Reset();
                                     recTaxJurisdictions.SetRange(recTaxJurisdictions.Code, tmoviva."Tax Jurisdiction Code");
                                     if recTaxJurisdictions.FindFirst() then begin
-                                        acumularImpuesto(arrImpuestos, arrValoresImpuestos, recTaxJurisdictions."GMLoc VAT Book Code", tmoviva.Amount);
+                                        acumularImpuesto(arrImpuestos, arrValoresImpuestos, recTaxJurisdictions."GMA VAT Book Code", tmoviva.Amount);
                                     end;
                                 end;
 
-                            tmoviva."GMLocTax Type Loc"::"IVA Percepcion":
+                            tmoviva."GMATax Type Loc"::"IVA Percepcion":
                                 ImporIVA2 := ImporIVA2 + (tmoviva.Amount * factor * -1);
-                            tmoviva."GMLocTax Type Loc"::"Ingresos Brutos":
+                            tmoviva."GMATax Type Loc"::"Ingresos Brutos":
                                 begin
                                     ImporIVA3 := ImporIVA3 + (tmoviva.Amount * factor * -1);
                                     recTaxJurisdictions.Reset();
@@ -1004,7 +1004,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                                     end;
                                 end;
 
-                            tmoviva."GMLocTax Type Loc"::Otros:
+                            tmoviva."GMATax Type Loc"::Otros:
                                 ImporIVA4 := ImporIVA4 + (tmoviva.Amount * factor * -1);
                         end;
                     until tmoviva.NEXT = 0;
@@ -1049,10 +1049,10 @@ report 80875 "PersInvoice & DM (A) - FE"
                     gTel := Rec18."Phone No.";
 
                 RecActEmpresa.RESET;
-                RecActEmpresa.SETCURRENTKEY("GMLocActivity Code");
-                RecActEmpresa.SETRANGE("GMLocActivity Code", "GMLocPoint of Sales");
+                RecActEmpresa.SETCURRENTKEY("GMAActivity Code");
+                RecActEmpresa.SETRANGE("GMAActivity Code", "GMAPoint of Sales");
                 if RecActEmpresa.FINDFIRST then
-                    gInicio := RecActEmpresa."GMLocActivity Starting Date";
+                    gInicio := RecActEmpresa."GMAActivity Starting Date";
 
                 Recshipment.RESET;
                 Recshipment.SETRANGE("Order No.", "Sales Invoice Header"."Order No.");
@@ -1064,7 +1064,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                 _recVatEntry.RESET;
                 _recVatEntry.SETCURRENTKEY(_recVatEntry."Document No.", _recVatEntry."Tax Jurisdiction Code");
                 _recVatEntry.SETRANGE("Document No.", "Sales Invoice Header"."No.");
-                _recVatEntry.SETFILTER("GMLocTax Type Loc", '<>%1', _recVatEntry."GMLocTax Type Loc"::IVA);
+                _recVatEntry.SETFILTER("GMATax Type Loc", '<>%1', _recVatEntry."GMATax Type Loc"::IVA);
                 begin
                     jurisdiccionactual := '999999';
 
@@ -1095,7 +1095,7 @@ report 80875 "PersInvoice & DM (A) - FE"
 
                             if _recVatEntry."Tax Jurisdiction Code" <> jurisdiccionactual then begin
 
-                                if _recVatEntry."GMLocTax Type Loc" = _recVatEntry."GMLocTax Type Loc"::"Ingresos Brutos" then begin
+                                if _recVatEntry."GMATax Type Loc" = _recVatEntry."GMATax Type Loc"::"Ingresos Brutos" then begin
                                     TotalIvaPerIBB += _recVatEntry.Amount;//ACumulador jony
                                     TotalBase := _recVatEntry.Base;
                                     ImportePercIIBB := _recVatEntry.Amount;
@@ -1119,7 +1119,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                             end
                             else begin
 
-                                if _recVatEntry."GMLocTax Type Loc" = _recVatEntry."GMLocTax Type Loc"::"Ingresos Brutos" then begin
+                                if _recVatEntry."GMATax Type Loc" = _recVatEntry."GMATax Type Loc"::"Ingresos Brutos" then begin
                                     TotalIvaPerIBB += _recVatEntry.Amount;//ACumulador jony
                                 end
                                 else begin
@@ -1171,7 +1171,7 @@ report 80875 "PersInvoice & DM (A) - FE"
                 // InfoEmpresa.GET();
                 ok := recAreaImp.GET('CLI-RI');
                 if ok then
-                    ok := recTipoFisca.GET(recAreaImp."GMLocFiscal Type");
+                    ok := recTipoFisca.GET(recAreaImp."GMAFiscal Type");
 
                 //SL Begin Bug-1564
                 // InfoEmpresa.GET();
@@ -1236,10 +1236,10 @@ report 80875 "PersInvoice & DM (A) - FE"
         paramMonedaOriginal: Boolean;
         PaymentTerms: Record "Payment Terms";
         FormaPago: Record "Payment Method";
-        TipoFisca: Record "GMLocFiscal Type";
+        TipoFisca: Record "GMAFiscal Type";
         AreaImp: Record "Tax Area";
         ImporteLetras: Text[256];
-        Convierto: Codeunit GMLocConvierteNoAText;
+        Convierto: Codeunit GMAConvierteNoAText;
         NumberText: array[2] of Text[256];
         Moneda: Record Currency;
         MovIVA: Record "VAT Entry";
@@ -1260,14 +1260,14 @@ report 80875 "PersInvoice & DM (A) - FE"
         Valor: Integer;
         cadena: Text[100];
         character: Char;
-        Convertir: Codeunit "GMLocANSI <-> ASCII conve";
+        Convertir: Codeunit "GMAANSI <-> ASCII conve";
         Barra2: Text[100];
         barra: Text[60];
         "----------------------------->": Integer;
         recLineasTemp: Record "Sales Invoice Line" temporary;
         recLineas: Record "Sales Invoice Line";
         cont: Integer;
-        recTipoFisca: Record "GMLocFiscal Type";
+        recTipoFisca: Record "GMAFiscal Type";
         recAreaImp: Record "Tax Area";
         leyenda: Text[1024];
         recCliente: Record Customer;
@@ -1284,7 +1284,7 @@ report 80875 "PersInvoice & DM (A) - FE"
         gDescuento: Decimal;
         "RecSalesperson/Purchaser": Record "Salesperson/Purchaser";
         gNomVend: Text[50];
-        CUCBarras: Codeunit "GMLocCodigo de barras FE";
+        CUCBarras: Codeunit "GMACodigo de barras FE";
         gDescuento1: Decimal;
         gTotNetoT: Decimal;
         tmoviva: Record "VAT Entry";
@@ -1300,10 +1300,10 @@ report 80875 "PersInvoice & DM (A) - FE"
         z: Integer;
         Rec18: Record Customer;
         gTel: Text[1024];
-        RecActEmpresa: Record "GMLocCompany Activity";
+        RecActEmpresa: Record "GMACompany Activity";
         gInicio: Date;
         "RecSales Shipment Header": Record "Sales Shipment Header";
-        RecProvincia: Record GMLocProvince;
+        RecProvincia: Record GMAProvince;
         gProvincia: Text[50];
         gCantidad: Integer;
         r: Integer;
@@ -1462,17 +1462,17 @@ report 80875 "PersInvoice & DM (A) - FE"
 
     procedure buscarDocumentoRelacionado("Sales Invoice Header": Record "Sales Invoice Header") // Cesar
     var
-        buscarDocRelacionado: Record "GMLoc Invoicing Related Docs";
+        buscarDocRelacionado: Record "GMA Invoicing Related Docs";
     begin
         buscarDocRelacionado.RESET;
-        buscarDocRelacionado.SETRANGE("GMLoc Document No.", "Sales Invoice Header"."No.");
+        buscarDocRelacionado.SETRANGE("GMA Document No.", "Sales Invoice Header"."No.");
         if buscarDocRelacionado.FINDFIRST then
-            Descripcion := 'Documento Relacionado: ' + buscarDocRelacionado."GMLoc Related Document No."
+            Descripcion := 'Documento Relacionado: ' + buscarDocRelacionado."GMA Related Document No."
         else begin
             buscarDocRelacionado.RESET;
-            buscarDocRelacionado.SETRANGE("GMLoc Document No.", "Sales Invoice Header"."Pre-Assigned No.");
+            buscarDocRelacionado.SETRANGE("GMA Document No.", "Sales Invoice Header"."Pre-Assigned No.");
             if buscarDocRelacionado.FINDFIRST then
-                Descripcion := 'Documento Relacionado: ' + buscarDocRelacionado."GMLoc Related Document No."
+                Descripcion := 'Documento Relacionado: ' + buscarDocRelacionado."GMA Related Document No."
             else
                 Descripcion := '';
         end;

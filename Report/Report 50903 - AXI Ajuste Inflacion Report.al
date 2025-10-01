@@ -1,4 +1,4 @@
-report 80903 "AXI Ajuste Inflacion Report"
+report 34006903 "AXI Ajuste Inflacion Report"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

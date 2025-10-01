@@ -1,12 +1,12 @@
 ﻿/// <summary>
-///  File Description : MEM Copy of Localization Argentina report: Withholdings Book (report 34006466 "GMLocWithholdings Book") 
+///  File Description : MEM Copy of Localization Argentina report: Withholdings Book (report 34006466 "GMAWithholdings Book") 
 /// </summary>
 /// <remarks>
 /// | Rev No. | Date | By | Description |
 /// |:-------:|:----:|:--:|:------------|
 /// | 000 | 20241224 | Arvind | Initial Release |
 /// </remarks>
-report 80899 "PersWithholdings Book"
+report 34006899 "PersWithholdings Book"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -169,37 +169,37 @@ report 80899 "PersWithholdings Book"
                 column(Integer_Number; Number)
                 {
                 }
-                column(GMLocPictureSign; "GMLocTreasury Setup".GMLocSignPicture)
+                column(GMAPictureSign; "GMATreasury Setup".GMASignPicture)
                 {
                 }
-                dataitem(EnVentas; "GMLocValues Entry")
+                dataitem(EnVentas; "GMAValues Entry")
                 {
-                    DataItemTableView = SORTING("GMLocDocument No.") ORDER(Ascending) WHERE("GMLocDocument Type" = FILTER(Recibo | "Ing/Egreso"), GMLocAmount = FILTER(<> 0), GMLocValue = FILTER(<> ''));
-                    RequestFilterFields = GMLocValue;
+                    DataItemTableView = SORTING("GMADocument No.") ORDER(Ascending) WHERE("GMADocument Type" = FILTER(Recibo | "Ing/Egreso"), GMAAmount = FILTER(<> 0), GMAValue = FILTER(<> ''));
+                    RequestFilterFields = GMAValue;
                     RequestFilterHeading = 'Sufridas - Recibos Ing/Egreso';
                     // Solicitan cambio a document date
-                    // column(EnVentas__Fecha_registro_; "GMLocPosting Date")
+                    // column(EnVentas__Fecha_registro_; "GMAPosting Date")
                     // {
                     // }
-                    column(EnVentas__Fecha_registro_; "GMLocDocument Date")
+                    column(EnVentas__Fecha_registro_; "GMADocument Date")
                     {
                     }
-                    column(EnVentas__Fecha_Documento_; "GMLocDocument Date")
+                    column(EnVentas__Fecha_Documento_; "GMADocument Date")
                     {
                     }
-                    column(EnVentas__Nro_Doc_; "GMLocDocument No.")
+                    column(EnVentas__Nro_Doc_; "GMADocument No.")
                     {
                     }
-                    column(EnVentas_Valor; GMLocValue)
+                    column(EnVentas_Valor; GMAValue)
                     {
                     }
-                    column(EnVentas__C_d__Serie_; "GMLocSeries Code")
+                    column(EnVentas__C_d__Serie_; "GMASeries Code")
                     {
                     }
-                    column(EnVentas_Importe; -1 * GMLocAmount)
+                    column(EnVentas_Importe; -1 * GMAAmount)
                     {
                     }
-                    column(EnVentas_EnVentas__Nro_Valor_; EnVentas."GMLocValue No.")
+                    column(EnVentas_EnVentas__Nro_Valor_; EnVentas."GMAValue No.")
                     {
                     }
                     column(RecCustomer__No__; RecCustomer."No.")
@@ -211,16 +211,16 @@ report 80899 "PersWithholdings Book"
                     column(RecCustomer_Name; RecCustomer.Name)
                     {
                     }
-                    column(EnVentas__Nro_Doc_Caption; FIELDCAPTION("GMLocDocument No."))
+                    column(EnVentas__Nro_Doc_Caption; FIELDCAPTION("GMADocument No."))
                     {
                     }
-                    column(EnVentas_ValorCaption; FIELDCAPTION(GMLocValue))
+                    column(EnVentas_ValorCaption; FIELDCAPTION(GMAValue))
                     {
                     }
                     column(N_meroCaption; N_meroCaptionLbl)
                     {
                     }
-                    column(EnVentas_ImporteCaption; FIELDCAPTION(GMLocAmount))
+                    column(EnVentas_ImporteCaption; FIELDCAPTION(GMAAmount))
                     {
                     }
                     column(FechaCaption; FechaCaptionLbl)
@@ -241,25 +241,25 @@ report 80899 "PersWithholdings Book"
                     column(Nombre_clienteCaption; Nombre_clienteCaptionLbl)
                     {
                     }
-                    column(EnVentas_Entry_No_; "GMLocEntry No.")
+                    column(EnVentas_Entry_No_; "GMAEntry No.")
                     {
                     }
                     column(EnVentas_Transaction_No_; GLRecord."Transaction No.")
                     {
                     }
-                    column(EnVentas_GMLocTax_Code_; RecWithholdingLedgerEntry."GMLocTax Code")
+                    column(EnVentas_GMATax_Code_; RecWithholdingLedgerEntry."GMATax Code")
                     {
                     }
                     // AW - BEGIN
-                    column(TipoRegimen_EnVentas; RecWithholdingLedgerEntry."GMLocTax System")
+                    column(TipoRegimen_EnVentas; RecWithholdingLedgerEntry."GMATax System")
                     { }
-                    column(FechaRetencion_EnVentas; RecWithholdingLedgerEntry.GMLocDocumentDate)
+                    column(FechaRetencion_EnVentas; RecWithholdingLedgerEntry.GMADocumentDate)
                     { }
-                    // column(FechaRetencion_EnVentas; RecWithholdingLedgerEntry."GMLocWithholding Date")
+                    // column(FechaRetencion_EnVentas; RecWithholdingLedgerEntry."GMAWithholding Date")
                     // { }
-                    column(BaseImponible_EnVentas; FORMAT(-1 * RecWithholdingLedgerEntry.GMLocBase, 0, '<Precision,2:2><Integer Thousand><Decimals>'))
+                    column(BaseImponible_EnVentas; FORMAT(-1 * RecWithholdingLedgerEntry.GMABase, 0, '<Precision,2:2><Integer Thousand><Decimals>'))
                     { }
-                    column(Alicuota_EnVentas; FORMAT(RecWithholdingLedgerEntry."GMLocWithholding%", 0, '<Precision,2:2><Integer Thousand><Decimals>'))
+                    column(Alicuota_EnVentas; FORMAT(RecWithholdingLedgerEntry."GMAWithholding%", 0, '<Precision,2:2><Integer Thousand><Decimals>'))
                     { }
                     // AW - END
                     trigger OnPreDataItem();
@@ -267,58 +267,58 @@ report 80899 "PersWithholdings Book"
                         txtValores: Text;
                     begin
 
-                        IF (EnVentas.GetFilter(GMLocValue) = '') then begin
+                        IF (EnVentas.GetFilter(GMAValue) = '') then begin
                             Valores.RESET;
-                            Valores.SETCURRENTKEY(GMLocCode);
-                            Valores.SetRange("GMLocIs Withholding", true);
+                            Valores.SETCURRENTKEY(GMACode);
+                            Valores.SetRange("GMAIs Withholding", true);
                             if Provincia <> '' then
-                                Valores.SetRange(GMLocProvince, Provincia);
+                                Valores.SetRange(GMAProvince, Provincia);
 
                             if Valores.FindFirst() then
                                 repeat
-                                    txtValores += Valores.GMLocCode + '|';
+                                    txtValores += Valores.GMACode + '|';
                                 until Valores.Next() = 0;
                             if StrLen(txtValores) > 0 then
                                 txtValores := CopyStr(txtValores, 1, StrLen(txtValores) - 1);
-                            EnVentas.SETRANGE(EnVentas."GMLocDocument Date", Desde, Hasta);
-                            EnVentas.SetFilter(EnVentas."GMLocValue", txtValores);
+                            EnVentas.SETRANGE(EnVentas."GMADocument Date", Desde, Hasta);
+                            EnVentas.SetFilter(EnVentas."GMAValue", txtValores);
                         end
                         else begin
-                            EnVentas.SETRANGE(EnVentas."GMLocDocument Date", Desde, Hasta);
-                            GlobaltxtValoresVentas := EnVentas.GetFilter(GMLocValue);
+                            EnVentas.SETRANGE(EnVentas."GMADocument Date", Desde, Hasta);
+                            GlobaltxtValoresVentas := EnVentas.GetFilter(GMAValue);
                         end;
 
                         //Bssi Start
                         if BssiMEMSystemSetup.BssiUseGlobalDimOne() then
-                            EnVentas.SetRange("GMLocGlobal Dimension 1", BssiDimensionValue.Code)
+                            EnVentas.SetRange("GMAGlobal Dimension 1", BssiDimensionValue.Code)
                         else
-                            EnVentas.SetRange("GMLocGlobal Dimension 2", BssiDimensionValue.Code);
+                            EnVentas.SetRange("GMAGlobal Dimension 2", BssiDimensionValue.Code);
                         //Bssi End
 
                         /*if (GlobaltxtVAloresVentas = '') then begin
                                 Totales.RESET;
-                                Totales.SETCURRENTKEY(Totales.GMLocValue);
-                                Totales.SETRANGE(Totales."GMLocPosting Date", Desde, Hasta);
+                                Totales.SETCURRENTKEY(Totales.GMAValue);
+                                Totales.SETRANGE(Totales."GMAPosting Date", Desde, Hasta);
 
                                 Valores.RESET;
-                                Valores.SETCURRENTKEY(GMLocCode);
-                                Valores.SetRange("GMLocIs Withholding", true);
+                                Valores.SETCURRENTKEY(GMACode);
+                                Valores.SetRange("GMAIs Withholding", true);
                                 if Provincia <> '' then
-                                    Valores.SetRange(GMLocProvince, Provincia);
+                                    Valores.SetRange(GMAProvince, Provincia);
 
                                 if Valores.FindFirst() then
                                     repeat
-                                        txtValores += Valores.GMLocCode + '|';
+                                        txtValores += Valores.GMACode + '|';
                                     until Valores.Next() = 0;
                                 if StrLen(txtValores) > 0 then
                                     txtValores := CopyStr(txtValores, 1, StrLen(txtValores) - 1);
-                                Totales.SetFilter(Totales."GMLocValue", txtValores);
+                                Totales.SetFilter(Totales."GMAValue", txtValores);
                             end
                             else begin
                                 Totales.RESET;
-                                Totales.SETCURRENTKEY(Totales.GMLocValue);
-                                Totales.SETRANGE(Totales."GMLocPosting Date", Desde, Hasta);
-                                Totales.SetFilter(Totales."GMLocValue", '%1', GlobaltxtValoresVentas);
+                                Totales.SETCURRENTKEY(Totales.GMAValue);
+                                Totales.SETRANGE(Totales."GMAPosting Date", Desde, Hasta);
+                                Totales.SetFilter(Totales."GMAValue", '%1', GlobaltxtValoresVentas);
                             end;*/
                     end;
 
@@ -327,65 +327,65 @@ report 80899 "PersWithholdings Book"
 
                         // AW - BEGIN
                         if (GenerarSufridas = false) then CurrReport.Skip();
-                        // Para obtener Fecha Retención, Base Imponible, Alícuota ("GMLocWithholding Date", "GMLocBase", "GMLocWithholding%")
+                        // Para obtener Fecha Retención, Base Imponible, Alícuota ("GMAWithholding Date", "GMABase", "GMAWithholding%")
                         RecWithholdingLedgerEntry.Reset();
-                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry."GMLocVoucher Number", EnVentas."GMLocDocument No.");
-                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry."GMLocWithh. Certificate No.", EnVentas."GMLocValue No.");
-                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry.GMLocValue, EnVentas.GMLocValue);
+                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry."GMAVoucher Number", EnVentas."GMADocument No.");
+                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry."GMAWithh. Certificate No.", EnVentas."GMAValue No.");
+                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry.GMAValue, EnVentas.GMAValue);
                         if (RecWithholdingLedgerEntry.FindFirst()) then;
 
-                        // Para obtener Tipo Régimen ("GMLocTax System")
+                        // Para obtener Tipo Régimen ("GMATax System")
                         /* RecWithholdingDatail.Reset();
-                         RecWithholdingDatail.SetRange(RecWithholdingDatail.GMLocValue, EnVentas.GMLocValue);
-                         RecWithholdingDatail.SetRange(RecWithholdingDatail."GMLocWithholding No.", RecWithholdingLedgerEntry."GMLocWithholding No.");
+                         RecWithholdingDatail.SetRange(RecWithholdingDatail.GMAValue, EnVentas.GMAValue);
+                         RecWithholdingDatail.SetRange(RecWithholdingDatail."GMAWithholding No.", RecWithholdingLedgerEntry."GMAWithholding No.");
                          if (RecWithholdingDatail.FindFirst()) then;
      */
                         //AW -END
 
                         // Para obtener No. Asiento Contable
                         GLRecord.Reset();
-                        GLRecord.SetRange(GLRecord."GMLocCheck No.", EnVentas."GMLocValue No.");
-                        GLRecord.SetRange(GLRecord."GMLocCashBank", EnVentas."GMLocCash/Bank Account");
-                        GLRecord.SetRange(GLRecord."GMLocValue", EnVentas."GMLocValue");
-                        GLRecord.SetRange(GLRecord."Document No.", EnVentas."GMLocDocument No.");
+                        GLRecord.SetRange(GLRecord."GMACheck No.", EnVentas."GMAValue No.");
+                        GLRecord.SetRange(GLRecord."GMACashBank", EnVentas."GMACash/Bank Account");
+                        GLRecord.SetRange(GLRecord."GMAValue", EnVentas."GMAValue");
+                        GLRecord.SetRange(GLRecord."Document No.", EnVentas."GMADocument No.");
                         if GLRecord.FINDFIRST then;
 
                         RecCustomer.RESET;
                         RecCustomer.SETCURRENTKEY("No.");
-                        RecCustomer.SETRANGE("No.", "GMLocEntry Source Code");
+                        RecCustomer.SETRANGE("No.", "GMAEntry Source Code");
                         if RecCustomer.FINDFIRST then;
                     end;
 
 
                 }
-                dataitem(EnCompras; "GMLocValues Entry")
+                dataitem(EnCompras; "GMAValues Entry")
                 {
-                    DataItemTableView = SORTING("GMLocDocument No.") ORDER(Ascending) WHERE("GMLocDocument Type" = CONST("Orden de Pago"));
-                    RequestFilterFields = GMLocValue;
+                    DataItemTableView = SORTING("GMADocument No.") ORDER(Ascending) WHERE("GMADocument Type" = CONST("Orden de Pago"));
+                    RequestFilterFields = GMAValue;
                     RequestFilterHeading = 'Realizadas Ordenes de Pago';
-                    column(EnCompras_Importe; -1 * GMLocAmount)
+                    column(EnCompras_Importe; -1 * GMAAmount)
                     {
                     }
-                    column(EnCompras__C_d__Serie_; "GMLocSeries Code")
+                    column(EnCompras__C_d__Serie_; "GMASeries Code")
                     {
                     }
-                    column(EnCompras_Valor; GMLocValue)
+                    column(EnCompras_Valor; GMAValue)
                     {
                     }
-                    column(EnCompras__Nro_Doc_; "GMLocDocument No.")
+                    column(EnCompras__Nro_Doc_; "GMADocument No.")
                     {
                     }
                     // Solicitan cambio a document date
-                    // column(EnCompras__Fecha_registro_; "GMLocPosting Date")
+                    // column(EnCompras__Fecha_registro_; "GMAPosting Date")
                     // {
                     // }
-                    column(EnCompras__Fecha_registro_; "GMLocDocument Date")
+                    column(EnCompras__Fecha_registro_; "GMADocument Date")
                     {
                     }
-                    column(EnCompras__Fecha_documento_; "GMLocDocument Date")
+                    column(EnCompras__Fecha_documento_; "GMADocument Date")
                     {
                     }
-                    column(EnCompras_EnCompras__Nro_Valor_; EnCompras."GMLocValue No.")
+                    column(EnCompras_EnCompras__Nro_Valor_; EnCompras."GMAValue No.")
                     {
                     }
                     column(RecVendor__No__; RecVendor."No.")
@@ -427,25 +427,25 @@ report 80899 "PersWithholdings Book"
                     column(Nombre_ProveedorCaption; Nombre_ProveedorCaptionLbl)
                     {
                     }
-                    column(EnCompras_Entry_No_; "GMLocEntry No.")
+                    column(EnCompras_Entry_No_; "GMAEntry No.")
                     {
                     }
                     column(EnCompras_Transaction_No_; GLRecord."Transaction No.")
                     {
                     }
-                    column(EnCompras_GMLocTax_Code_; RecWithholdingLedgerEntry."GMLocTax Code")
+                    column(EnCompras_GMATax_Code_; RecWithholdingLedgerEntry."GMATax Code")
                     {
                     }
                     // AW - BEGIN
-                    column(TipoRegimen_EnCompras; RecWithholdingLedgerEntry."GMLocTax System")
+                    column(TipoRegimen_EnCompras; RecWithholdingLedgerEntry."GMATax System")
                     { }
-                    column(FechaRetencion_EnCompras; format(RecWithholdingLedgerEntry.GMLocDocumentDate, 10, '<Day,2>/<Month,2>/<year4>'))
+                    column(FechaRetencion_EnCompras; format(RecWithholdingLedgerEntry.GMADocumentDate, 10, '<Day,2>/<Month,2>/<year4>'))
                     { }
-                    //                    column(FechaRetencion_EnCompras; format(RecWithholdingLedgerEntry."GMLocWithholding Date", 10, '<Day,2>/<Month,2>/<year4>'))
+                    //                    column(FechaRetencion_EnCompras; format(RecWithholdingLedgerEntry."GMAWithholding Date", 10, '<Day,2>/<Month,2>/<year4>'))
                     // { }
-                    column(BaseImponible_EnCompras; FORMAT(-1 * RecWithholdingLedgerEntry.GMLocBase, 0, '<Precision,2:2><Integer Thousand><Decimals>'))
+                    column(BaseImponible_EnCompras; FORMAT(-1 * RecWithholdingLedgerEntry.GMABase, 0, '<Precision,2:2><Integer Thousand><Decimals>'))
                     { }
-                    column(Alicuota_EnCompras; FORMAT(RecWithholdingLedgerEntry."GMLocWithholding%", 0, '<Precision,2:2><Integer Thousand><Decimals>'))
+                    column(Alicuota_EnCompras; FORMAT(RecWithholdingLedgerEntry."GMAWithholding%", 0, '<Precision,2:2><Integer Thousand><Decimals>'))
                     { }
                     // AW - END
                     // FORMAT(RecTaxReportBase.LocARTaxAmount, 0, '<Precision,2:2><Integer Thousand><Decimals>')
@@ -453,63 +453,63 @@ report 80899 "PersWithholdings Book"
                     trigger OnPreDataItem();
                     var
                         txtValores: Text;
-                        Valores: Record GMLocValues;
+                        Valores: Record GMAValues;
                     begin
 
-                        IF (EnCompras.GetFilter(GMLocValue) = '') then begin
+                        IF (EnCompras.GetFilter(GMAValue) = '') then begin
                             Valores.RESET;
-                            Valores.SETCURRENTKEY(GMLocCode);
-                            Valores.SetRange("GMLocIs Withholding", true);
+                            Valores.SETCURRENTKEY(GMACode);
+                            Valores.SetRange("GMAIs Withholding", true);
                             if Provincia <> '' then
-                                Valores.SetRange(GMLocProvince, Provincia);
+                                Valores.SetRange(GMAProvince, Provincia);
 
                             if Valores.FindFirst() then
                                 repeat
-                                    txtValores += Valores.GMLocCode + '|';
+                                    txtValores += Valores.GMACode + '|';
                                 until Valores.Next() = 0;
                             if StrLen(txtValores) > 0 then
                                 txtValores := CopyStr(txtValores, 1, StrLen(txtValores) - 1);
 
-                            EnCompras.SETRANGE(EnCompras."GMLocDocument Date", Desde, Hasta);
-                            EnCompras.SetFilter(EnCompras."GMLocValue", txtValores);
+                            EnCompras.SETRANGE(EnCompras."GMADocument Date", Desde, Hasta);
+                            EnCompras.SetFilter(EnCompras."GMAValue", txtValores);
                         end
                         else begin
-                            EnCompras.SETRANGE(EnCompras."GMLocDocument Date", Desde, Hasta);
-                            GlobaltxtValoresCompras := EnCompras.GetFilter(GMLocValue);
+                            EnCompras.SETRANGE(EnCompras."GMADocument Date", Desde, Hasta);
+                            GlobaltxtValoresCompras := EnCompras.GetFilter(GMAValue);
                         end;
 
                         //Bssi Start
                         if BssiMEMSystemSetup.BssiUseGlobalDimOne() then
-                            EnCompras.SetRange("GMLocGlobal Dimension 1", BssiDimensionValue.Code)
+                            EnCompras.SetRange("GMAGlobal Dimension 1", BssiDimensionValue.Code)
                         else
-                            EnCompras.SetRange("GMLocGlobal Dimension 2", BssiDimensionValue.Code);
+                            EnCompras.SetRange("GMAGlobal Dimension 2", BssiDimensionValue.Code);
                         //Bssi End
 
                         /*
                         if (GlobaltxtValoresCompras = '') then begin
                             Compras_Totales.RESET;
-                            Compras_Totales.SETCURRENTKEY(Compras_Totales.GMLocValue);
-                            Compras_Totales.SETRANGE(Compras_Totales."GMLocPosting Date", Desde, Hasta);
+                            Compras_Totales.SETCURRENTKEY(Compras_Totales.GMAValue);
+                            Compras_Totales.SETRANGE(Compras_Totales."GMAPosting Date", Desde, Hasta);
 
                             Valores.RESET;
-                            Valores.SETCURRENTKEY(GMLocCode);
-                            Valores.SetRange("GMLocIs Withholding", true);
+                            Valores.SETCURRENTKEY(GMACode);
+                            Valores.SetRange("GMAIs Withholding", true);
                             if Provincia <> '' then
-                                Valores.SetRange(GMLocProvince, Provincia);
+                                Valores.SetRange(GMAProvince, Provincia);
 
                             if Valores.FindFirst() then
                                 repeat
-                                    txtValores += Valores.GMLocCode + '|';
+                                    txtValores += Valores.GMACode + '|';
                                 until Valores.Next() = 0;
                             if StrLen(txtValores) > 0 then
                                 txtValores := CopyStr(txtValores, 1, StrLen(txtValores) - 1);
-                            Compras_Totales.SetFilter(Compras_Totales."GMLocValue", txtValores);
+                            Compras_Totales.SetFilter(Compras_Totales."GMAValue", txtValores);
                         end
                         else begin
                             Compras_Totales.RESET;
-                            Compras_Totales.SETCURRENTKEY(Compras_Totales.GMLocValue);
-                            Compras_Totales.SETRANGE(Compras_Totales."GMLocPosting Date", Desde, Hasta);
-                            Compras_Totales.SetFilter(Compras_Totales."GMLocValue", '%1', GlobaltxtValoresCompras);
+                            Compras_Totales.SETCURRENTKEY(Compras_Totales.GMAValue);
+                            Compras_Totales.SETRANGE(Compras_Totales."GMAPosting Date", Desde, Hasta);
+                            Compras_Totales.SetFilter(Compras_Totales."GMAValue", '%1', GlobaltxtValoresCompras);
                         end;
                     */
                     end;
@@ -520,34 +520,34 @@ report 80899 "PersWithholdings Book"
                         if (GenerarRealizadas = false) then CurrReport.Skip();
                         // AW - BEGIN
 
-                        // Para obtener Fecha Retención, Base Imponible, Alícuota ("GMLocWithholding Date", "GMLocBase", "GMLocWithholding%")
+                        // Para obtener Fecha Retención, Base Imponible, Alícuota ("GMAWithholding Date", "GMABase", "GMAWithholding%")
                         RecWithholdingLedgerEntry.Reset();
-                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry."GMLocVoucher Number", EnCompras."GMLocDocument No.");
-                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry."GMLocWithh. Certificate No.", Encompras."GMLocValue No.");
-                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry.GMLocValue, EnCompras.GMLocValue);
+                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry."GMAVoucher Number", EnCompras."GMADocument No.");
+                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry."GMAWithh. Certificate No.", Encompras."GMAValue No.");
+                        RecWithholdingLedgerEntry.SetRange(RecWithholdingLedgerEntry.GMAValue, EnCompras.GMAValue);
 
                         // Bssi Start
                         if BssiMEMSystemSetup.BssiUseGlobalDimOne() then
-                            RecWithholdingLedgerEntry.SetRange("GMLocShortcut Dimension 1", BssiDimensionValue.Code)
+                            RecWithholdingLedgerEntry.SetRange("GMAShortcut Dimension 1", BssiDimensionValue.Code)
                         else
-                            RecWithholdingLedgerEntry.SetRange("GMLocShortcut Dimension 2", BssiDimensionValue.Code);
+                            RecWithholdingLedgerEntry.SetRange("GMAShortcut Dimension 2", BssiDimensionValue.Code);
                         // Bssi End
 
                         if (RecWithholdingLedgerEntry.FindFirst()) then;
-                        // Para obtener Tipo Régimen ("GMLocTax System")
+                        // Para obtener Tipo Régimen ("GMATax System")
                         /* RecWithholdingDatail.Reset();
-                         RecWithholdingDatail.SetRange(RecWithholdingDatail.GMLocValue, EnCompras.GMLocValue);
-                         RecWithholdingDatail.SetRange(RecWithholdingDatail."GMLocWithholding No.", RecWithholdingLedgerEntry."GMLocWithholding No.");
+                         RecWithholdingDatail.SetRange(RecWithholdingDatail.GMAValue, EnCompras.GMAValue);
+                         RecWithholdingDatail.SetRange(RecWithholdingDatail."GMAWithholding No.", RecWithholdingLedgerEntry."GMAWithholding No.");
                          if (RecWithholdingDatail.FindFirst()) then;
      */
                         //AW -END
 
                         // Para obtener No. Asiento Contable
                         GLRecord.Reset();
-                        GLRecord.SetRange(GLRecord."GMLocCheck No.", EnCompras."GMLocValue No.");
-                        GLRecord.SetRange(GLRecord."GMLocCashBank", EnCompras."GMLocCash/Bank Account");
-                        GLRecord.SetRange(GLRecord."GMLocValue", EnCompras."GMLocValue");
-                        GLRecord.SetRange(GLRecord."Document No.", EnCompras."GMLocDocument No.");
+                        GLRecord.SetRange(GLRecord."GMACheck No.", EnCompras."GMAValue No.");
+                        GLRecord.SetRange(GLRecord."GMACashBank", EnCompras."GMACash/Bank Account");
+                        GLRecord.SetRange(GLRecord."GMAValue", EnCompras."GMAValue");
+                        GLRecord.SetRange(GLRecord."Document No.", EnCompras."GMADocument No.");
 
                         // Bssi Start
                         if BssiMEMSystemSetup.BssiUseGlobalDimOne() then
@@ -560,7 +560,7 @@ report 80899 "PersWithholdings Book"
 
                         RecVendor.RESET;
                         RecVendor.SETCURRENTKEY("No.");
-                        RecVendor.SETRANGE("No.", "GMLocEntry Source Code");
+                        RecVendor.SETRANGE("No.", "GMAEntry Source Code");
                         if RecVendor.FINDFIRST then;
                     end;
 
@@ -568,19 +568,19 @@ report 80899 "PersWithholdings Book"
                 }
 
                 //Totales Ventas
-                dataitem(Totales; "GMLocValues Entry")
+                dataitem(Totales; "GMAValues Entry")
                 {
-                    DataItemTableView = SORTING(GMLocValue) ORDER(Ascending);
-                    column(Totales_Valor; GMLocValue)
+                    DataItemTableView = SORTING(GMAValue) ORDER(Ascending);
+                    column(Totales_Valor; GMAValue)
                     {
                     }
-                    column(Totales_Importe; -1 * GMLocAmount)
+                    column(Totales_Importe; -1 * GMAAmount)
                     {
                     }
                     column(Texto; Texto)
                     {
                     }
-                    column(Totales_ValorCaption; FIELDCAPTION(GMLocValue))
+                    column(Totales_ValorCaption; FIELDCAPTION(GMAValue))
                     {
                     }
                     column(TotalCaption; TotalCaptionLbl)
@@ -592,7 +592,7 @@ report 80899 "PersWithholdings Book"
                     column(TOTALESCaption; TOTALESCaptionLbl)
                     {
                     }
-                    column(Totales_Entry_No_; "GMLocEntry No.")
+                    column(Totales_Entry_No_; "GMAEntry No.")
                     {
                     }
                     column(CodImpuesto; CodImpuesto)
@@ -615,15 +615,15 @@ report 80899 "PersWithholdings Book"
                         if (GenerarSufridas = false) then
                             CurrReport.Skip();
                         Valores.RESET;
-                        Valores.SETCURRENTKEY(GMLocCode);
-                        Valores.SETRANGE(GMLocCode, GMLocValue);
+                        Valores.SETCURRENTKEY(GMACode);
+                        Valores.SETRANGE(GMACode, GMAValue);
                         if Valores.FINDFIRST then begin
                             BssiMEMTaxesByEntity.Reset();
-                            BssiMEMTaxesByEntity.SetRange(BssiTaxCode, valores."GMLocTax Code");
+                            BssiMEMTaxesByEntity.SetRange(BssiTaxCode, valores."GMATax Code");
                             BssiMEMTaxesByEntity.SetRange(BssiMEMEntityID, BssiDimensionValue.Code);
                             if BssiMEMTaxesByEntity.FindFirst() then begin
-                                Compras_texto := Valores."GMLocTax Code";
-                                Compras_CodImpuesto := valores."GMLocTax Code";
+                                Compras_texto := Valores."GMATax Code";
+                                Compras_CodImpuesto := valores."GMATax Code";
                             end
                             else begin
                                 texto := 'No agrupado por código impuesto.';
@@ -635,51 +635,51 @@ report 80899 "PersWithholdings Book"
                             ORIGINAL
                             if ((GlobaltxtValoresCompras = '') and (GlobaltxtVAloresVentas = '')) then begin
                                 Totales.RESET;
-                                Totales.SETCURRENTKEY(Totales.GMLocValue);
-                                Totales.SETRANGE(Totales."GMLocPosting Date", Desde, Hasta);
+                                Totales.SETCURRENTKEY(Totales.GMAValue);
+                                Totales.SETRANGE(Totales."GMAPosting Date", Desde, Hasta);
 
                                 Valores.RESET;
-                                Valores.SETCURRENTKEY(GMLocCode);
-                                Valores.SetRange("GMLocIs Withholding", true);
+                                Valores.SETCURRENTKEY(GMACode);
+                                Valores.SetRange("GMAIs Withholding", true);
                                 if Provincia <> '' then
-                                    Valores.SetRange(GMLocProvince, Provincia);
+                                    Valores.SetRange(GMAProvince, Provincia);
 
                                 if Valores.FindFirst() then
                                     repeat
-                                        txtValores += Valores.GMLocCode + '|';
+                                        txtValores += Valores.GMACode + '|';
                                     until Valores.Next() = 0;
                                 if StrLen(txtValores) > 0 then
                                     txtValores := CopyStr(txtValores, 1, StrLen(txtValores) - 1);
-                                Totales.SetFilter(Totales."GMLocValue", txtValores);
+                                Totales.SetFilter(Totales."GMAValue", txtValores);
                             end
                             else begin
                                 Totales.RESET;
-                                Totales.SETCURRENTKEY(Totales.GMLocValue);
-                                Totales.SETRANGE(Totales."GMLocPosting Date", Desde, Hasta);
+                                Totales.SETCURRENTKEY(Totales.GMAValue);
+                                Totales.SETRANGE(Totales."GMAPosting Date", Desde, Hasta);
                                 if ((GlobaltxtValoresCompras <> '') and (GlobaltxtVAloresVentas <> '')) then
-                                    Totales.SetFilter(Totales."GMLocValue", '%1|%2', GlobaltxtValoresVentas, GlobaltxtValoresCompras);
+                                    Totales.SetFilter(Totales."GMAValue", '%1|%2', GlobaltxtValoresVentas, GlobaltxtValoresCompras);
                                 if ((GlobaltxtValoresCompras <> '') and (GlobaltxtVAloresVentas = '')) then
-                                    Totales.SetFilter(Totales."GMLocValue", '%1', GlobaltxtValoresCompras);
+                                    Totales.SetFilter(Totales."GMAValue", '%1', GlobaltxtValoresCompras);
                                 if ((GlobaltxtValoresCompras = '') and (GlobaltxtVAloresVentas <> '')) then
-                                    Totales.SetFilter(Totales."GMLocValue", '%1', GlobaltxtValoresVentas);
+                                    Totales.SetFilter(Totales."GMAValue", '%1', GlobaltxtValoresVentas);
                             end;
                         end;
 
                         trigger OnAfterGetRecord();
                         var
-                            recTaxes: Record GMLocTaxes;
+                            recTaxes: Record GMATaxes;
                         begin
 
 
                             Valores.RESET;
-                            Valores.SETCURRENTKEY(GMLocCode);
-                            Valores.SETRANGE(GMLocCode, GMLocValue);
+                            Valores.SETCURRENTKEY(GMACode);
+                            Valores.SETRANGE(GMACode, GMAValue);
                             if Valores.FINDFIRST then begin
                                 rectaxes.reset;
-                                recTaxes.SetRange(recTaxes."GMLocTax Code", valores."GMLocTax Code");
+                                recTaxes.SetRange(recTaxes."GMATax Code", valores."GMATax Code");
                                 if recTaxes.FindFirst() then begin
-                                    Texto := Valores."GMLocTax Code";
-                                    codimpuesto := valores."GMLocTax Code";
+                                    Texto := Valores."GMATax Code";
+                                    codimpuesto := valores."GMATax Code";
 
                                 end
                                 else begin
@@ -696,19 +696,19 @@ report 80899 "PersWithholdings Book"
 
                 }
 
-                dataitem(Compras_Totales; "GMLocValues Entry")
+                dataitem(Compras_Totales; "GMAValues Entry")
                 {
-                    DataItemTableView = SORTING(GMLocValue) ORDER(Ascending);
-                    column(Compras_Totales_Valor; GMLocValue)
+                    DataItemTableView = SORTING(GMAValue) ORDER(Ascending);
+                    column(Compras_Totales_Valor; GMAValue)
                     {
                     }
-                    column(Compras_Totales_Importe; -1 * GMLocAmount)
+                    column(Compras_Totales_Importe; -1 * GMAAmount)
                     {
                     }
                     column(Compras_Texto; Compras_texto)
                     {
                     }
-                    column(Compras_Totales_ValorCaption; FIELDCAPTION(GMLocValue))
+                    column(Compras_Totales_ValorCaption; FIELDCAPTION(GMAValue))
                     {
                     }
                     column(Compras_TotalCaption; TotalCaptionLbl)
@@ -720,7 +720,7 @@ report 80899 "PersWithholdings Book"
                     column(Compras_TOTALESCaption; TOTALESCaptionLbl)
                     {
                     }
-                    column(Compras_Totales_Entry_No_; "GMLocEntry No.")
+                    column(Compras_Totales_Entry_No_; "GMAEntry No.")
                     {
                     }
                     column(Compras_CodImpuesto; Compras_CodImpuesto)
@@ -738,22 +738,22 @@ report 80899 "PersWithholdings Book"
 
                     trigger OnAfterGetRecord();
                     var
-                        // recTaxes: Record GMLocTaxes;
+                        // recTaxes: Record GMATaxes;
                         BssiMEMTaxesByEntity: Record BssiMEMWithholdingTaxByEntity;
                     begin
                         if (GenerarRealizadas = false) then CurrReport.Skip();
                         Valores.RESET;
-                        Valores.SETCURRENTKEY(GMLocCode);
-                        Valores.SETRANGE(GMLocCode, GMLocValue);
+                        Valores.SETCURRENTKEY(GMACode);
+                        Valores.SETRANGE(GMACode, GMAValue);
                         if Valores.FINDFIRST then begin
                             // rectaxes.reset;
-                            // recTaxes.SetRange(recTaxes."GMLocTax Code", valores."GMLocTax Code");
+                            // recTaxes.SetRange(recTaxes."GMATax Code", valores."GMATax Code");
                             BssiMEMTaxesByEntity.Reset();
-                            BssiMEMTaxesByEntity.SetRange(BssiTaxCode, valores."GMLocTax Code");
+                            BssiMEMTaxesByEntity.SetRange(BssiTaxCode, valores."GMATax Code");
                             BssiMEMTaxesByEntity.SetRange(BssiMEMEntityID, BssiDimensionValue.Code);
                             if BssiMEMTaxesByEntity.FindFirst() then begin
-                                Compras_texto := Valores."GMLocTax Code";
-                                Compras_CodImpuesto := valores."GMLocTax Code";
+                                Compras_texto := Valores."GMATax Code";
+                                Compras_CodImpuesto := valores."GMATax Code";
 
                             end
                             else begin
@@ -776,8 +776,8 @@ report 80899 "PersWithholdings Book"
                     Empresa.SetFilter(Code, BssiDimensionValue.Code);
                     IF (Empresa.FindFirst()) THEN;
 
-                    "GMLocTreasury Setup".GET();
-                    "GMLocTreasury Setup".CALCFIELDS(GMLocSignPicture);
+                    "GMATreasury Setup".GET();
+                    "GMATreasury Setup".CALCFIELDS(GMASignPicture);
                 end;
             }
             trigger OnPreDataItem()
@@ -795,7 +795,7 @@ report 80899 "PersWithholdings Book"
         {
             area(content)
             {
-                group(GMLocOptions)
+                group(GMAOptions)
                 {
                     Caption = 'Opciones';
                     field(Desde; Desde)
@@ -814,7 +814,7 @@ report 80899 "PersWithholdings Book"
                     {
                         Caption = 'Province Code';
                         ApplicationArea = ALL;
-                        TableRelation = GMLocProvince;
+                        TableRelation = GMAProvince;
                     }
                     field(GenerarSufridas; GenerarSufridas)
                     {
@@ -899,7 +899,7 @@ report 80899 "PersWithholdings Book"
         Folio: Integer;
         Desde: Date;
         Hasta: Date;
-        Valores: Record GMLocValues;
+        Valores: Record GMAValues;
         Texto: Text[300];
         RecCustomer: Record Customer;
         RecVendor: Record Vendor;
@@ -931,9 +931,9 @@ report 80899 "PersWithholdings Book"
         Descripci_nCaptionLbl: Label 'Descripción';
         TOTALESCaptionLbl: Label 'TOTALES';
         // AW - BEGIN
-        RecWithholdingLedgerEntry: record "GMLocWithholding Ledger Entry";
-        //RecWithholdingDatail: record "GMLocWithholding Datail";
-        "GMLocTreasury Setup": Record "GMLocTreasury Setup";
+        RecWithholdingLedgerEntry: record "GMAWithholding Ledger Entry";
+        //RecWithholdingDatail: record "GMAWithholding Datail";
+        "GMATreasury Setup": Record "GMATreasury Setup";
         Provincia: Text;
         CodImpuesto: Text;
         GlobaltxtValoresCompras: code[20];

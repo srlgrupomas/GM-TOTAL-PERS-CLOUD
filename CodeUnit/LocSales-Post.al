@@ -1,4 +1,4 @@
-codeunit 80996 "LocSales-Post"
+codeunit 34006996 "LocSales-Post"
 {
     Permissions = TableData "Sales Line" = rimd,
                   TableData "Purchase Header" = rm,

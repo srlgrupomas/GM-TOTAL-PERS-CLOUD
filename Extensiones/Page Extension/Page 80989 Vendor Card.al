@@ -1,4 +1,4 @@
-﻿pageextension 80989 "PersExtend_Vendor" extends "Vendor Card"
+﻿pageextension 34006989 "PersExtend_Vendor" extends "Vendor Card"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -22,19 +22,19 @@
         {
             ShowMandatory = true;
         }
-        modify("GMLocFiscal Type")
+        modify("GMAFiscal Type")
         {
             ShowMandatory = true;
         }
-        modify("GMLocProvince Code")
+        modify("GMAProvince Code")
         {
             ShowMandatory = true;
         }
-        modify("GMLocWithholding Code")
+        modify("GMAWithholding Code")
         {
             ShowMandatory = true;
         }
-        modify("GMLocAFIP Document Type")
+        modify("GMAAFIP Document Type")
         {
             ShowMandatory = true;
         }

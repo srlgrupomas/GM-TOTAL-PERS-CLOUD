@@ -1,4 +1,4 @@
-report 80909 "VAT Withhoding Certificate GEN"
+report 34006909 "VAT Withhoding Certificate GEN"
 {
     // No. yyyy.mm.dd        Developer     Company     DocNo.         Version    Description
     // -----------------------------------------------------------------------------------------------------
@@ -11,17 +11,17 @@ report 80909 "VAT Withhoding Certificate GEN"
 
     dataset
     {
-        dataitem("Movimiento Retenciones"; "GMLocWithholding Ledger Entry")
+        dataitem("Movimiento Retenciones"; "GMAWithholding Ledger Entry")
         {
-            DataItemTableView = SORTING("GMLocNo.");
-            RequestFilterFields = "GMLocNo.";
+            DataItemTableView = SORTING("GMANo.");
+            RequestFilterFields = "GMANo.";
             column(Descripcion; Descripcion)
             {
             }
-            column(Movimiento_Retenciones__Movimiento_Retenciones___Base_de_calculo_; "Movimiento Retenciones"."GMLocCalculation Base")
+            column(Movimiento_Retenciones__Movimiento_Retenciones___Base_de_calculo_; "Movimiento Retenciones"."GMACalculation Base")
             {
             }
-            column(Movimiento_Retenciones__Movimiento_Retenciones___Importe_retencion_; "Movimiento Retenciones"."GMLocWithholding Amount")
+            column(Movimiento_Retenciones__Movimiento_Retenciones___Importe_retencion_; "Movimiento Retenciones"."GMAWithholding Amount")
             {
             }
             column(alicuota; alicuota)
@@ -30,19 +30,19 @@ report 80909 "VAT Withhoding Certificate GEN"
             column(minimo; minimo)
             {
             }
-            column(Movimiento_Retenciones_No_; "GMLocNo.")
+            column(Movimiento_Retenciones_No_; "GMANo.")
             {
             }
-            column(Movimiento_Retenciones_Voucher_Number; "GMLocVoucher Number")
+            column(Movimiento_Retenciones_Voucher_Number; "GMAVoucher Number")
             {
             }
-            column(GMLocPictureSign; "GMLocTreasury Setup".GMLocSignPicture)
+            column(GMAPictureSign; "GMATreasury Setup".GMASignPicture)
             {
             }
             dataitem(Copia; "Integer")
             {
                 DataItemTableView = SORTING(Number);
-                column(DetRetencion_Titulo; DetRetencion.GMLocTitle)
+                column(DetRetencion_Titulo; DetRetencion.GMATitle)
                 {
                 }
                 column(InfoEmpresa_Name; InfoEmpresa.BssiLegalNameFull)
@@ -72,7 +72,7 @@ report 80909 "VAT Withhoding Certificate GEN"
                 column(InfoEmpresa__VAT_Registration_No__; InfoEmpresa.BssiRegistrationNo)
                 {
                 }
-                column(Proveedor__No_ingresos_brutos_; Proveedor."GMLocGross Income Tax No")
+                column(Proveedor__No_ingresos_brutos_; Proveedor."GMAGross Income Tax No")
                 {
                 }
                 column(Proveedor__VAT_Registration_No__; Proveedor."VAT Registration No.")
@@ -84,22 +84,22 @@ report 80909 "VAT Withhoding Certificate GEN"
                 column(Proveedor_Name; Proveedor.Name)
                 {
                 }
-                column(Movimiento_Retenciones___Nro_Certificado_Retencion_; "Movimiento Retenciones"."GMLocWithh. Certificate No.")
+                column(Movimiento_Retenciones___Nro_Certificado_Retencion_; "Movimiento Retenciones"."GMAWithh. Certificate No.")
                 {
                 }
-                column(Movimiento_Retenciones___Fecha_comprobante_; "Movimiento Retenciones"."GMLocVoucher Date")
+                column(Movimiento_Retenciones___Fecha_comprobante_; "Movimiento Retenciones"."GMAVoucher Date")
                 {
                 }
-                column(Tipo_fiscal__Description; "Tipo fiscal".GMLocDescription)
+                column(Tipo_fiscal__Description; "Tipo fiscal".GMADescription)
                 {
                 }
-                column(Movimiento_Retenciones___Numero_comprobante_; "Movimiento Retenciones"."GMLocVoucher Number")
+                column(Movimiento_Retenciones___Numero_comprobante_; "Movimiento Retenciones"."GMAVoucher Number")
                 {
                 }
                 column(tipoCond; tipoCond)
                 {
                 }
-                column(DetRetencion__Agente_de_Retencion_; DetRetencion."GMLocWithholding Agent")
+                column(DetRetencion__Agente_de_Retencion_; DetRetencion."GMAWithholding Agent")
                 {
                 }
                 column("CERTIFICADO_DE_RETENCIÓN_N_Caption"; CERTIFICADO_DE_RETENCIÓN_N_CaptionLbl)
@@ -165,19 +165,19 @@ report 80909 "VAT Withhoding Certificate GEN"
                 dataitem(Pagina; "Integer")
                 {
                     DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
-                    column(Movimiento_Retenciones___Importe_retencion_; "Movimiento Retenciones"."GMLocWithholding Amount")
+                    column(Movimiento_Retenciones___Importe_retencion_; "Movimiento Retenciones"."GMAWithholding Amount")
                     {
                     }
-                    column(Movimiento_Retenciones__Base_decPagosAnt_decMinimoNoImp__alicuota_100; "Movimiento Retenciones"."GMLocWithholding Amount")
+                    column(Movimiento_Retenciones__Base_decPagosAnt_decMinimoNoImp__alicuota_100; "Movimiento Retenciones"."GMAWithholding Amount")
                     {
                     }
                     column(FORMAT_alicuota______; FORMAT(alicuota) + ' %')
                     {
                     }
-                    column(Movimiento_Retenciones__Base; "Movimiento Retenciones"."GMLocCalculation Base")
+                    column(Movimiento_Retenciones__Base; "Movimiento Retenciones"."GMACalculation Base")
                     {
                     }
-                    column("Régimen__________DetRetencion_Regimen__________DetRetencion_Descripcion"; 'Régimen' + '  ' + DetRetencion."GMLocTax System" + ' - ' + DetRetencion.GMLocDescription)
+                    column("Régimen__________DetRetencion_Regimen__________DetRetencion_Descripcion"; 'Régimen' + '  ' + DetRetencion."GMATax System" + ' - ' + DetRetencion.GMADescription)
                     {
                     }
                     column(InfoEmpresa_Picture2; InfoEmpresa.BssiPicture)
@@ -228,11 +228,11 @@ report 80909 "VAT Withhoding Certificate GEN"
                     column(Pagina_Number; Number)
                     {
                     }
-                    dataitem("Posted Payment Order Vouchers"; "GMLocPosted Payment Ord Vouch")
+                    dataitem("Posted Payment Order Vouchers"; "GMAPosted Payment Ord Vouch")
                     {
-                        DataItemLink = "GMLocPayment Order No." = FIELD("GMLocVoucher Number");
+                        DataItemLink = "GMAPayment Order No." = FIELD("GMAVoucher Number");
                         DataItemLinkReference = "Movimiento Retenciones";
-                        DataItemTableView = SORTING("GMLocPayment Order No.", "GMLocVoucher No.") ORDER(Ascending);
+                        DataItemTableView = SORTING("GMAPayment Order No.", "GMAVoucher No.") ORDER(Ascending);
                         column(tipocomp; tipocomp)
                         {
                         }
@@ -269,13 +269,13 @@ report 80909 "VAT Withhoding Certificate GEN"
                         column(TOTAL_IMPONIBLECaption; TOTAL_IMPONIBLECaptionLbl)
                         {
                         }
-                        column(Posted_Payment_Order_Vouchers_Payment_Order_No_; "GMLocPayment Order No.")
+                        column(Posted_Payment_Order_Vouchers_Payment_Order_No_; "GMAPayment Order No.")
                         {
                         }
-                        column(Posted_Payment_Order_Vouchers_Voucher_No_; "GMLocVoucher No.")
+                        column(Posted_Payment_Order_Vouchers_Voucher_No_; "GMAVoucher No.")
                         {
                         }
-                        column(Posted_Payment_Order_Vouchers_Entry_No_; "GMLocEntry No.")
+                        column(Posted_Payment_Order_Vouchers_Entry_No_; "GMAEntry No.")
                         {
                         }
 
@@ -283,61 +283,61 @@ report 80909 "VAT Withhoding Certificate GEN"
                         var
                             Facturas: Record "Purch. Inv. Header";
                             LineasFactura: Record "Purch. Inv. Line";
-                            Comportamiento: Record "GMLocWithholding Kind Line";
-                            DetRetencion: Record "GMLocWithholding Datail";
-                            retencion: Record "GMLocWithholding Calculation";
+                            Comportamiento: Record "GMAWithholding Kind Line";
+                            DetRetencion: Record "GMAWithholding Datail";
+                            retencion: Record "GMAWithholding Calculation";
                             ControlProv: Boolean;
-                            Escala: Record "GMLocWithholding Scale";
+                            Escala: Record "GMAWithholding Scale";
                             caja: Code[20];
-                            Valores: Record GMLocValues;
-                            retencionesempresa: Record GMLocTaxes;
+                            Valores: Record GMAValues;
+                            retencionesempresa: Record GMATaxes;
                             CodCondicion: Code[20];
-                            CondImpuesto: Record "GMLocVendor Condition";
+                            CondImpuesto: Record "GMAVendor Condition";
                             PorcMonto: Decimal;
-                            MovRetencion: Record "GMLocWithholding Ledger Entry";
-                            act_retencion: Record "GMLocWithholding Calculation";
-                            exencion: Record "GMLocWithholding Exention";
-                            CondImpositiva: Record "GMLocTax Conditions";
+                            MovRetencion: Record "GMAWithholding Ledger Entry";
+                            act_retencion: Record "GMAWithholding Calculation";
+                            exencion: Record "GMAWithholding Exention";
+                            CondImpositiva: Record "GMATax Conditions";
                             CodCondSICORE: Code[3];
                             inicio_mes: Date;
                             fin_mes: Date;
                             ProximoMovimiento: Integer;
                             ControlValor: Boolean;
-                            LinValores: Record "GMLocPayment Order Value Line";
+                            LinValores: Record "GMAPayment Order Value Line";
                             Facturas2: Record "Purch. Cr. Memo Hdr.";
                             LineasFactura2: Record "Purch. Cr. Memo Line";
                         begin
                             ///Doy de alta los tipos de retenciones con el monto de pago correspondiente en la tabla Calculo de Retencion
                             Acumulado := 0;
-                            if ("Posted Payment Order Vouchers"."GMLocDocument Type" = "Posted Payment Order Vouchers"."GMLocDocument Type"::Invoice) or
-                              ("Posted Payment Order Vouchers"."GMLocDocument Type" = "Posted Payment Order Vouchers"."GMLocDocument Type"::"Credit Memo") then begin
+                            if ("Posted Payment Order Vouchers"."GMADocument Type" = "Posted Payment Order Vouchers"."GMADocument Type"::Invoice) or
+                              ("Posted Payment Order Vouchers"."GMADocument Type" = "Posted Payment Order Vouchers"."GMADocument Type"::"Credit Memo") then begin
                                 Facturas.RESET;
-                                Facturas.SETRANGE(Facturas."No.", "Posted Payment Order Vouchers"."GMLocVoucher No.");
+                                Facturas.SETRANGE(Facturas."No.", "Posted Payment Order Vouchers"."GMAVoucher No.");
                                 if Facturas.FindSet() then begin
                                     Facturas.CALCFIELDS("Amount Including VAT");
                                     //Calculo porcentaje del pago sobre el total de la factura
                                     if Facturas."Currency Factor" <> 0 then
-                                        PorcMonto := (("GMLocAmount (LCY)" * 100) / (Facturas."Amount Including VAT" / Facturas."Currency Factor"))
+                                        PorcMonto := (("GMAAmount (LCY)" * 100) / (Facturas."Amount Including VAT" / Facturas."Currency Factor"))
                                     else
-                                        PorcMonto := (("GMLocAmount (LCY)" * 100) / Facturas."Amount Including VAT");
-                                    if ("Posted Payment Order Vouchers".GMLocCrMemoAppliedExists) then
+                                        PorcMonto := (("GMAAmount (LCY)" * 100) / Facturas."Amount Including VAT");
+                                    if ("Posted Payment Order Vouchers".GMACrMemoAppliedExists) then
                                         PorcMonto := 100;
 
                                     LineasFactura.RESET;
-                                    LineasFactura.SETRANGE("Document No.", "Posted Payment Order Vouchers"."GMLocVoucher No.");
+                                    LineasFactura.SETRANGE("Document No.", "Posted Payment Order Vouchers"."GMAVoucher No.");
                                     if LineasFactura.FindSet() then begin
                                         repeat
                                             Comportamiento.RESET;
-                                            Comportamiento.SETRANGE(Comportamiento."GMLocWithholding Code", LineasFactura."GMLocWithholding Code");
-                                            Comportamiento.SETRANGE(Comportamiento."GMLocTax System", "Movimiento Retenciones"."GMLocTax System");
-                                            Comportamiento.SETRANGE(Comportamiento."GMLocWithholding No.", "Movimiento Retenciones"."GMLocWithholding No.");//NAVAR1.06
+                                            Comportamiento.SETRANGE(Comportamiento."GMAWithholding Code", LineasFactura."GMAWithholding Code");
+                                            Comportamiento.SETRANGE(Comportamiento."GMATax System", "Movimiento Retenciones"."GMATax System");
+                                            Comportamiento.SETRANGE(Comportamiento."GMAWithholding No.", "Movimiento Retenciones"."GMAWithholding No.");//NAVAR1.06
                                             if Comportamiento.FindSet() then begin
                                                 DetRetencion.RESET;
-                                                DetRetencion.SETRANGE(DetRetencion."GMLocWithholding No.", Comportamiento."GMLocWithholding No.");
+                                                DetRetencion.SETRANGE(DetRetencion."GMAWithholding No.", Comportamiento."GMAWithholding No.");
                                                 if DetRetencion.FindSet() then begin
 
                                                     ///Control de Valor en Detalle de Retención
-                                                    if DetRetencion.GMLocValue = '' then
+                                                    if DetRetencion.GMAValue = '' then
                                                         ControlValor := false
                                                     else
                                                         ControlValor := true;
@@ -346,32 +346,32 @@ report 80909 "VAT Withhoding Certificate GEN"
 
                                                         ///Controlo que sea una retencion de la empresa
                                                         retencionesempresa.RESET;
-                                                        retencionesempresa.SETRANGE(retencionesempresa."GMLocTax Code", DetRetencion."GMLocTax Code");
+                                                        retencionesempresa.SETRANGE(retencionesempresa."GMATax Code", DetRetencion."GMATax Code");
                                                         if retencionesempresa.FindSet() then
-                                                            if retencionesempresa.GMLocRetains = true then begin
+                                                            if retencionesempresa.GMARetains = true then begin
 
                                                                 ControlProv := false;
-                                                                if retencionesempresa.GMLocProvince = '' then
+                                                                if retencionesempresa.GMAProvince = '' then
                                                                     ControlProv := true
                                                                 else
-                                                                    if (Facturas.GMLocProvince <> '') and (Facturas.GMLocProvince = retencionesempresa.GMLocProvince) then
+                                                                    if (Facturas.GMAProvince <> '') and (Facturas.GMAProvince = retencionesempresa.GMAProvince) then
                                                                         ControlProv := true
                                                             end;
 
                                                         ///Control de la condicion de retencion del proveedor
                                                         CondImpuesto.RESET;
-                                                        CondImpuesto.SETRANGE(CondImpuesto."GMLocTax Code", DetRetencion."GMLocTax Code");
-                                                        CondImpuesto.SETRANGE(CondImpuesto."GMLocVendor Code", "Posted Payment Order Vouchers".GMLocVendor);
+                                                        CondImpuesto.SETRANGE(CondImpuesto."GMATax Code", DetRetencion."GMATax Code");
+                                                        CondImpuesto.SETRANGE(CondImpuesto."GMAVendor Code", "Posted Payment Order Vouchers".GMAVendor);
                                                         if CondImpuesto.FindSet() then
-                                                            CodCondicion := CondImpuesto."GMLocTax Condition";
+                                                            CodCondicion := CondImpuesto."GMATax Condition";
 
                                                         if ControlProv then begin
                                                             Escala.RESET;
-                                                            Escala.SETRANGE(Escala."GMLocScale Code", DetRetencion."GMLocScale Code");
-                                                            Escala.SETRANGE(Escala."GMLocWithholding Condition", CodCondicion);
+                                                            Escala.SETRANGE(Escala."GMAScale Code", DetRetencion."GMAScale Code");
+                                                            Escala.SETRANGE(Escala."GMAWithholding Condition", CodCondicion);
                                                             if Escala.FindSet() then begin
-                                                                case DetRetencion."GMLocWithholding Base Type" of
-                                                                    DetRetencion."GMLocWithholding Base Type"::"Sin Impuestos":
+                                                                case DetRetencion."GMAWithholding Base Type" of
+                                                                    DetRetencion."GMAWithholding Base Type"::"Sin Impuestos":
                                                                         if Facturas."Currency Factor" <> 0 then
                                                                             Acumulado := ((PorcMonto * (LineasFactura."VAT Base Amount" / Facturas."Currency Factor")) / 100) +
                                                                                                      Acumulado
@@ -379,7 +379,7 @@ report 80909 "VAT Withhoding Certificate GEN"
                                                                             Acumulado := ((PorcMonto * LineasFactura."VAT Base Amount") / 100) +
                                                                                                 Acumulado;
 
-                                                                    DetRetencion."GMLocWithholding Base Type"::"Importe Impuestos":
+                                                                    DetRetencion."GMAWithholding Base Type"::"Importe Impuestos":
                                                                         if Facturas."Currency Factor" <> 0 then
                                                                             Acumulado := ((PorcMonto * ((LineasFactura."Amount Including VAT" / Facturas."Currency Factor")
                                                                                                 - (LineasFactura."VAT Base Amount" / Facturas."Currency Factor"))) / 100) +
@@ -388,7 +388,7 @@ report 80909 "VAT Withhoding Certificate GEN"
                                                                             Acumulado := ((PorcMonto * (LineasFactura."Amount Including VAT"
                                                                                                  - LineasFactura."VAT Base Amount")) / 100) + Acumulado;
 
-                                                                    DetRetencion."GMLocWithholding Base Type"::"Importe Total":
+                                                                    DetRetencion."GMAWithholding Base Type"::"Importe Total":
                                                                         if Facturas."Currency Factor" <> 0 then
                                                                             Acumulado := ((PorcMonto * (LineasFactura."Amount Including VAT" / Facturas."Currency Factor")) / 100) +
                                                                                                      Acumulado
@@ -409,31 +409,31 @@ report 80909 "VAT Withhoding Certificate GEN"
 
                                 end;
                             end;
-                            if ("Posted Payment Order Vouchers"."GMLocDocument Type" = "Posted Payment Order Vouchers"."GMLocDocument Type"::"Credit Memo") then begin
+                            if ("Posted Payment Order Vouchers"."GMADocument Type" = "Posted Payment Order Vouchers"."GMADocument Type"::"Credit Memo") then begin
                                 Facturas2.RESET;
-                                Facturas2.SETRANGE("No.", "Posted Payment Order Vouchers"."GMLocVoucher No.");
+                                Facturas2.SETRANGE("No.", "Posted Payment Order Vouchers"."GMAVoucher No.");
                                 if Facturas2.FindSet() then begin
                                     Facturas2.CALCFIELDS("Amount Including VAT");
                                     //Calculo porcentaje del pago sobre el total de la factura
                                     if Facturas2."Currency Factor" <> 0 then
-                                        PorcMonto := (("GMLocAmount (LCY)" * 100) / (Facturas2."Amount Including VAT" / Facturas2."Currency Factor"))
+                                        PorcMonto := (("GMAAmount (LCY)" * 100) / (Facturas2."Amount Including VAT" / Facturas2."Currency Factor"))
                                     else
-                                        PorcMonto := (("GMLocAmount (LCY)" * 100) / Facturas2."Amount Including VAT");
+                                        PorcMonto := (("GMAAmount (LCY)" * 100) / Facturas2."Amount Including VAT");
 
                                     LineasFactura2.RESET;
-                                    LineasFactura2.SETRANGE("Document No.", "Posted Payment Order Vouchers"."GMLocVoucher No.");
+                                    LineasFactura2.SETRANGE("Document No.", "Posted Payment Order Vouchers"."GMAVoucher No.");
                                     if LineasFactura2.FindSet() then begin
                                         repeat
                                             Comportamiento.RESET;
-                                            Comportamiento.SETRANGE(Comportamiento."GMLocWithholding Code", LineasFactura2."GMLocWithholding Code");
-                                            Comportamiento.SETRANGE(Comportamiento."GMLocTax System", "Movimiento Retenciones"."GMLocTax System");
+                                            Comportamiento.SETRANGE(Comportamiento."GMAWithholding Code", LineasFactura2."GMAWithholding Code");
+                                            Comportamiento.SETRANGE(Comportamiento."GMATax System", "Movimiento Retenciones"."GMATax System");
                                             if Comportamiento.FindSet() then begin
                                                 DetRetencion.RESET;
-                                                DetRetencion.SETRANGE(DetRetencion."GMLocWithholding No.", Comportamiento."GMLocWithholding No.");
+                                                DetRetencion.SETRANGE(DetRetencion."GMAWithholding No.", Comportamiento."GMAWithholding No.");
                                                 if DetRetencion.FindSet() then begin
 
                                                     ///Control de Valor en Detalle de Retención
-                                                    if DetRetencion.GMLocValue = '' then
+                                                    if DetRetencion.GMAValue = '' then
                                                         ControlValor := false
                                                     else
                                                         ControlValor := true;
@@ -442,39 +442,39 @@ report 80909 "VAT Withhoding Certificate GEN"
 
                                                         ///Controlo que sea una retencion de la empresa
                                                         retencionesempresa.RESET;
-                                                        retencionesempresa.SETRANGE(retencionesempresa."GMLocTax Code", DetRetencion."GMLocTax Code");
+                                                        retencionesempresa.SETRANGE(retencionesempresa."GMATax Code", DetRetencion."GMATax Code");
                                                         if retencionesempresa.FindSet() then
-                                                            if retencionesempresa.GMLocRetains = true then begin
+                                                            if retencionesempresa.GMARetains = true then begin
 
                                                                 ControlProv := false;
-                                                                if retencionesempresa.GMLocProvince = '' then
+                                                                if retencionesempresa.GMAProvince = '' then
                                                                     ControlProv := true
                                                                 else
-                                                                    if (Facturas2.GMLocProvince <> '') and (Facturas2.GMLocProvince = retencionesempresa.GMLocProvince) then
+                                                                    if (Facturas2.GMAProvince <> '') and (Facturas2.GMAProvince = retencionesempresa.GMAProvince) then
                                                                         ControlProv := true
                                                             end;
 
                                                         ///Control de la condicion de retencion del proveedor
                                                         CondImpuesto.RESET;
-                                                        CondImpuesto.SETRANGE(CondImpuesto."GMLocTax Code", DetRetencion."GMLocTax Code");
-                                                        CondImpuesto.SETRANGE(CondImpuesto."GMLocVendor Code", "Posted Payment Order Vouchers".GMLocVendor);
+                                                        CondImpuesto.SETRANGE(CondImpuesto."GMATax Code", DetRetencion."GMATax Code");
+                                                        CondImpuesto.SETRANGE(CondImpuesto."GMAVendor Code", "Posted Payment Order Vouchers".GMAVendor);
                                                         if CondImpuesto.FindSet() then
-                                                            CodCondicion := CondImpuesto."GMLocTax Condition";
+                                                            CodCondicion := CondImpuesto."GMATax Condition";
 
                                                         if ControlProv then begin
                                                             Escala.RESET;
-                                                            Escala.SETRANGE(Escala."GMLocScale Code", DetRetencion."GMLocScale Code");
-                                                            Escala.SETRANGE(Escala."GMLocWithholding Condition", CodCondicion);
+                                                            Escala.SETRANGE(Escala."GMAScale Code", DetRetencion."GMAScale Code");
+                                                            Escala.SETRANGE(Escala."GMAWithholding Condition", CodCondicion);
                                                             if Escala.FindSet() then begin
-                                                                case DetRetencion."GMLocWithholding Base Type" of
-                                                                    DetRetencion."GMLocWithholding Base Type"::"Sin Impuestos":
+                                                                case DetRetencion."GMAWithholding Base Type" of
+                                                                    DetRetencion."GMAWithholding Base Type"::"Sin Impuestos":
                                                                         if Facturas2."Currency Factor" <> 0 then
                                                                             Acumulado -= ((PorcMonto * (LineasFactura2."VAT Base Amount" / Facturas2."Currency Factor")) / 100)
 
                                                                         else
                                                                             Acumulado -= ((PorcMonto * LineasFactura2."VAT Base Amount") / 100);
 
-                                                                    DetRetencion."GMLocWithholding Base Type"::"Importe Impuestos":
+                                                                    DetRetencion."GMAWithholding Base Type"::"Importe Impuestos":
                                                                         if Facturas2."Currency Factor" <> 0 then
                                                                             Acumulado -= ((PorcMonto * ((LineasFactura2."Amount Including VAT" / Facturas2."Currency Factor")
                                                                                                 - (LineasFactura2."VAT Base Amount" / Facturas2."Currency Factor"))) / 100)
@@ -482,7 +482,7 @@ report 80909 "VAT Withhoding Certificate GEN"
                                                                             Acumulado -= ((PorcMonto * (LineasFactura2."Amount Including VAT"
                                                                                                  - LineasFactura2."VAT Base Amount")) / 100);
 
-                                                                    DetRetencion."GMLocWithholding Base Type"::"Importe Total":
+                                                                    DetRetencion."GMAWithholding Base Type"::"Importe Total":
                                                                         if Facturas2."Currency Factor" <> 0 then
                                                                             Acumulado -= ((PorcMonto * (LineasFactura2."Amount Including VAT" / Facturas2."Currency Factor")) / 100)
                                                                         else
@@ -503,7 +503,7 @@ report 80909 "VAT Withhoding Certificate GEN"
                             end;
 
                             movfac.RESET;
-                            movfac.SETRANGE(movfac."Document No.", "Posted Payment Order Vouchers"."GMLocVoucher No.");
+                            movfac.SETRANGE(movfac."Document No.", "Posted Payment Order Vouchers"."GMAVoucher No.");
                             ok := movfac.FindSet();
 
                             //NAVAR1.06002-
@@ -511,13 +511,13 @@ report 80909 "VAT Withhoding Certificate GEN"
                             tipocomp := '';
                             if (movfac."Document Type" = movfac."Document Type"::Invoice) then begin
                                 tipocomp := 'FC';
-                                ImporteNC := FindApplicCreditMemo("Posted Payment Order Vouchers"."GMLocVoucher No.");
+                                ImporteNC := FindApplicCreditMemo("Posted Payment Order Vouchers"."GMAVoucher No.");
                             end;
 
                             if (movfac."Document Type" = movfac."Document Type"::"Credit Memo") then
                                 tipocomp := 'NC';
 
-                            if (movfac."Document Type" = movfac."GMLocDocument Type Loc."::"Nota Débito") then
+                            if (movfac."Document Type" = movfac."GMADocument Type Loc."::"GMANota Debito") then
                                 tipocomp := 'ND';
 
                             if (movfac."Document Type" = movfac."Document Type"::"Credit Memo") then
@@ -525,15 +525,15 @@ report 80909 "VAT Withhoding Certificate GEN"
 
                             Acumulado := ROUND(Acumulado, 0.01);
 
-                            if (HOPago.GET("Posted Payment Order Vouchers"."GMLocPayment Order No.")) then
-                                if (HOPago."GMLocNew Payment") then
-                                    Acumulado := "Posted Payment Order Vouchers".GMLocCancelled;
+                            if (HOPago.GET("Posted Payment Order Vouchers"."GMAPayment Order No.")) then
+                                if (HOPago."GMANew Payment") then
+                                    Acumulado := "Posted Payment Order Vouchers".GMACancelled;
 
                             AcumTotal := AcumTotal + Acumulado;
 
                             CLEAR(TOTAL);
 
-                            if ("Posted Payment Order Vouchers".GMLocCrMemoAppliedExists) then
+                            if ("Posted Payment Order Vouchers".GMACrMemoAppliedExists) then
                                 TOTAL := Acumulado
                             else
                                 TOTAL := Acumulado + ImporteNC;
@@ -562,7 +562,7 @@ report 80909 "VAT Withhoding Certificate GEN"
 
             trigger OnAfterGetRecord();
             var
-                HLinCompPago: Record "GMLocPosted Payment Ord Vouch";
+                HLinCompPago: Record "GMAPosted Payment Ord Vouch";
                 MovProveedor: Record "Vendor Ledger Entry";
                 i: Integer;
                 Dia: Text[2];
@@ -571,27 +571,27 @@ report 80909 "VAT Withhoding Certificate GEN"
                 BssiMEMSystemSetup: record BssiMEMSystemSetup;
             begin
                 DetRetencion.RESET;
-                DetRetencion.SETRANGE(DetRetencion."GMLocWithholding No.", "Movimiento Retenciones"."GMLocWithholding No.");
+                DetRetencion.SETRANGE(DetRetencion."GMAWithholding No.", "Movimiento Retenciones"."GMAWithholding No.");
                 if DetRetencion.FindSet() then
-                    Descripcion := DetRetencion.GMLocDescription;
+                    Descripcion := DetRetencion.GMADescription;
 
                 Escala.RESET;
-                Escala.SETRANGE(Escala."GMLocScale Code", "Movimiento Retenciones"."GMLocScale Code");
-                Escala.SETRANGE(Escala."GMLocWithholding Condition", "Movimiento Retenciones"."GMLocCondition Code");
-                Escala.SETRANGE(Escala."GMLocTax Code", "Movimiento Retenciones"."GMLocTax Code");
+                Escala.SETRANGE(Escala."GMAScale Code", "Movimiento Retenciones"."GMAScale Code");
+                Escala.SETRANGE(Escala."GMAWithholding Condition", "Movimiento Retenciones"."GMACondition Code");
+                Escala.SETRANGE(Escala."GMATax Code", "Movimiento Retenciones"."GMATax Code");
                 if Escala.FindSet() then
                     repeat
-                        if (Escala.GMLocFrom <= "Movimiento Retenciones"."GMLocCalculation Base") then begin
-                            alicuota := Escala."GMLocExcedent %";
-                            minimo := Escala.GMLocFrom;
-                            decMinimoNoImp := Escala."GMLocBase Amount";
+                        if (Escala.GMAFrom <= "Movimiento Retenciones"."GMACalculation Base") then begin
+                            alicuota := Escala."GMAExcedent %";
+                            minimo := Escala.GMAFrom;
+                            decMinimoNoImp := Escala."GMABase Amount";
                         end;
                     until Escala.NEXT = 0;
                 //11807+
                 "Withholding Kind Line".RESET;
-                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMLocWithholding Code", "GMLocWithholding Code");
-                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMLocTax Code", "GMLocTax Code");
-                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMLocIs vendor withholding", true);
+                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMAWithholding Code", "GMAWithholding Code");
+                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMATax Code", "GMATax Code");
+                "Withholding Kind Line".SETRANGE("Withholding Kind Line"."GMAIs vendor withholding", true);
                 if ("Withholding Kind Line".FINDFIRST) then begin
                     if ("Vendor withholding" <> '') then begin
                         Proveedor.RESET;
@@ -602,14 +602,14 @@ report 80909 "VAT Withhoding Certificate GEN"
                     else begin
                         Proveedor.RESET;
                         Proveedor.SETCURRENTKEY("No.");
-                        Proveedor.SETRANGE("No.", "GMLocVendor Code");
+                        Proveedor.SETRANGE("No.", "GMAVendor Code");
                         if Proveedor.FINDFIRST then;
                     end;
                 end
                 else begin
                     Proveedor.RESET;
                     Proveedor.SETCURRENTKEY("No.");
-                    Proveedor.SETRANGE("No.", "GMLocVendor Code");
+                    Proveedor.SETRANGE("No.", "GMAVendor Code");
                     if Proveedor.FINDFIRST then;
                 end;
                 //11807-
@@ -625,16 +625,16 @@ report 80909 "VAT Withhoding Certificate GEN"
                 end;
 
 
-                HOPago.GET("Movimiento Retenciones"."GMLocVoucher Number");
-                HOPago.CALCFIELDS("GMLocPaid Amount (LCY)");
-                HLinCompPago.SETRANGE("GMLocPayment Order No.", HOPago."GMLocPayment O. No.");
+                HOPago.GET("Movimiento Retenciones"."GMAVoucher Number");
+                HOPago.CALCFIELDS("GMAPaid Amount (LCY)");
+                HLinCompPago.SETRANGE("GMAPayment Order No.", HOPago."GMAPayment O. No.");
                 HLinCompPago.FindFirst();
                 for i := 1 to 60 do
                     txtNroComprobantes[i] := ' ';
                 i := 1;
                 repeat
                     Contador += 1;
-                    if MovProveedor.GET(HLinCompPago."GMLocEntry No.") then begin
+                    if MovProveedor.GET(HLinCompPago."GMAEntry No.") then begin
                         if (MovProveedor."Document Type" = MovProveedor."Document Type"::Invoice) then
                             txtNroComprobantes[i] += 'FC  ' + MovProveedor."External Document No.";
                         if (MovProveedor."Document Type" = MovProveedor."Document Type"::"Credit Memo") then
@@ -648,23 +648,23 @@ report 80909 "VAT Withhoding Certificate GEN"
                     end;
                 until (HLinCompPago.NEXT = 0) or (Contador = 150);
 
-                Dia := FORMAT(DATE2DMY("Movimiento Retenciones"."GMLocWithholding Date", 1));
-                Anio := FORMAT(DATE2DMY("Movimiento Retenciones"."GMLocWithholding Date", 3));
-                Mes := FORMAT("Movimiento Retenciones"."GMLocWithholding Date", 0, '<Month Text>');
+                Dia := FORMAT(DATE2DMY("Movimiento Retenciones"."GMAWithholding Date", 1));
+                Anio := FORMAT(DATE2DMY("Movimiento Retenciones"."GMAWithholding Date", 3));
+                Mes := FORMAT("Movimiento Retenciones"."GMAWithholding Date", 0, '<Month Text>');
                 txtLugarYFecha := 'Buenos Aires, ' + Dia + ' de ' + Mes + ' de ' + Anio + '.';
                 txtDeclaracion := 'La presente retención se informará en la DDJJ correspondiente al mes de ' + Mes + ' del año ' + Anio + '.';
 
                 InfoEmpresa.Reset();
                 InfoEmpresa.SetFilter("Dimension Code", BssiMEMSystemSetup.Bssi_cGetEntityCode());
-                InfoEmpresa.SetFilter(Code, "Movimiento Retenciones"."GMLocShortcut Dimension 1");
+                InfoEmpresa.SetFilter(Code, "Movimiento Retenciones"."GMAShortcut Dimension 1");
                 IF (InfoEmpresa.FindFirst()) THEN;
                 InfoEmpresa.CALCFIELDS(InfoEmpresa.BssiPicture);
 
                 Provincia.RESET;
-                Provincia.SETCURRENTKEY(Provincia."GMLocProvince Code");
-                Provincia.SETRANGE("GMLocProvince Code", InfoEmpresa.BssiProvinceCode);
+                Provincia.SETCURRENTKEY(Provincia."GMAProvince Code");
+                Provincia.SETRANGE("GMAProvince Code", InfoEmpresa.BssiProvinceCode);
                 if Provincia.FINDFIRST then
-                    gProvincia := Provincia.GMLocDescription;
+                    gProvincia := Provincia.GMADescription;
                 if (InfoEmpresa.BssiBillingAddr1 <> '') then direccionEmpresa := InfoEmpresa.BssiBillingAddr1;
                 if (InfoEmpresa.BssiBillingCity <> '') then direccionEmpresa := direccionEmpresa + ',  ' + InfoEmpresa.BssiBillingCity;
                 if (InfoEmpresa.BssiBillingZipCode <> '') then direccionEmpresa := direccionEmpresa + ', C.P. ' + InfoEmpresa.BssiBillingZipCode;
@@ -678,8 +678,8 @@ report 80909 "VAT Withhoding Certificate GEN"
             trigger OnPreDataItem();
             begin
                 ok := InfoEmpresa.FindSet();
-                "GMLocTreasury Setup".GET();
-                "GMLocTreasury Setup".CALCFIELDS(GMLocSignPicture);
+                "GMATreasury Setup".GET();
+                "GMATreasury Setup".CALCFIELDS(GMASignPicture);
 
             end;
         }
@@ -718,16 +718,16 @@ report 80909 "VAT Withhoding Certificate GEN"
         Proveedor: Record Vendor;
         ok: Boolean;
         Descripcion: Text[100];
-        DetRetencion: Record "GMLocWithholding Datail";
-        Escala: Record "GMLocWithholding Scale";
+        DetRetencion: Record "GMAWithholding Datail";
+        Escala: Record "GMAWithholding Scale";
         alicuota: Decimal;
         minimo: Decimal;
-        Provincia: Record GMLocProvince;
-        Retenciones: Codeunit GMLocRetenciones;
-        retencion: Record "GMLocWithholding Calculation";
+        Provincia: Record GMAProvince;
+        Retenciones: Codeunit GMARetenciones;
+        retencion: Record "GMAWithholding Calculation";
         Acumulado: Decimal;
         movfac: Record "Vendor Ledger Entry";
-        HOPago: Record "GMLocPosted Payment Order";
+        HOPago: Record "GMAPosted Payment Order";
         InicioMes: Date;
         blnEncontroRetencionesAnt: Boolean;
         txtLugarYFecha: Text[250];
@@ -738,14 +738,14 @@ report 80909 "VAT Withhoding Certificate GEN"
         decMinimoNoImp: Decimal;
         optCopias: Option "Sólo original",Duplicado,Triplicado;
         textoCopia: array[3] of Text[50];
-        Temp_PagosProcesados: Record "GMLocPosted Payment Order" temporary;
+        Temp_PagosProcesados: Record "GMAPosted Payment Order" temporary;
         txtNroC: array[30] of Text[250];
         Contador: Integer;
-        "Hist Lin Valor OPago": Record "GMLocPosted Payment Order Valu";
+        "Hist Lin Valor OPago": Record "GMAPosted Payment Order Valu";
         tipocomp: Text[30];
         DescRet: Text[250];
-        "Tipo fiscal": Record "GMLocFiscal Type";
-        globImpuestos: Record GMLocTaxes;
+        "Tipo fiscal": Record "GMAFiscal Type";
+        globImpuestos: Record GMATaxes;
         tipoCond: Text[30];
         AcumTotal: Decimal;
         VendorLedgerEntry: Record "Vendor Ledger Entry";
@@ -753,7 +753,7 @@ report 80909 "VAT Withhoding Certificate GEN"
         ImporteNC: Decimal;
         TOTAL: Decimal;
         TOTALNC: Decimal;
-        "Withholding Kind Line": Record "GMLocWithholding Kind Line";
+        "Withholding Kind Line": Record "GMAWithholding Kind Line";
         "CERTIFICADO_DE_RETENCIÓN_N_CaptionLbl": Label 'CERTIFICADO DE RETENCIÓN Nº';
         DATOS_DEL_AGENTE_DE_RETENCIONCaptionLbl: Label 'DATOS DEL AGENTE DE RETENCION';
         Domicilio_CaptionLbl: Label 'Domicilio:';
@@ -802,15 +802,15 @@ report 80909 "VAT Withhoding Certificate GEN"
         direccionProveedor: Text[250];
         direccionEmpresa: Text[250];
         maestroPais: Record "Country/Region";
-        "GMLocTreasury Setup": Record "GMLocTreasury Setup";
+        "GMATreasury Setup": Record "GMATreasury Setup";
 
     procedure Fun_BaseRetGanHOP(NroHOPago: Code[20]) Dec_BaseHOP: Decimal;
     var
-        HCabOP: Record "GMLocPosted Payment Order";
-        LinComprobanteOP: Record "GMLocPosted Payment Ord Vouch";
+        HCabOP: Record "GMAPosted Payment Order";
+        LinComprobanteOP: Record "GMAPosted Payment Ord Vouch";
         LineasFactura: Record "Purch. Inv. Line";
         LineasAbono: Record "Purch. Cr. Memo Line";
-        Comportamiento: Record "GMLocWithholding Kind Line";
+        Comportamiento: Record "GMAWithholding Kind Line";
         PorcMonto: Decimal;
         Dec_ImporteMov: Decimal;
         Rec_MovProveedor: Record "Vendor Ledger Entry";
@@ -825,11 +825,11 @@ report 80909 "VAT Withhoding Certificate GEN"
         
         */
 
-        LinComprobanteOP.SETRANGE(LinComprobanteOP."GMLocVoucher No.", NroHOPago);
+        LinComprobanteOP.SETRANGE(LinComprobanteOP."GMAVoucher No.", NroHOPago);
         if LinComprobanteOP.FINDFIRST then begin
             HCabOP.GET(NroHOPago);
-            HCabOP.CALCFIELDS("GMLocPaid Amount (LCY)");
-            Dec_PctAnulacion := LinComprobanteOP."GMLocAmount (LCY)" / HCabOP."GMLocPaid Amount (LCY)" * 100 * -1;
+            HCabOP.CALCFIELDS("GMAPaid Amount (LCY)");
+            Dec_PctAnulacion := LinComprobanteOP."GMAAmount (LCY)" / HCabOP."GMAPaid Amount (LCY)" * 100 * -1;
         end;
 
         if Dec_PctAnulacion = 100 then begin
@@ -838,7 +838,7 @@ report 80909 "VAT Withhoding Certificate GEN"
         end;
 
         CLEAR(LinComprobanteOP);
-        LinComprobanteOP.SETRANGE("GMLocPayment Order No.", NroHOPago);
+        LinComprobanteOP.SETRANGE("GMAPayment Order No.", NroHOPago);
         /*
                             ================================================================================================================
         ==
@@ -864,7 +864,7 @@ report 80909 "VAT Withhoding Certificate GEN"
         ==
         ==
         */
-        LinComprobanteOP.SETFILTER("GMLocDocument Type", '<>%1', LinComprobanteOP."GMLocDocument Type"::"Credit Memo");
+        LinComprobanteOP.SETFILTER("GMADocument Type", '<>%1', LinComprobanteOP."GMADocument Type"::"Credit Memo");
         if LinComprobanteOP.FindSet() then
             repeat
 
@@ -873,27 +873,27 @@ report 80909 "VAT Withhoding Certificate GEN"
 
                 //Calculo porcentaje del pago sobre el total de la factura
 
-                if Rec_MovProveedor.GET(LinComprobanteOP."GMLocEntry No.") then begin
+                if Rec_MovProveedor.GET(LinComprobanteOP."GMAEntry No.") then begin
                     Rec_MovProveedor.CALCFIELDS("Amount (LCY)");
                     Dec_ImporteMov := Rec_MovProveedor."Amount (LCY)";
                 end;
 
                 if Dec_ImporteMov <> 0 then
-                    if LinComprobanteOP."GMLocExchange Rate" <> 0 then
-                        PorcMonto := ((LinComprobanteOP."GMLocAmount (LCY)" * 100) / (Dec_ImporteMov / LinComprobanteOP."GMLocExchange Rate")) * -1
+                    if LinComprobanteOP."GMAExchange Rate" <> 0 then
+                        PorcMonto := ((LinComprobanteOP."GMAAmount (LCY)" * 100) / (Dec_ImporteMov / LinComprobanteOP."GMAExchange Rate")) * -1
                     else
-                        PorcMonto := ((LinComprobanteOP.GMLocAmount * 100) / Dec_ImporteMov) * -1
+                        PorcMonto := ((LinComprobanteOP.GMAAmount * 100) / Dec_ImporteMov) * -1
                 else
                     PorcMonto := 1;
 
                 //Sumo el importe base de las líneas que aplican
                 LineasFactura.RESET;
-                LineasFactura.SETRANGE("Document No.", LinComprobanteOP."GMLocVoucher No.");
+                LineasFactura.SETRANGE("Document No.", LinComprobanteOP."GMAVoucher No.");
                 if LineasFactura.FindSet() then
                     repeat
                         Comportamiento.RESET;
-                        Comportamiento.SETRANGE(Comportamiento."GMLocWithholding Code", LineasFactura."GMLocWithholding Code");
-                        Comportamiento.SETRANGE(Comportamiento."GMLocTax Code", 'GANANCIAS');
+                        Comportamiento.SETRANGE(Comportamiento."GMAWithholding Code", LineasFactura."GMAWithholding Code");
+                        Comportamiento.SETRANGE(Comportamiento."GMATax Code", 'GANANCIAS');
                         if Comportamiento.FindSet() then
                             Dec_BaseDocu += LineasFactura."VAT Base Amount";
                     until LineasFactura.NEXT = 0;
@@ -909,7 +909,7 @@ report 80909 "VAT Withhoding Certificate GEN"
         ==================================================================================================================================
         
         */
-        LinComprobanteOP.SETFILTER("GMLocDocument Type", '=%1', LinComprobanteOP."GMLocDocument Type"::"Credit Memo");
+        LinComprobanteOP.SETFILTER("GMADocument Type", '=%1', LinComprobanteOP."GMADocument Type"::"Credit Memo");
         if LinComprobanteOP.FindSet() then
             repeat
 
@@ -918,26 +918,26 @@ report 80909 "VAT Withhoding Certificate GEN"
 
                 //Calculo porcentaje del pago sobre el total de la factura
 
-                if Rec_MovProveedor.GET(LinComprobanteOP."GMLocEntry No.") then begin
+                if Rec_MovProveedor.GET(LinComprobanteOP."GMAEntry No.") then begin
                     Rec_MovProveedor.CALCFIELDS("Amount (LCY)");
                     Dec_ImporteMov := Rec_MovProveedor."Amount (LCY)";
                 end;
                 if Dec_ImporteMov <> 0 then
-                    if LinComprobanteOP."GMLocExchange Rate" <> 0 then
-                        PorcMonto := ((LinComprobanteOP."GMLocAmount (LCY)" * 100) / (Dec_ImporteMov / LinComprobanteOP."GMLocExchange Rate")) * -1
+                    if LinComprobanteOP."GMAExchange Rate" <> 0 then
+                        PorcMonto := ((LinComprobanteOP."GMAAmount (LCY)" * 100) / (Dec_ImporteMov / LinComprobanteOP."GMAExchange Rate")) * -1
                     else
-                        PorcMonto := ((LinComprobanteOP.GMLocAmount * 100) / Dec_ImporteMov) * -1
+                        PorcMonto := ((LinComprobanteOP.GMAAmount * 100) / Dec_ImporteMov) * -1
                 else
                     PorcMonto := 1;
 
                 //Resto el importe base de las líneas que aplican
                 LineasAbono.RESET;
-                LineasAbono.SETRANGE("Document No.", LinComprobanteOP."GMLocVoucher No.");
+                LineasAbono.SETRANGE("Document No.", LinComprobanteOP."GMAVoucher No.");
                 if LineasAbono.FindSet() then
                     repeat
                         Comportamiento.RESET;
-                        Comportamiento.SETRANGE(Comportamiento."GMLocWithholding Code", LineasAbono."GMLocWithholding Code");
-                        Comportamiento.SETRANGE(Comportamiento."GMLocTax Code", 'GANANCIAS');
+                        Comportamiento.SETRANGE(Comportamiento."GMAWithholding Code", LineasAbono."GMAWithholding Code");
+                        Comportamiento.SETRANGE(Comportamiento."GMATax Code", 'GANANCIAS');
                         if Comportamiento.FindSet() then
                             Dec_BaseDocu += LineasAbono."VAT Base Amount";
                     until LineasAbono.NEXT = 0;
@@ -976,7 +976,7 @@ report 80909 "VAT Withhoding Certificate GEN"
                 if (LclMovProv."Document Type" = LclMovProv."Document Type"::"Credit Memo") then begin
 
                     recPCMH.RESET;
-                    recPCMH.SETRANGE("Pay-to Vendor No.", "Posted Payment Order Vouchers".GMLocVendor);
+                    recPCMH.SETRANGE("Pay-to Vendor No.", "Posted Payment Order Vouchers".GMAVendor);
                     recPCMH.SETRANGE(recPCMH."No.", LclMovProv."Document No.");
                     if recPCMH.FINDFIRST then begin
                         recPCMH.CALCFIELDS(Amount, "Amount Including VAT");
